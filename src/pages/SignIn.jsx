@@ -1,5 +1,5 @@
 function SignIn() {
-  return <div>Sign In</div>;
+  return <>Sign In</>;
 }
 
 export default SignIn;

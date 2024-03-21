@@ -1,3 +1,5 @@
+import { NavLink } from 'react-router-dom';
+
 function Header() {
   return (
     <header>
@@ -5,13 +7,16 @@ function Header() {
       <nav>
         <ul>
           <li>
-            <a href='/home'>Shop</a>
+            <NavLink to='/'>Shop</NavLink>
           </li>
           <li>
-            <a href='/signin'>Sign In</a>
+            <NavLink to='/signin'>Sign In</NavLink>
           </li>
           <li>
-            <a href='/cart'>Cart</a>
+            <NavLink to='/cart'>Cart</NavLink>
+          </li>
+          <li>
+            <NavLink to='/manage'>Manage</NavLink>
           </li>
         </ul>
       </nav>

@@ -70,10 +70,23 @@ a {
   text-decoration: none;
 }
 
+h3 {
+  font-size: 4rem ;
+  font-weight: 800;
+  line-height: 4rem;
+  text-transform: uppercase;
+  letter-spacing: -.1rem;
+}
+
 p {
+  font-size: 2rem;
+      font-weight: 400;
+      line-height: 2rem;
+}
+
+p.small {
   font-size: 1.25rem;
-      font-weight: 800;
-      line-height: 1.25rem;
+  line-height: 1.5rem;
 }
 
 li {

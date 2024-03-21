@@ -5,7 +5,9 @@ function AppLayout() {
   return (
     <div>
       <Header />
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
     </div>
   );
 }
