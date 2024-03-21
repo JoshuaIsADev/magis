@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import styled from 'styled-components';
 import { deleteProduct } from '../../services/apiProducts';
+import toast from 'react-hot-toast';
 
 const Img = styled.img`
   width: 12rem;
@@ -26,12 +27,12 @@ function ProductRow({ product }) {
   const { isLoading: isDeleting, mutate } = useMutation({
     mutationFn: (id) => deleteProduct(id),
     onSuccess: () => {
-      alert('Product succesfully deleted');
+      toast.success('Product succesfully deleted');
       queryClient.invalidateQueries({
         queryKey: ['products'],
       });
     },
-    onError: (err) => alert(err.message),
+    onError: (err) => toast.error(err.message),
   });
 
   return (

@@ -14,8 +14,8 @@ export async function getProducts() {
 export async function deleteProduct(id) {
   const { data, error } = await supabase.from('products').delete().eq('id', id);
   if (error) {
-    console.log(error);
-    throw new error('Product could not be deleted');
+    console.error(error);
+    throw new Error('Product could not be deleted');
   }
   return data;
 }
