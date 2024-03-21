@@ -6,6 +6,9 @@ const Input = styled.input`
   border-radius: var(--border-radius-sm);
   padding: 0.8rem 1.2rem;
   box-shadow: none;
+  &[type='radio'] {
+    margin-right: 1rem;
+  }
 `;
 
 export default Input;

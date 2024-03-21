@@ -7,6 +7,7 @@ import Label from '../../ui/Label';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createProduct } from '../../services/apiProducts';
 import toast from 'react-hot-toast';
+import Errors from '../../ui/Errors';
 
 const FormRow = styled.div`
   display: flex;
@@ -26,7 +27,9 @@ const Error = styled.span`
 `;
 
 function CreateProductForm() {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, formState } = useForm();
+  const { errors } = formState;
+  console.log(errors);
   const queryClient = useQueryClient();
   const { mutate, isLoading: isCreating } = useMutation({
     mutationFn: (newProduct) => createProduct(newProduct),
@@ -44,11 +47,21 @@ function CreateProductForm() {
     mutate(data);
   }
 
+  function onError(errors) {
+    // console.log(errors);
+  }
+
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(onSubmit, onError)}>
       <FormRow>
         <Label htmlFor='name'>Product name</Label>
-        <Input type='text' id='name' {...register('name')} />
+        <Input
+          type='text'
+          id='name'
+          disabled={isCreating}
+          {...register('name', { required: 'This field is required' })}
+        />
+        {errors?.name?.message && <Errors>{errors.name.message}</Errors>}
       </FormRow>
       <FormRow>
         <li>
@@ -57,8 +70,10 @@ function CreateProductForm() {
             name='category'
             id='chair'
             value='chair'
+            disabled={isCreating}
             {...register('category')}
           />
+
           <Label htmlFor='chair'>Chair</Label>
         </li>
         <li>
@@ -67,6 +82,7 @@ function CreateProductForm() {
             name='category'
             id='table'
             value='table'
+            disabled={isCreating}
             {...register('category')}
           />
           <Label htmlFor='table'>Table</Label>
@@ -77,6 +93,7 @@ function CreateProductForm() {
             name='category'
             id='bench'
             value='bench'
+            disabled={isCreating}
             {...register('category')}
           />
           <Label htmlFor='bench'>Bench</Label>
@@ -87,6 +104,7 @@ function CreateProductForm() {
             name='category'
             id='sofa'
             value='sofa'
+            disabled={isCreating}
             {...register('category')}
           />
           <Label htmlFor='sofa'>Sofa</Label>
@@ -99,41 +117,64 @@ function CreateProductForm() {
           id='tags'
           defaultValue='{"tag1", "tag2"}'
           placeholder='{"tag1", "tag2"}'
+          disabled={isCreating}
           {...register('tags')}
         />
       </FormRow>
       <FormRow>
         <Label htmlFor='unitPrice'>Unit Price</Label>
-        <Input type='number' id='unitPrice' {...register('unitPrice')} />
+        <Input
+          type='number'
+          id='unitPrice'
+          disabled={isCreating}
+          {...register('unitPrice', { required: 'This field is required' })}
+        />
+        {errors?.unitPrice?.message && (
+          <Errors>{errors.unitPrice.message}</Errors>
+        )}
       </FormRow>
       <FormRow>
         <Label htmlFor='designer'>Designer</Label>
-        <Input type='text' id='designer' {...register('designer')} />
+        <Input
+          type='text'
+          id='designer'
+          disabled={isCreating}
+          {...register('designer')}
+        />
       </FormRow>
       <FormRow>
         <Label htmlFor='material'>Material</Label>
         <TextArea
           id='material'
           name='material'
-          rows='4'
-          {...register('material')}
+          rows='6'
+          disabled={isCreating}
+          {...register('material', { required: 'This field is required' })}
         />
+        {errors?.material?.message && (
+          <Errors>{errors.material.message}</Errors>
+        )}
       </FormRow>
       <FormRow>
         <Label htmlFor='description1'>Description Paragraph 1</Label>
         <TextArea
           id='description1'
           name='description1'
-          rows='4'
-          {...register('description1')}
+          rows='6'
+          disabled={isCreating}
+          {...register('description1', { required: 'This field is required' })}
         />
+        {errors?.description1?.message && (
+          <Errors>{errors.description1.message}</Errors>
+        )}
       </FormRow>
       <FormRow>
         <Label htmlFor='description2'>Description Paragraph 2</Label>
         <TextArea
           id='description2'
           name='description2'
-          rows='4'
+          rows='6'
+          disabled={isCreating}
           {...register('description2')}
         />
       </FormRow>
@@ -142,7 +183,8 @@ function CreateProductForm() {
         <TextArea
           id='measurements'
           name='measurements'
-          rows='4'
+          rows='6'
+          disabled={isCreating}
           defaultValue='{ "seating height": 46, "total height": 84.5, "width": 55, "depth": 54 }'
           placeholder='{ "seating height": 46, "total height": 84.5, "width": 55, "depth": 54 }'
           {...register('measurements')}
@@ -157,6 +199,7 @@ function CreateProductForm() {
           // accept='image/*'
           // type='file'
           // defaultValue={''}
+          disabled={isCreating}
           {...register('mainImageUrl')}
         />
       </FormRow>
@@ -169,6 +212,7 @@ function CreateProductForm() {
           // accept='image/*'
           // type='file'
           // defaultValue={''}
+          disabled={isCreating}
           {...register('imageUrl')}
         />
       </FormRow>
