@@ -8,7 +8,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createProduct } from '../../services/apiProducts';
 import toast from 'react-hot-toast';
 import Errors from '../../ui/Errors';
-import FileInput from '../../ui/FileInput';
 
 const FormRow = styled.div`
   display: flex;
@@ -45,16 +44,7 @@ function CreateProductForm() {
   });
 
   function onSubmit(data) {
-    // const mainImageNames = [];
-    // Object.values(data.mainImage).map((item) =>
-    //   mainImageNames.push(item.name)
-    // );
-    // console.log(mainImageNames);
-    // console.log(
-    //   `https://wuurkebuthemtrftoedw.supabase.co/storage/v1/object/public/product-images/${data.mainImage[0].name}`
-    // );
-    // console.log(data.testImage[0].name);
-    mutate({ ...data, testImage: data.testImage[0] });
+    mutate(data);
   }
 
   function onError(errors) {
@@ -201,38 +191,29 @@ function CreateProductForm() {
         />
       </FormRow>
       <FormRow>
-        <Label htmlFor='testImage'>Test image</Label>
-        <FileInput
-          id='testImage'
-          type='file'
-          accept='image/*'
-          disabled={isCreating}
-          {...register('testImage')}
-        />
-      </FormRow>
-      <FormRow>
-        <Label htmlFor='mainImage'>Main Images</Label>
+        <Label htmlFor='mainImageUrl'>Main Images</Label>
         <Input
-          id='mainImage'
-          type='text'
-          accept='image/*'
-          // multiple
-          defaultValue='{"image1", "image2"}'
-          disabled={isCreating}
-          {...register('mainImage')}
-        />
-      </FormRow>
-      <FormRow>
-        <Label htmlFor='image'>Images</Label>
-        <Input
-          id='image'
+          id='mainImageUrl'
           type='text'
           defaultValue='{"image1", "image2"}'
           // accept='image/*'
           // type='file'
           // defaultValue={''}
           disabled={isCreating}
-          {...register('image')}
+          {...register('mainImageUrl')}
+        />
+      </FormRow>
+      <FormRow>
+        <Label htmlFor='imageUrl'>Images</Label>
+        <Input
+          id='imageUrl'
+          type='text'
+          defaultValue='{"image1", "image2"}'
+          // accept='image/*'
+          // type='file'
+          // defaultValue={''}
+          disabled={isCreating}
+          {...register('imageUrl')}
         />
       </FormRow>
       <FormRow>
