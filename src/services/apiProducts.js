@@ -1,3 +1,5 @@
+import { getImageName } from '../utils/getImageName';
+import { getImagePath } from '../utils/getImagePath';
 import supabase, { supabaseUrl } from './supabase';
 
 export async function getProducts() {
@@ -12,19 +14,66 @@ export async function getProducts() {
 }
 
 export async function createProduct(newProduct) {
-  const imageName = `${Math.floor(Math.random() * 100000)}-${
-    newProduct.testImage.name
-  }`.replaceAll('/', '');
-  const imagePath = `${supabaseUrl}/storage/v1/object/public/product-images/${imageName}`;
+  const allImages = newProduct.image;
+  let imageNameArray = [];
+  let imagePathArray = [];
+  // console.log(newProduct.testImage);
+  // Object.values(newProduct.testImage).map((image) => console.log(image));
 
-  // const imageUrl
+  // const imageName = Object.values(allImages).map((image) =>
+  //   getImageName(image)
+  // );
 
-  //https://wuurkebuthemtrftoedw.supabase.co/storage/v1/object/public/product-images/
+  // const allImageNames = await Promise.all(imageName);
+  // console.log(allImageNames);
 
+  // const imagePath = imageNameArray.map(
+  //   (imageName) =>
+  //     `${supabaseUrl}/storage/v1/object/public/product-images/${imageName}`
+  // );
+  // console.log(imagePath);
+
+  // const imageName = `${Math.floor(Math.random() * 100000)}-${
+  //   newProduct.testImage.name
+  // }`.replaceAll('/', '');
+
+  // const imagePaths = Object.values(newProduct.testImage).map(
+  //   () => `${supabaseUrl}/storage/v1/object/public/product-images/${imageNames}`
+  // );
+  // console.log(imagePaths);
+
+  // const imagePath = `${supabaseUrl}/storage/v1/object/public/product-images/${imageName}`;
+
+  // console.log(imageName);
+  // console.log(imagePath);
+
+  // 2. upload image
+  for (let image of allImages) {
+    const imageName = await getImageName(image);
+    const imagePath = await getImagePath(imageName);
+    imageNameArray.push(imageName);
+    imagePathArray.push(imagePath);
+
+    const { error: storageError } = await supabase.storage
+      .from('product-images')
+      .upload(imageName, image);
+
+    // 3. Delete the product if there was an error uploading the image
+    if (storageError) {
+      await supabase.from('products').delete().eq('id', image.id);
+      console.error(storageError);
+      throw new Error(
+        'Product image could not be uploaded and product was not created'
+      );
+    }
+  }
+
+  console.log(imageNameArray);
+  console.log(imagePathArray);
   // 1. Create product
   const { data, error } = await supabase
     .from('products')
-    .insert([{ ...newProduct, testImage: imagePath }])
+    .insert([{ ...newProduct, image: imagePathArray }])
     .select();
 
   if (error) {
@@ -32,19 +81,6 @@ export async function createProduct(newProduct) {
     throw new Error('Product could not be created');
   }
 
-  // 2. upload image
-  const { error: storageError } = await supabase.storage
-    .from('product-images')
-    .upload(imageName, newProduct.testImage);
-
-  // 3. Delete the product if there was an error uploading the image
-  if (storageError) {
-    await supabase.from('products').delete().eq('id', data.id);
-    console.error(storageError);
-    throw new Error(
-      'Product image could not be uploaded and product was not created'
-    );
-  }
   return data;
 }
 

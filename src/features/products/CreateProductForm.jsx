@@ -45,16 +45,7 @@ function CreateProductForm() {
   });
 
   function onSubmit(data) {
-    // const mainImageNames = [];
-    // Object.values(data.mainImage).map((item) =>
-    //   mainImageNames.push(item.name)
-    // );
-    // console.log(mainImageNames);
-    // console.log(
-    //   `https://wuurkebuthemtrftoedw.supabase.co/storage/v1/object/public/product-images/${data.mainImage[0].name}`
-    // );
-    // console.log(data.testImage[0].name);
-    mutate({ ...data, testImage: data.testImage[0] });
+    mutate({ ...data, image: data.image });
   }
 
   function onError(errors) {
@@ -79,7 +70,7 @@ function CreateProductForm() {
             type='radio'
             name='category'
             id='chair'
-            value='chair'
+            value='Chair'
             disabled={isCreating}
             {...register('category')}
           />
@@ -91,7 +82,7 @@ function CreateProductForm() {
             type='radio'
             name='category'
             id='table'
-            value='table'
+            value='Table'
             disabled={isCreating}
             {...register('category')}
           />
@@ -102,7 +93,7 @@ function CreateProductForm() {
             type='radio'
             name='category'
             id='bench'
-            value='bench'
+            value='Bench'
             disabled={isCreating}
             {...register('category')}
           />
@@ -113,7 +104,7 @@ function CreateProductForm() {
             type='radio'
             name='category'
             id='sofa'
-            value='sofa'
+            value='Sofa'
             disabled={isCreating}
             {...register('category')}
           />
@@ -201,16 +192,17 @@ function CreateProductForm() {
         />
       </FormRow>
       <FormRow>
-        <Label htmlFor='testImage'>Test image</Label>
+        <Label htmlFor='image'>Images</Label>
         <FileInput
-          id='testImage'
+          id='image'
           type='file'
           accept='image/*'
           disabled={isCreating}
-          {...register('testImage')}
+          multiple
+          {...register('image')}
         />
       </FormRow>
-      <FormRow>
+      {/* <FormRow>
         <Label htmlFor='mainImage'>Main Images</Label>
         <Input
           id='mainImage'
@@ -221,8 +213,8 @@ function CreateProductForm() {
           disabled={isCreating}
           {...register('mainImage')}
         />
-      </FormRow>
-      <FormRow>
+      </FormRow> */}
+      {/* <FormRow>
         <Label htmlFor='image'>Images</Label>
         <Input
           id='image'
@@ -234,7 +226,7 @@ function CreateProductForm() {
           disabled={isCreating}
           {...register('image')}
         />
-      </FormRow>
+      </FormRow> */}
       <FormRow>
         <button type='reset'>Cancel</button>
         <button disabled={isCreating}>Submit</button>

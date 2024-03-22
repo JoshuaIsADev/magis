@@ -19,7 +19,7 @@ function ProductRow({ product }) {
     category,
     units,
     unitPrice,
-    mainImage,
+    image,
   } = product;
 
   const queryClient = useQueryClient();
@@ -37,7 +37,7 @@ function ProductRow({ product }) {
 
   return (
     <TableRow role='row'>
-      <div>{<Img src={mainImage[0]} alt='product' />}</div>
+      <div>{<Img src={image[0]} alt='product' />}</div>
       <div>
         <h3>{name}</h3>
         <p className='small'>{designer}</p>
