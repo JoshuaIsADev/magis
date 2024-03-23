@@ -2,6 +2,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import styled from 'styled-components';
 import { deleteProduct } from '../../services/apiProducts';
 import toast from 'react-hot-toast';
+import { getMainImage } from '../../utils/getMainImage';
+import { useEffect, useState } from 'react';
 
 const Img = styled.img`
   width: 12rem;
@@ -35,9 +37,17 @@ function ProductRow({ product }) {
     onError: (err) => toast.error(err.message),
   });
 
+  const [mainImage, setMainImage] = useState(null);
+
+  useEffect(() => {
+    getMainImage(image).then((image) => {
+      setMainImage(image[0]);
+    });
+  }, [image]);
+
   return (
     <TableRow role='row'>
-      <div>{<Img src={image[0]} alt='product' />}</div>
+      <div>{<Img src={mainImage} alt='product' />}</div>
       <div>
         <h3>{name}</h3>
         <p className='small'>{designer}</p>
