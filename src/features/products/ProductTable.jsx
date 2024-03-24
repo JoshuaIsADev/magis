@@ -7,16 +7,15 @@ import ProductRow from './ProductRow';
 
 function ProductTable() {
   const {
-    isLoading,
+    isPending,
     data: products,
     error,
   } = useQuery({
     queryKey: ['products'],
     queryFn: getProducts,
   });
-  if (isLoading) return <Spinner />;
+  if (isPending) return <Spinner />;
   // console.log(products[0].imageUrl);
-
   return (
     <>
       {products.map((product) => (

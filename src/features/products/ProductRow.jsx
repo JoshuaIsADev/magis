@@ -4,6 +4,7 @@ import { deleteProduct } from '../../services/apiProducts';
 import toast from 'react-hot-toast';
 import { getMainImage } from '../../utils/getMainImage';
 import { useEffect, useState } from 'react';
+import CreateProductForm from './CreateProductForm';
 
 const Img = styled.img`
   width: 12rem;
@@ -14,6 +15,8 @@ const Img = styled.img`
 const TableRow = styled.div``;
 
 function ProductRow({ product }) {
+  const [showForm, setShowForm] = useState(false);
+
   const {
     id: productId,
     name,
@@ -26,7 +29,7 @@ function ProductRow({ product }) {
 
   const queryClient = useQueryClient();
 
-  const { isLoading: isDeleting, mutate } = useMutation({
+  const { isPending: isDeleting, mutate } = useMutation({
     mutationFn: (id) => deleteProduct(id),
     onSuccess: () => {
       toast.success('Product succesfully deleted');
@@ -46,20 +49,28 @@ function ProductRow({ product }) {
   }, [image]);
 
   return (
-    <TableRow role='row'>
-      <div>{<Img src={mainImage} alt='product' />}</div>
-      <div>
-        <h3>{name}</h3>
-        <p className='small'>{designer}</p>
-        <p className='small'>{category}</p>
-        <p className='small'>{units} in stock</p>
-        <p className='small'>${unitPrice}</p>
-        <button>Edit</button>
-        <button onClick={() => mutate(productId)} disabled={isDeleting}>
-          Delete
-        </button>
-      </div>
-    </TableRow>
+    <>
+      <TableRow role='row'>
+        <div>{<Img src={mainImage} alt='product' />}</div>
+        <div>
+          <h3>{name}</h3>
+          <p className='small'>{designer}</p>
+          <p className='small'>{category}</p>
+          <p className='small'>{units} in stock</p>
+          <p className='small'>${unitPrice}</p>
+          <button
+            disabled={isDeleting}
+            onClick={() => setShowForm((show) => !show)}
+          >
+            Edit
+          </button>
+          <button onClick={() => mutate(productId)} disabled={isDeleting}>
+            Delete
+          </button>
+        </div>
+      </TableRow>
+      {showForm && <CreateProductForm productToEdit={product} />}
+    </>
   );
 }
 

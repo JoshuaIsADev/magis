@@ -1,11 +1,11 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import { createEditProduct } from '../../services/apiProducts';
 import Form from '../../ui/Form';
 import Input from '../../ui/Input';
 import TextArea from '../../ui/TextArea';
 import Label from '../../ui/Label';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { createProduct } from '../../services/apiProducts';
 import toast from 'react-hot-toast';
 import Errors from '../../ui/Errors';
 import FileInput from '../../ui/FileInput';
@@ -18,19 +18,23 @@ const FormRow = styled.div`
   gap: 0.5rem;
 `;
 
-function CreateProductForm({ productToEdit = {} }) {
-  const { id: editId, ...editValues } = productToEdit;
-  const isEditSession = Boolean(editId);
+const CategoryContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
 
-  const { register, handleSubmit, reset, formState } = useForm({
-    defaultValues: isEditSession ? editValues : {},
-  });
+const Error = styled.span`
+  font-size: 1.4rem;
+  color: var(--color-red);
+`;
+
+function CreateProductForm() {
+  const { register, handleSubmit, reset, formState } = useForm();
   const { errors } = formState;
-
+  console.log(errors);
   const queryClient = useQueryClient();
-
-  const { mutate: createProduct, isPending: isCreating } = useMutation({
-    mutationFn: (newProduct) => createEditProduct(newProduct),
+  const { mutate, isPending: isCreating } = useMutation({
+    mutationFn: (newProduct) => createProduct(newProduct),
     onSuccess: () => {
       toast.success('New product successfully created');
       queryClient.invalidateQueries({
@@ -41,26 +45,8 @@ function CreateProductForm({ productToEdit = {} }) {
     onError: (err) => toast.error(err.message),
   });
 
-  const { mutate: editProduct, isPending: isEditing } = useMutation({
-    mutationFn: ({ newProductData, id }) =>
-      createEditProduct(newProductData, id),
-    onSuccess: () => {
-      toast.success('Product successfully edited');
-      queryClient.invalidateQueries({
-        queryKey: ['products'],
-      });
-      reset();
-    },
-    onError: (err) => toast.error(err.message),
-  });
-
-  const isWorking = isCreating || isEditing;
-
   function onSubmit(data) {
-    const image = typeof data.image === 'string' ? data.image : data.image;
-    if (isEditSession)
-      editProduct({ newProductData: { ...data, image }, id: editId });
-    else createProduct({ ...data, image: image });
+    mutate({ ...data, image: data.image });
   }
 
   function onError(errors) {
@@ -74,7 +60,7 @@ function CreateProductForm({ productToEdit = {} }) {
         <Input
           type='text'
           id='name'
-          disabled={isWorking}
+          disabled={isCreating}
           {...register('name', { required: 'This field is required' })}
         />
         {errors?.name?.message && <Errors>{errors.name.message}</Errors>}
@@ -86,7 +72,7 @@ function CreateProductForm({ productToEdit = {} }) {
             name='category'
             id='chair'
             value='Chair'
-            disabled={isWorking}
+            disabled={isCreating}
             {...register('category')}
           />
 
@@ -98,7 +84,7 @@ function CreateProductForm({ productToEdit = {} }) {
             name='category'
             id='table'
             value='Table'
-            disabled={isWorking}
+            disabled={isCreating}
             {...register('category')}
           />
           <Label htmlFor='table'>Table</Label>
@@ -109,7 +95,7 @@ function CreateProductForm({ productToEdit = {} }) {
             name='category'
             id='bench'
             value='Bench'
-            disabled={isWorking}
+            disabled={isCreating}
             {...register('category')}
           />
           <Label htmlFor='bench'>Bench</Label>
@@ -120,7 +106,7 @@ function CreateProductForm({ productToEdit = {} }) {
             name='category'
             id='sofa'
             value='Sofa'
-            disabled={isWorking}
+            disabled={isCreating}
             {...register('category')}
           />
           <Label htmlFor='sofa'>Sofa</Label>
@@ -133,7 +119,7 @@ function CreateProductForm({ productToEdit = {} }) {
           id='tags'
           defaultValue='{"tag1", "tag2"}'
           placeholder='{"tag1", "tag2"}'
-          disabled={isWorking}
+          disabled={isCreating}
           {...register('tags')}
         />
       </FormRow>
@@ -142,7 +128,7 @@ function CreateProductForm({ productToEdit = {} }) {
         <Input
           type='number'
           id='unitPrice'
-          disabled={isWorking}
+          disabled={isCreating}
           {...register('unitPrice', { required: 'This field is required' })}
         />
         {errors?.unitPrice?.message && (
@@ -154,7 +140,7 @@ function CreateProductForm({ productToEdit = {} }) {
         <Input
           type='text'
           id='designer'
-          disabled={isWorking}
+          disabled={isCreating}
           {...register('designer')}
         />
       </FormRow>
@@ -164,7 +150,7 @@ function CreateProductForm({ productToEdit = {} }) {
           id='material'
           name='material'
           rows='6'
-          disabled={isWorking}
+          disabled={isCreating}
           {...register('material', { required: 'This field is required' })}
         />
         {errors?.material?.message && (
@@ -177,7 +163,7 @@ function CreateProductForm({ productToEdit = {} }) {
           id='description1'
           name='description1'
           rows='6'
-          disabled={isWorking}
+          disabled={isCreating}
           {...register('description1', { required: 'This field is required' })}
         />
         {errors?.description1?.message && (
@@ -190,7 +176,7 @@ function CreateProductForm({ productToEdit = {} }) {
           id='description2'
           name='description2'
           rows='6'
-          disabled={isWorking}
+          disabled={isCreating}
           {...register('description2')}
         />
       </FormRow>
@@ -200,7 +186,7 @@ function CreateProductForm({ productToEdit = {} }) {
           id='measurements'
           name='measurements'
           rows='6'
-          disabled={isWorking}
+          disabled={isCreating}
           defaultValue='{ "seating height": 46, "total height": 84.5, "width": 55, "depth": 54 }'
           placeholder='{ "seating height": 46, "total height": 84.5, "width": 55, "depth": 54 }'
           {...register('measurements')}
@@ -212,22 +198,42 @@ function CreateProductForm({ productToEdit = {} }) {
           id='image'
           type='file'
           accept='image/*'
-          disabled={isWorking}
+          disabled={isCreating}
           multiple
-          {...register('image', {
-            required: isEditSession ? false : 'This field is required',
-          })}
+          {...register('image')}
         />
       </FormRow>
-
+      {/* <FormRow>
+        <Label htmlFor='mainImage'>Main Images</Label>
+        <Input
+          id='mainImage'
+          type='text'
+          accept='image/*'
+          // multiple
+          defaultValue='{"image1", "image2"}'
+          disabled={isCreating}
+          {...register('mainImage')}
+        />
+      </FormRow> */}
+      {/* <FormRow>
+        <Label htmlFor='image'>Images</Label>
+        <Input
+          id='image'
+          type='text'
+          defaultValue='{"image1", "image2"}'
+          // accept='image/*'
+          // type='file'
+          // defaultValue={''}
+          disabled={isCreating}
+          {...register('image')}
+        />
+      </FormRow> */}
       <FormRow>
-        {isWorking && <Spinner />}
-        <button type='reset' disabled={isWorking}>
+        {isCreating && <Spinner />}
+        <button type='reset' disabled={isCreating}>
           Cancel
         </button>
-        <button disabled={isWorking}>
-          {isEditSession ? 'Update product' : 'Add product'}
-        </button>
+        <button disabled={isCreating}>Submit</button>
       </FormRow>
     </Form>
   );

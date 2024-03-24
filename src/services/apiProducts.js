@@ -13,15 +13,20 @@ export async function getProducts() {
   return data;
 }
 
-export async function createProduct(newProduct) {
-  const allImages = newProduct.image;
+export async function createEditProduct(newProduct, id) {
+  console.log(newProduct, id);
+
+  // const newProduct.image = newProduct.image;
+  const hasImagePath = newProduct.image[0]?.startsWith?.(supabaseUrl);
   let imageNameArray = [];
   let imagePathArray = [];
+  console.log(hasImagePath);
 
   // 1. upload image
-  for (let image of allImages) {
-    const imageName = await getImageName(image);
-    const imagePath = await getImagePath(imageName);
+  for (let image of newProduct.image) {
+    const imageName = hasImagePath ? image : await getImageName(image);
+    const imagePath = hasImagePath ? image : await getImagePath(imageName);
+
     imageNameArray.push(imageName);
     imagePathArray.push(imagePath);
 
@@ -39,17 +44,24 @@ export async function createProduct(newProduct) {
     }
   }
 
-  // 3. Create product
-  const { data, error } = await supabase
-    .from('products')
-    .insert([{ ...newProduct, image: imagePathArray }])
-    .select();
+  // 3. Create/edit product
+  // a. Create product
+  let query = supabase.from('products');
+  if (!id) query = query.insert([{ ...newProduct, image: imagePathArray }]);
+
+  // b. edit
+  if (id)
+    query = query
+      .update({ ...newProduct, image: imagePathArray })
+      .eq('id', id)
+      .select();
+
+  const { data, error } = await query.select().single();
 
   if (error) {
     console.error(error);
     throw new Error('Product could not be created');
   }
-
   return data;
 }
 
