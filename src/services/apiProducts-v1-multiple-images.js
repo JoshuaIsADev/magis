@@ -30,9 +30,9 @@ export async function createEditProduct(newProduct, id) {
     imageNameArray.push(imageName);
     imagePathArray.push(imagePath);
 
-    const { error: storageError } = hasImagePath
-      ? image
-      : await supabase.storage.from('product-images').upload(imageName, image);
+    const { error: storageError } = await supabase.storage
+      .from('product-images')
+      .upload(imageName, image);
 
     // 2. Delete the product if there was an error uploading the image
     if (storageError) {
