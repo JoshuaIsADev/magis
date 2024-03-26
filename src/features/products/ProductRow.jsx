@@ -1,10 +1,8 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import styled from 'styled-components';
-import { deleteProduct } from '../../services/apiProducts';
-import toast from 'react-hot-toast';
-import { getMainImage } from '../../utils/getMainImage';
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { getMainImage } from '../../utils/getMainImage';
 import CreateProductForm from './CreateProductForm';
+import { useDeleteProduct } from './UseDeleteProduct';
 
 const Img = styled.img`
   width: 12rem;
@@ -16,29 +14,17 @@ const TableRow = styled.div``;
 
 function ProductRow({ product }) {
   const [showForm, setShowForm] = useState(false);
+  const { isDeleting, deleteProduct } = useDeleteProduct();
 
   const {
     id: productId,
     name,
     designer,
     category,
-    units,
+    inStock,
     unitPrice,
     image,
   } = product;
-
-  const queryClient = useQueryClient();
-
-  const { isPending: isDeleting, mutate } = useMutation({
-    mutationFn: (id) => deleteProduct(id),
-    onSuccess: () => {
-      toast.success('Product succesfully deleted');
-      queryClient.invalidateQueries({
-        queryKey: ['products'],
-      });
-    },
-    onError: (err) => toast.error(err.message),
-  });
 
   const [mainImage, setMainImage] = useState(null);
 
@@ -56,7 +42,7 @@ function ProductRow({ product }) {
           <h3>{name}</h3>
           <p className='small'>{designer}</p>
           <p className='small'>{category}</p>
-          <p className='small'>{units} in stock</p>
+          <p className='small'>{inStock} in stock</p>
           <p className='small'>${unitPrice}</p>
           <button
             disabled={isDeleting}
@@ -64,7 +50,10 @@ function ProductRow({ product }) {
           >
             Edit
           </button>
-          <button onClick={() => mutate(productId)} disabled={isDeleting}>
+          <button
+            onClick={() => deleteProduct(productId)}
+            disabled={isDeleting}
+          >
             Delete
           </button>
         </div>

@@ -6,16 +6,14 @@ import Spinner from '../ui/Spinner';
 import { deleteProduct, getProducts } from '../services/apiProducts';
 import styled from 'styled-components';
 import { Row } from '../ui/Row';
+import ProductTableOperations from '../features/products/ProductTableOperations';
+import { useSearchParams } from 'react-router-dom';
 
 const Table = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
   width: 100%;
-`;
-
-const TableHeader = styled.div`
-  padding: 1rem 0;
 `;
 
 const Img = styled.img`
@@ -29,10 +27,9 @@ function ManageProducts() {
 
   return (
     <>
+      <h3>Manage products</h3>
+      <ProductTableOperations />
       <Table role='table'>
-        <TableHeader role='header'>
-          <h3>Manage products</h3>
-        </TableHeader>
         <ProductTable />
       </Table>
       <button onClick={() => setShowForm((show) => !show)}>

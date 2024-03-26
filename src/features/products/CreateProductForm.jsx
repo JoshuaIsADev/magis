@@ -1,12 +1,11 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import { createEditProduct } from '../../services/apiProducts';
+import { useCreateProduct } from './useCreateProduct';
+import { useEditProduct } from './useEditProduct';
 import Form from '../../ui/Form';
 import Input from '../../ui/Input';
 import TextArea from '../../ui/TextArea';
 import Label from '../../ui/Label';
-import toast from 'react-hot-toast';
 import Errors from '../../ui/Errors';
 import FileInput from '../../ui/FileInput';
 import Spinner from '../../ui/Spinner';
@@ -19,6 +18,10 @@ const FormRow = styled.div`
 `;
 
 function CreateProductForm({ productToEdit = {} }) {
+  const { isCreating, createProduct } = useCreateProduct();
+  const { isEditing, editProduct } = useEditProduct();
+  const isWorking = isCreating || isEditing;
+
   const { id: editId, ...editValues } = productToEdit;
   const isEditSession = Boolean(editId);
 
@@ -27,40 +30,18 @@ function CreateProductForm({ productToEdit = {} }) {
   });
   const { errors } = formState;
 
-  const queryClient = useQueryClient();
-
-  const { mutate: createProduct, isPending: isCreating } = useMutation({
-    mutationFn: (newProduct) => createEditProduct(newProduct),
-    onSuccess: () => {
-      toast.success('New product successfully created');
-      queryClient.invalidateQueries({
-        queryKey: ['products'],
-      });
-      reset();
-    },
-    onError: (err) => toast.error(err.message),
-  });
-
-  const { mutate: editProduct, isPending: isEditing } = useMutation({
-    mutationFn: ({ newProductData, id }) =>
-      createEditProduct(newProductData, id),
-    onSuccess: () => {
-      toast.success('Product successfully edited');
-      queryClient.invalidateQueries({
-        queryKey: ['products'],
-      });
-      reset();
-    },
-    onError: (err) => toast.error(err.message),
-  });
-
-  const isWorking = isCreating || isEditing;
-
   function onSubmit(data) {
     const image = typeof data.image === 'string' ? data.image : data.image;
     if (isEditSession)
-      editProduct({ newProductData: { ...data, image }, id: editId });
-    else createProduct({ ...data, image: image });
+      editProduct(
+        { newProductData: { ...data, image }, id: editId },
+        { onSuccess: (data) => reset() }
+      );
+    else
+      createProduct(
+        { ...data, image: image },
+        { onSuccess: (data) => reset() }
+      );
   }
 
   function onError(errors) {
@@ -103,7 +84,7 @@ function CreateProductForm({ productToEdit = {} }) {
           />
           <Label htmlFor='table'>Table</Label>
         </li>
-        <li>
+        {/* <li>
           <Input
             type='radio'
             name='category'
@@ -113,7 +94,7 @@ function CreateProductForm({ productToEdit = {} }) {
             {...register('category')}
           />
           <Label htmlFor='bench'>Bench</Label>
-        </li>
+        </li> */}
         <li>
           <Input
             type='radio'
@@ -144,6 +125,18 @@ function CreateProductForm({ productToEdit = {} }) {
           id='unitPrice'
           disabled={isWorking}
           {...register('unitPrice', { required: 'This field is required' })}
+        />
+        {errors?.unitPrice?.message && (
+          <Errors>{errors.unitPrice.message}</Errors>
+        )}
+      </FormRow>
+      <FormRow>
+        <Label htmlFor='inStock'>In stock</Label>
+        <Input
+          type='number'
+          id='inStock'
+          disabled={isWorking}
+          {...register('inStock', { required: 'This field is required' })}
         />
         {errors?.unitPrice?.message && (
           <Errors>{errors.unitPrice.message}</Errors>
