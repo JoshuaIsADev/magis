@@ -8,49 +8,75 @@ function ProductTable() {
   const [searchParams] = useSearchParams();
 
   if (isPending) return <Spinner />;
-  const filterValue = searchParams.get('category') || 'all';
+  const filterValueCategory = searchParams.get('category') || 'all';
   const filterValueDesigner = searchParams.get('designer') || 'all';
+  const filterValueMaterial = searchParams.get('material') || 'all';
+  // console.log(filterValueMaterial);
 
   let filteredProducts;
-  if (filterValue === 'all') filteredProducts = products;
+  if (filterValueCategory === 'all') filteredProducts = products;
   if (filterValueDesigner === 'all') filteredProducts = products;
+  if (filterValueMaterial === 'all') filteredProducts = products;
 
-  // if (filterValue === 'Chair')
-  //   filteredProducts = products.filter(
-  //     (product) => product.category === 'Chair'
-  //   );
-  // if (filterValue === 'Table')
-  //   filteredProducts = products.filter(
-  //     (product) => product.category === 'Table'
-  //   );
-  // if (filterValue === 'Sofa')
-  //   filteredProducts = products.filter(
-  //     (product) => product.category === 'Sofa'
-  //   );
-  // if (filterValueDesigner === 'Konstantin Grcic')
-  //   filteredProducts = products.filter(
-  //     (product) => product.designer === 'Konstantin Grcic'
-  //   );
-
-  if (filterValue !== 'all' && filterValue !== 'null')
+  if (filterValueCategory !== 'all' && filterValueCategory !== 'null')
     filteredProducts = products.filter(
-      (product) => product.category === filterValue
+      (product) => product.category === filterValueCategory
     );
   if (filterValueDesigner !== 'all' && filterValueDesigner !== 'null')
     filteredProducts = products.filter(
       (product) => product.designer === filterValueDesigner
     );
+  if (filterValueMaterial !== 'all' && filterValueMaterial !== 'null')
+    filteredProducts = products.filter((product) =>
+      product.material.includes(filterValueMaterial)
+    );
 
   if (
-    filterValue !== 'all' &&
-    filterValue !== 'null' &&
+    filterValueCategory !== 'all' &&
+    filterValueCategory !== 'null' &&
     filterValueDesigner !== 'all' &&
     filterValueDesigner !== 'null'
   )
     filteredProducts = products.filter(
       (product) =>
-        product.category === filterValue &&
+        product.category === filterValueCategory &&
         product.designer === filterValueDesigner
+    );
+  if (
+    filterValueCategory !== 'all' &&
+    filterValueCategory !== 'null' &&
+    filterValueMaterial !== 'all' &&
+    filterValueMaterial !== 'null'
+  )
+    filteredProducts = products.filter(
+      (product) =>
+        product.category === filterValueCategory &&
+        product.material.includes(filterValueMaterial)
+    );
+  if (
+    filterValueDesigner !== 'all' &&
+    filterValueDesigner !== 'null' &&
+    filterValueMaterial !== 'all' &&
+    filterValueMaterial !== 'null'
+  )
+    filteredProducts = products.filter(
+      (product) =>
+        product.designer === filterValueDesigner &&
+        product.material.includes(filterValueMaterial)
+    );
+  if (
+    filterValueCategory !== 'all' &&
+    filterValueCategory !== 'null' &&
+    filterValueDesigner !== 'all' &&
+    filterValueDesigner !== 'null' &&
+    filterValueMaterial !== 'all' &&
+    filterValueMaterial !== 'null'
+  )
+    filteredProducts = products.filter(
+      (product) =>
+        product.category === filterValueCategory &&
+        product.designer === filterValueDesigner &&
+        product.material.includes(filterValueMaterial)
     );
   console.log(filteredProducts);
 
@@ -60,12 +86,14 @@ function ProductTable() {
 
   return (
     <>
-      {/* {products.map((product) => (
-        <ProductRow key={product.id} role='row' product={product} />
-      ))} */}
       {filteredProducts.map((product) => (
         <ProductRow key={product.id} role='row' product={product} />
       ))}
+      {filteredProducts.length === 0 ? (
+        <p>No products match your search criteria.</p>
+      ) : (
+        ''
+      )}
     </>
   );
 }
