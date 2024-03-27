@@ -15,26 +15,49 @@ function ProductTable() {
   if (filterValue === 'all') filteredProducts = products;
   if (filterValueDesigner === 'all') filteredProducts = products;
 
-  if (filterValueDesigner !== 'all')
-    filteredProducts = products.filter(
-      (product) => product.designer === filterValueDesigner
-    );
-  if (filterValue !== 'all')
+  // if (filterValue === 'Chair')
+  //   filteredProducts = products.filter(
+  //     (product) => product.category === 'Chair'
+  //   );
+  // if (filterValue === 'Table')
+  //   filteredProducts = products.filter(
+  //     (product) => product.category === 'Table'
+  //   );
+  // if (filterValue === 'Sofa')
+  //   filteredProducts = products.filter(
+  //     (product) => product.category === 'Sofa'
+  //   );
+  // if (filterValueDesigner === 'Konstantin Grcic')
+  //   filteredProducts = products.filter(
+  //     (product) => product.designer === 'Konstantin Grcic'
+  //   );
+
+  if (filterValue !== 'all' && filterValue !== 'null')
     filteredProducts = products.filter(
       (product) => product.category === filterValue
     );
-  if (filterValue !== 'all' && filterValueDesigner !== 'all')
+  if (filterValueDesigner !== 'all' && filterValueDesigner !== 'null')
     filteredProducts = products.filter(
-      (product) =>
-        product.category === filterValue &&
-        product.designer === filterValueDesigner
+      (product) => product.designer === filterValueDesigner
     );
 
-  // if (filteredProducts.length === 0) {
-  //   console.log('No products match your search criteria.');
+  console.log(filteredProducts);
+
+  // if (
+  //   filterValue === 'Chair' &&
+  //   filterValueDesigner === 'Ronan & Erwan Bouroullec'
+  // ) {
+  //   filteredProducts = products.filter(
+  //     (product) =>
+  //       product.designer === 'Ronan & Erwan Bouroullec' &&
+  //       product.category === 'Chair'
+  //   );
   // }
 
-  console.log(filteredProducts);
+  if (filteredProducts.length === 0) {
+    console.log('No products match your search criteria.');
+  }
+
   return (
     <>
       {/* {products.map((product) => (
