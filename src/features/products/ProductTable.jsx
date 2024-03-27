@@ -41,18 +41,18 @@ function ProductTable() {
       (product) => product.designer === filterValueDesigner
     );
 
+  if (
+    filterValue !== 'all' &&
+    filterValue !== 'null' &&
+    filterValueDesigner !== 'all' &&
+    filterValueDesigner !== 'null'
+  )
+    filteredProducts = products.filter(
+      (product) =>
+        product.category === filterValue &&
+        product.designer === filterValueDesigner
+    );
   console.log(filteredProducts);
-
-  // if (
-  //   filterValue === 'Chair' &&
-  //   filterValueDesigner === 'Ronan & Erwan Bouroullec'
-  // ) {
-  //   filteredProducts = products.filter(
-  //     (product) =>
-  //       product.designer === 'Ronan & Erwan Bouroullec' &&
-  //       product.category === 'Chair'
-  //   );
-  // }
 
   if (filteredProducts.length === 0) {
     console.log('No products match your search criteria.');
