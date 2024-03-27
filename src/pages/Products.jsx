@@ -14,7 +14,7 @@ function Products() {
   });
   if (isLoading) return <Spinner />;
 
-  console.log(products);
+  // console.log(products);
   return (
     <>
       <p>Filter / Sort</p>

@@ -6,27 +6,33 @@ import { useProducts } from './useProducts';
 function ProductTable() {
   const { isPending, products } = useProducts();
   const [searchParams] = useSearchParams();
-  // console.log(typeof products[0].category);
 
   if (isPending) return <Spinner />;
   const filterValue = searchParams.get('category') || 'all';
-  console.log(filterValue);
+  const filterValueDesigner = searchParams.get('designer') || 'all';
 
   let filteredProducts;
   if (filterValue === 'all') filteredProducts = products;
-  if (filterValue === 'Chair')
+  if (filterValueDesigner === 'all') filteredProducts = products;
+
+  if (filterValueDesigner !== 'all')
     filteredProducts = products.filter(
-      (product) => product.category === 'Chair'
+      (product) => product.designer === filterValueDesigner
     );
-  // filteredProducts = 'test';
-  if (filterValue === 'Table')
+  if (filterValue !== 'all')
     filteredProducts = products.filter(
-      (product) => product.category === 'Table'
+      (product) => product.category === filterValue
     );
-  if (filterValue === 'Sofa')
+  if (filterValue !== 'all' && filterValueDesigner !== 'all')
     filteredProducts = products.filter(
-      (product) => product.category === 'Sofa'
+      (product) =>
+        product.category === filterValue &&
+        product.designer === filterValueDesigner
     );
+
+  // if (filteredProducts.length === 0) {
+  //   console.log('No products match your search criteria.');
+  // }
 
   console.log(filteredProducts);
   return (
