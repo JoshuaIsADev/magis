@@ -1,12 +1,12 @@
 import Filter from '../../ui/Filter';
-import FilterDesigner from '../../ui/FilterDesigner';
+import SortBy from '../../ui/SortBy';
 import TableOperations from '../../ui/TableOperations';
 
 function ProductTableOperations() {
   return (
     <TableOperations>
       <Filter />
-      {/* <FilterDesigner /> */}
+      <SortBy />
     </TableOperations>
   );
 }

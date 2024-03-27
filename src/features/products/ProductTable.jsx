@@ -13,6 +13,7 @@ function ProductTable() {
   const filterValueMaterial = searchParams.get('material') || 'all';
   // console.log(filterValueMaterial);
 
+  //Filter
   let filteredProducts;
   if (filterValueCategory === 'all') filteredProducts = products;
   if (filterValueDesigner === 'all') filteredProducts = products;
@@ -78,15 +79,32 @@ function ProductTable() {
         product.designer === filterValueDesigner &&
         product.material.includes(filterValueMaterial)
     );
-  console.log(filteredProducts);
 
   if (filteredProducts.length === 0) {
     console.log('No products match your search criteria.');
   }
 
+  console.log(filteredProducts);
+
+  //Sort
+  const selectedSort = searchParams.get('sortBy') || 'name-asc';
+  const [field, direction] = selectedSort.split('-');
+  const modifier = direction === 'asc' ? 1 : -1;
+  const sortedProducts = filteredProducts.sort((a, b) => {
+    if (typeof a[field] === 'string') {
+      return a[field].localeCompare(b[field]) * modifier;
+    } else {
+      return (a[field] - b[field]) * modifier;
+    }
+  });
+  console.log(field, direction, modifier);
+
   return (
     <>
-      {filteredProducts.map((product) => (
+      {/* {filteredProducts.map((product) => (
+        <ProductRow key={product.id} role='row' product={product} />
+      ))} */}
+      {sortedProducts.map((product) => (
         <ProductRow key={product.id} role='row' product={product} />
       ))}
       {filteredProducts.length === 0 ? (
