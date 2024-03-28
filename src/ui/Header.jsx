@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import SignOut from '../features/authentication/SignOut';
 
 function Header() {
   return (
@@ -14,6 +15,9 @@ function Header() {
           </li>
           <li>
             <NavLink to='/cart'>Cart</NavLink>
+          </li>
+          <li>
+            <SignOut />
           </li>
           {/* <li>
             <NavLink to='/manage'>Manage</NavLink>

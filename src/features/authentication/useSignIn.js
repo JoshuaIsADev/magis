@@ -10,7 +10,12 @@ export function useSignIn() {
     mutationFn: ({ email, password }) => signInApi({ email, password }),
     onSuccess: (user) => {
       queryClient.setQueriesData(['user', user]);
-      navigate('/manage');
+      console.log(user.user.email);
+      if (user.user.email === 'admin@test.com') {
+        navigate('/manage', { replace: true });
+      } else {
+        navigate('/products', { replace: true });
+      }
     },
     onError: (err) => {
       console.log('ERROR', err);

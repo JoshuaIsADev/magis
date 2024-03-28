@@ -84,8 +84,6 @@ function ProductTable() {
     console.log('No products match your search criteria.');
   }
 
-  console.log(filteredProducts);
-
   //Sort
   const selectedSort = searchParams.get('sortBy') || 'name-asc';
   const [field, direction] = selectedSort.split('-');
