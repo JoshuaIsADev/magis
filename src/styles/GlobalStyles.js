@@ -11,7 +11,7 @@ const GlobalStyles = createGlobalStyle`
   --color-grey-600: #484848;
   --color-grey-700: #2e2e2e;
   --color-grey-800: #161616;
-  --color-grey-900: #000000;
+  --color-grey-900: #292929;
   --color-red: #FF0000; 
 
   --color-brand: #F0F406;
@@ -50,7 +50,7 @@ const GlobalStyles = createGlobalStyle`
   margin: 0;
   padding: 0;
   font-size: 16px;
-  color: var(--color-gray-900);
+  color: var(--color-grey-900);
 }
 
 html {
@@ -69,6 +69,14 @@ body {
 
 a {
   text-decoration: none;
+}
+
+h2 {
+  font-size: 1.5rem ;
+  font-weight: 800;
+  line-height: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: -.1rem;
 }
 
 h3 {

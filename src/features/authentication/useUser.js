@@ -7,5 +7,9 @@ export function useUser() {
     queryFn: getCurrentUser,
   });
 
-  return { isPending, user, isAuthenticated: user?.role === 'authenticated' };
+  return {
+    isPending,
+    user,
+    isAuthenticated: user?.role === 'authenticated',
+  };
 }

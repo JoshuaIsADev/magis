@@ -1,11 +1,8 @@
 import { useState } from 'react';
-import { signIn } from '../../services/apiAuth';
 import Form from '../../ui/Form';
 import styled from 'styled-components';
 import Label from '../../ui/Label';
 import Input from '../../ui/Input';
-import Errors from '../../ui/Errors';
-import { useForm } from 'react-hook-form';
 import { useSignIn } from './useSignIn';
 import Spinner from '../../ui/Spinner';
 
