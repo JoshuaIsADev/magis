@@ -15,9 +15,9 @@ function Header() {
           <li>
             <NavLink to='/cart'>Cart</NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink to='/manage'>Manage</NavLink>
-          </li>
+          </li> */}
         </ul>
       </nav>
     </header>

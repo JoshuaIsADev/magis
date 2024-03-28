@@ -97,7 +97,7 @@ function ProductTable() {
       return (a[field] - b[field]) * modifier;
     }
   });
-  console.log(field, direction, modifier);
+  // console.log(field, direction, modifier);
 
   return (
     <>

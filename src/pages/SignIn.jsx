@@ -1,5 +1,11 @@
+import SignInForm from '../features/authentication/SignInForm';
+
 function SignIn() {
-  return <>Sign In</>;
+  return (
+    <div>
+      <SignInForm />
+    </div>
+  );
 }
 
 export default SignIn;

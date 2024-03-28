@@ -13,6 +13,7 @@ import PageNotFound from './pages/PageNotFound';
 import AppLayout from './ui/AppLayout';
 import Products from './pages/Products';
 import ManageProducts from './pages/ManageProducts';
+import ProtectedRoute from './ui/ProtectedRoute';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,7 +39,16 @@ function App() {
             <Route path='signup' element={<SignUp />} />
             <Route path='order' element={<Order />} />
             <Route path='checkout' element={<CheckOut />} />
-            <Route path='manage' element={<ManageProducts />} />
+
+            <Route
+              path='manage'
+              element={
+                <ProtectedRoute>
+                  <ManageProducts />
+                </ProtectedRoute>
+              }
+            />
+
             <Route path='*' element={<PageNotFound />} />
           </Route>
         </Routes>
