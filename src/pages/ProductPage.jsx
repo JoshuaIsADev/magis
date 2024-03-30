@@ -46,7 +46,7 @@ const DataContainer = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
-  gap: 0.75rem;
+  gap: 1rem;
 `;
 
 const Button = styled.button`
@@ -55,12 +55,10 @@ const Button = styled.button`
   border-radius: 3rem;
   border: none;
   cursor: pointer;
-  .selected {
-    outline: 1px solid var(--color-grey-300);
-    outline-offset: 0.4rem;
-  }
-  &:hover,
-  &:active {
+  outline: ${(props) =>
+    props.$active ? '1px solid var(--color-grey-300)' : 'none'};
+  outline-offset: 0.4rem;
+  &:hover {
     outline: 1px solid var(--color-grey-300);
     outline-offset: 0.4rem;
   }
@@ -72,6 +70,11 @@ function ProductPage() {
   const { id: productId } = useParams();
   if (isPending) return <Spinner />;
   const product = products.find((p) => p.id === Number(productId));
+
+  function handleColorClick(clickedColor) {
+    setColor(clickedColor);
+    console.log(clickedColor);
+  }
 
   return (
     <>
@@ -102,10 +105,21 @@ function ProductPage() {
               <h3>Shop colors and quantity</h3>
               <DataContainer>
                 <ButtonContainer>
-                  <Button></Button>
-                  <Button></Button>
-                  <Button></Button>
-                  <Button></Button>
+                  <Button
+                    color='black'
+                    $active={color === 'black'}
+                    onClick={() => handleColorClick('black')}
+                  ></Button>
+                  <Button
+                    color='green'
+                    $active={color === 'green'}
+                    onClick={() => handleColorClick('green')}
+                  ></Button>
+                  <Button
+                    color='red'
+                    $active={color === 'red'}
+                    onClick={() => handleColorClick('red')}
+                  ></Button>
                 </ButtonContainer>
               </DataContainer>
             </InfoContainer>
