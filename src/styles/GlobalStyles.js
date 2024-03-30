@@ -28,10 +28,14 @@ const GlobalStyles = createGlobalStyle`
   --border-radius-lg: 2rem;
 
   /* --width-desktop: calc(100vw - 7rem); */
-  --width-max: 1920px;
+  --width-max: 2560px;
   --width-text-max: 700px; 
   --width-main: 1200px;
 
+  --padding-s: 2rem;
+  --padding-m: 4rem;
+  --padding-l: 6rem;
+  --padding-v: 2rem;
   --padding-row: 25vw;
   --padding-sides: 2rem;
 
@@ -71,6 +75,23 @@ a {
   text-decoration: none;
 }
 
+h1 {
+  font-size: 4rem ;
+  font-weight: 400;
+  line-height: 5rem;
+  /* letter-spacing: -.1rem; */
+}
+
+.homeHeading {
+  text-indent: 40rem;
+  padding-bottom: 4rem;
+}
+
+.productHeading {
+  letter-spacing: -.3rem;
+  padding-bottom: 30vh;
+}
+
 h2 {
   font-size: 1.5rem ;
   font-weight: 800;
@@ -79,18 +100,15 @@ h2 {
   letter-spacing: -.1rem;
 }
 
-h3 {
-  font-size: 4rem ;
-  font-weight: 800;
-  line-height: 4rem;
-  text-transform: uppercase;
-  letter-spacing: -.1rem;
+h3, p {
+  font-size: 1rem;
+      font-weight: 400;
+      line-height: 1rem;
+      line-height: 1.25rem;
 }
 
-p {
-  font-size: 2rem;
-      font-weight: 400;
-      line-height: 2rem;
+.bold {
+  font-weight: 700;
 }
 
 p.small {
@@ -117,6 +135,9 @@ img {
   max-width: 800px;
 } */
 
+.test {
+  background-color: #484848;
+}
 
 //OVERRIDES
 .faded {

@@ -1,11 +1,16 @@
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import Spinner from '../../ui/Spinner';
 import ProductRow from './ProductRow';
 import { useProducts } from './useProducts';
+import ProductCard from './ProductCard';
+import styled from 'styled-components';
+import { StyledProductTable } from '../../ui/StyledProductTable';
 
 function ProductTable() {
   const { isPending, products } = useProducts();
   const [searchParams] = useSearchParams();
+  const location = useLocation();
+  const pathIsManage = location.pathname.includes('manage');
 
   if (isPending) return <Spinner />;
   const filterValueCategory = searchParams.get('category') || 'all';
@@ -99,16 +104,16 @@ function ProductTable() {
 
   return (
     <>
-      {/* {filteredProducts.map((product) => (
-        <ProductRow key={product.id} role='row' product={product} />
-      ))} */}
-      {sortedProducts.map((product) => (
-        <ProductRow key={product.id} role='row' product={product} />
-      ))}
-      {filteredProducts.length === 0 ? (
-        <p>No products match your search criteria.</p>
+      {pathIsManage ? (
+        sortedProducts.map((product) => (
+          <ProductRow key={product.id} role='row' product={product} />
+        ))
       ) : (
-        ''
+        <StyledProductTable>
+          {sortedProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </StyledProductTable>
       )}
     </>
   );

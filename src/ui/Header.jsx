@@ -4,54 +4,75 @@ import styled from 'styled-components';
 import StyledLink from './StyledLink';
 import { UserContext } from '../context/user';
 import { useUser } from '../features/authentication/useUser';
+import { useSignOut } from '../features/authentication/useSignOut';
+import Hr from './Hr';
 
 const StyledHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  max-width: var(--width-max);
   margin: 0 auto;
+  padding: var(--padding-s) var(--padding-s) 0;
 `;
 
 const Ul = styled.ul`
   display: flex;
   flex-direction: row;
-  gap: 1rem;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 1.5rem;
 `;
 
 function Header() {
   const { currentUser } = useContext(UserContext);
   // console.log(currentUser);
-  const { isPending, isAuthenticated } = useUser();
-  console.log(isAuthenticated);
-  return (
-    <StyledHeader>
-      <h2>Magis</h2>
-      <nav>
-        <Ul>
-          <li className='mainNav'>
-            <StyledLink $variation='header' to='/'>
-              Shop
-            </StyledLink>
-          </li>
-          <li>
-            <StyledLink $variation='header' to='/signin'>
-              Sign In
-            </StyledLink>
-          </li>
-          <li>
-            <StyledLink $variation='header' to='/cart'>
-              Cart
-            </StyledLink>
-          </li>
-          <li>{isAuthenticated ? <SignOut /> : ''}</li>
+  const { isAuthenticated } = useUser();
+  const { signOut, isPending } = useSignOut();
 
-          {/* <li>
+  return (
+    <>
+      <StyledHeader>
+        <h2>Magis</h2>
+        <nav>
+          <Ul>
+            <li className='mainNav'>
+              <StyledLink $variation='header' to='/'>
+                Shop
+              </StyledLink>
+            </li>
+            |
+            {/* <li>
+            <StyledLink $variation='header' to='/signin'>
+            Sign In
+            </StyledLink>
+          </li> */}
+            <li disabled={isPending}>
+              {isAuthenticated ? (
+                // <SignOut />
+                <StyledLink $variation='header' onClick={signOut}>
+                  Sign Out
+                </StyledLink>
+              ) : (
+                <StyledLink $variation='header' to='/signin'>
+                  Sign In
+                </StyledLink>
+              )}
+            </li>
+            |
+            <li>
+              <StyledLink $variation='header' to='/cart'>
+                Cart
+              </StyledLink>
+            </li>
+            {/* <li>
             <StyledLink $variation='header' to='/manage'>Manage</StyledLink>
           </li> */}
-        </Ul>
-      </nav>
-    </StyledHeader>
+          </Ul>
+        </nav>
+      </StyledHeader>
+      <Hr />
+    </>
   );
 }
 

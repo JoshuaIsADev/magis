@@ -1,4 +1,10 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  useParams,
+} from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
@@ -33,7 +39,7 @@ function App() {
           <Route element={<AppLayout />}>
             <Route index element={<Navigate replace to='products' />} />
             <Route path='products' element={<Products />} />
-            <Route path='productpage' element={<ProductPage />} />
+            <Route path='product/:id' element={<ProductPage />} />
             <Route path='cart' element={<Cart />} />
             <Route path='signin' element={<SignIn />} />
             <Route path='signup' element={<SignUp />} />

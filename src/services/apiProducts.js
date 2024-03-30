@@ -20,7 +20,6 @@ export async function createEditProduct(newProduct, id) {
   const hasImagePath = newProduct.image[0]?.startsWith?.(supabaseUrl);
   let imageNameArray = [];
   let imagePathArray = [];
-  console.log(hasImagePath);
 
   // 1. upload image
   for (let image of newProduct.image) {

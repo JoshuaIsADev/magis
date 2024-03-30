@@ -10,10 +10,11 @@ const variations = {
     font-size: 1.5rem;
     font-weight: 400;
     text-transform: uppercase;
+    letter-spacing: -0.1rem;
     &:hover,
     &:active,
-    &.active:link,
-    &.active:visited {
+    &.active:link
+    /* &.active:visited  */ {
       color: var(--color-grey-300);
     }
   `,

@@ -1,13 +1,17 @@
+import styled from 'styled-components';
 import Filter from '../../ui/Filter';
 import SortBy from '../../ui/SortBy';
-import TableOperations from '../../ui/TableOperations';
+
+const StyledProductTableOperations = styled.nav`
+  padding: 0 var(--padding-s);
+`;
 
 function ProductTableOperations() {
   return (
-    <TableOperations>
+    <StyledProductTableOperations>
       <Filter />
       <SortBy />
-    </TableOperations>
+    </StyledProductTableOperations>
   );
 }
 
