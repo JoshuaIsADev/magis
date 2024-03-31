@@ -3,7 +3,7 @@ import { useProducts } from '../features/products/useProducts';
 import Spinner from '../ui/Spinner';
 import Section from '../ui/Section';
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Container = styled.div`
   display: grid;
@@ -71,46 +71,40 @@ const QuantityContainer = styled.div`
 
 function ProductPage() {
   const [color, setColor] = useState('');
-  const [quantity, setQuantity] = useState(1);
-  const [newCartItems, setNewCartItems] = useState([]);
+  const [quantity, setQuantity] = useState(0);
+  const [addToCart, setAddToCart] = useState();
   const { isPending, products } = useProducts();
   const { id: productId } = useParams();
+
+  useEffect(() => {
+    console.log(addToCart);
+  }, [addToCart]);
 
   if (isPending) return <Spinner />;
   const product = products.find((p) => p.id === Number(productId));
 
-  function handleKeyDown(e) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-    }
+  function handleColorClick(clickedColor) {
+    setColor(clickedColor);
   }
 
-  function handleColorChange(e) {
-    setColor(e.target.value);
+  function handleQuantityAdd() {
+    setQuantity((quantity) => quantity + 1);
   }
 
-  function handleAddCartItems(cartItem) {
-    setNewCartItems((cartItems) => [...cartItems, cartItem]);
+  function handleQuantitySubtract() {
+    if (quantity > 0) setQuantity((quantity) => quantity - 1);
   }
 
-  function handleQuantityChange(e) {
-    setQuantity(Number(e.target.value));
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    const newCartItem = { color, quantity, productId };
-    // console.log(newCartItem);
-
-    handleAddCartItems(newCartItem);
-
+  function handleAddToCart() {
+    setAddToCart((prevCart) => {
+      if (!Array.isArray(prevCart)) {
+        return [{ color, quantity }];
+      }
+      return [...prevCart, { color, quantity }];
+    });
     setColor('');
-    setQuantity(1);
+    setQuantity(0);
   }
-
-  // console.log(newCartItems);
-
-  const disabled = !color || !quantity || quantity === 0;
 
   return (
     <>
@@ -139,49 +133,42 @@ function ProductPage() {
                 <p>${product.unitPrice}</p>
               </InfoRow>
               <h3>Shop colors and quantity</h3>
-              <form onSubmit={handleSubmit}>
-                <InfoRow>
-                  <div>
-                    <input
-                      type='radio'
-                      name='color'
-                      value='grey'
-                      onChange={handleColorChange}
-                      onKeyDown={handleKeyDown}
-                    />
-                    <input
-                      type='radio'
-                      name='color'
-                      value='white'
-                      onChange={handleColorChange}
-                      onKeyDown={handleKeyDown}
-                    />
-                    <input
-                      type='radio'
-                      name='color'
-                      value='black'
-                      onChange={handleColorChange}
-                      onKeyDown={handleKeyDown}
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type='number'
-                      name='quantity'
-                      min='0'
-                      max='100'
-                      value={quantity}
-                      onChange={handleQuantityChange}
-                      onKeyDown={handleKeyDown}
-                    />
-                  </div>
-                </InfoRow>
-                <InfoRow>
-                  <button type='submit' disabled={disabled}>
-                    Add to cart
-                  </button>
-                </InfoRow>
-              </form>
+              <InfoRow>
+                <ButtonContainer>
+                  <Button
+                    color='black'
+                    $active={color === 'black'}
+                    onClick={() => handleColorClick('black')}
+                  ></Button>
+                  <Button
+                    color='green'
+                    $active={color === 'green'}
+                    onClick={() => handleColorClick('green')}
+                  ></Button>
+                  <Button
+                    color='red'
+                    $active={color === 'red'}
+                    onClick={() => handleColorClick('red')}
+                  ></Button>
+                </ButtonContainer>
+                <QuantityContainer>
+                  <Button
+                    $variation='quantity'
+                    onClick={handleQuantitySubtract}
+                  >
+                    -
+                  </Button>
+                  <p>{quantity}</p>
+                  <Button $variation='quantity' onClick={handleQuantityAdd}>
+                    +
+                  </Button>
+                </QuantityContainer>
+              </InfoRow>
+              <InfoRow>
+                <Button $variation='addToCart' onClick={handleAddToCart}>
+                  Add to cart
+                </Button>
+              </InfoRow>
             </InfoContainer>
           </Article>
         </Container>
