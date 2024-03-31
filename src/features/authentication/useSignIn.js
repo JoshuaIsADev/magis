@@ -3,7 +3,7 @@ import { signIn as signInApi } from '../../services/apiAuth';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { useContext } from 'react';
-import { UserContext } from '../../context/user';
+import { UserContext } from '../../context/userContext';
 
 export function useSignIn() {
   const queryClient = useQueryClient();

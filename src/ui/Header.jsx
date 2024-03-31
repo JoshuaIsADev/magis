@@ -2,10 +2,11 @@ import { useContext } from 'react';
 import SignOut from '../features/authentication/SignOut';
 import styled from 'styled-components';
 import StyledLink from './StyledLink';
-import { UserContext } from '../context/user';
+import { UserContext } from '../context/userContext';
 import { useUser } from '../features/authentication/useUser';
 import { useSignOut } from '../features/authentication/useSignOut';
 import Hr from './Hr';
+import { CartContext } from '../context/cartContext';
 
 const StyledHeader = styled.header`
   display: flex;
@@ -27,8 +28,21 @@ const Ul = styled.ul`
 function Header() {
   const { currentUser } = useContext(UserContext);
   // console.log(currentUser);
+  const { cartItems } = useContext(CartContext);
+  const cartItemsCount = cartItems.length;
+  console.log(cartItems);
   const { isAuthenticated } = useUser();
   const { signOut, isPending } = useSignOut();
+
+  let cartItemQuantityArray = [];
+  let cartItemQuantity = 0;
+  for (const cartItem of cartItems) {
+    cartItemQuantityArray.push(cartItem.quantity);
+  }
+  for (let i = 0; i < cartItemQuantityArray.length; i++) {
+    cartItemQuantity += cartItemQuantityArray[i];
+  }
+  console.log(cartItemQuantity);
 
   return (
     <>
@@ -66,7 +80,7 @@ function Header() {
                 </StyledLink>
               ) : (
                 <StyledLink $variation='header' to='/cart'>
-                  Cart
+                  Cart {cartItemQuantity > 0 ? `(${cartItemQuantity})` : ''}
                 </StyledLink>
               )}
             </li>

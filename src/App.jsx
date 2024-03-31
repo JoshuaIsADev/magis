@@ -20,8 +20,8 @@ import AppLayout from './ui/AppLayout';
 import Products from './pages/Products';
 import ManageProducts from './pages/ManageProducts';
 import ProtectedRoute from './ui/ProtectedRoute';
-import { UserProvider } from './context/user';
-import { ProductsProvider } from './context/products';
+import { UserProvider } from './context/userContext';
+import { CartProvider } from './context/cartContext';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,7 +38,7 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <UserProvider>
-          <ProductsProvider>
+          <CartProvider>
             <Routes>
               <Route element={<AppLayout />}>
                 <Route index element={<Navigate replace to='products' />} />
@@ -62,7 +62,7 @@ function App() {
                 <Route path='*' element={<PageNotFound />} />
               </Route>
             </Routes>
-          </ProductsProvider>
+          </CartProvider>
         </UserProvider>
       </BrowserRouter>
 

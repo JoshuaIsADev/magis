@@ -3,9 +3,7 @@ import { useProducts } from '../features/products/useProducts';
 import Spinner from '../ui/Spinner';
 import Section from '../ui/Section';
 import styled from 'styled-components';
-import { useContext, useState } from 'react';
-import { CartContext } from '../context/cartContext';
-// import { CartContext } from '../context/cartContext';
+import { useState } from 'react';
 
 const Container = styled.div`
   display: grid;
@@ -74,8 +72,7 @@ const QuantityContainer = styled.div`
 function ProductPage() {
   const [color, setColor] = useState('');
   const [quantity, setQuantity] = useState(1);
-  // const [cartItems, setCartItems] = useState([]);
-  const { setCartItems } = useContext(CartContext);
+  const [newCartItems, setNewCartItems] = useState([]);
   const { isPending, products } = useProducts();
   const { id: productId } = useParams();
 
@@ -93,9 +90,8 @@ function ProductPage() {
   }
 
   function handleAddCartItems(cartItem) {
-    setCartItems((cartItems) => [...cartItems, cartItem]);
+    setNewCartItems((cartItems) => [...cartItems, cartItem]);
   }
-  // console.log(cartItems);
 
   function handleQuantityChange(e) {
     setQuantity(Number(e.target.value));
@@ -104,13 +100,14 @@ function ProductPage() {
   function handleSubmit(e) {
     e.preventDefault();
     const newCartItem = { color, quantity, productId };
+    console.log(newCartItem);
 
     handleAddCartItems(newCartItem);
 
     setQuantity(1);
   }
 
-  // console.log(cartItems);
+  // console.log(newCartItems);
 
   const disabled = !color || !quantity || quantity === 0;
 
