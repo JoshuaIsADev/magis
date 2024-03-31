@@ -49,7 +49,6 @@ function Header() {
           </li> */}
             <li disabled={isPending}>
               {isAuthenticated ? (
-                // <SignOut />
                 <StyledLink $variation='header' onClick={signOut}>
                   Sign Out
                 </StyledLink>
@@ -60,10 +59,16 @@ function Header() {
               )}
             </li>
             |
-            <li>
-              <StyledLink $variation='header' to='/cart'>
-                Cart
-              </StyledLink>
+            <li disabled={isPending}>
+              {isAuthenticated ? (
+                <StyledLink $variation='header' to='/manage'>
+                  Manage
+                </StyledLink>
+              ) : (
+                <StyledLink $variation='header' to='/cart'>
+                  Cart
+                </StyledLink>
+              )}
             </li>
             {/* <li>
             <StyledLink $variation='header' to='/manage'>Manage</StyledLink>

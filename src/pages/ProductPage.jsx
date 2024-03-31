@@ -64,8 +64,14 @@ const Button = styled.button`
   }
 `;
 
+const QuantityContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
+
 function ProductPage() {
   const [color, setColor] = useState('');
+  const [quantity, setquantity] = useState(0);
   const { isPending, products } = useProducts();
   const { id: productId } = useParams();
   if (isPending) return <Spinner />;
@@ -75,6 +81,14 @@ function ProductPage() {
     setColor(clickedColor);
     console.log(clickedColor);
   }
+
+  function handleQuantityAdd() {
+    setquantity((quantity) => quantity + 1);
+  }
+  function handleQuantitySubtract() {
+    if (quantity > 1) setquantity((quantity) => quantity - 1);
+  }
+  console.log(quantity);
 
   return (
     <>
@@ -121,6 +135,18 @@ function ProductPage() {
                     onClick={() => handleColorClick('red')}
                   ></Button>
                 </ButtonContainer>
+                <QuantityContainer>
+                  <Button
+                    $variation='quantity'
+                    onClick={handleQuantitySubtract}
+                  >
+                    -
+                  </Button>
+                  <p>{quantity}</p>
+                  <Button $variation='quantity' onClick={handleQuantityAdd}>
+                    +
+                  </Button>
+                </QuantityContainer>
               </DataContainer>
             </InfoContainer>
           </Article>

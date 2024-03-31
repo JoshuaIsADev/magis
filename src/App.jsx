@@ -20,6 +20,8 @@ import AppLayout from './ui/AppLayout';
 import Products from './pages/Products';
 import ManageProducts from './pages/ManageProducts';
 import ProtectedRoute from './ui/ProtectedRoute';
+import { UserProvider } from './context/user';
+import { ProductsProvider } from './context/products';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -35,29 +37,33 @@ function App() {
       <ReactQueryDevtools initialIsOpen={false} />
       <GlobalStyles />
       <BrowserRouter>
-        <Routes>
-          <Route element={<AppLayout />}>
-            <Route index element={<Navigate replace to='products' />} />
-            <Route path='products' element={<Products />} />
-            <Route path='product/:id' element={<ProductPage />} />
-            <Route path='cart' element={<Cart />} />
-            <Route path='signin' element={<SignIn />} />
-            <Route path='signup' element={<SignUp />} />
-            <Route path='order' element={<Order />} />
-            <Route path='checkout' element={<CheckOut />} />
+        <UserProvider>
+          <ProductsProvider>
+            <Routes>
+              <Route element={<AppLayout />}>
+                <Route index element={<Navigate replace to='products' />} />
+                <Route path='products' element={<Products />} />
+                <Route path='product/:id' element={<ProductPage />} />
+                <Route path='cart' element={<Cart />} />
+                <Route path='signin' element={<SignIn />} />
+                <Route path='signup' element={<SignUp />} />
+                <Route path='order' element={<Order />} />
+                <Route path='checkout' element={<CheckOut />} />
 
-            <Route
-              path='manage'
-              element={
-                <ProtectedRoute>
-                  <ManageProducts />
-                </ProtectedRoute>
-              }
-            />
+                <Route
+                  path='manage'
+                  element={
+                    <ProtectedRoute>
+                      <ManageProducts />
+                    </ProtectedRoute>
+                  }
+                />
 
-            <Route path='*' element={<PageNotFound />} />
-          </Route>
-        </Routes>
+                <Route path='*' element={<PageNotFound />} />
+              </Route>
+            </Routes>
+          </ProductsProvider>
+        </UserProvider>
       </BrowserRouter>
 
       <Toaster
