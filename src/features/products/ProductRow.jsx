@@ -26,12 +26,12 @@ function ProductRow({ product }) {
     image,
   } = product;
 
-  const mainImage = useMainImage(image);
+  const mainImage = useMainImage(image)[0];
 
   return (
     <>
       <TableRow role='row'>
-        <div>{<Img src={mainImage[0]} alt='product' />}</div>
+        <div>{<Img src={mainImage} alt='product' />}</div>
         <div>
           <h3>{name}</h3>
           <p className='small'>{designer}</p>
