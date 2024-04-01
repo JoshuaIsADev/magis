@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { getMainImage } from '../../utils/getMainImage';
 import { Link } from 'react-router-dom';
+import { useMainImage } from './useMainImage';
 
 const Img = styled.img`
   aspect-ratio: 1;
@@ -20,28 +21,22 @@ const Info = styled.div`
 `;
 
 function ProductCard({ product }) {
-  const {
-    id: productId,
-    name,
-    designer,
-    category,
-    inStock,
-    unitPrice,
-    image,
-  } = product;
+  const { id: productId, name, designer, unitPrice, image } = product;
 
-  const [mainImage, setMainImage] = useState(null);
+  // const [mainImage, setMainImage] = useState(null);
 
-  useEffect(() => {
-    getMainImage(image).then((image) => {
-      setMainImage(image[0]);
-    });
-  }, [image]);
+  // useEffect(() => {
+  //   getMainImage(image).then((image) => {
+  //     setMainImage(image[0]);
+  //   });
+  // }, [image]);
+  // console.log(image);
+  const mainImage = useMainImage(image);
 
   return (
     <StyledProductCard>
       <Link to={`/product/${productId}`}>
-        <div>{<Img src={mainImage} alt='product' />}</div>
+        <div>{<Img src={mainImage[0]} alt='product' />}</div>
         <Info>
           <p className='bold'>{name}</p>
           <p>{designer}</p>

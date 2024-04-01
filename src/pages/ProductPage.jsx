@@ -74,13 +74,23 @@ const QuantityContainer = styled.div`
 function ProductPage() {
   const [color, setColor] = useState('');
   const [quantity, setQuantity] = useState(1);
-  // const [cartItems, setCartItems] = useState([]);
-  const { setCartItems } = useContext(CartContext);
+  const { cartItems, setCartItems } = useContext(CartContext);
   const { isPending, products } = useProducts();
   const { id: productId } = useParams();
+  const selectedProductId = color + '-' + productId;
 
   if (isPending) return <Spinner />;
   const product = products.find((p) => p.id === Number(productId));
+
+  // function checkIsItemInCart({ selectedProductId, quantity }) {
+  //   console.log(selectedProductId);
+  //   console.log(quantity);
+  //   console.log(
+  //     cartItems.map((cartItem) =>
+  //       cartItem.selectedProductId === selectedProductId ? 'true' : 'false'
+  //     )
+  //   );
+  // }
 
   function handleKeyDown(e) {
     if (e.key === 'Enter') {
@@ -95,7 +105,6 @@ function ProductPage() {
   function handleAddCartItems(cartItem) {
     setCartItems((cartItems) => [...cartItems, cartItem]);
   }
-  // console.log(cartItems);
 
   function handleQuantityChange(e) {
     setQuantity(Number(e.target.value));
@@ -103,14 +112,12 @@ function ProductPage() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const newCartItem = { color, quantity, productId };
-
+    // const newCartItem = { color, quantity, productId };
+    const newCartItem = { selectedProductId, quantity };
     handleAddCartItems(newCartItem);
-
+    // checkIsItemInCart(newCartItem);
     setQuantity(1);
   }
-
-  // console.log(cartItems);
 
   const disabled = !color || !quantity || quantity === 0;
 

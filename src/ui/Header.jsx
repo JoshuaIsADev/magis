@@ -27,10 +27,8 @@ const Ul = styled.ul`
 
 function Header() {
   const { currentUser } = useContext(UserContext);
-  // console.log(currentUser);
   const { cartItems } = useContext(CartContext);
   const cartItemsCount = cartItems.length;
-  console.log(cartItems);
   const { isAuthenticated } = useUser();
   const { signOut, isPending } = useSignOut();
 
@@ -42,7 +40,6 @@ function Header() {
   for (let i = 0; i < cartItemQuantityArray.length; i++) {
     cartItemQuantity += cartItemQuantityArray[i];
   }
-  console.log(cartItemQuantity);
 
   return (
     <>

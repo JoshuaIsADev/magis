@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
-import { getMainImage } from '../../utils/getMainImage';
 import CreateProductForm from './CreateProductForm';
 import { useDeleteProduct } from './UseDeleteProduct';
+import { useMainImage } from './useMainImage';
 
 const Img = styled.img`
   width: 12rem;
@@ -26,18 +26,12 @@ function ProductRow({ product }) {
     image,
   } = product;
 
-  const [mainImage, setMainImage] = useState(null);
-
-  useEffect(() => {
-    getMainImage(image).then((image) => {
-      setMainImage(image[0]);
-    });
-  }, [image]);
+  const mainImage = useMainImage(image);
 
   return (
     <>
       <TableRow role='row'>
-        <div>{<Img src={mainImage} alt='product' />}</div>
+        <div>{<Img src={mainImage[0]} alt='product' />}</div>
         <div>
           <h3>{name}</h3>
           <p className='small'>{designer}</p>
