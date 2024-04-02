@@ -3,6 +3,7 @@ import { CartContext } from '../context/cartContext';
 import { useProducts } from '../features/products/useProducts';
 import Spinner from '../ui/Spinner';
 import styled from 'styled-components';
+import { capitalize } from '../utils/capitalize';
 
 const Img = styled.img`
   width: 12rem;
@@ -32,6 +33,7 @@ function Cart() {
         combinedCartItems.push({
           selectedProductId: item.selectedProductId,
           quantity: item.quantity,
+          color: capitalize(item.selectedProductId.split('-')[0]),
         });
       }
     });
@@ -48,6 +50,7 @@ function Cart() {
           <div key={id + '-' + Math.floor(Math.random() * 1000)}>
             {<Img src={mainImage} alt='product' />}
             <p>{name}</p>
+            <p>{combinedCartItem.color}</p>
             <p>{unitPrice}</p>
             <p>{combinedCartItem.quantity}</p>
           </div>

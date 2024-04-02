@@ -200,6 +200,18 @@ function CreateProductForm({ productToEdit = {} }) {
         />
       </FormRow>
       <FormRow>
+        <Label htmlFor='measurements'>Color</Label>
+        <TextArea
+          id='color'
+          name='color'
+          rows='6'
+          disabled={isWorking}
+          defaultValue='{ "white": "F6F6F6", "black": "292929", "stone": "AA9A8D", "orange": "F06500" }'
+          placeholder='{ "white": "F6F6F6", "black": "292929", "stone": "AA9A8D", "orange": "F06500" }'
+          {...register('color')}
+        />
+      </FormRow>
+      <FormRow>
         <Label htmlFor='image'>Images</Label>
         <FileInput
           id='image'

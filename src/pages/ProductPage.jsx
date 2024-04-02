@@ -82,16 +82,6 @@ function ProductPage() {
   if (isPending) return <Spinner />;
   const product = products.find((p) => p.id === Number(productId));
 
-  // function checkIsItemInCart({ selectedProductId, quantity }) {
-  //   console.log(selectedProductId);
-  //   console.log(quantity);
-  //   console.log(
-  //     cartItems.map((cartItem) =>
-  //       cartItem.selectedProductId === selectedProductId ? 'true' : 'false'
-  //     )
-  //   );
-  // }
-
   function handleKeyDown(e) {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -151,27 +141,16 @@ function ProductPage() {
               <form onSubmit={handleSubmit}>
                 <InfoRow>
                   <div>
-                    <input
-                      type='radio'
-                      name='color'
-                      value='grey'
-                      onChange={handleColorChange}
-                      onKeyDown={handleKeyDown}
-                    />
-                    <input
-                      type='radio'
-                      name='color'
-                      value='white'
-                      onChange={handleColorChange}
-                      onKeyDown={handleKeyDown}
-                    />
-                    <input
-                      type='radio'
-                      name='color'
-                      value='black'
-                      onChange={handleColorChange}
-                      onKeyDown={handleKeyDown}
-                    />
+                    {product.color.map((color, index) => (
+                      <input
+                        key={index}
+                        type='radio'
+                        name='color'
+                        value={color.colorName}
+                        onChange={handleColorChange}
+                        onKeyDown={handleKeyDown}
+                      />
+                    ))}
                   </div>
                   <div>
                     <input
