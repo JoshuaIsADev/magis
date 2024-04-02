@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { CartContext } from '../context/cartContext';
 import { useProducts } from '../features/products/useProducts';
 import Spinner from '../ui/Spinner';
@@ -14,11 +14,19 @@ const Img = styled.img`
 function Cart() {
   const { isPending, products } = useProducts();
   const { cartItems } = useContext(CartContext);
+  // const [itemPrices, setItemPrice] = useState(0);
 
-  function getProduct(item) {
-    const itemId = Number(item.selectedProductId.split('-')[1]);
-    return products.find((product) => product.id === itemId);
-  }
+  // function handleItemPrice(itemPrice) {
+  //   setItemPrice((itemPrices) => [...itemPrices, itemPrice]);
+  //   console.log(itemPrices);
+  // }
+
+  const getProduct = useMemo(() => {
+    return (item) => {
+      const itemId = Number(item.selectedProductId.split('-')[1]);
+      return products.find((product) => product.id === itemId);
+    };
+  }, [products]);
 
   const combinedCartItems = [];
 
@@ -30,32 +38,37 @@ function Cart() {
       if (existingItem) {
         existingItem.quantity += item.quantity;
       } else {
+        const productdata = getProduct(item);
+        // console.log(productdata);
+        const mainImage = productdata.image.find((img) => img.includes('main'));
         combinedCartItems.push({
           selectedProductId: item.selectedProductId,
           quantity: item.quantity,
           color: capitalize(item.selectedProductId.split('-')[0]),
+          name: productdata.name,
+          unitPrice: productdata.unitPrice,
+          mainImage,
+          id: productdata.id,
         });
       }
     });
+
+  console.log(combinedCartItems);
 
   if (isPending) return <Spinner />;
 
   return (
     <>
-      {combinedCartItems.map((combinedCartItem) => {
-        const { name, id, image, unitPrice } = getProduct(combinedCartItem);
-        const mainImage = image.find((img) => img.includes('main'));
-
-        return (
-          <div key={id + '-' + Math.floor(Math.random() * 1000)}>
-            {<Img src={mainImage} alt='product' />}
-            <p>{name}</p>
-            <p>{combinedCartItem.color}</p>
-            <p>{unitPrice}</p>
-            <p>{combinedCartItem.quantity}</p>
-          </div>
-        );
-      })}
+      {combinedCartItems.map((combinedCartItem) => (
+        <div key={combinedCartItem.id + '-' + Math.floor(Math.random() * 1000)}>
+          {<Img src={combinedCartItem.mainImage} alt='product' />}
+          <p>{combinedCartItem.name}</p>
+          <p>{combinedCartItem.color}</p>
+          <p>{combinedCartItem.unitPrice}</p>
+          <p>{combinedCartItem.quantity}</p>
+          {/* <button onClick={handleItemPrice}>add</button> */}
+        </div>
+      ))}
     </>
   );
 }
