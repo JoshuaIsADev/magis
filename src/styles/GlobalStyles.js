@@ -125,6 +125,17 @@ img {
   width: 100%;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
 .underline {
   text-decoration-thickness: 3px;
   text-underline-offset: 1rem;

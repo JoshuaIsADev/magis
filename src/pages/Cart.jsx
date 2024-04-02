@@ -13,13 +13,50 @@ const Img = styled.img`
 
 function Cart() {
   const { isPending, products } = useProducts();
-  const { cartItems } = useContext(CartContext);
-  // const [itemPrices, setItemPrice] = useState(0);
+  const { cartItems, setCartItems } = useContext(CartContext);
+  const [quantities, setQuantities] = useState(
+    cartItems.reduce((acc, item) => {
+      acc[item.selectedProductId] = item.quantity;
+      return acc;
+    }, {})
+  );
 
-  // function handleItemPrice(itemPrice) {
-  //   setItemPrice((itemPrices) => [...itemPrices, itemPrice]);
-  //   console.log(itemPrices);
-  // }
+  const handleAdd = (selectedProductId) => {
+    setQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [selectedProductId]: (prevQuantities[selectedProductId] || 0) + 1,
+    }));
+  };
+
+  const handleSubtract = (selectedProductId) => {
+    if (quantities[selectedProductId] > 0) {
+      setQuantities((prevQuantities) => ({
+        ...prevQuantities,
+        [selectedProductId]: prevQuantities[selectedProductId] - 1,
+      }));
+    }
+  };
+
+  function handleQuantityChange(e, selectedProductId) {
+    const newQuantity = parseInt(e.target.value, 10);
+    if (!isNaN(newQuantity)) {
+      setQuantities((prevQuantities) => ({
+        ...prevQuantities,
+        [selectedProductId]: newQuantity,
+      }));
+    }
+  }
+
+  function handleSubmit(e, item) {
+    e.preventDefault();
+    const updatedCartItems = cartItems.map((cartItem) => {
+      if (cartItem.selectedProductId === item.selectedProductId) {
+        return { ...cartItem, quantity: quantities[item.selectedProductId] };
+      }
+      return cartItem;
+    });
+    setCartItems(updatedCartItems);
+  }
 
   const getProduct = useMemo(() => {
     return (item) => {
@@ -30,7 +67,7 @@ function Cart() {
 
   const combinedCartItems = [];
 
-  if (cartItems.length !== 0)
+  if (cartItems.length !== 0) {
     cartItems.forEach((item) => {
       const existingItem = combinedCartItems.find(
         (i) => i.selectedProductId === item.selectedProductId
@@ -39,7 +76,6 @@ function Cart() {
         existingItem.quantity += item.quantity;
       } else {
         const productdata = getProduct(item);
-        // console.log(productdata);
         const mainImage = productdata.image.find((img) => img.includes('main'));
         combinedCartItems.push({
           selectedProductId: item.selectedProductId,
@@ -52,22 +88,53 @@ function Cart() {
         });
       }
     });
-
-  console.log(combinedCartItems);
+  }
 
   if (isPending) return <Spinner />;
 
   return (
     <>
       {combinedCartItems.map((combinedCartItem) => (
-        <div key={combinedCartItem.id + '-' + Math.floor(Math.random() * 1000)}>
-          {<Img src={combinedCartItem.mainImage} alt='product' />}
-          <p>{combinedCartItem.name}</p>
-          <p>{combinedCartItem.color}</p>
-          <p>{combinedCartItem.unitPrice}</p>
-          <p>{combinedCartItem.quantity}</p>
-          {/* <button onClick={handleItemPrice}>add</button> */}
-        </div>
+        <form
+          onSubmit={(e) => handleSubmit(e, combinedCartItem)}
+          key={combinedCartItem.id + combinedCartItem.color}
+        >
+          <div>
+            {<Img src={combinedCartItem.mainImage} alt='product' />}
+            <p>{combinedCartItem.name}</p>
+            <p>{combinedCartItem.color}</p>
+            <p>{combinedCartItem.unitPrice}</p>
+            {/* <p>{combinedCartItem.quantity}</p> */}
+            <p>
+              {Number(combinedCartItem.quantity) *
+                Number(combinedCartItem.unitPrice)}
+            </p>
+            <button
+              type='button'
+              onClick={() => handleSubtract(combinedCartItem.selectedProductId)}
+            >
+              -
+            </button>
+            <input
+              type='number'
+              name='quantity'
+              min='0'
+              max='100'
+              step='1'
+              value={quantities[combinedCartItem.selectedProductId]}
+              onChange={(e) =>
+                handleQuantityChange(e, combinedCartItem.selectedProductId)
+              }
+            />
+            <button
+              type='button'
+              onClick={() => handleAdd(combinedCartItem.selectedProductId)}
+            >
+              +
+            </button>
+            <button type='submit'>Update cart</button>
+          </div>
+        </form>
       ))}
     </>
   );

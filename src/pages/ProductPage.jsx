@@ -88,6 +88,16 @@ function ProductPage() {
     }
   }
 
+  const handleAdd = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
+
+  const handleSubtract = () => {
+    if (quantity > 0) {
+      setQuantity((prevQuantity) => prevQuantity - 1);
+    }
+  };
+
   function handleColorChange(e) {
     setColor(e.target.value);
   }
@@ -158,10 +168,17 @@ function ProductPage() {
                       name='quantity'
                       min='0'
                       max='100'
-                      value={quantity}
+                      step='1'
+                      value={Number(quantity)}
                       onChange={handleQuantityChange}
                       onKeyDown={handleKeyDown}
                     />
+                    <button type='button' onClick={handleSubtract}>
+                      -
+                    </button>
+                    <button type='button' onClick={handleAdd}>
+                      +
+                    </button>
                   </div>
                 </InfoRow>
                 <InfoRow>
