@@ -48,16 +48,24 @@ function Cart() {
     }
   }
 
-  function handleDelete(selectedProductId) {
-    cartItems.forEach((cartItem) => {
-      if (cartItem.selectedProductId === selectedProductId) {
-        console.log(selectedProductId);
-        setQuantities((prevQuantities) => ({
-          ...prevQuantities,
-          [selectedProductId]: 0,
-        }));
-      }
-    });
+  function handleDelete(e, selectedProductId) {
+    e.preventDefault();
+    // console.log(cartItems[0].selectedProductId);
+    const updatedCartItems = cartItems.filter(
+      (cartItem) => cartItem.selectedProductId !== selectedProductId
+    );
+    setCartItems(updatedCartItems);
+    console.log(updatedCartItems);
+    // console.log(updatedCartItems);
+    // cartItems.forEach((cartItem) => {
+    //   if (cartItem.selectedProductId === selectedProductId) {
+    //     console.log(selectedProductId);
+    //     setQuantities((prevQuantities) => ({
+    //       ...prevQuantities,
+    //       [selectedProductId]: 0,
+    //     }));
+    //   }
+    // });
   }
 
   function handleSubmit(e, item) {
@@ -147,7 +155,9 @@ function Cart() {
               +
             </button>
             <button
-              onClick={() => handleDelete(combinedCartItem.selectedProductId)}
+              onClick={(e) =>
+                handleDelete(e, combinedCartItem.selectedProductId)
+              }
             >
               Remove item
             </button>
