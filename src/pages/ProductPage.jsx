@@ -5,7 +5,6 @@ import Section from '../ui/Section';
 import styled from 'styled-components';
 import { useContext, useState } from 'react';
 import { CartContext } from '../context/cartContext';
-// import { CartContext } from '../context/cartContext';
 
 const Container = styled.div`
   display: grid;

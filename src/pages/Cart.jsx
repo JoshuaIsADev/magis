@@ -20,6 +20,7 @@ function Cart() {
       return acc;
     }, {})
   );
+  // console.log(cartItems);
 
   const handleAdd = (selectedProductId) => {
     setQuantities((prevQuantities) => ({
@@ -47,12 +48,25 @@ function Cart() {
     }
   }
 
+  function handleDelete(selectedProductId) {
+    cartItems.forEach((cartItem) => {
+      if (cartItem.selectedProductId === selectedProductId) {
+        console.log(selectedProductId);
+        setQuantities((prevQuantities) => ({
+          ...prevQuantities,
+          [selectedProductId]: 0,
+        }));
+      }
+    });
+  }
+
   function handleSubmit(e, item) {
     e.preventDefault();
     const updatedCartItems = cartItems.map((cartItem) => {
       if (cartItem.selectedProductId === item.selectedProductId) {
         return { ...cartItem, quantity: quantities[item.selectedProductId] };
       }
+
       return cartItem;
     });
     setCartItems(updatedCartItems);
@@ -131,6 +145,11 @@ function Cart() {
               onClick={() => handleAdd(combinedCartItem.selectedProductId)}
             >
               +
+            </button>
+            <button
+              onClick={() => handleDelete(combinedCartItem.selectedProductId)}
+            >
+              Remove item
             </button>
             <button type='submit'>Update cart</button>
           </div>
