@@ -6,6 +6,8 @@ import Label from '../../ui/Label';
 import Input from '../../ui/Input';
 import { useSignIn } from './useSignIn';
 import Spinner from '../../ui/Spinner';
+import Errors from '../../ui/Errors';
+import { useSignUp } from './useSignUp';
 
 const FormRow = styled.div`
   display: flex;
@@ -15,11 +17,12 @@ const FormRow = styled.div`
 `;
 
 function SignUpForm() {
-  const { register, formState, getValues, handleSubmit } = useForm();
+  const { signUp, isLoading } = useSignUp();
+  const { register, formState, getValues, handleSubmit, reset } = useForm();
   const { errors } = formState;
 
-  function onSubmit(data) {
-    console.log(data);
+  function onSubmit({ fullName, email, password }) {
+    signUp({ fullName, email, password }, { onSettled: reset });
   }
 
   return (
@@ -32,6 +35,9 @@ function SignUpForm() {
           autoComplete='namel'
           {...register('fullName', { required: 'This field is required' })}
         ></Input>
+        {errors?.fullName?.message && (
+          <Errors>{errors.fullName.message}</Errors>
+        )}
         <Label htmlFor='email'>Email</Label>
         <Input
           type='email'
@@ -45,6 +51,7 @@ function SignUpForm() {
             },
           })}
         ></Input>
+        {errors?.email?.message && <Errors>{errors.email.message}</Errors>}
       </FormRow>
       <FormRow>
         <Label htmlFor='password'>Password (min 8 characters)</Label>
@@ -59,6 +66,9 @@ function SignUpForm() {
             },
           })}
         ></Input>
+        {errors?.password?.message && (
+          <Errors>{errors.password.message}</Errors>
+        )}
         <Label htmlFor='passwordConfirm'>Confirm password</Label>
         <Input
           type='password'
@@ -69,6 +79,9 @@ function SignUpForm() {
               value === getValues().password || 'Passwords needs to match',
           })}
         ></Input>
+        {errors?.passwordConfirm?.message && (
+          <Errors>{errors.passwordConfirm.message}</Errors>
+        )}
       </FormRow>
       <FormRow>
         <button>{'Sign up'}</button>

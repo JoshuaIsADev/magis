@@ -29,7 +29,8 @@ function Header() {
   const { currentUser } = useContext(UserContext);
   const { cartItems } = useContext(CartContext);
   const cartItemsCount = cartItems.length;
-  const { isAuthenticated } = useUser();
+  const { user, isAuthenticated } = useUser();
+  const admin = user?.email === 'admin@test.com';
   const { signOut, isPending } = useSignOut();
 
   let cartItemQuantityArray = [];
@@ -71,7 +72,7 @@ function Header() {
             </li>
             |
             <li disabled={isPending}>
-              {isAuthenticated ? (
+              {admin ? (
                 <StyledLink $variation='header' to='/manage'>
                   Manage
                 </StyledLink>
