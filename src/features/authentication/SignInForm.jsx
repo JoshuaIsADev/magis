@@ -17,8 +17,6 @@ function SignInForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { signIn, isPending } = useSignIn();
-  // const { register, handleSubmit, reset, formState } = useForm();
-  // const { errors } = formState;
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -41,12 +39,11 @@ function SignInForm() {
         <Input
           type='email'
           id='email'
-          autoComplete='username'
+          autoComplete='email'
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={isPending}
         ></Input>
-        {/* {errors?.email?.message && <Errors>{errors.email.message}</Errors>} */}
       </FormRow>
       <FormRow>
         <Label htmlFor='password'>Password</Label>
@@ -58,7 +55,6 @@ function SignInForm() {
           onChange={(e) => setPassword(e.target.value)}
           disabled={isPending}
         ></Input>
-        {/* {errors?.email?.message && <Errors>{errors.email.message}</Errors>} */}
       </FormRow>
       <FormRow>
         <button disabled={isPending}>

@@ -162,6 +162,9 @@ function ProductPage() {
                     ))}
                   </div>
                   <div>
+                    <button type='button' onClick={handleSubtract}>
+                      -
+                    </button>
                     <input
                       type='number'
                       name='quantity'
@@ -172,9 +175,6 @@ function ProductPage() {
                       onChange={handleQuantityChange}
                       onKeyDown={handleKeyDown}
                     />
-                    <button type='button' onClick={handleSubtract}>
-                      -
-                    </button>
                     <button type='button' onClick={handleAdd}>
                       +
                     </button>
