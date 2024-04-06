@@ -4,6 +4,7 @@ import { useProducts } from '../features/products/useProducts';
 import Spinner from '../ui/Spinner';
 import styled from 'styled-components';
 import { capitalize } from '../utils/capitalize';
+import StyledLink from '../ui/StyledLink';
 
 const Img = styled.img`
   width: 12rem;
@@ -20,7 +21,7 @@ function Cart() {
       return acc;
     }, {})
   );
-  // console.log(cartItems);
+  console.log(cartItems);
 
   const handleAdd = (selectedProductId) => {
     setQuantities((prevQuantities) => ({
@@ -56,16 +57,6 @@ function Cart() {
     );
     setCartItems(updatedCartItems);
     console.log(updatedCartItems);
-    // console.log(updatedCartItems);
-    // cartItems.forEach((cartItem) => {
-    //   if (cartItem.selectedProductId === selectedProductId) {
-    //     console.log(selectedProductId);
-    //     setQuantities((prevQuantities) => ({
-    //       ...prevQuantities,
-    //       [selectedProductId]: 0,
-    //     }));
-    //   }
-    // });
   }
 
   function handleSubmit(e, item) {
@@ -116,55 +107,64 @@ function Cart() {
 
   return (
     <>
-      {combinedCartItems.map((combinedCartItem) => (
-        <form
-          onSubmit={(e) => handleSubmit(e, combinedCartItem)}
-          key={combinedCartItem.id + combinedCartItem.color}
-        >
-          <div>
-            {<Img src={combinedCartItem.mainImage} alt='product' />}
-            <p>{combinedCartItem.name}</p>
-            <p>{combinedCartItem.color}</p>
-            <p>{combinedCartItem.unitPrice}</p>
-            {/* <p>{combinedCartItem.quantity}</p> */}
-            <p>
-              {Number(combinedCartItem.quantity) *
-                Number(combinedCartItem.unitPrice)}
-            </p>
-            <button
-              type='button'
-              onClick={() => handleSubtract(combinedCartItem.selectedProductId)}
-            >
-              -
-            </button>
-            <input
-              type='number'
-              name='quantity'
-              min='0'
-              max='100'
-              step='1'
-              value={quantities[combinedCartItem.selectedProductId]}
-              onChange={(e) =>
-                handleQuantityChange(e, combinedCartItem.selectedProductId)
-              }
-            />
-            <button
-              type='button'
-              onClick={() => handleAdd(combinedCartItem.selectedProductId)}
-            >
-              +
-            </button>
-            <button
-              onClick={(e) =>
-                handleDelete(e, combinedCartItem.selectedProductId)
-              }
-            >
-              Remove item
-            </button>
-            <button type='submit'>Update cart</button>
-          </div>
-        </form>
-      ))}
+      <div>
+        {combinedCartItems.map((combinedCartItem) => (
+          <form
+            onSubmit={(e) => handleSubmit(e, combinedCartItem)}
+            key={combinedCartItem.id + combinedCartItem.color}
+          >
+            <div>
+              {<Img src={combinedCartItem.mainImage} alt='product' />}
+              <p>{combinedCartItem.name}</p>
+              <p>{combinedCartItem.color}</p>
+              <p>{combinedCartItem.unitPrice}</p>
+              {/* <p>{combinedCartItem.quantity}</p> */}
+              <p>
+                {Number(combinedCartItem.quantity) *
+                  Number(combinedCartItem.unitPrice)}
+              </p>
+              <button
+                type='button'
+                onClick={() =>
+                  handleSubtract(combinedCartItem.selectedProductId)
+                }
+              >
+                -
+              </button>
+              <input
+                type='number'
+                name='quantity'
+                min='0'
+                max='100'
+                step='1'
+                value={quantities[combinedCartItem.selectedProductId]}
+                onChange={(e) =>
+                  handleQuantityChange(e, combinedCartItem.selectedProductId)
+                }
+              />
+              <button
+                type='button'
+                onClick={() => handleAdd(combinedCartItem.selectedProductId)}
+              >
+                +
+              </button>
+              <button
+                onClick={(e) =>
+                  handleDelete(e, combinedCartItem.selectedProductId)
+                }
+              >
+                Remove item
+              </button>
+              <button type='submit'>Update cart</button>
+            </div>
+          </form>
+        ))}
+      </div>
+      <div>
+        <StyledLink to='/checkout'>
+          <button>Checkout</button>
+        </StyledLink>
+      </div>
     </>
   );
 }

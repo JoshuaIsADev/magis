@@ -101,8 +101,22 @@ function ProductPage() {
     setColor(e.target.value);
   }
 
+  // function handleAddCartItems(cartItem) {
+  //   setCartItems((cartItems) => [...cartItems, cartItem]);
+  // }
+
   function handleAddCartItems(cartItem) {
-    setCartItems((cartItems) => [...cartItems, cartItem]);
+    const existingItemIndex = cartItems.findIndex(
+      (item) => item.selectedProductId === cartItem.selectedProductId
+    );
+
+    if (existingItemIndex !== -1) {
+      const updatedCartItems = [...cartItems];
+      updatedCartItems[existingItemIndex].quantity += cartItem.quantity;
+      setCartItems(updatedCartItems);
+    } else {
+      setCartItems((prevCartItems) => [...prevCartItems, cartItem]);
+    }
   }
 
   function handleQuantityChange(e) {

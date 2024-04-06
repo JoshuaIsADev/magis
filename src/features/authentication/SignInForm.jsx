@@ -57,9 +57,8 @@ function SignInForm() {
         ></Input>
       </FormRow>
       <FormRow>
-        <button disabled={isPending}>
-          {!isPending ? 'Sign in' : <Spinner />}
-        </button>
+        {isPending && <Spinner />}
+        <button disabled={isPending}>Sign in</button>
       </FormRow>
     </Form>
   );

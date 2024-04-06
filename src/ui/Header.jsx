@@ -54,11 +54,6 @@ function Header() {
               </StyledLink>
             </li>
             |
-            {/* <li>
-            <StyledLink $variation='header' to='/signin'>
-            Sign In
-            </StyledLink>
-          </li> */}
             <li disabled={isPending}>
               {isAuthenticated ? (
                 <StyledLink $variation='header' onClick={signOut}>
