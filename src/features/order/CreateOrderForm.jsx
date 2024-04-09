@@ -1,4 +1,3 @@
-import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import Form from '../../ui/Form';
@@ -8,9 +7,8 @@ import { useUser } from '../authentication/useUser';
 import { useContext } from 'react';
 import { CartContext } from '../../context/cartContext';
 import Errors from '../../ui/Errors';
-import { createOrder } from '../../services/apiOrders';
-import toast from 'react-hot-toast';
 import Spinner from '../../ui/Spinner';
+import { useCreateOrder } from './useCreateOrder';
 
 const FormRow = styled.div`
   display: flex;
@@ -24,22 +22,14 @@ function CreateOrderForm() {
   const { register, formState, handleSubmit, reset } = useForm();
   const { errors } = formState;
   const { cartItems, setCartItems } = useContext(CartContext);
-
-  const { mutate, isPending } = useMutation({
-    mutationFn: createOrder,
-    onSuccess: () => {
-      toast.success('New order successfully created');
-      reset();
-    },
-    onError: (err) => toast.error(err.message),
-  });
+  const { isPending, createOrder } = useCreateOrder();
 
   const orderedProducts = JSON.stringify(cartItems);
   const userId = JSON.stringify(user.id).replace(/^"|"$/g, '');
 
   function onSubmit(data) {
     // console.log(data);
-    mutate(data);
+    createOrder(data, { onSuccess: (data) => reset() });
   }
 
   return (

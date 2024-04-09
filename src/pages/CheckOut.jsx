@@ -38,9 +38,6 @@ function CheckOut() {
   const combinedCartItems = [];
 
   cartItems.forEach((item) => {
-    // combinedCartItems.find(
-    //   (i) => i.selectedProductId === item.selectedProductId
-    // );
     const productdata = getProduct(item);
     const mainImage = productdata.image.find((img) => img.includes('main'));
     combinedCartItems.push({
@@ -74,42 +71,6 @@ function CheckOut() {
         ))}
       </div>
       <CreateOrderForm />
-      {/* <div>
-        <Form>
-          <FormRow>
-            <Label htmlFor='fullName'>Full name</Label>
-            <Input type='text' id='fullName' autoComplete='name'></Input>
-          </FormRow>
-          <FormRow>
-            <Label htmlFor='fullName'>Email</Label>
-            <Input
-              type='text'
-              id='email'
-              autoComplete='email'
-              defaultValue={user.email}
-            ></Input>
-          </FormRow>
-          <FormRow>
-            <Label htmlFor='streetNumber'>Street number</Label>
-            <Input
-              type='text'
-              id='streetNumber'
-              autoComplete='streetNumber'
-            ></Input>
-          </FormRow>
-          <FormRow>
-            <Label htmlFor='state'>State</Label>
-            <Input type='text' id='state' autoComplete='state'></Input>
-          </FormRow>
-          <FormRow>
-            <Label htmlFor='zip'>Zip code</Label>
-            <Input type='text' id='zip' autoComplete='zip'></Input>
-          </FormRow>
-          <FormRow>
-            <button>Place order</button>
-          </FormRow>
-        </Form>
-      </div> */}
     </>
   );
 }
