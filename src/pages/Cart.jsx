@@ -1,21 +1,17 @@
-import { useContext, useMemo } from 'react';
+import { useContext } from 'react';
 import { CartContext } from '../context/cartContext';
 import { useProducts } from '../features/products/useProducts';
 import Spinner from '../ui/Spinner';
 import { capitalize } from '../utils/capitalize';
 import StyledLink from '../ui/StyledLink';
 import CartForm from '../features/cart/CartForm';
+import useProductFinder from '../features/products/useProductFinder';
 
 function Cart() {
   const { isPending, products } = useProducts();
-  const { cartItems, setCartItems } = useContext(CartContext);
+  const { cartItems } = useContext(CartContext);
 
-  const getProduct = useMemo(() => {
-    return (item) => {
-      const itemId = Number(item.selectedProductId.split('-')[1]);
-      return products.find((product) => product.id === itemId);
-    };
-  }, [products]);
+  const getProduct = useProductFinder(products);
 
   const combinedCartItems = [];
 

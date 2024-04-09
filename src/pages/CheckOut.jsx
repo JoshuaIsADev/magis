@@ -1,13 +1,11 @@
-import { useContext, useMemo } from 'react';
+import { useContext } from 'react';
 import { CartContext } from '../context/cartContext';
 import { capitalize } from '../utils/capitalize';
 import { useProducts } from '../features/products/useProducts';
 import styled from 'styled-components';
-import Label from '../ui/Label';
-import Form from '../ui/Form';
-import Input from '../ui/Input';
-import { useUser } from '../features/authentication/useUser';
 import CreateOrderForm from '../features/order/CreateOrderForm';
+import Spinner from '../ui/Spinner';
+import useProductFinder from '../features/products/useProductFinder';
 
 const Img = styled.img`
   width: 12rem;
@@ -15,25 +13,11 @@ const Img = styled.img`
   object-fit: contain;
 `;
 
-// const FormRow = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: left;
-//   gap: 0.5rem;
-// `;
-
 function CheckOut() {
   const { isPending, products } = useProducts();
-  const { cartItems, setCartItems } = useContext(CartContext);
-  const { user, isAuthenticated } = useUser();
-  // console.log(cartItems, user);
+  const { cartItems } = useContext(CartContext);
 
-  const getProduct = useMemo(() => {
-    return (item) => {
-      const itemId = Number(item.selectedProductId.split('-')[1]);
-      return products.find((product) => product.id === itemId);
-    };
-  }, [products]);
+  const getProduct = useProductFinder(products);
 
   const combinedCartItems = [];
 
@@ -52,6 +36,8 @@ function CheckOut() {
   });
 
   // console.log(combinedCartItems);
+
+  if (isPending) return <Spinner />;
 
   return (
     <>
