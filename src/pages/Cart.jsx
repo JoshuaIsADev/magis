@@ -6,6 +6,7 @@ import { capitalize } from '../utils/capitalize';
 import StyledLink from '../ui/StyledLink';
 import CartForm from '../features/cart/CartForm';
 import useProductFinder from '../features/products/useProductFinder';
+import { constructCartItem } from '../utils/constructCartItem';
 
 function Cart() {
   const { isPending, products } = useProducts();
@@ -23,17 +24,7 @@ function Cart() {
       if (existingItem) {
         existingItem.quantity += item.quantity;
       } else {
-        const productdata = getProduct(item);
-        const mainImage = productdata.image.find((img) => img.includes('main'));
-        combinedCartItems.push({
-          selectedProductId: item.selectedProductId,
-          quantity: item.quantity,
-          color: capitalize(item.selectedProductId.split('-')[0]),
-          name: productdata.name,
-          unitPrice: productdata.unitPrice,
-          mainImage,
-          id: productdata.id,
-        });
+        combinedCartItems.push(constructCartItem(item, getProduct, capitalize));
       }
     });
   }

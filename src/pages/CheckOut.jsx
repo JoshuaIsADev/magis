@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import CreateOrderForm from '../features/order/CreateOrderForm';
 import Spinner from '../ui/Spinner';
 import useProductFinder from '../features/products/useProductFinder';
+import { constructCartItem } from '../utils/constructCartItem';
 
 const Img = styled.img`
   width: 12rem;
@@ -22,17 +23,7 @@ function CheckOut() {
   const combinedCartItems = [];
 
   cartItems.forEach((item) => {
-    const productdata = getProduct(item);
-    const mainImage = productdata.image.find((img) => img.includes('main'));
-    combinedCartItems.push({
-      selectedProductId: item.selectedProductId,
-      quantity: item.quantity,
-      color: capitalize(item.selectedProductId.split('-')[0]),
-      name: productdata.name,
-      unitPrice: productdata.unitPrice,
-      mainImage,
-      id: productdata.id,
-    });
+    combinedCartItems.push(constructCartItem(item, getProduct, capitalize));
   });
 
   // console.log(combinedCartItems);
