@@ -14,7 +14,7 @@ export async function getProducts() {
 }
 
 export async function createEditProduct(newProduct, id) {
-  console.log(newProduct, id);
+  // console.log(newProduct, id);
 
   // const newProduct.image = newProduct.image;
   const hasImagePath = newProduct.image[0]?.startsWith?.(supabaseUrl);

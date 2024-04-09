@@ -21,7 +21,7 @@ function Cart() {
       return acc;
     }, {})
   );
-  console.log(cartItems);
+  // console.log(cartItems);
 
   const handleAdd = (selectedProductId) => {
     setQuantities((prevQuantities) => ({

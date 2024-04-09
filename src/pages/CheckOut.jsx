@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import Label from '../ui/Label';
 import Form from '../ui/Form';
 import Input from '../ui/Input';
+import { useUser } from '../features/authentication/useUser';
+import CreateOrderForm from '../features/order/CreateOrderForm';
 
 const Img = styled.img`
   width: 12rem;
@@ -13,17 +15,18 @@ const Img = styled.img`
   object-fit: contain;
 `;
 
-const FormRow = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  gap: 0.5rem;
-`;
+// const FormRow = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: left;
+//   gap: 0.5rem;
+// `;
 
 function CheckOut() {
   const { isPending, products } = useProducts();
   const { cartItems, setCartItems } = useContext(CartContext);
-  // console.log(cartItems);
+  const { user, isAuthenticated } = useUser();
+  // console.log(cartItems, user);
 
   const getProduct = useMemo(() => {
     return (item) => {
@@ -35,9 +38,9 @@ function CheckOut() {
   const combinedCartItems = [];
 
   cartItems.forEach((item) => {
-    const existingItem = combinedCartItems.find(
-      (i) => i.selectedProductId === item.selectedProductId
-    );
+    // combinedCartItems.find(
+    //   (i) => i.selectedProductId === item.selectedProductId
+    // );
     const productdata = getProduct(item);
     const mainImage = productdata.image.find((img) => img.includes('main'));
     combinedCartItems.push({
@@ -70,11 +73,21 @@ function CheckOut() {
           </div>
         ))}
       </div>
-      <div>
+      <CreateOrderForm />
+      {/* <div>
         <Form>
           <FormRow>
             <Label htmlFor='fullName'>Full name</Label>
             <Input type='text' id='fullName' autoComplete='name'></Input>
+          </FormRow>
+          <FormRow>
+            <Label htmlFor='fullName'>Email</Label>
+            <Input
+              type='text'
+              id='email'
+              autoComplete='email'
+              defaultValue={user.email}
+            ></Input>
           </FormRow>
           <FormRow>
             <Label htmlFor='streetNumber'>Street number</Label>
@@ -96,7 +109,7 @@ function CheckOut() {
             <button>Place order</button>
           </FormRow>
         </Form>
-      </div>
+      </div> */}
     </>
   );
 }
