@@ -101,10 +101,6 @@ function ProductPage() {
     setColor(e.target.value);
   }
 
-  // function handleAddCartItems(cartItem) {
-  //   setCartItems((cartItems) => [...cartItems, cartItem]);
-  // }
-
   function handleAddCartItems(cartItem) {
     const existingItemIndex = cartItems.findIndex(
       (item) => item.selectedProductId === cartItem.selectedProductId

@@ -8,17 +8,6 @@ import ProductTableOperations from '../features/products/ProductTableOperations'
 import ProductTable from '../features/products/ProductTable';
 
 function Products() {
-  // const {
-  //   isLoading,
-  //   data: products,
-  //   error,
-  // } = useQuery({
-  //   queryKey: ['products'],
-  //   queryFn: getProducts,
-  // });
-  // if (isLoading) return <Spinner />;
-
-  // console.log(products);
   return (
     <>
       <Section>

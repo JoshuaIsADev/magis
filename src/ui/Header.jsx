@@ -66,20 +66,27 @@ function Header() {
               )}
             </li>
             |
-            <li disabled={isPending}>
-              {admin ? (
+            {admin ? (
+              <li disabled={isPending}>
                 <StyledLink $variation='header' to='/manage'>
                   Manage
                 </StyledLink>
-              ) : (
-                <StyledLink $variation='header' to='/cart'>
-                  Cart {cartItemQuantity > 0 ? `(${cartItemQuantity})` : ''}
-                </StyledLink>
-              )}
-            </li>
-            {/* <li>
-            <StyledLink $variation='header' to='/manage'>Manage</StyledLink>
-          </li> */}
+              </li>
+            ) : (
+              <>
+                <li disabled={isPending}>
+                  <StyledLink $variation='header' to='/orders'>
+                    Orders
+                  </StyledLink>
+                </li>
+                |
+                <li disabled={isPending}>
+                  <StyledLink $variation='header' to='/cart'>
+                    Cart {cartItemQuantity > 0 ? `(${cartItemQuantity})` : ''}
+                  </StyledLink>
+                </li>
+              </>
+            )}
           </Ul>
         </nav>
       </StyledHeader>

@@ -17,7 +17,6 @@ const Img = styled.img`
 function CheckOut() {
   const { isPending, products } = useProducts();
   const { cartItems } = useContext(CartContext);
-
   const getProduct = useProductFinder(products);
 
   const combinedCartItems = [];
