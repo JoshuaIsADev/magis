@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { CartContext } from '../context/cartContext';
-import { capitalize } from '../utils/capitalize';
 import { useProducts } from '../features/products/useProducts';
 import styled from 'styled-components';
 import CreateOrderForm from '../features/order/CreateOrderForm';
@@ -22,7 +21,7 @@ function CheckOut() {
   const combinedCartItems = [];
 
   cartItems.forEach((item) => {
-    combinedCartItems.push(constructCartItem(item, getProduct, capitalize));
+    combinedCartItems.push(constructCartItem(item, getProduct));
   });
 
   // console.log(cartItems);

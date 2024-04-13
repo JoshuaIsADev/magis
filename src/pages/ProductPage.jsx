@@ -77,13 +77,11 @@ function ProductPage() {
   const { cartItems, setCartItems } = useContext(CartContext);
   const { isPending, products } = useProducts();
   const { id: productId } = useParams();
-  // const mainImage = useMainImage(product.image);
 
   if (isPending) return <Spinner />;
   const product = products.find((p) => p.id === Number(productId));
 
-  const selectedProductId = color + '-' + productId;
-  //  + '-' + product.unitPrice
+  const selectedProductId = productId;
   function handleKeyDown(e) {
     if (e.key === 'Enter') {
       e.preventDefault();

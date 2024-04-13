@@ -28,36 +28,26 @@ function CreateOrderForm() {
   const userId = JSON.stringify(user.id).replace(/^"|"$/g, '');
 
   function onSubmit(data) {
-    // console.log(data);
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    const hours = String(currentDate.getHours()).padStart(2, '0');
+    const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+    const orderNumber = `${userId.slice(
+      0,
+      7
+    )}-${year}${month}${day}${hours}${minutes}`;
+
+    data.orderNumber = orderNumber;
+    data.orderedProducts = orderedProducts;
+    data.user_id = userId;
+    data.totalPrice = totalPrice;
     createOrder(data, { onSuccess: (data) => reset() });
   }
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <FormRow>
-        <Input
-          type='hidden'
-          id='orderedProducts'
-          value={orderedProducts}
-          {...register('orderedProducts')}
-        ></Input>
-      </FormRow>
-      <FormRow>
-        <Input
-          type='hidden'
-          id='user_id'
-          value={userId}
-          {...register('user_id')}
-        ></Input>
-      </FormRow>
-      <FormRow>
-        <Input
-          type='hidden'
-          id='totalPrice'
-          value={totalPrice}
-          {...register('totalPrice')}
-        ></Input>
-      </FormRow>
       <FormRow>
         <Label htmlFor='fullName'>Full name</Label>
         <Input

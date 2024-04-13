@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { getMainImage } from '../../utils/getMainImage';
 import { Link } from 'react-router-dom';
 import { useMainImage } from './useMainImage';
 
@@ -23,14 +22,6 @@ const Info = styled.div`
 function ProductCard({ product }) {
   const { id: productId, name, designer, unitPrice, image } = product;
 
-  // const [mainImage, setMainImage] = useState(null);
-
-  // useEffect(() => {
-  //   getMainImage(image).then((image) => {
-  //     setMainImage(image[0]);
-  //   });
-  // }, [image]);
-  // console.log(image);
   const mainImage = useMainImage(image);
 
   return (

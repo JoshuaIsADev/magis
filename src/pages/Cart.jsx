@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from 'react';
 import { CartContext } from '../context/cartContext';
 import { useProducts } from '../features/products/useProducts';
 import Spinner from '../ui/Spinner';
-import { capitalize } from '../utils/capitalize';
 import StyledLink from '../ui/StyledLink';
 import CartForm from '../features/cart/CartForm';
 import useProductFinder from '../features/products/useProductFinder';
@@ -23,7 +22,7 @@ function Cart() {
       if (existingItem) {
         existingItem.quantity += item.quantity;
       } else {
-        combinedCartItems.push(constructCartItem(item, getProduct, capitalize));
+        combinedCartItems.push(constructCartItem(item, getProduct));
       }
     });
   }

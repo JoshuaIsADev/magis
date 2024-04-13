@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import { useUser } from '../features/authentication/useUser';
 import { useOrders } from '../features/order/useOrders';
 import useProductFinder from '../features/products/useProductFinder';
@@ -5,6 +6,12 @@ import { useProducts } from '../features/products/useProducts';
 import Spinner from '../ui/Spinner';
 import { capitalize } from '../utils/capitalize';
 import { constructOrderItem } from '../utils/constructOrderItem';
+
+const Img = styled.img`
+  width: 12rem;
+  aspect-ratio: 1;
+  object-fit: contain;
+`;
 
 function Orders() {
   const { isPending: isProductsPending, products } = useProducts();
@@ -20,42 +27,35 @@ function Orders() {
     orderedProducts: JSON.parse(order.orderedProducts),
   }));
 
-  if (ordersWithParsedProducts.length !== 0) {
-    const combinedOrderItems = [];
-
-    ordersWithParsedProducts.forEach((item) => {
-      combinedOrderItems.push(
-        constructOrderItem(item, getProduct, capitalize)
-        // item.email
-      );
-    });
-    // console.log(combinedOrderItems);
-  }
-  // ordersWithParsedProducts.forEach((order) => {
-  //   order.orderedProducts.forEach((item) => {
-  //     combinedOrderItems.push(
-  //       constructOrderItem(item, getProduct, capitalize)
-  //     );
-  //   });
-  // });
-
-  // console.log(combinedOrderItems);
-  // console.log(ordersWithParsedProducts);
-  // console.log(getProduct(ordersWithParsedProducts[1].orderedProducts[0]));
+  console.log(ordersWithParsedProducts);
 
   return (
     <>
-      {/* {ordersWithParsedProducts.map((order) => (
+      {ordersWithParsedProducts.map((order) => (
         <div key={order.id}>
-          <p>{order.email}</p>
+          <p>Purchased on: {order.created_at.slice(0, 10)}</p>
+          <p>Order number: {order.orderNumber}</p>
+          <p>Contact info: {order.email}</p>
+          <div>
+            <p>Shipped to:</p>
+            <p>{order.fullName}</p>
+            <p>{order.streetNumber}</p>
+            <p>{order.state}</p>
+            <p>{order.zipCode}</p>
+          </div>
+
           {order.orderedProducts.map((orderItem) => (
             <div key={orderItem.selectedProductId}>
-              <p>{orderItem.selectedProductId}</p>
-              <p>{orderItem.quantity}</p>
+              <Img src={orderItem.mainImage} alt='product' />
+              <p>color: {capitalize(orderItem.color)}</p>
+              <p>
+                quanity: {orderItem.quantity} x ${orderItem.unitPrice}
+              </p>
             </div>
           ))}
+          <p>Total price: {order.totalPrice}</p>
         </div>
-      ))} */}
+      ))}
     </>
   );
 }

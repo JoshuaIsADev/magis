@@ -1,10 +1,12 @@
-export function constructCartItem(item, getProduct, capitalize) {
+import { capitalize } from '../utils/capitalize';
+
+export function constructCartItem(item, getProduct) {
   const productdata = getProduct(item);
   const mainImage = productdata.image.find((img) => img.includes('main'));
   return {
     selectedProductId: item.selectedProductId,
     quantity: item.quantity,
-    color: capitalize(item.selectedProductId.split('-')[0]),
+    color: capitalize(item.color),
     name: productdata.name,
     unitPrice: productdata.unitPrice,
     mainImage,
