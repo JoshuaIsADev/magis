@@ -25,7 +25,7 @@ function CheckOut() {
     combinedCartItems.push(constructCartItem(item, getProduct, capitalize));
   });
 
-  // console.log(combinedCartItems);
+  console.log(cartItems);
 
   if (isPending) return <Spinner />;
 
@@ -45,6 +45,10 @@ function CheckOut() {
             </p>
           </div>
         ))}
+      </div>
+      <div>
+        <p>Total Price</p>
+        <p></p>
       </div>
       <CreateOrderForm />
     </>

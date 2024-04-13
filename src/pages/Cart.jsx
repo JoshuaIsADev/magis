@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { CartContext } from '../context/cartContext';
 import { useProducts } from '../features/products/useProducts';
 import Spinner from '../ui/Spinner';
@@ -11,8 +11,17 @@ import { constructCartItem } from '../utils/constructCartItem';
 function Cart() {
   const { isPending, products } = useProducts();
   const { cartItems } = useContext(CartContext);
-
   const getProduct = useProductFinder(products);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    let newTotalPrice = 0;
+
+    cartItems.forEach((cartItem) => {
+      newTotalPrice += cartItem.unitPrice * cartItem.quantity;
+    });
+    setTotalPrice(newTotalPrice);
+  }, [cartItems]);
 
   const combinedCartItems = [];
 
@@ -28,6 +37,8 @@ function Cart() {
       }
     });
   }
+
+  console.log(cartItems, totalPrice);
 
   if (isPending) return <Spinner />;
 
@@ -46,6 +57,9 @@ function Cart() {
             combinedCartItem={combinedCartItem}
           />
         ))}
+      </div>
+      <div>
+        <h2>Total price: {totalPrice}</h2>
       </div>
       <div>
         <StyledLink to='/checkout'>

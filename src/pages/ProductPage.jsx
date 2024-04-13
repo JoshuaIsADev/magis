@@ -5,6 +5,7 @@ import Section from '../ui/Section';
 import styled from 'styled-components';
 import { useContext, useState } from 'react';
 import { CartContext } from '../context/cartContext';
+import { useMainImage } from '../features/products/useMainImage';
 
 const Container = styled.div`
   display: grid;
@@ -76,11 +77,13 @@ function ProductPage() {
   const { cartItems, setCartItems } = useContext(CartContext);
   const { isPending, products } = useProducts();
   const { id: productId } = useParams();
-  const selectedProductId = color + '-' + productId;
+  // const mainImage = useMainImage(product.image);
 
   if (isPending) return <Spinner />;
   const product = products.find((p) => p.id === Number(productId));
 
+  const selectedProductId = color + '-' + productId;
+  //  + '-' + product.unitPrice
   function handleKeyDown(e) {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -120,9 +123,16 @@ function ProductPage() {
   }
 
   function handleSubmit(e) {
+    const mainImage = product.image.find((img) => img.includes('main'));
     e.preventDefault();
     // const newCartItem = { color, quantity, productId };
-    const newCartItem = { selectedProductId, quantity };
+    const newCartItem = {
+      selectedProductId,
+      quantity,
+      unitPrice: product.unitPrice,
+      color,
+      mainImage,
+    };
     handleAddCartItems(newCartItem);
     // checkIsItemInCart(newCartItem);
     setQuantity(1);

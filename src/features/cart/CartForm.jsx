@@ -61,7 +61,6 @@ function CartForm({
       (cartItem) => cartItem.selectedProductId !== selectedProductId
     );
     setCartItems(updatedCartItems);
-    console.log(updatedCartItems);
   }
 
   function handleSubmit(e, item) {
@@ -75,6 +74,7 @@ function CartForm({
     });
     setCartItems(updatedCartItems);
   }
+
   return (
     <Form onSubmit={(e) => handleSubmit(e, combinedCartItem)}>
       <div>
