@@ -21,7 +21,7 @@ function CreateOrderForm() {
   const { user, isAuthenticated } = useUser();
   const { register, formState, handleSubmit, reset } = useForm();
   const { errors } = formState;
-  const { cartItems, setCartItems } = useContext(CartContext);
+  const { cartItems, totalPrice } = useContext(CartContext);
   const { isPending, createOrder } = useCreateOrder();
 
   const orderedProducts = JSON.stringify(cartItems);
@@ -48,6 +48,14 @@ function CreateOrderForm() {
           id='user_id'
           value={userId}
           {...register('user_id')}
+        ></Input>
+      </FormRow>
+      <FormRow>
+        <Input
+          type='hidden'
+          id='totalPrice'
+          value={totalPrice}
+          {...register('totalPrice')}
         ></Input>
       </FormRow>
       <FormRow>

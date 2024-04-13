@@ -10,18 +10,8 @@ import { constructCartItem } from '../utils/constructCartItem';
 
 function Cart() {
   const { isPending, products } = useProducts();
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, totalPrice } = useContext(CartContext);
   const getProduct = useProductFinder(products);
-  const [totalPrice, setTotalPrice] = useState(0);
-
-  useEffect(() => {
-    let newTotalPrice = 0;
-
-    cartItems.forEach((cartItem) => {
-      newTotalPrice += cartItem.unitPrice * cartItem.quantity;
-    });
-    setTotalPrice(newTotalPrice);
-  }, [cartItems]);
 
   const combinedCartItems = [];
 
@@ -37,8 +27,6 @@ function Cart() {
       }
     });
   }
-
-  console.log(cartItems, totalPrice);
 
   if (isPending) return <Spinner />;
 

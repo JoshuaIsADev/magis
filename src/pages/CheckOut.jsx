@@ -16,7 +16,7 @@ const Img = styled.img`
 
 function CheckOut() {
   const { isPending, products } = useProducts();
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, totalPrice } = useContext(CartContext);
   const getProduct = useProductFinder(products);
 
   const combinedCartItems = [];
@@ -25,7 +25,7 @@ function CheckOut() {
     combinedCartItems.push(constructCartItem(item, getProduct, capitalize));
   });
 
-  console.log(cartItems);
+  // console.log(cartItems);
 
   if (isPending) return <Spinner />;
 
@@ -47,8 +47,7 @@ function CheckOut() {
         ))}
       </div>
       <div>
-        <p>Total Price</p>
-        <p></p>
+        <h2>Total price: {totalPrice}</h2>
       </div>
       <CreateOrderForm />
     </>
