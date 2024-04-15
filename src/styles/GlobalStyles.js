@@ -14,7 +14,7 @@ const GlobalStyles = createGlobalStyle`
   --color-grey-900: #292929;
   --color-red: #FF0000; 
 
-  --color-brand: #F0F406;
+  --color-brand: #F9F3E6;
   
   --color-danger: #000000;
 
@@ -28,7 +28,7 @@ const GlobalStyles = createGlobalStyle`
   --border-radius-lg: 2rem;
 
   /* --width-desktop: calc(100vw - 7rem); */
-  --width-max: 2560px;
+  --width-max: 3840px;
   --width-text-max: 700px; 
   --width-main: 1200px;
 
@@ -65,20 +65,13 @@ html {
 body {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-optical-sizing: auto;
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 a {
   text-decoration: none;
-}
-
-h1 {
-  font-size: 4rem ;
-  font-weight: 400;
-  line-height: 5rem;
-  /* letter-spacing: -.1rem; */
 }
 
 .homeHeading {
@@ -91,15 +84,7 @@ h1 {
   padding-bottom: 30vh;
 }
 
-h2 {
-  font-size: 1.5rem ;
-  font-weight: 800;
-  line-height: 1.5rem;
-  text-transform: uppercase;
-  letter-spacing: -.1rem;
-}
-
-h3, p {
+p {
   font-size: 1rem;
       font-weight: 400;
       line-height: 1rem;

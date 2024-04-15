@@ -5,7 +5,6 @@ import useProductFinder from '../features/products/useProductFinder';
 import { useProducts } from '../features/products/useProducts';
 import Spinner from '../ui/Spinner';
 import { capitalize } from '../utils/capitalize';
-import { constructOrderItem } from '../utils/constructOrderItem';
 
 const Img = styled.img`
   width: 12rem;
@@ -14,10 +13,9 @@ const Img = styled.img`
 `;
 
 function Orders() {
-  const { isPending: isProductsPending, products } = useProducts();
+  // const { isPending: isProductsPending, products } = useProducts();
   const { isPending: isUserPending, user } = useUser();
   const { isPending, orders } = useOrders();
-  const getProduct = useProductFinder(products);
 
   if (isUserPending || isPending) return <Spinner />;
   const ordersList = orders.filter((order) => order.user_id === user.id);
@@ -26,8 +24,6 @@ function Orders() {
     ...order,
     orderedProducts: JSON.parse(order.orderedProducts),
   }));
-
-  console.log(ordersWithParsedProducts);
 
   return (
     <>

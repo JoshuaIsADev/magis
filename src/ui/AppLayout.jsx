@@ -1,13 +1,16 @@
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
+import { HeadingProvider } from '../context/headingContext';
 
 function AppLayout() {
   return (
     <div>
-      <Header />
-      <main>
-        <Outlet />
-      </main>
+      <HeadingProvider>
+        <Header />
+        <main>
+          <Outlet />
+        </main>
+      </HeadingProvider>
     </div>
   );
 }

@@ -7,14 +7,28 @@ const variations = {
   `,
 
   header: css`
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 400;
     text-transform: uppercase;
-    letter-spacing: -0.1rem;
+    color: ${(props) => props.$color};
+    transition: 0.5s ease-in;
     &:hover,
     &:active,
     &.active:link
     /* &.active:visited  */ {
+      color: ${(props) => props.$color};
+    }
+  `,
+
+  headerLogo: css`
+    font-size: 2.5rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    color: ${(props) => props.$color};
+    transition: 0.5s ease-in;
+    &:hover,
+    &:active,
+    &.active:link {
       color: var(--color-grey-300);
     }
   `,
@@ -39,7 +53,7 @@ const StyledLink = styled(NavLink)`
   &:active,
   &.active:link,
   &.active:visited {
-    color: var(--color-grey-900);
+    color: var(--color-grey-700);
   }
 `;
 
