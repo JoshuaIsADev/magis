@@ -8,9 +8,12 @@ const StyledProductTable = styled.div`
   flex-wrap: wrap;
   gap: 2rem; */
   display: grid;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
   grid-template-columns: repeat(4, 1fr);
-  gap: 4rem;
-  padding: var(--padding-l) 0;
+  gap: 8rem;
+  padding: var(--padding-xl) 0;
 `;
 
 export { StyledProductTable };
