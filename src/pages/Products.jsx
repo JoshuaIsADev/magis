@@ -6,6 +6,8 @@ import { spreadText } from '../utils/spreadText.jsx';
 import { useContext, useEffect } from 'react';
 import { HeadingContext } from '../context/headingContext.jsx';
 import { useLocation } from 'react-router-dom';
+import styled, { keyframes } from 'styled-components';
+import HeroText from '../ui/HeroText.jsx';
 
 function Products() {
   const { headingColor, setHeadingColor, ref, inView } =
@@ -31,7 +33,7 @@ function Products() {
   return (
     <>
       <Section $variation='hero' ref={ref}>
-        {spreadText('Magis')}
+        <HeroText>{spreadText('Magis', 'hero')}</HeroText>
         <Heading as='h3' $variation='hero' $color={headingColor}>
           Since 1976 Magis produces
         </Heading>

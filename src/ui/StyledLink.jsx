@@ -33,6 +33,17 @@ const variations = {
     }
   `,
 
+  footer: css`
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    &:hover,
+    &:active,
+    &.active:link {
+      color: var(--color-grey-600);
+    }
+  `,
+
   underline: css`
     font-size: 1rem;
     font-weight: 600;

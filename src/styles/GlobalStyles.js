@@ -35,9 +35,11 @@ const GlobalStyles = createGlobalStyle`
   --padding-s: 2rem;
   --padding-m: 4rem;
   --padding-l: 6rem;
+  --padding-xl: 10rem;
   --padding-v: 2rem;
   --padding-row: 25vw;
   --padding-sides: 2rem;
+  --padding-right: 1rem;
 
   @media (max-width: 1400px) {
   --padding-row: 12vw;
@@ -74,21 +76,11 @@ a {
   text-decoration: none;
 }
 
-.homeHeading {
-  text-indent: 40rem;
-  padding-bottom: 4rem;
-}
-
-.productHeading {
-  letter-spacing: -.3rem;
-  padding-bottom: 30vh;
-}
-
 p {
   font-size: 1rem;
       font-weight: 400;
       line-height: 1rem;
-      line-height: 1.25rem;
+      line-height: 1.5rem;
 }
 
 .bold {
@@ -96,8 +88,10 @@ p {
 }
 
 p.small {
-  font-size: 1.25rem;
-  line-height: 1.5rem;
+  font-size: .8rem;
+  line-height: 1.25rem;
+  letter-spacing: .05rem;
+  font-weight: 500;
 }
 
 li {
