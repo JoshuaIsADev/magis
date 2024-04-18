@@ -41,6 +41,8 @@ const GlobalStyles = createGlobalStyle`
   --padding-sides: 2rem;
   --padding-right: 1rem;
 
+  --font: "Plus Jakarta Sans", sans-serif;
+
   @media (max-width: 1400px) {
   --padding-row: 12vw;
 }
@@ -55,7 +57,7 @@ const GlobalStyles = createGlobalStyle`
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-size: 16px;
+  font-size: 15px;
   color: var(--color-grey-900);
 }
 
@@ -65,7 +67,7 @@ html {
 }
 
 body {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: var(--font);
   font-optical-sizing: auto;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -126,6 +128,19 @@ input[type="number"] {
 
 .test {
   background-color: #484848;
+}
+
+.arrow {
+  /* padding-top: 0.3rem; */
+  font-size: 1.5rem;
+  transition: all .3s ease-in-out;
+}
+
+.downArrow {
+  transform: rotate(180);
+  /* padding-bottom: 0.3rem; */
+  font-size: 1.5rem;
+  transition: all .3s ease-in-out;
 }
 
 //OVERRIDES

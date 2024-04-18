@@ -8,6 +8,12 @@ const variations = {
   header: css`
     color: var(--color-brand);
   `,
+  bold: css`
+    font-weight: 800;
+  `,
+  dropdown: css`
+    padding-top: 0.6rem;
+  `,
 };
 
 const Heading = styled.h1`
@@ -33,6 +39,15 @@ const Heading = styled.h1`
     css`
       font-size: 1rem;
       font-weight: 400;
+      line-height: 1rem;
+      text-transform: uppercase;
+      ${(props) => variations[props.$variation]}
+    `}
+  ${(props) =>
+    props.as === 'h4' &&
+    css`
+      font-size: 0.75rem;
+      font-weight: 500;
       line-height: 1rem;
       text-transform: uppercase;
       ${(props) => variations[props.$variation]}

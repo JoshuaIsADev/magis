@@ -4,7 +4,16 @@ import ProductRow from './ProductRow';
 import { useProducts } from './useProducts';
 import ProductCard from './ProductCard';
 import styled from 'styled-components';
-import { StyledProductTable } from '../../ui/StyledProductTable';
+
+const StyledProductTable = styled.div`
+  display: grid;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8rem;
+  padding: 2rem 0;
+`;
 
 function ProductTable() {
   const { isPending, products } = useProducts();
