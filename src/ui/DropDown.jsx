@@ -4,7 +4,7 @@ const variations = {
   header: css`
     display: flex;
     align-items: center;
-    padding-top: 10rem;
+    padding-top: var(--padding-m);
     background-color: white;
   `,
   menu: css`
@@ -37,15 +37,17 @@ const DropdownAnimation = keyframes`
 `;
 
 const DropdownContent = styled.div`
-  position: absolute;
-  opacity: 0;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: left;
+  flex-wrap: wrap;
+  flex-direction: row;
+  position: absolute;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 0;
   background-color: rgba(255, 255, 255, 0.9);
   width: 100%;
-  gap: 0.5rem;
+  column-gap: 10rem;
+  row-gap: 0.5rem;
   z-index: -1;
 
   &.show {
@@ -54,6 +56,7 @@ const DropdownContent = styled.div`
     opacity: 1;
     animation: ${DropdownAnimation} 0.2s ease-in-out forwards;
     z-index: 2;
+    padding-bottom: 4rem;
   }
 
   p {
@@ -71,16 +74,17 @@ const DropdownContent = styled.div`
 
 const DropdownRow = styled.div`
   display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
+  align-items: center;
+
   ${(props) => variations[props.$variation]}
 `;
 
 const Column = styled.div`
   display: flex;
   align-items: center;
-  flex-wrap: nowrap;
-  gap: 0.5rem;
+  flex-wrap: wrap;
+  min-width: 10rem;
+  gap: 2rem;
 `;
 
 const Button = styled.button`
@@ -88,7 +92,7 @@ const Button = styled.button`
   font-weight: 600;
   letter-spacing: var(--letter-space);
   text-transform: uppercase;
-  padding: 0.5rem 1rem;
+  padding: 0;
   background-color: var(--color-grey-0);
   border: none;
   cursor: pointer;

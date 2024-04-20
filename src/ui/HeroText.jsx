@@ -15,11 +15,19 @@ const HeroText = styled.div`
   width: 100%;
   max-width: var(--width-max);
   margin: 0 auto;
-  /* padding-right: 2rem; */
   opacity: 0;
   animation: ${HeroTextAnimation} 3s ease-in-out forwards;
   animation-delay: 1s;
   transition: opacity 2s ease-in-out;
 `;
 
-export default HeroText;
+const SectionHeading = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--width-max);
+  margin: 0 auto;
+  padding-top: var(--padding-xl);
+`;
+
+export { HeroText, SectionHeading };

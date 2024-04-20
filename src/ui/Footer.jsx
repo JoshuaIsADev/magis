@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import HeroText from './HeroText';
+import { HeroText } from './HeroText';
 import { spreadText } from '../utils/spreadText';
 
 const StyledFooter = styled.footer`

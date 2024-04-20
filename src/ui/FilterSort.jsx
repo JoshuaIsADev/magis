@@ -44,8 +44,6 @@ function FilterSort() {
     <>
       <DropdownContainer>
         <DropdownRow $variation='header'>
-          <Heading as='h3'>Shop</Heading>
-
           <Button
             $variation='menu'
             onClick={() => setShowDropdown(!showDropdown)}
@@ -61,9 +59,9 @@ function FilterSort() {
         <DropdownContent className={showDropdown ? 'show' : ''}>
           <DropdownRow>
             <Column>
-              <Heading as='h3' $variation='title'>
-                Category
-              </Heading>
+              <Heading as='h3'>Category</Heading>
+            </Column>
+            <Column>
               <Button
                 onClick={() => handleFilterCategory('all')}
                 className={
@@ -100,9 +98,7 @@ function FilterSort() {
           </DropdownRow>
           <DropdownRow>
             <Column>
-              <Heading as='h4' $variation='dropdown'>
-                Designer
-              </Heading>
+              <Heading as='h3'>Designer</Heading>
             </Column>
             <Column>
               <Button
@@ -152,9 +148,7 @@ function FilterSort() {
           </DropdownRow>
           <DropdownRow>
             <Column>
-              <Heading as='h4' $variation='dropdown'>
-                Material
-              </Heading>
+              <Heading as='h3'>Material</Heading>
             </Column>
             <Column>
               <Button
@@ -221,9 +215,7 @@ function FilterSort() {
           </DropdownRow>
           <DropdownRow>
             <Column>
-              <Heading as='h4' $variation='dropdown'>
-                Sort
-              </Heading>
+              <Heading as='h3'>Sort</Heading>
             </Column>
             <Column>
               <Button

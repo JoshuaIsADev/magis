@@ -13,3 +13,17 @@ export function spreadText(text, variation) {
     </>
   );
 }
+
+export function spreadTextSection(text, variation) {
+  return (
+    <>
+      {text.split(' ').map((word, index) => (
+        <div key={index}>
+          <Heading as='h2' $variation={variation}>
+            {word}
+          </Heading>
+        </div>
+      ))}
+    </>
+  );
+}

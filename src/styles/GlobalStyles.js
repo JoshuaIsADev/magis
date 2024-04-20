@@ -82,9 +82,8 @@ a {
 
 p {
   font-size: 1rem;
-      font-weight: 500;
+      font-weight: 600;
       line-height: 1rem;
-      line-height: 1.5rem;
       letter-spacing: var(--letter-space);
 }
 

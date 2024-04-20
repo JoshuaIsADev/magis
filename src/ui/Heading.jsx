@@ -16,9 +16,6 @@ const variations = {
   dropdown: css`
     padding-top: 0.6rem;
   `,
-  title: css`
-    padding-right: var(--padding-m);
-  `,
 };
 
 const Heading = styled.h1`

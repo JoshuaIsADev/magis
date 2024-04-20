@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useMainImage } from './useMainImage';
+import Heading from '../../ui/Heading';
 
 const StyledProductCard = styled.div`
   display: flex;
@@ -9,8 +10,9 @@ const StyledProductCard = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
-  width: 100%;
-  max-width: 30rem;
+  gap: 1rem;
+  /* width: 35rem; */
+  /* max-width: 40rem; */
   height: 100%;
 `;
 
@@ -22,8 +24,8 @@ const Img = styled.img`
 const Info = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0rem;
   text-align: center;
+  gap: 0.25rem;
 `;
 
 function ProductCard({ product }) {
@@ -51,7 +53,7 @@ function ProductCard({ product }) {
         </div>
       </Link>
       <Info>
-        <p className='bold'>{name}</p>
+        <Heading as='h3'>{name}</Heading>
         <p>{designer}</p>
         <p>${unitPrice}</p>
       </Info>

@@ -8,10 +8,10 @@ import styled from 'styled-components';
 const StyledProductTable = styled.div`
   display: grid;
   margin: 0 auto;
-  align-items: center;
-  justify-content: center;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8rem;
+  justify-content: space-between;
+  align-content: end;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10rem;
   padding: 2rem 0;
 `;
 
