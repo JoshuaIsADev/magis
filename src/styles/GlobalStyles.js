@@ -14,7 +14,7 @@ const GlobalStyles = createGlobalStyle`
   --color-grey-900: #292929;
   --color-red: #FF0000; 
 
-  --color-brand: #F9F3E6;
+  --color-brand: #FF2E00;
   
   --color-danger: #000000;
 
@@ -42,6 +42,8 @@ const GlobalStyles = createGlobalStyle`
   --padding-right: 1rem;
 
   --font: "Plus Jakarta Sans", sans-serif;
+  --letter-space: .1rem;
+  --letter-space-l: .4rem;
 
   @media (max-width: 1400px) {
   --padding-row: 12vw;
@@ -80,9 +82,10 @@ a {
 
 p {
   font-size: 1rem;
-      font-weight: 400;
+      font-weight: 500;
       line-height: 1rem;
       line-height: 1.5rem;
+      letter-spacing: var(--letter-space);
 }
 
 .bold {

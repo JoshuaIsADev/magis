@@ -28,18 +28,16 @@ function Products() {
     return () => {
       setHeadingColor('var(--color-grey-900)');
     };
-  }, []);
+  }, [setHeadingColor]);
 
   return (
     <>
       <Section $variation='hero' ref={ref}>
-        <HeroText>{spreadText('Magis', 'hero')}</HeroText>
-        <Heading as='h3' $variation='hero' $color={headingColor}>
-          Since 1976 Magis produces
-        </Heading>
         <Heading as='h2' $variation='hero' $color={headingColor}>
-          Aesthetic, functional, Italian-made furniture
+          Since 1976 Magis produces, aesthetic and functional Italian-made
+          furniture
         </Heading>
+        <HeroText>{spreadText('Magis', 'hero')}</HeroText>
       </Section>
 
       <Section>

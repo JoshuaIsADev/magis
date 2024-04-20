@@ -7,7 +7,7 @@ export const HeadingContext = createContext({
 
 export const HeadingProvider = ({ children }) => {
   const { ref, inView } = useInView({
-    threshold: 0.6,
+    threshold: 0.1,
   });
   const [headingColor, setHeadingColor] = useState('var(--color-brand)');
 

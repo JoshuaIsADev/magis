@@ -8,7 +8,8 @@ const variations = {
 
   header: css`
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 500;
+    letter-spacing: var(--letter-space);
     text-transform: uppercase;
     color: ${(props) => props.$color};
     transition: 0.5s ease-in;
@@ -21,8 +22,9 @@ const variations = {
   `,
 
   headerLogo: css`
-    font-size: 2.5rem;
-    font-weight: 300;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: var(--letter-space-l);
     text-transform: uppercase;
     color: ${(props) => props.$color};
     transition: 0.5s ease-in;

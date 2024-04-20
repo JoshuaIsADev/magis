@@ -6,8 +6,10 @@ const StyledProductTableOperations = styled.nav`
   justify-content: center;
   gap: 2rem;
   width: 100%;
-  margin: var(--padding-l) auto;
-  padding-top: 4rem;
+  margin: 0 auto var(--padding-s);
+  /* padding-top: 4rem; */
+  /* padding-top: 5rem; */
+  /* background-color: white; */
 `;
 
 function ProductTableOperations() {

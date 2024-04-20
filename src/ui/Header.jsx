@@ -12,7 +12,7 @@ import { HeadingContext } from '../context/headingContext';
 
 const StyledHeader = styled.header`
   position: fixed;
-  width: 100vw;
+  width: 100%;
   padding: var(--padding-s) var(--padding-s);
   z-index: 10;
 `;
@@ -20,10 +20,7 @@ const StyledHeader = styled.header`
 const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
-  max-width: var(--width-max);
   width: 100%;
-  margin: 0 auto;
-  padding-right: 1rem;
 `;
 
 const Ul = styled.ul`
@@ -31,7 +28,6 @@ const Ul = styled.ul`
   flex-direction: row;
   gap: 2rem;
   align-items: center;
-  font-size: 1rem;
 `;
 
 function Header() {

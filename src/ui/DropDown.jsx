@@ -1,6 +1,12 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 const variations = {
+  header: css`
+    display: flex;
+    align-items: center;
+    padding-top: 10rem;
+    background-color: white;
+  `,
   menu: css`
     display: flex;
     align-items: center;
@@ -13,39 +19,21 @@ const variations = {
   `,
 };
 
-const DropdownRow = styled.div`
-  display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
-  ${(props) => variations[props.$variation]}
-`;
-
-const Column = styled.div`
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  min-width: 6rem;
-  gap: 0.5rem;
-`;
-
-const Button = styled.button`
-  padding: 0.5rem 1rem;
-  background-color: var(--color-grey-0);
-  border: 1px solid var(--color-grey-300);
-  border-radius: 0.5rem;
-  cursor: pointer;
-  &:hover,
-  &.selected {
-    background-color: var(--color-grey-900);
-    color: var(--color-grey-0);
-  }
-  ${(props) => variations[props.$variation]}
-`;
-
 const DropdownContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+`;
+
+const DropdownAnimation = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(1rem);
+  }
 `;
 
 const DropdownContent = styled.div`
@@ -56,30 +44,22 @@ const DropdownContent = styled.div`
   justify-content: center;
   align-items: left;
   background-color: rgba(255, 255, 255, 0.9);
-  /* background-image: linear-gradient(
-    to bottom,
-    var(--color-grey-0) 60%,
-    rgba(255, 0, 0, 0)
-  ); */
-  /* padding-bottom: 1rem; */
   width: 100%;
   gap: 0.5rem;
   z-index: -1;
-  transform: translateY(4rem);
-  transition: all 0.2s ease-in-out;
+
   &.show {
-    position: absolute;
-    opacity: 1;
+    position: relative;
     display: flex;
+    opacity: 1;
+    animation: ${DropdownAnimation} 0.2s ease-in-out forwards;
     z-index: 2;
-    transform: translateY(5rem);
-    transition: all 0.2s ease-in-out;
   }
 
   p {
     cursor: pointer;
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 600;
     text-transform: uppercase;
     &:hover,
     &:active,
@@ -87,6 +67,38 @@ const DropdownContent = styled.div`
       color: var(--color-grey-200);
     }
   }
+`;
+
+const DropdownRow = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  ${(props) => variations[props.$variation]}
+`;
+
+const Column = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+`;
+
+const Button = styled.button`
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: var(--letter-space);
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-grey-0);
+  border: none;
+  cursor: pointer;
+  &:hover,
+  &.selected {
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
+    text-decoration-thickness: 2px;
+  }
+  ${(props) => variations[props.$variation]}
 `;
 
 export { DropdownRow, Column, Button, DropdownContainer, DropdownContent };

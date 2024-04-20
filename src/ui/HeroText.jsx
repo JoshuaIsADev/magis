@@ -12,10 +12,10 @@ const HeroTextAnimation = keyframes`
 const HeroText = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 98vw;
+  width: 100%;
   max-width: var(--width-max);
   margin: 0 auto;
-  padding-right: 2.5rem;
+  /* padding-right: 2rem; */
   opacity: 0;
   animation: ${HeroTextAnimation} 3s ease-in-out forwards;
   animation-delay: 1s;
