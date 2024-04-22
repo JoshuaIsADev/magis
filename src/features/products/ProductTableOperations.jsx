@@ -1,22 +1,12 @@
-import styled from 'styled-components';
 import FilterSort from '../../ui/FilterSort';
-
-const StyledProductTableOperations = styled.nav`
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  width: 100%;
-  margin: 0 auto var(--padding-s);
-  /* padding-top: 4rem; */
-  /* padding-top: 5rem; */
-  /* background-color: white; */
-`;
+import Column from '../../ui/Column';
+import Row from '../../ui/Row';
 
 function ProductTableOperations() {
   return (
-    <StyledProductTableOperations>
+    <Row>
       <FilterSort />
-    </StyledProductTableOperations>
+    </Row>
   );
 }
 

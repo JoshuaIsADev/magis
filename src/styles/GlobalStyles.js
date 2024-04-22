@@ -59,7 +59,7 @@ const GlobalStyles = createGlobalStyle`
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-size: 15px;
+  font-size: 12px;
   color: var(--color-grey-900);
 }
 
@@ -134,14 +134,14 @@ input[type="number"] {
 
 .arrow {
   /* padding-top: 0.3rem; */
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   transition: all .3s ease-in-out;
 }
 
 .downArrow {
   transform: rotate(180);
   /* padding-bottom: 0.3rem; */
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   transition: all .3s ease-in-out;
 }
 

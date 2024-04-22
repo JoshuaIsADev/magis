@@ -11,6 +11,7 @@ const FormRow = styled.div`
   flex-direction: column;
   align-items: left;
   gap: 0.5rem;
+  width: 100%;
 `;
 
 function SignInForm() {
@@ -33,9 +34,11 @@ function SignInForm() {
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form $variation='guest' onSubmit={handleSubmit}>
       <FormRow>
-        <Label htmlFor='email'>Email</Label>
+        <Label $variation='guest' htmlFor='email'>
+          Email
+        </Label>
         <Input
           type='email'
           id='email'

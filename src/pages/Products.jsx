@@ -7,7 +7,11 @@ import { useContext, useEffect } from 'react';
 import { HeadingContext } from '../context/headingContext.jsx';
 import { useLocation } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
-import { HeroText, SectionHeading } from '../ui/HeroText.jsx';
+import { HeroText } from '../ui/HeroText.jsx';
+import SectionHeading from '../ui/SectionHeading.jsx';
+import Row from '../ui/Row.jsx';
+import Column from '../ui/Column.jsx';
+import Hr from '../ui/Hr.jsx';
 
 function Products() {
   const { headingColor, setHeadingColor, ref, inView } =
@@ -33,17 +37,24 @@ function Products() {
   return (
     <>
       <Section $variation='hero' ref={ref}>
-        <Heading as='h2' $variation='hero' $color={headingColor}>
-          Since 1976 Magis produces experimental, aesthetic and functional
-          Italian-made furniture
-        </Heading>
-        <HeroText>{spreadText('Magis', 'hero')}</HeroText>
+        <Row>
+          <Column $variation='heroHeadline'>
+            <Heading as='h2' $variation='hero' $color={headingColor}>
+              Since 1976 Magis produces experimental, aesthetic and functional
+              Italian-made furniture
+            </Heading>
+          </Column>
+        </Row>
+        <Row>
+          <Column $variation='heroHeadline'>
+            <HeroText>{spreadText('Magis', 'hero')}</HeroText>
+          </Column>
+        </Row>
       </Section>
 
       <Section>
-        <SectionHeading>
-          {spreadTextSection('Shop the collection', 'hero')}
-        </SectionHeading>
+        <SectionHeading text='Shop the collection' />
+        <Hr />
         <ProductTableOperations />
         <ProductTable />
       </Section>

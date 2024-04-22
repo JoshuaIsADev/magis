@@ -10,6 +10,7 @@ const HeroTextAnimation = keyframes`
 `;
 
 const HeroText = styled.div`
+  grid-column: 1 / span 6;
   display: flex;
   justify-content: space-between;
   width: 100%;

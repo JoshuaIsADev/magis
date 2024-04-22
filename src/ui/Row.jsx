@@ -1,7 +1,18 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Row = styled.div`
-  display: flex;
-  justify-content: left;
+const variations = {
+  sectionHeading: css`
+    padding-top: 10rem;
+  `,
+};
+
+const Row = styled.div`
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  width: 100%;
   gap: 2rem;
+  padding: 1rem 2rem;
+  ${(props) => variations[props.$variation]}
 `;
+
+export default Row;

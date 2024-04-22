@@ -5,7 +5,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import Spinner from '../ui/Spinner';
 import { deleteProduct, getProducts } from '../services/apiProducts';
 import styled from 'styled-components';
-import { Row } from '../ui/Row';
+import Row from '../ui/Row';
 import ProductTableOperations from '../features/products/ProductTableOperations';
 import { useSearchParams } from 'react-router-dom';
 

@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 import Label from './Label';
 
-const StyledFormRow = styled.div`
-  display: grid;
-`;
-
 const Error = styled.span`
   font-size: 1.4rem;
   color: var(--color-red);
@@ -12,11 +8,11 @@ const Error = styled.span`
 
 function FormRow({ label, error, children }) {
   return (
-    <StyledFormRow>
+    <>
       {label && <Label htmlFor={children.props.id}>{label}</Label>}
       {children}
       {error && <Error>{error}</Error>}
-    </StyledFormRow>
+    </>
   );
 }
 

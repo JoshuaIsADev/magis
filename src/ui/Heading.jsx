@@ -6,7 +6,6 @@ const variations = {
     text-align: justify;
     letter-spacing: var(--letter-space);
   `,
-
   header: css`
     color: var(--color-brand);
   `,
@@ -15,6 +14,12 @@ const variations = {
   `,
   dropdown: css`
     padding-top: 0.6rem;
+  `,
+  footer: css`
+    padding-bottom: var(--padding-xl);
+  `,
+  filterSort: css`
+    padding-bottom: 2rem;
   `,
 };
 
@@ -41,7 +46,7 @@ const Heading = styled.h1`
     props.as === 'h3' &&
     css`
       font-size: 1rem;
-      font-weight: 600;
+      font-weight: 500;
       line-height: 1rem;
       letter-spacing: var(--letter-space);
       text-transform: uppercase;
@@ -51,7 +56,7 @@ const Heading = styled.h1`
     props.as === 'h4' &&
     css`
       font-size: 0.75rem;
-      font-weight: 600;
+      font-weight: 500;
       line-height: 1rem;
       text-transform: uppercase;
       letter-spacing: var(--letter-space);

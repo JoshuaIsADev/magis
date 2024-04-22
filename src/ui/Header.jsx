@@ -9,23 +9,19 @@ import { CartContext } from '../context/cartContext';
 import Heading from './Heading';
 import { Link } from 'react-router-dom';
 import { HeadingContext } from '../context/headingContext';
+import Row from './Row';
+import Column from './Column';
 
-const StyledHeader = styled.header`
+const StyledHeader = styled.nav`
   position: fixed;
   width: 100%;
-  padding: var(--padding-s) var(--padding-s);
+  max-width: var(--width-max);
+  margin: 0 auto;
   z-index: 10;
-`;
-
-const Nav = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
 `;
 
 const Ul = styled.ul`
   display: flex;
-  flex-direction: row;
   gap: 2rem;
   align-items: center;
 `;
@@ -49,12 +45,14 @@ function Header() {
   }
 
   return (
-    <>
-      <StyledHeader>
-        <Nav>
+    <StyledHeader>
+      <Row>
+        <Column $variation='headerLogo'>
           <StyledLink $variation='headerLogo' to='/' $color={headingColor}>
             Magis
           </StyledLink>
+        </Column>
+        <Column $variation='headerNav'>
           <Ul>
             <li>
               <StyledLink $variation='header' to='/' $color={headingColor}>
@@ -116,9 +114,9 @@ function Header() {
               </>
             )}
           </Ul>
-        </Nav>
-      </StyledHeader>
-    </>
+        </Column>
+      </Row>
+    </StyledHeader>
   );
 }
 

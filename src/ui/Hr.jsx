@@ -1,8 +1,22 @@
 import styled from 'styled-components';
+import Row from './Row';
+import Column from './Column';
 
-const Hr = styled.hr`
-  border-top: 1px solid var(--color-grey-100);
-  margin: 1rem 0;
+const StyledHr = styled.hr`
+  border: none;
+  border-top: 1px solid var(--color-grey-300);
+  width: 100%;
+  margin: 0;
 `;
+
+function Hr() {
+  return (
+    <Row>
+      <Column $variation='hr'>
+        <StyledHr />
+      </Column>
+    </Row>
+  );
+}
 
 export default Hr;
