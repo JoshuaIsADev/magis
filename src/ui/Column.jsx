@@ -21,9 +21,13 @@ const variations = {
   headerLogo: css`
     grid-column: 1 / span 1;
   `,
-  headerNav: css`
-    grid-column: 5 / span 2;
-    justify-content: right;
+  headerNavShop: css`
+    grid-column: 5 / span 1;
+    justify-content: left;
+  `,
+  headerNavUser: css`
+    grid-column: 6 / span 1;
+    justify-content: left;
   `,
   heroHeadline: css`
     grid-column: 1 / span 6;
@@ -42,8 +46,11 @@ const variations = {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.35rem;
+    text-align: left;
+    gap: 0.5rem;
     opacity: 0;
+    position: absolute;
+    transform: translateY(1rem);
     &.show {
       position: relative;
       display: flex;
@@ -52,6 +59,31 @@ const variations = {
       z-index: 2;
       padding-bottom: 4rem;
     }
+  `,
+  productCard: css`
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10rem;
+  `,
+  footerAbout: css`
+    grid-column: 1 / span 2;
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    gap: 2rem;
+  `,
+  footerContact: css`
+    grid-column: 5 / span 2;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  `,
+  signInUpForm: css`
+    grid-column: 1 / span 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   `,
 };
 

@@ -1,12 +1,13 @@
 import SignInForm from '../features/authentication/SignInForm';
-import { SectionHeading } from '../ui/HeroText';
+import SectionHeading from '../ui/SectionHeading.jsx';
+import Hr from '../ui/Hr';
 import Section from '../ui/Section';
-import { spreadTextSection } from '../utils/spreadText';
 
 function SignIn() {
   return (
     <Section>
-      <SectionHeading>{spreadTextSection('Sign in', 'hero')}</SectionHeading>
+      <SectionHeading text='Sign in' />
+      <Hr />
       <SignInForm />
     </Section>
   );

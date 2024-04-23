@@ -52,7 +52,7 @@ function Header() {
             Magis
           </StyledLink>
         </Column>
-        <Column $variation='headerNav'>
+        <Column $variation='headerNavShop'>
           <Ul>
             <li>
               <StyledLink $variation='header' to='/' $color={headingColor}>
@@ -79,7 +79,10 @@ function Header() {
                 </StyledLink>
               )}
             </li>
-
+          </Ul>
+        </Column>
+        <Column $variation='headerNavUser'>
+          <Ul>
             {admin ? (
               <li disabled={isPending}>
                 <StyledLink

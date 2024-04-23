@@ -1,17 +1,11 @@
-import styled, { css } from 'styled-components';
-
-const variations = {
-  guest: css`
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--color-grey-0);
-  `,
-};
+import styled from 'styled-components';
 
 const Label = styled.label`
   font-size: 1rem;
   font-weight: 500;
-  ${(props) => variations[props.$variation]}
+  line-height: 1rem;
+  letter-spacing: var(--letter-space);
+  text-transform: uppercase;
 `;
 
 export default Label;

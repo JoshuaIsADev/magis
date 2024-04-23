@@ -3,13 +3,14 @@ import styled, { css } from 'styled-components';
 const variations = {
   header: css`
     display: flex;
-    align-items: center;
+    align-items: left;
     background-color: white;
   `,
   menu: css`
     display: flex;
-    align-items: center;
+    align-items: left;
     border: none;
+    text-align: left;
     &:hover,
     &.selected {
       background-color: var(--color-grey-0);
@@ -26,6 +27,7 @@ const Button = styled.button`
   padding: 0;
   background-color: var(--color-grey-0);
   border: none;
+  text-align: left;
   cursor: pointer;
   &:hover,
   &.selected {

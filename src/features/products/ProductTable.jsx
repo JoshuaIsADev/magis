@@ -4,6 +4,7 @@ import ProductRow from './ProductRow';
 import { useProducts } from './useProducts';
 import ProductCard from './ProductCard';
 import styled from 'styled-components';
+import Row from '../../ui/Row';
 
 const StyledProductTable = styled.div`
   display: grid;
@@ -112,19 +113,19 @@ function ProductTable() {
   // console.log(field, direction, modifier);
 
   return (
-    <>
+    <Row>
       {pathIsManage ? (
         sortedProducts.map((product) => (
           <ProductRow key={product.id} role='row' product={product} />
         ))
       ) : (
-        <StyledProductTable>
+        <>
           {sortedProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
-        </StyledProductTable>
+        </>
       )}
-    </>
+    </Row>
   );
 }
 

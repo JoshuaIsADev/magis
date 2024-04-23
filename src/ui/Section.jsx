@@ -13,6 +13,13 @@ const variations = {
     background-repeat: no-repeat;
     padding-top: var(--padding-m);
   `,
+  footer: css`
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    /* min-height: 100vh; */
+    padding: 10rem 0;
+  `,
 };
 
 const Section = styled.section`

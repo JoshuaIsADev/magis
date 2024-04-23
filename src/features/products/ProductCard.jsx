@@ -3,18 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useMainImage } from './useMainImage';
 import Heading from '../../ui/Heading';
-
-const StyledProductCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 auto;
-  gap: 1rem;
-  /* width: 35rem; */
-  /* max-width: 40rem; */
-  height: 100%;
-`;
+import Column from '../../ui/Column';
 
 const Img = styled.img`
   aspect-ratio: 1;
@@ -24,8 +13,9 @@ const Img = styled.img`
 const Info = styled.div`
   display: flex;
   flex-direction: column;
-  text-align: center;
-  gap: 0.25rem;
+  text-align: left;
+  gap: 0.5rem;
+  padding-bottom: 2rem;
 `;
 
 function ProductCard({ product }) {
@@ -42,7 +32,12 @@ function ProductCard({ product }) {
   }
 
   return (
-    <StyledProductCard>
+    <Column $variation='productCard'>
+      <Info>
+        <Heading as='h3'>{name}</Heading>
+        <p>{designer}</p>
+        <p>${unitPrice}</p>
+      </Info>
       <Link
         to={`/product/${productId}`}
         onMouseEnter={handleMouseEnter}
@@ -52,12 +47,7 @@ function ProductCard({ product }) {
           <Img src={isHovered ? mainImage[1] : mainImage[0]} alt='product' />
         </div>
       </Link>
-      <Info>
-        <Heading as='h3'>{name}</Heading>
-        <p>{designer}</p>
-        <p>${unitPrice}</p>
-      </Info>
-    </StyledProductCard>
+    </Column>
   );
 }
 

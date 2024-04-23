@@ -16,7 +16,7 @@ const variations = {
     padding-top: 0.6rem;
   `,
   footer: css`
-    padding-bottom: var(--padding-xl);
+    padding-bottom: 4rem;
   `,
   filterSort: css`
     padding-bottom: 2rem;
