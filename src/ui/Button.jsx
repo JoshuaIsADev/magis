@@ -17,6 +17,23 @@ const variations = {
       color: var(--color-grey-900);
     }
   `,
+
+  primary: css`
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: var(--letter-space);
+    text-transform: uppercase;
+    color: ${(props) => props.$color};
+    transition: 0.5s ease-in;
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
+    text-decoration-thickness: 1px;
+    &:hover,
+    &:active,
+    &.active:link {
+      color: var(--color-grey-300);
+    }
+  `,
 };
 
 const Button = styled.button`
@@ -33,7 +50,7 @@ const Button = styled.button`
   &.selected {
     text-decoration: underline;
     text-underline-offset: 0.2rem;
-    text-decoration-thickness: 2px;
+    text-decoration-thickness: 1px;
   }
   ${(props) => variations[props.$variation]}
 `;

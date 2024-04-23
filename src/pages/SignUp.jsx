@@ -1,10 +1,15 @@
 import SignUpForm from '../features/authentication/SignUpForm';
+import Hr from '../ui/Hr';
+import Section from '../ui/Section';
+import SectionHeading from '../ui/SectionHeading';
 
 function SignUp() {
   return (
-    <div>
+    <Section>
+      <SectionHeading text='Sign up' />
+      <Hr />
       <SignUpForm />
-    </div>
+    </Section>
   );
 }
 

@@ -1,13 +1,10 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import SignOut from '../features/authentication/SignOut';
 import styled from 'styled-components';
 import StyledLink from './StyledLink';
 import { UserContext } from '../context/userContext';
 import { useUser } from '../features/authentication/useUser';
 import { useSignOut } from '../features/authentication/useSignOut';
 import { CartContext } from '../context/cartContext';
-import Heading from './Heading';
-import { Link } from 'react-router-dom';
 import { HeadingContext } from '../context/headingContext';
 import Row from './Row';
 import Column from './Column';
