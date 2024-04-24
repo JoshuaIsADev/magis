@@ -10,6 +10,15 @@ import Spinner from '../../ui/Spinner';
 import Row from '../../ui/Row';
 import Column from '../../ui/Column';
 import Button from '../../ui/Button';
+import { useMainImage } from './useMainImage';
+import styled from 'styled-components';
+
+const Img = styled.img`
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  padding: 0;
+`;
 
 function CreateProductForm({ productToEdit = {} }) {
   const { isCreating, createProduct } = useCreateProduct();
@@ -23,6 +32,9 @@ function CreateProductForm({ productToEdit = {} }) {
     defaultValues: isEditSession ? editValues : {},
   });
   const { errors } = formState;
+  console.log({ productToEdit });
+
+  const mainImage = useMainImage(productToEdit.image)[0];
 
   function onSubmit(data) {
     const image = typeof data.image === 'string' ? data.image : data.image;
@@ -45,6 +57,7 @@ function CreateProductForm({ productToEdit = {} }) {
   return (
     <form onSubmit={handleSubmit(onSubmit, onError)}>
       <Row>
+        {productToEdit ? <Img src={mainImage} alt='product' /> : ''}
         <Column $variation='createEditProduct'>
           <Label htmlFor='name' isFirst={true}>
             Product name

@@ -6,9 +6,10 @@ import Heading from '../../ui/Heading';
 import Column from '../../ui/Column';
 
 const Img = styled.img`
+  max-width: 40rem;
   aspect-ratio: 1;
   object-fit: contain;
-  padding: 4rem 8rem;
+  padding: 2rem 4rem;
 `;
 
 function ProductCard({ product }) {

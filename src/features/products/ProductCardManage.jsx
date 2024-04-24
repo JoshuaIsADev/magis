@@ -3,9 +3,15 @@ import styled from 'styled-components';
 import CreateProductForm from './CreateProductForm';
 import { useDeleteProduct } from './UseDeleteProduct';
 import { useMainImage } from './useMainImage';
+import { VscChromeClose } from 'react-icons/vsc';
 import Column from '../../ui/Column';
 import Heading from '../../ui/Heading';
 import Button from '../../ui/Button';
+import Modal from '../../ui/Modal';
+import Section from '../../ui/Section';
+import Row from '../../ui/Row';
+import SectionHeading from '../../ui/SectionHeading';
+import Hr from '../../ui/Hr';
 
 const Img = styled.img`
   width: 100%;
@@ -54,8 +60,21 @@ function ProductCardManage({ product }) {
             Edit
           </Button>
         </Column>
-        {showForm && <CreateProductForm productToEdit={product} />}
       </Column>
+      {showForm && (
+        <Modal>
+          <Section>
+            <Row>
+              <Button onClick={() => setShowForm((show) => !show)}>
+                <VscChromeClose />
+              </Button>
+            </Row>
+            <SectionHeading text='Edit product' />
+            <Hr />
+            <CreateProductForm productToEdit={product} />
+          </Section>
+        </Modal>
+      )}
     </>
   );
 }
