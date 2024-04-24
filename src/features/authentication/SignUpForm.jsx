@@ -1,5 +1,4 @@
 import { useForm } from 'react-hook-form';
-import styled from 'styled-components';
 import StyledLink from '../../ui/StyledLink';
 import Label from '../../ui/Label';
 import Input from '../../ui/Input';
@@ -11,13 +10,6 @@ import Row from '../../ui/Row';
 import Column from '../../ui/Column';
 import Heading from '../../ui/Heading';
 import Button from '../../ui/Button';
-
-const FormRow = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  gap: 0.5rem;
-`;
 
 function SignUpForm() {
   const { signUp, isPending } = useSignUp();
@@ -38,7 +30,9 @@ function SignUpForm() {
               Sign In
             </StyledLink>
           </Heading>
-          <Label htmlFor='fullName'>Full name</Label>
+          <Label htmlFor='fullName' isFirst={true}>
+            Full name
+          </Label>
           <Input
             type='text'
             id='fullName'
@@ -94,6 +88,10 @@ function SignUpForm() {
           {errors?.passwordConfirm?.message && (
             <Errors>{errors.passwordConfirm.message}</Errors>
           )}
+        </Column>
+      </Row>
+      <Row $variation='formSubmitButtons'>
+        <Column $variation='formSubmitButtons'>
           {isPending && <Spinner />}
           <Button type='reset' disabled={isPending}>
             Cancel

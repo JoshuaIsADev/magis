@@ -4,6 +4,9 @@ const variations = {
   sectionHeading: css`
     padding-top: 10rem;
   `,
+  formSubmitButtons: css`
+    padding-top: 4rem;
+  `,
 };
 
 const Row = styled.div`

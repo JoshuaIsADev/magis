@@ -6,8 +6,7 @@ const Input = styled.input`
   background-color: var(--color-grey-0);
   box-shadow: none;
   border-radius: none;
-  padding: 0.8rem 0;
-  margin-bottom: 2rem;
+  padding: 0.5rem 0;
   &[type='radio'] {
     margin-right: 1rem;
   }

@@ -66,6 +66,12 @@ const variations = {
     flex-direction: column;
     padding-top: 10rem;
   `,
+  productCardManage: css`
+    grid-column: span 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10rem;
+  `,
   footerAbout: css`
     grid-column: 1 / span 2;
     display: flex;
@@ -83,7 +89,18 @@ const variations = {
     grid-column: 1 / span 2;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.5rem;
+  `,
+  formSubmitButtons: css`
+    grid-column: 1 / span 2;
+    display: flex;
+    gap: 2rem;
+  `,
+  createEditProduct: css`
+    grid-column: 1 / span 6;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   `,
 };
 

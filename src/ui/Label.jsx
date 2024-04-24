@@ -6,6 +6,7 @@ const Label = styled.label`
   line-height: 1rem;
   letter-spacing: var(--letter-space);
   text-transform: uppercase;
+  padding-top: ${(props) => (props.isFirst ? '2rem' : '0')};
 `;
 
 export default Label;

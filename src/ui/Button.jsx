@@ -24,7 +24,7 @@ const variations = {
     letter-spacing: var(--letter-space);
     text-transform: uppercase;
     color: ${(props) => props.$color};
-    transition: 0.5s ease-in;
+    transition: 0.1s ease-in;
     text-decoration: underline;
     text-underline-offset: 0.3rem;
     text-decoration-thickness: 1px;
@@ -49,7 +49,7 @@ const Button = styled.button`
   &:hover,
   &.selected {
     text-decoration: underline;
-    text-underline-offset: 0.2rem;
+    text-underline-offset: 0.3rem;
     text-decoration-thickness: 1px;
   }
   ${(props) => variations[props.$variation]}

@@ -7,6 +7,7 @@ import Row from '../../ui/Row';
 import Column from '../../ui/Column';
 import Heading from '../../ui/Heading';
 import Button from '../../ui/Button';
+import StyledLink from '../../ui/StyledLink';
 
 function SignInForm() {
   const [email, setEmail] = useState('');
@@ -32,9 +33,14 @@ function SignInForm() {
       <Row>
         <Column $variation='signInUpForm'>
           <Heading as='h3' $variation='footer'>
-            Not yet a member? Sign up!
+            Not yet a member?
+            <StyledLink $variation='primaryHeading' to='/signup'>
+              Sign Up!
+            </StyledLink>
           </Heading>
-          <Label htmlFor='email'>Email</Label>
+          <Label htmlFor='email' isFirst={true}>
+            Email
+          </Label>
           <Input
             type='email'
             id='email'
@@ -53,9 +59,15 @@ function SignInForm() {
             onChange={(e) => setPassword(e.target.value)}
             disabled={isPending}
           ></Input>
+        </Column>
+      </Row>
 
+      <Row $variation='formSubmitButtons'>
+        <Column $variation='formSubmitButtons'>
           {isPending && <Spinner />}
-          <Button disabled={isPending}>Sign in</Button>
+          <Button $variation='primary' disabled={isPending}>
+            Sign in
+          </Button>
         </Column>
       </Row>
     </form>

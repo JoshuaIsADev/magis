@@ -1,10 +1,10 @@
 import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import Spinner from '../../ui/Spinner';
-import ProductRow from './ProductRow';
 import { useProducts } from './useProducts';
 import ProductCard from './ProductCard';
 import styled from 'styled-components';
 import Row from '../../ui/Row';
+import ProductCardManage from './ProductCardManage';
 
 const StyledProductTable = styled.div`
   display: grid;
@@ -116,7 +116,7 @@ function ProductTable() {
     <Row>
       {pathIsManage ? (
         sortedProducts.map((product) => (
-          <ProductRow key={product.id} role='row' product={product} />
+          <ProductCardManage key={product.id} role='row' product={product} />
         ))
       ) : (
         <>

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import CreateProductForm from './CreateProductForm';
 import { useDeleteProduct } from './UseDeleteProduct';
 import { useMainImage } from './useMainImage';
+import Column from '../../ui/Column';
 
 const Img = styled.img`
   width: 12rem;
@@ -12,7 +13,7 @@ const Img = styled.img`
 
 const TableRow = styled.div``;
 
-function ProductRow({ product }) {
+function ProductCardManage({ product }) {
   const [showForm, setShowForm] = useState(false);
   const { isDeleting, deleteProduct } = useDeleteProduct();
 
@@ -29,7 +30,7 @@ function ProductRow({ product }) {
   const mainImage = useMainImage(image)[0];
 
   return (
-    <>
+    <Column $variation='productCardManage'>
       <TableRow role='row'>
         <div>{<Img src={mainImage} alt='product' />}</div>
         <div>
@@ -53,8 +54,8 @@ function ProductRow({ product }) {
         </div>
       </TableRow>
       {showForm && <CreateProductForm productToEdit={product} />}
-    </>
+    </Column>
   );
 }
 
-export default ProductRow;
+export default ProductCardManage;
