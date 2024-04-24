@@ -8,14 +8,7 @@ import Column from '../../ui/Column';
 const Img = styled.img`
   aspect-ratio: 1;
   object-fit: contain;
-`;
-
-const Info = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  gap: 0.5rem;
-  padding-bottom: 2rem;
+  padding: 4rem 8rem;
 `;
 
 function ProductCard({ product }) {
@@ -33,19 +26,15 @@ function ProductCard({ product }) {
 
   return (
     <Column $variation='productCard'>
-      <Info>
-        <Heading as='h3'>{name}</Heading>
-        <p>{designer}</p>
-        <p>${unitPrice}</p>
-      </Info>
+      <Heading as='h3'>{name}</Heading>
+      <p>{designer}</p>
+      <p>${unitPrice}</p>
       <Link
         to={`/product/${productId}`}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <div>
-          <Img src={isHovered ? mainImage[1] : mainImage[0]} alt='product' />
-        </div>
+        <Img src={isHovered ? mainImage[1] : mainImage[0]} alt='product' />
       </Link>
     </Column>
   );

@@ -4,14 +4,15 @@ import CreateProductForm from './CreateProductForm';
 import { useDeleteProduct } from './UseDeleteProduct';
 import { useMainImage } from './useMainImage';
 import Column from '../../ui/Column';
+import Heading from '../../ui/Heading';
+import Button from '../../ui/Button';
 
 const Img = styled.img`
-  width: 12rem;
+  width: 100%;
   aspect-ratio: 1;
   object-fit: contain;
+  padding: 4rem 0rem;
 `;
-
-const TableRow = styled.div``;
 
 function ProductCardManage({ product }) {
   const [showForm, setShowForm] = useState(false);
@@ -30,31 +31,32 @@ function ProductCardManage({ product }) {
   const mainImage = useMainImage(image)[0];
 
   return (
-    <Column $variation='productCardManage'>
-      <TableRow role='row'>
-        <div>{<Img src={mainImage} alt='product' />}</div>
-        <div>
-          <h3>{name}</h3>
-          <p className='small'>{designer}</p>
-          <p className='small'>{category}</p>
-          <p className='small'>{inStock} in stock</p>
-          <p className='small'>${unitPrice}</p>
-          <button
-            disabled={isDeleting}
-            onClick={() => setShowForm((show) => !show)}
-          >
-            Edit
-          </button>
-          <button
+    <>
+      <Column $variation='productCardManage'>
+        <Heading as='h3'>{name}</Heading>
+        <p>{designer}</p>
+        <p>{category}</p>
+        <p>{inStock} in stock</p>
+        <p>${unitPrice}</p>
+        {<Img src={mainImage} alt='product' />}
+        <Column $variation='formSubmitButtons'>
+          <Button
             onClick={() => deleteProduct(productId)}
             disabled={isDeleting}
           >
             Delete
-          </button>
-        </div>
-      </TableRow>
-      {showForm && <CreateProductForm productToEdit={product} />}
-    </Column>
+          </Button>
+          <Button
+            $variation='primary'
+            disabled={isDeleting}
+            onClick={() => setShowForm((show) => !show)}
+          >
+            Edit
+          </Button>
+        </Column>
+        {showForm && <CreateProductForm productToEdit={product} />}
+      </Column>
+    </>
   );
 }
 
