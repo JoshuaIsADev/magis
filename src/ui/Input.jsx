@@ -1,4 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+const variations = {
+  order: css`
+    text-align: center;
+  `,
+};
 
 const Input = styled.input`
   border: none;
@@ -10,6 +16,7 @@ const Input = styled.input`
   &[type='radio'] {
     margin-right: 1rem;
   }
+  ${(props) => variations[props.$variation]}
 `;
 
 export default Input;

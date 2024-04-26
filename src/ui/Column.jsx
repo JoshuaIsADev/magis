@@ -102,11 +102,26 @@ const variations = {
     flex-direction: column;
     gap: 0.5rem;
   `,
+  order: css`
+    grid-column: span 1;
+    display: flex;
+    flex-direction: column;
+  `,
+  orderButtons: css`
+    grid-column: span 1;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+  `,
+  orderSummary: css`
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+  `,
 };
 
 const Column = styled.div`
   display: flex;
-  /* flex-direction: column; */
   width: 100%;
   ${(props) => variations[props.$variation]}
 `;

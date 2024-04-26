@@ -1,10 +1,16 @@
 import { useContext, useState } from 'react';
-import Form from '../../ui/Form';
 import Input from '../../ui/Input';
-import Label from '../../ui/Label';
+import { VscRemove, VscAdd, VscTrash } from 'react-icons/vsc';
 import styled from 'styled-components';
 import { CartContext } from '../../context/cartContext';
+import Column from '../../ui/Column';
+import Row from '../../ui/Row';
+import Button from '../../ui/Button';
 
+const OrderButtons = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`;
 const Img = styled.img`
   width: 12rem;
   aspect-ratio: 1;
@@ -76,34 +82,51 @@ function CartForm({
   }
 
   return (
-    <Form onSubmit={(e) => handleSubmit(e, combinedCartItem)}>
-      <div>
-        {<Img src={mainImage} alt='product' />}
-        <p>{name}</p>
-        <p>{color}</p>
-        <p>{unitPrice}</p>
-        <p>{Number(quantity) * Number(unitPrice)}</p>
-        <button type='button' onClick={() => handleSubtract(selectedProductId)}>
-          -
-        </button>
-        <input
-          type='number'
-          name='quantity'
-          min='0'
-          max='100'
-          step='1'
-          value={quantities[selectedProductId]}
-          onChange={(e) => handleQuantityChange(e, selectedProductId)}
-        />
-        <button type='button' onClick={() => handleAdd(selectedProductId)}>
-          +
-        </button>
-        <button onClick={(e) => handleDelete(e, selectedProductId)}>
-          Remove item
-        </button>
-        <button type='submit'>Update cart</button>
-      </div>
-    </Form>
+    <form onSubmit={(e) => handleSubmit(e, combinedCartItem)}>
+      <Row $variation='order'>
+        <Column $variation='order'>
+          {<Img src={mainImage} alt='product' />}
+        </Column>
+        <Column $variation='order'>
+          <p>{name}</p>
+        </Column>
+        <Column $variation='order'>
+          <p>{color}</p>
+        </Column>
+        <Column $variation='order'>
+          <p>${unitPrice}</p>
+        </Column>
+        <Column $variation='orderButtons'>
+          <OrderButtons>
+            <Button
+              type='button'
+              onClick={() => handleSubtract(selectedProductId)}
+            >
+              <VscRemove />
+            </Button>
+            <Input
+              $variation='order'
+              type='number'
+              name='quantity'
+              min='0'
+              max='100'
+              step='1'
+              value={quantities[selectedProductId]}
+              onChange={(e) => handleQuantityChange(e, selectedProductId)}
+            />
+            <Button type='button' onClick={() => handleAdd(selectedProductId)}>
+              <VscAdd />
+            </Button>
+          </OrderButtons>
+          <Button type='submit'>Update cart</Button>
+        </Column>
+        <Column $variation='order'>
+          <Button onClick={(e) => handleDelete(e, selectedProductId)}>
+            <VscTrash />
+          </Button>
+        </Column>
+      </Row>
+    </form>
   );
 }
 

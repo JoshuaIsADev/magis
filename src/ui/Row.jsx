@@ -7,6 +7,9 @@ const variations = {
   formSubmitButtons: css`
     padding-top: 4rem;
   `,
+  order: css`
+    align-items: center;
+  `,
 };
 
 const Row = styled.div`
