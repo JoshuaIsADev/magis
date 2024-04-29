@@ -2,6 +2,9 @@ import { NavLink } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 const variations = {
+  productCard: css`
+    height: 100%;
+  `,
   hero: css`
     color: var(--color-brand);
   `,
@@ -60,8 +63,10 @@ const variations = {
 
   underline: css`
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 500;
     text-decoration: underline;
+    text-transform: uppercase;
+    text-transform: uppercase;
     text-decoration-thickness: 1px;
     text-underline-offset: 0.3rem;
   `,
@@ -74,10 +79,7 @@ const StyledLink = styled(NavLink)`
     ${(props) => variations[props.$variation]}
   }
 
-  &:hover,
-  &:active,
-  &.active:link,
-  &.active:visited {
+  &:hover {
     text-decoration: underline;
     text-underline-offset: 0.3rem;
     text-decoration-thickness: 1px;

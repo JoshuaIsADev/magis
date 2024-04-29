@@ -3,11 +3,7 @@ import Column from '../../ui/Column';
 import Row from '../../ui/Row';
 
 function ProductTableOperations() {
-  return (
-    <Row>
-      <FilterSort />
-    </Row>
-  );
+  return <FilterSort />;
 }
 
 export default ProductTableOperations;

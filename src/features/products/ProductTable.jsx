@@ -2,18 +2,24 @@ import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import Spinner from '../../ui/Spinner';
 import { useProducts } from './useProducts';
 import ProductCard from './ProductCard';
-import styled from 'styled-components';
 import Row from '../../ui/Row';
 import ProductCardManage from './ProductCardManage';
+import styled from 'styled-components';
 
 const StyledProductTable = styled.div`
+  grid-area: productTable;
   display: grid;
-  margin: 0 auto;
-  justify-content: space-between;
-  align-content: end;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10rem;
-  padding: 2rem 0;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1px;
+  background-color: var(--color-grey-200);
+  &::after {
+    content: '';
+    background-color: var(--color-grey-0);
+    grid-column: span 1;
+  }
+  border-bottom: var(--border);
+  border-right: var(--border);
+  border-left: var(--border);
 `;
 
 function ProductTable() {
@@ -113,7 +119,7 @@ function ProductTable() {
   // console.log(field, direction, modifier);
 
   return (
-    <Row>
+    <StyledProductTable>
       {pathIsManage ? (
         sortedProducts.map((product) => (
           <ProductCardManage key={product.id} role='row' product={product} />
@@ -125,7 +131,20 @@ function ProductTable() {
           ))}
         </>
       )}
-    </Row>
+    </StyledProductTable>
+    // <Row $variation='productCard'>
+    //   {pathIsManage ? (
+    //     sortedProducts.map((product) => (
+    //       <ProductCardManage key={product.id} role='row' product={product} />
+    //     ))
+    //   ) : (
+    //     <>
+    //       {sortedProducts.map((product) => (
+    //         <ProductCard key={product.id} product={product} />
+    //       ))}
+    //     </>
+    //   )}
+    // </Row>
   );
 }
 

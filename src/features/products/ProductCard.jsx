@@ -4,12 +4,31 @@ import { Link } from 'react-router-dom';
 import { useMainImage } from './useMainImage';
 import Heading from '../../ui/Heading';
 import Column from '../../ui/Column';
+import Img from '../../ui/Img';
+import StyledLink from '../../ui/StyledLink';
 
-const Img = styled.img`
-  max-width: 40rem;
-  aspect-ratio: 1;
-  object-fit: contain;
-  padding: 2rem 4rem;
+const StyledProductCard = styled.div`
+  grid-column: span 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  background-color: var(--color-grey-0);
+`;
+
+const ImageContainer = styled.div`
+  padding: var(--cell);
+`;
+
+const InfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--cell);
+`;
+
+const InfoRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 function ProductCard({ product }) {
@@ -26,18 +45,39 @@ function ProductCard({ product }) {
   }
 
   return (
-    <Column $variation='productCard'>
-      <Heading as='h3'>{name}</Heading>
-      <p>{designer}</p>
-      <p>${unitPrice}</p>
-      <Link
-        to={`/product/${productId}`}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <Img src={isHovered ? mainImage[1] : mainImage[0]} alt='product' />
-      </Link>
-    </Column>
+    <StyledProductCard>
+      <ImageContainer>
+        <StyledLink
+          $variation='productCard'
+          to={`/product/${productId}`}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <Img
+            $variation='productCard'
+            src={isHovered ? mainImage[1] : mainImage[0]}
+            alt='product'
+          />
+        </StyledLink>
+      </ImageContainer>
+      <InfoContainer>
+        <InfoRow>
+          <Heading as='h3'>{name}</Heading>
+          <p>${unitPrice}</p>
+        </InfoRow>
+        <InfoRow>
+          <p>{designer}</p>
+          <StyledLink
+            $variation='underline'
+            to={`/product/${productId}`}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            Shop
+          </StyledLink>
+        </InfoRow>
+      </InfoContainer>
+    </StyledProductCard>
   );
 }
 

@@ -10,13 +10,7 @@ const StyledHr = styled.hr`
 `;
 
 function Hr() {
-  return (
-    <Row>
-      <Column $variation='hr'>
-        <StyledHr />
-      </Column>
-    </Row>
-  );
+  return <StyledHr />;
 }
 
 export default Hr;

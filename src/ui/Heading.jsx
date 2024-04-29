@@ -2,9 +2,7 @@ import styled, { css } from 'styled-components';
 
 const variations = {
   hero: css`
-    color: var(--color-brand);
     text-align: justify;
-    letter-spacing: var(--letter-space);
   `,
   header: css`
     color: var(--color-brand);
@@ -16,7 +14,12 @@ const variations = {
     padding-top: 0.6rem;
   `,
   footer: css`
-    padding-bottom: 4rem;
+    padding-top: 6rem;
+    padding-bottom: 2rem;
+  `,
+  heading: css`
+    padding-top: 6rem;
+    padding-bottom: 2rem;
   `,
   filterSort: css`
     padding-bottom: 2rem;
@@ -27,8 +30,8 @@ const Heading = styled.h1`
   ${(props) =>
     props.as === 'h1' &&
     css`
-      font-size: 13rem;
-      font-weight: 200;
+      font-size: 14rem;
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: var(--letter-space);
       ${(props) => variations[props.$variation]}
@@ -37,7 +40,7 @@ const Heading = styled.h1`
     props.as === 'h2' &&
     css`
       font-size: 6rem;
-      font-weight: 200;
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: var(--letter-space);
       ${(props) => variations[props.$variation]}
@@ -46,7 +49,7 @@ const Heading = styled.h1`
     props.as === 'h3' &&
     css`
       font-size: 1rem;
-      font-weight: 500;
+      font-weight: 700;
       line-height: 1rem;
       letter-spacing: var(--letter-space);
       text-transform: uppercase;

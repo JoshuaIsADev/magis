@@ -1,6 +1,4 @@
 import { useForm } from 'react-hook-form';
-import styled from 'styled-components';
-import Form from '../../ui/Form';
 import Input from '../../ui/Input';
 import Label from '../../ui/Label';
 import { useUser } from '../authentication/useUser';
@@ -9,13 +7,9 @@ import { CartContext } from '../../context/cartContext';
 import Errors from '../../ui/Errors';
 import Spinner from '../../ui/Spinner';
 import { useCreateOrder } from './useCreateOrder';
-
-const FormRow = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  gap: 0.5rem;
-`;
+import Row from '../../ui/Row';
+import Column from '../../ui/Column';
+import Button from '../../ui/Button';
 
 function CreateOrderForm() {
   const { user, isAuthenticated } = useUser();
@@ -47,78 +41,97 @@ function CreateOrderForm() {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <FormRow>
-        <Label htmlFor='fullName'>Full name</Label>
-        <Input
-          type='text'
-          id='fullName'
-          autoComplete='name'
-          disabled={isPending}
-          {...register('fullName', { required: 'This field is required' })}
-        ></Input>
-        {errors?.fullName?.message && (
-          <Errors>{errors.fullName.message}</Errors>
-        )}
-      </FormRow>
-      <FormRow>
-        <Label htmlFor='email'>Email</Label>
-        <Input
-          type='text'
-          id='email'
-          autoComplete='email'
-          disabled={isPending}
-          defaultValue={user.email}
-          {...register('email', {
-            required: 'This field is required',
-            pattern: {
-              value: /\S+@\S+\.\S+/,
-              message: 'Please provide a valid email address',
-            },
-          })}
-        ></Input>
-        {errors?.email?.message && <Errors>{errors.email.message}</Errors>}
-      </FormRow>
-      <FormRow>
-        <Label htmlFor='streetNumber'>Street number</Label>
-        <Input
-          type='text'
-          id='streetNumber'
-          autoComplete='streetNumber'
-          disabled={isPending}
-          {...register('streetNumber', { required: 'This field is required' })}
-        ></Input>
-        {errors?.streetNumber?.message && (
-          <Errors>{errors.streetNumber.message}</Errors>
-        )}
-      </FormRow>
-      <FormRow>
-        <Label htmlFor='state'>State</Label>
-        <Input
-          type='text'
-          id='state'
-          autoComplete='state'
-          disabled={isPending}
-          {...register('state', { required: 'This field is required' })}
-        ></Input>
-        {errors?.state?.message && <Errors>{errors.state.message}</Errors>}
-      </FormRow>
-      <FormRow>
-        <Label htmlFor='zipCode'>Zip code</Label>
-        <Input
-          type='text'
-          id='zipCode'
-          autoComplete='zip'
-          disabled={isPending}
-          {...register('zipCode', { required: 'This field is required' })}
-        ></Input>
-        {errors?.zipCode?.message && <Errors>{errors.fullName.message}</Errors>}
-      </FormRow>
-      <FormRow>
-        {isPending && <Spinner />}
-        <button disabled={isPending}>Place order</button>
-      </FormRow>
-    </Form>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <>
+        <Column $variation='checkout'>
+          <Label htmlFor='fullName' isFirst={true}>
+            First name
+          </Label>
+          <Input
+            type='text'
+            id='fullName'
+            autoComplete='name'
+            disabled={isPending}
+            {...register('fullName', { required: 'This field is required' })}
+          ></Input>
+          {errors?.fullName?.message && (
+            <Errors>{errors.fullName.message}</Errors>
+          )}
+          <Label htmlFor='fullName'>Last name</Label>
+          <Input
+            type='text'
+            id='fullName'
+            autoComplete='name'
+            disabled={isPending}
+            {...register('fullName', { required: 'This field is required' })}
+          ></Input>
+          {errors?.fullName?.message && (
+            <Errors>{errors.fullName.message}</Errors>
+          )}
+
+          <Label htmlFor='email'>Email</Label>
+          <Input
+            type='text'
+            id='email'
+            autoComplete='email'
+            disabled={isPending}
+            defaultValue={user.email}
+            {...register('email', {
+              required: 'This field is required',
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: 'Please provide a valid email address',
+              },
+            })}
+          ></Input>
+          {errors?.email?.message && <Errors>{errors.email.message}</Errors>}
+
+          <Label htmlFor='streetNumber'>Street number</Label>
+          <Input
+            type='text'
+            id='streetNumber'
+            autoComplete='streetNumber'
+            disabled={isPending}
+            {...register('streetNumber', {
+              required: 'This field is required',
+            })}
+          ></Input>
+          {errors?.streetNumber?.message && (
+            <Errors>{errors.streetNumber.message}</Errors>
+          )}
+
+          <Label htmlFor='state'>State</Label>
+          <Input
+            type='text'
+            id='state'
+            autoComplete='state'
+            disabled={isPending}
+            {...register('state', { required: 'This field is required' })}
+          ></Input>
+          {errors?.state?.message && <Errors>{errors.state.message}</Errors>}
+
+          <Label htmlFor='zipCode'>Zip code</Label>
+          <Input
+            type='text'
+            id='zipCode'
+            autoComplete='zip'
+            disabled={isPending}
+            {...register('zipCode', { required: 'This field is required' })}
+          ></Input>
+          {errors?.zipCode?.message && (
+            <Errors>{errors.fullName.message}</Errors>
+          )}
+
+          {isPending && <Spinner />}
+        </Column>
+      </>
+
+      <Column $variation='buttons'>
+        <Button $variation='primary' disabled={isPending}>
+          Place order
+        </Button>
+      </Column>
+    </form>
   );
 }
 

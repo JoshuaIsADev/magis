@@ -6,6 +6,9 @@ const variations = {
     align-items: left;
     background-color: white;
   `,
+  trash: css`
+    padding-top: 0.3rem;
+  `,
   menu: css`
     display: flex;
     align-items: left;
@@ -45,6 +48,7 @@ const Button = styled.button`
   background-color: var(--color-grey-0);
   border: none;
   text-align: left;
+  width: fit-content;
   cursor: pointer;
   &:hover,
   &.selected {

@@ -4,13 +4,19 @@ import Hr from './Hr';
 import Row from './Row';
 import Column from './Column';
 
+const StyledSectionHeading = styled.div`
+  grid-column: span 2;
+  padding: var(--cell);
+  border-left: var(--border);
+  border-right: var(--border);
+  border-bottom: var(--border);
+`;
+
 function SectionHeading({ text }) {
   return (
-    <Row $variation='sectionHeading'>
-      <Column $variation='sectionHeading'>
-        <Heading as='h3'>{text}</Heading>
-      </Column>
-    </Row>
+    <StyledSectionHeading>
+      <Heading as='h3'>{text}</Heading>
+    </StyledSectionHeading>
   );
 }
 

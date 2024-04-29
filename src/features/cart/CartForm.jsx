@@ -3,18 +3,52 @@ import Input from '../../ui/Input';
 import { VscRemove, VscAdd, VscTrash } from 'react-icons/vsc';
 import styled from 'styled-components';
 import { CartContext } from '../../context/cartContext';
-import Column from '../../ui/Column';
-import Row from '../../ui/Row';
 import Button from '../../ui/Button';
+import Heading from '../../ui/Heading';
+
+const StyledCartForm = styled.form`
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  border-bottom: var(--border);
+`;
+
+const ImageContainer = styled.div`
+  grid-column: 1 / span 1;
+  padding: var(--cell);
+`;
+
+const InfoContainer = styled.div`
+  grid-column: 2 / span 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--cell);
+`;
+
+const InfoRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
 
 const OrderButtons = styled.div`
   display: flex;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 1rem;
+  height: auto;
+  justify-content: flex-end;
 `;
 const Img = styled.img`
   width: 12rem;
   aspect-ratio: 1;
   object-fit: contain;
+`;
+
+const ButtonsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 `;
 
 function CartForm({
@@ -82,51 +116,52 @@ function CartForm({
   }
 
   return (
-    <form onSubmit={(e) => handleSubmit(e, combinedCartItem)}>
-      <Row $variation='order'>
-        <Column $variation='order'>
-          {<Img src={mainImage} alt='product' />}
-        </Column>
-        <Column $variation='order'>
-          <p>{name}</p>
-        </Column>
-        <Column $variation='order'>
-          <p>{color}</p>
-        </Column>
-        <Column $variation='order'>
+    <StyledCartForm onSubmit={(e) => handleSubmit(e, combinedCartItem)}>
+      <ImageContainer>{<Img src={mainImage} alt='product' />}</ImageContainer>
+      <InfoContainer>
+        <InfoRow>
+          <Heading as='h3'>{name}</Heading>
+
           <p>${unitPrice}</p>
-        </Column>
-        <Column $variation='orderButtons'>
-          <OrderButtons>
+        </InfoRow>
+        <InfoRow>
+          <p>{color}</p>
+          <ButtonsContainer>
+            <OrderButtons>
+              <Button
+                type='button'
+                onClick={() => handleSubtract(selectedProductId)}
+              >
+                <VscRemove />
+              </Button>
+              <Input
+                $variation='order'
+                type='number'
+                name='quantity'
+                min='0'
+                max='100'
+                step='1'
+                value={quantities[selectedProductId]}
+                onChange={(e) => handleQuantityChange(e, selectedProductId)}
+              />
+              <Button
+                type='button'
+                onClick={() => handleAdd(selectedProductId)}
+              >
+                <VscAdd />
+              </Button>
+            </OrderButtons>
+            <Button type='submit'>Update</Button>
             <Button
-              type='button'
-              onClick={() => handleSubtract(selectedProductId)}
+              $variation='trash'
+              onClick={(e) => handleDelete(e, selectedProductId)}
             >
-              <VscRemove />
+              <VscTrash />
             </Button>
-            <Input
-              $variation='order'
-              type='number'
-              name='quantity'
-              min='0'
-              max='100'
-              step='1'
-              value={quantities[selectedProductId]}
-              onChange={(e) => handleQuantityChange(e, selectedProductId)}
-            />
-            <Button type='button' onClick={() => handleAdd(selectedProductId)}>
-              <VscAdd />
-            </Button>
-          </OrderButtons>
-          <Button type='submit'>Update cart</Button>
-        </Column>
-        <Column $variation='order'>
-          <Button onClick={(e) => handleDelete(e, selectedProductId)}>
-            <VscTrash />
-          </Button>
-        </Column>
-      </Row>
-    </form>
+          </ButtonsContainer>
+        </InfoRow>
+      </InfoContainer>
+    </StyledCartForm>
   );
 }
 

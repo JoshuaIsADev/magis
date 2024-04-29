@@ -3,11 +3,25 @@ import Label from '../../ui/Label';
 import Input from '../../ui/Input';
 import { useSignIn } from './useSignIn';
 import Spinner from '../../ui/Spinner';
-import Row from '../../ui/Row';
-import Column from '../../ui/Column';
-import Heading from '../../ui/Heading';
 import Button from '../../ui/Button';
 import StyledLink from '../../ui/StyledLink';
+import styled from 'styled-components';
+
+const StyledSignInForm = styled.form`
+  grid-area: form;
+  display: flex;
+  flex-direction: column;
+  border-left: var(--border);
+  padding: var(--cell);
+  min-height: 80vh;
+`;
+
+const Container = styled.div`
+  grid-area: container;
+  border-left: var(--border);
+  border-right: var(--border);
+  padding: var(--cell);
+`;
 
 function SignInForm() {
   const [email, setEmail] = useState('');
@@ -29,48 +43,41 @@ function SignInForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Row>
-        <Column $variation='signInUpForm'>
-          <Heading as='h3' $variation='footer'>
-            Not yet a member?
-            <StyledLink $variation='primaryHeading' to='/signup'>
-              Sign Up!
-            </StyledLink>
-          </Heading>
-          <Label htmlFor='email' isFirst={true}>
-            Email
-          </Label>
-          <Input
-            type='email'
-            id='email'
-            autoComplete='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            disabled={isPending}
-          ></Input>
+    <>
+      <StyledSignInForm onSubmit={handleSubmit}>
+        <Label htmlFor='email'>Email</Label>
+        <Input
+          type='email'
+          id='email'
+          autoComplete='email'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          disabled={isPending}
+        ></Input>
 
-          <Label htmlFor='password'>Password</Label>
-          <Input
-            type='password'
-            id='password'
-            autoComplete='password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            disabled={isPending}
-          ></Input>
-        </Column>
-      </Row>
-
-      <Row $variation='formSubmitButtons'>
-        <Column $variation='formSubmitButtons'>
-          {isPending && <Spinner />}
-          <Button $variation='primary' disabled={isPending}>
-            Sign in
-          </Button>
-        </Column>
-      </Row>
-    </form>
+        <Label htmlFor='password'>Password</Label>
+        <Input
+          type='password'
+          id='password'
+          autoComplete='password'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          disabled={isPending}
+        ></Input>
+        {isPending && <Spinner />}
+        <Button $variation='primary' disabled={isPending}>
+          Sign in
+        </Button>
+      </StyledSignInForm>
+      <Container>
+        <p>
+          Not yet a member?
+          <StyledLink $variation='primaryHeading' to='/signup'>
+            Sign up here
+          </StyledLink>
+        </p>
+      </Container>
+    </>
   );
 }
 

@@ -23,6 +23,9 @@ const GlobalStyles = createGlobalStyle`
   --background-color: #FFFFFF;
   --background-color-grey: #D9D9D9;
 
+  --cell: 2rem;
+  --border: 1px solid var(--color-grey-200);
+  --top: 6rem;
   --border-radius-sm: .5rem;
   --border-radius-md: 1rem;
   --border-radius-lg: 2rem;
@@ -32,6 +35,7 @@ const GlobalStyles = createGlobalStyle`
   --width-text-max: 700px; 
   --width-main: 1200px;
 
+  --padding-hero: 6rem;
   --padding-s: 2rem;
   --padding-m: 4rem;
   --padding-l: 6rem;
@@ -69,6 +73,7 @@ html {
 }
 
 body {
+
   font-family: var(--font);
   font-optical-sizing: auto;
   overflow-x: hidden;
@@ -96,6 +101,20 @@ p.small {
   line-height: 1.25rem;
   letter-spacing: .05rem;
   font-weight: 500;
+}
+p.medium {
+  font-size: 2rem;
+  line-height: 2.5rem;
+  letter-spacing: .05rem;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+p.large {
+  font-size: 3rem;
+  line-height: 3.5rem;
+  letter-spacing: .05rem;
+  font-weight: 400;
+  text-transform: uppercase;
 }
 
 li {
