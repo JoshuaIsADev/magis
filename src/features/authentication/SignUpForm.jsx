@@ -24,6 +24,12 @@ const Container = styled.div`
   padding: var(--cell);
 `;
 
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 3rem;
+`;
+
 function SignUpForm() {
   const { signUp, isPending } = useSignUp();
   const { register, formState, getValues, handleSubmit, reset } = useForm();
@@ -36,62 +42,70 @@ function SignUpForm() {
   return (
     <>
       <StyledSignUpForm onSubmit={handleSubmit(onSubmit)}>
-        <Label htmlFor='fullName'>Full name</Label>
-        <Input
-          type='text'
-          id='fullName'
-          autoComplete='name'
-          disabled={isPending}
-          {...register('fullName', { required: 'This field is required' })}
-        ></Input>
-        {errors?.fullName?.message && (
-          <Errors>{errors.fullName.message}</Errors>
-        )}
-        <Label htmlFor='email'>Email</Label>
-        <Input
-          type='email'
-          id='email'
-          autoComplete='email'
-          disabled={isPending}
-          {...register('email', {
-            required: 'This field is required',
-            pattern: {
-              value: /\S+@\S+\.\S+/,
-              message: 'Please provide a valid email address',
-            },
-          })}
-        ></Input>
-        {errors?.email?.message && <Errors>{errors.email.message}</Errors>}
-        <Label htmlFor='password'>Password (min 8 characters)</Label>
-        <Input
-          type='password'
-          id='password'
-          disabled={isPending}
-          {...register('password', {
-            required: 'This field is required',
-            minLength: {
-              value: 8,
-              message: 'Password needs a minimum 8 characters',
-            },
-          })}
-        ></Input>
-        {errors?.password?.message && (
-          <Errors>{errors.password.message}</Errors>
-        )}
-        <Label htmlFor='passwordConfirm'>Confirm password</Label>
-        <Input
-          type='password'
-          id='passwordConfirm'
-          disabled={isPending}
-          {...register('passwordConfirm', {
-            required: 'This field is required',
-            validate: (value) =>
-              value === getValues().password || 'Passwords needs to match',
-          })}
-        ></Input>
-        {errors?.passwordConfirm?.message && (
-          <Errors>{errors.passwordConfirm.message}</Errors>
-        )}
+        <InputContainer>
+          <Label htmlFor='fullName'>Full name</Label>
+          <Input
+            type='text'
+            id='fullName'
+            autoComplete='name'
+            disabled={isPending}
+            {...register('fullName', { required: 'This field is required' })}
+          ></Input>
+          {errors?.fullName?.message && (
+            <Errors>{errors.fullName.message}</Errors>
+          )}
+        </InputContainer>
+        <InputContainer>
+          <Label htmlFor='email'>Email</Label>
+          <Input
+            type='email'
+            id='email'
+            autoComplete='email'
+            disabled={isPending}
+            {...register('email', {
+              required: 'This field is required',
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: 'Please provide a valid email address',
+              },
+            })}
+          ></Input>
+          {errors?.email?.message && <Errors>{errors.email.message}</Errors>}
+        </InputContainer>
+        <InputContainer>
+          <Label htmlFor='password'>Password (min 8 characters)</Label>
+          <Input
+            type='password'
+            id='password'
+            disabled={isPending}
+            {...register('password', {
+              required: 'This field is required',
+              minLength: {
+                value: 8,
+                message: 'Password needs a minimum 8 characters',
+              },
+            })}
+          ></Input>
+          {errors?.password?.message && (
+            <Errors>{errors.password.message}</Errors>
+          )}
+        </InputContainer>
+        <InputContainer>
+          <Label htmlFor='passwordConfirm'>Confirm password</Label>
+          <Input
+            type='password'
+            id='passwordConfirm'
+            disabled={isPending}
+            {...register('passwordConfirm', {
+              required: 'This field is required',
+              validate: (value) =>
+                value === getValues().password || 'Passwords needs to match',
+            })}
+          ></Input>
+          {errors?.passwordConfirm?.message && (
+            <Errors>{errors.passwordConfirm.message}</Errors>
+          )}
+        </InputContainer>
         {isPending && <Spinner />}
         {/* <Button type='reset' disabled={isPending}>
           Cancel

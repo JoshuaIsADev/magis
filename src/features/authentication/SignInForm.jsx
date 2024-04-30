@@ -23,6 +23,12 @@ const Container = styled.div`
   padding: var(--cell);
 `;
 
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 3rem;
+`;
+
 function SignInForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -45,25 +51,29 @@ function SignInForm() {
   return (
     <>
       <StyledSignInForm onSubmit={handleSubmit}>
-        <Label htmlFor='email'>Email</Label>
-        <Input
-          type='email'
-          id='email'
-          autoComplete='email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          disabled={isPending}
-        ></Input>
+        <InputContainer>
+          <Label htmlFor='email'>Email</Label>
+          <Input
+            type='email'
+            id='email'
+            autoComplete='email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={isPending}
+          ></Input>
+        </InputContainer>
+        <InputContainer>
+          <Label htmlFor='password'>Password</Label>
+          <Input
+            type='password'
+            id='password'
+            autoComplete='password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            disabled={isPending}
+          ></Input>
+        </InputContainer>
 
-        <Label htmlFor='password'>Password</Label>
-        <Input
-          type='password'
-          id='password'
-          autoComplete='password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          disabled={isPending}
-        ></Input>
         {isPending && <Spinner />}
         <Button $variation='primary' disabled={isPending}>
           Sign in

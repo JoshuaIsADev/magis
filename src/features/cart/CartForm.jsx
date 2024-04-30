@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { CartContext } from '../../context/cartContext';
 import Button from '../../ui/Button';
 import Heading from '../../ui/Heading';
+import Img from '../../ui/Img';
 
 const StyledCartForm = styled.form`
   display: grid;
@@ -38,11 +39,6 @@ const OrderButtons = styled.div`
   gap: 1rem;
   height: auto;
   justify-content: flex-end;
-`;
-const Img = styled.img`
-  width: 12rem;
-  aspect-ratio: 1;
-  object-fit: contain;
 `;
 
 const ButtonsContainer = styled.div`
@@ -117,7 +113,9 @@ function CartForm({
 
   return (
     <StyledCartForm onSubmit={(e) => handleSubmit(e, combinedCartItem)}>
-      <ImageContainer>{<Img src={mainImage} alt='product' />}</ImageContainer>
+      <ImageContainer>
+        {<Img $variation='orderCard' src={mainImage} alt='product' />}
+      </ImageContainer>
       <InfoContainer>
         <InfoRow>
           <Heading as='h3'>{name}</Heading>

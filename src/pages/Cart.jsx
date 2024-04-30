@@ -30,11 +30,11 @@ const HeadingContainer = styled.div`
   border-left: var(--border);
   border-bottom: var(--border);
 `;
+
 const SummaryHeadingContainer = styled.div`
   grid-area: summaryHeading;
   padding: var(--cell);
   border-left: var(--border);
-  border-right: var(--border);
   border-bottom: var(--border);
 `;
 

@@ -57,11 +57,9 @@ function CreateProductForm({ productToEdit = {} }) {
   return (
     <form onSubmit={handleSubmit(onSubmit, onError)}>
       <Row>
-        {productToEdit ? <Img src={mainImage} alt='product' /> : ''}
+        {productToEdit.image ? <Img src={mainImage} alt='product' /> : ''}
         <Column $variation='createEditProduct'>
-          <Label htmlFor='name' isFirst={true}>
-            Product name
-          </Label>
+          <Label htmlFor='name'>Product name</Label>
           <Input
             type='text'
             id='name'

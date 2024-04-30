@@ -16,7 +16,7 @@ const StyledHeader = styled.header`
   border-bottom: var(--border);
   padding: 2rem;
   background-color: var(--color-grey-0);
-  z-index: 100;
+  z-index: 15;
 `;
 
 const HeaderLogo = styled.nav`

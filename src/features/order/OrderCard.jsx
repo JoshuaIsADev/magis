@@ -17,6 +17,7 @@ const ItemsInfo = styled.div`
 `;
 
 function OrderCard({ orderItem }) {
+  console.log(orderItem);
   return (
     <ItemsContainer key={orderItem.selectedProductId}>
       <Img $variation='orderCard' src={orderItem.mainImage} alt='product' />

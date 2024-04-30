@@ -10,6 +10,24 @@ import { useCreateOrder } from './useCreateOrder';
 import Row from '../../ui/Row';
 import Column from '../../ui/Column';
 import Button from '../../ui/Button';
+import styled from 'styled-components';
+
+const StyledCreateOrderForm = styled.form`
+  grid-area: form;
+  display: flex;
+  flex-direction: column;
+  border-left: var(--border);
+  padding: var(--cell);
+  min-height: 80vh;
+  padding-bottom: 10rem;
+  height: 100%;
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 3rem;
+`;
 
 function CreateOrderForm() {
   const { user, isAuthenticated } = useUser();
@@ -41,12 +59,10 @@ function CreateOrderForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <StyledCreateOrderForm onSubmit={handleSubmit(onSubmit)}>
       <>
-        <Column $variation='checkout'>
-          <Label htmlFor='fullName' isFirst={true}>
-            First name
-          </Label>
+        <InputContainer>
+          <Label htmlFor='fullName'>Full name</Label>
           <Input
             type='text'
             id='fullName'
@@ -57,18 +73,8 @@ function CreateOrderForm() {
           {errors?.fullName?.message && (
             <Errors>{errors.fullName.message}</Errors>
           )}
-          <Label htmlFor='fullName'>Last name</Label>
-          <Input
-            type='text'
-            id='fullName'
-            autoComplete='name'
-            disabled={isPending}
-            {...register('fullName', { required: 'This field is required' })}
-          ></Input>
-          {errors?.fullName?.message && (
-            <Errors>{errors.fullName.message}</Errors>
-          )}
-
+        </InputContainer>
+        <InputContainer>
           <Label htmlFor='email'>Email</Label>
           <Input
             type='text'
@@ -85,7 +91,8 @@ function CreateOrderForm() {
             })}
           ></Input>
           {errors?.email?.message && <Errors>{errors.email.message}</Errors>}
-
+        </InputContainer>
+        <InputContainer>
           <Label htmlFor='streetNumber'>Street number</Label>
           <Input
             type='text'
@@ -99,7 +106,8 @@ function CreateOrderForm() {
           {errors?.streetNumber?.message && (
             <Errors>{errors.streetNumber.message}</Errors>
           )}
-
+        </InputContainer>
+        <InputContainer>
           <Label htmlFor='state'>State</Label>
           <Input
             type='text'
@@ -109,7 +117,8 @@ function CreateOrderForm() {
             {...register('state', { required: 'This field is required' })}
           ></Input>
           {errors?.state?.message && <Errors>{errors.state.message}</Errors>}
-
+        </InputContainer>
+        <InputContainer>
           <Label htmlFor='zipCode'>Zip code</Label>
           <Input
             type='text'
@@ -121,17 +130,14 @@ function CreateOrderForm() {
           {errors?.zipCode?.message && (
             <Errors>{errors.fullName.message}</Errors>
           )}
-
-          {isPending && <Spinner />}
-        </Column>
+        </InputContainer>
+        {isPending && <Spinner />}
       </>
 
-      <Column $variation='buttons'>
-        <Button $variation='primary' disabled={isPending}>
-          Place order
-        </Button>
-      </Column>
-    </form>
+      <Button $variation='primary' disabled={isPending}>
+        Place order
+      </Button>
+    </StyledCreateOrderForm>
   );
 }
 

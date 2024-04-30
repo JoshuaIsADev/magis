@@ -14,6 +14,7 @@ const MadeContainer = styled.article`
   flex-direction: column;
   padding: var(--cell);
   gap: 2rem;
+  border-right: var(--border);
 `;
 const InfoContainer = styled.div`
   grid-area: info;
@@ -22,7 +23,7 @@ const InfoContainer = styled.div`
   justify-content: flex-end;
   gap: 2rem;
   padding: var(--cell);
-  border-left: var(--border);
+  border-right: var(--border);
 `;
 
 function Footer() {

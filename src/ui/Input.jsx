@@ -18,7 +18,6 @@ const Input = styled.input`
   &[type='radio'] {
     margin-right: 1rem;
   }
-  margin-bottom: 2rem;
   ${(props) => variations[props.$variation]}
 `;
 

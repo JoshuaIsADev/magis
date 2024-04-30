@@ -108,11 +108,11 @@ function FilterSort() {
           Filter / Sort
         </Button>
         <VscDebugBreakpointFunction
-          transform={showDropdown && 'rotate(180)'}
+          transform={showDropdown ? 'rotate(180)' : 'rotate(0)'}
           className={showDropdown ? 'downArrow' : 'arrow'}
         />
       </MenuButton>
-      <FilterSortDropdown className={showDropdown ? 'show' : ''}>
+      <FilterSortDropdown className={showDropdown ? 'show' : undefined}>
         <FilterSortList>
           <Heading as='h3' $variation='filterSort'>
             Category

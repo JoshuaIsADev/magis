@@ -1,6 +1,14 @@
 import styled from 'styled-components';
+import { VscChromeClose } from 'react-icons/vsc';
+import Button from './Button';
+import Heading from './Heading';
 
 const StyledModal = styled.div`
+  display: grid;
+  grid-template-columns: reapeat(2, 1fr);
+  grid-template-areas:
+    'heading closeButton'
+    'form form';
   top: 0;
   z-index: 20;
   background-color: var(--color-grey-0);
@@ -10,7 +18,7 @@ const StyledModal = styled.div`
   margin: auto;
   overflow-x: hidden;
   overflow-y: auto;
-  padding-bottom: 4rem;
+  border: var(--border);
 `;
 
 const ModalContainer = styled.div`
@@ -35,10 +43,38 @@ const ModalBg = styled.div`
   height: 100%;
 `;
 
-function Modal({ children }) {
+const HeadingContainer = styled.div`
+  grid-area: heading;
+  padding: var(--cell);
+  border-bottom: var(--border);
+`;
+
+const FormContainer = styled.div`
+  grid-area: form;
+`;
+
+const CloseButtonContainer = styled.div`
+  grid-area: closeButton;
+  padding: var(--cell);
+  border-bottom: var(--border);
+  display: flex;
+  justify-content: flex-end;
+`;
+
+function Modal({ children, onClose, heading }) {
   return (
     <ModalContainer>
-      <StyledModal>{children}</StyledModal>
+      <StyledModal>
+        <HeadingContainer>
+          <Heading as='h3'>{heading}</Heading>
+        </HeadingContainer>
+        <CloseButtonContainer>
+          <Button onClick={onClose}>
+            <VscChromeClose />
+          </Button>
+        </CloseButtonContainer>
+        <FormContainer>{children}</FormContainer>
+      </StyledModal>
       <ModalBg />;
     </ModalContainer>
   );

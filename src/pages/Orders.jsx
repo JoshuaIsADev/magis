@@ -12,6 +12,7 @@ const StyledOrders = styled.section`
   grid-template-columns: repeat(1, 1fr);
   grid-template-areas: 'heading' 'orders';
   padding-top: var(--top);
+  /* border-bottom: var(--border); */
 `;
 
 const HeadingContainer = styled.div`
@@ -26,6 +27,7 @@ const OrderTable = styled.div`
   grid-area: orders;
   border-left: var(--border);
   border-right: var(--border);
+
   grid-gap: 1px;
   background-color: var(--color-grey-200);
   &::after {
@@ -39,6 +41,7 @@ const OrderContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas: 'info item';
+  border-bottom: var(--border);
 `;
 
 const OrderInfoContainer = styled.div`

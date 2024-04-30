@@ -46,31 +46,6 @@ const InfoRow = styled.div`
   padding-bottom: var(--pading-m);
 `;
 
-const ButtonContainer = styled.div`
-  display: flex;
-  gap: 1rem;
-`;
-
-const Button = styled.button`
-  width: 3rem;
-  height: 3rem;
-  border-radius: 3rem;
-  border: none;
-  cursor: pointer;
-  outline: ${(props) =>
-    props.$active ? '1px solid var(--color-grey-300)' : 'none'};
-  outline-offset: 0.4rem;
-  &:hover {
-    outline: 1px solid var(--color-grey-300);
-    outline-offset: 0.4rem;
-  }
-`;
-
-const QuantityContainer = styled.div`
-  display: flex;
-  gap: 1rem;
-`;
-
 function ProductPage() {
   const [color, setColor] = useState('');
   const [quantity, setQuantity] = useState(1);

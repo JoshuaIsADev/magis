@@ -26,9 +26,11 @@ export function useMainImage(images) {
 
 async function getMainImage(images) {
   let mainImageArray = [];
-  for (const image of images) {
-    if (image.includes('main')) {
-      mainImageArray.push(image);
+  if (images !== undefined) {
+    for (const image of images) {
+      if (image.includes('main')) {
+        mainImageArray.push(image);
+      }
     }
   }
   return mainImageArray;
