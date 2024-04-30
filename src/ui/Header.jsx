@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
 import StyledLink from './StyledLink';
 import { UserContext } from '../context/userContext';

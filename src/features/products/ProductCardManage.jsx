@@ -3,14 +3,9 @@ import styled from 'styled-components';
 import CreateProductForm from './CreateProductForm';
 import { useDeleteProduct } from './UseDeleteProduct';
 import { useMainImage } from './useMainImage';
-import { VscChromeClose } from 'react-icons/vsc';
 import Heading from '../../ui/Heading';
 import Button from '../../ui/Button';
 import Modal from '../../ui/Modal';
-import Section from '../../ui/Section';
-import Row from '../../ui/Row';
-import SectionHeading from '../../ui/SectionHeading';
-import Hr from '../../ui/Hr';
 import Img from '../../ui/Img';
 
 const StyledProductCard = styled.div`
@@ -59,6 +54,10 @@ function ProductCardManage({ product }) {
 
   const mainImage = useMainImage(image)[0];
 
+  function toggleModal() {
+    setShowForm((show) => !show);
+  }
+
   return (
     <StyledProductCard>
       <ImageContainer>
@@ -94,16 +93,8 @@ function ProductCardManage({ product }) {
       </InfoContainer>
 
       {showForm && (
-        <Modal>
-          <Section>
-            <Row>
-              <Button onClick={() => setShowForm((show) => !show)}>
-                <VscChromeClose />
-              </Button>
-            </Row>
-            <SectionHeading text='Edit product' />
-            <CreateProductForm productToEdit={product} />
-          </Section>
+        <Modal onClose={toggleModal} heading='Edit product'>
+          <CreateProductForm productToEdit={product} />
         </Modal>
       )}
     </StyledProductCard>

@@ -6,8 +6,6 @@ import StyledLink from '../ui/StyledLink';
 import CartForm from '../features/cart/CartForm';
 import useProductFinder from '../features/products/useProductFinder';
 import { constructCartItem } from '../utils/constructCartItem';
-import Hr from '../ui/Hr';
-import Column from '../ui/Column';
 import Heading from '../ui/Heading';
 import Button from '../ui/Button';
 import styled from 'styled-components';

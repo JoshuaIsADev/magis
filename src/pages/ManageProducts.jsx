@@ -1,20 +1,11 @@
 import { useState } from 'react';
 import ProductTable from '../features/products/ProductTable';
 import CreateProductForm from '../features/products/CreateProductForm';
-import Row from '../ui/Row';
-import ProductTableOperations from '../features/products/ProductTableOperations';
-import SectionHeading from '../ui/SectionHeading';
-import Section from '../ui/Section';
-import Hr from '../ui/Hr';
 import Button from '../ui/Button';
 import Modal from '../ui/Modal';
 import styled from 'styled-components';
 import FilterSort from '../ui/FilterSort';
 import Heading from '../ui/Heading';
-// import { useMutation, useQuery } from '@tanstack/react-query';
-// import Spinner from '../ui/Spinner';
-// import { deleteProduct, getProducts } from '../services/apiProducts';
-// import { useSearchParams } from 'react-router-dom';
 
 const StyledManageProducts = styled.section`
   display: grid;
@@ -43,9 +34,9 @@ const AddButtonContainer = styled.div`
 function ManageProducts() {
   const [showForm, setShowForm] = useState(false);
 
-  const toggleModal = () => {
+  function toggleModal() {
     setShowForm((show) => !show);
-  };
+  }
 
   return (
     <StyledManageProducts>
@@ -53,7 +44,6 @@ function ManageProducts() {
         <Heading as='h3'>Manage products</Heading>
       </HeadingContainer>
       <FilterSort />
-      {/* <ProductTableOperations /> */}
       <ProductTable />
       <AddButtonContainer>
         <Button

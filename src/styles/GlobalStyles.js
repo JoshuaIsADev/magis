@@ -83,6 +83,7 @@ body {
 
 a {
   text-decoration: none;
+  letter-spacing: var(--letter-space);
 }
 
 p {

@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { useMainImage } from './useMainImage';
 import Heading from '../../ui/Heading';
-import Column from '../../ui/Column';
 import Img from '../../ui/Img';
 import StyledLink from '../../ui/StyledLink';
 

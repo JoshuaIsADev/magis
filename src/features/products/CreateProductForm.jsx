@@ -12,12 +12,30 @@ import Column from '../../ui/Column';
 import Button from '../../ui/Button';
 import { useMainImage } from './useMainImage';
 import styled from 'styled-components';
+import Img from '../../ui/Img';
 
-const Img = styled.img`
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: contain;
-  padding: 0;
+const StyledCreateProductForm = styled.form`
+  grid-column: span 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  background-color: var(--color-grey-0);
+  padding: var(--cell);
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 3rem;
+  gap: 0.5rem;
+`;
+
+const Li = styled.li`
+  display: flex;
+  align-items: center;
+`;
+const Ul = styled.ul`
+  display: flex;
+  gap: 2rem;
 `;
 
 function CreateProductForm({ productToEdit = {} }) {
@@ -55,23 +73,27 @@ function CreateProductForm({ productToEdit = {} }) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit, onError)}>
-      <Row>
-        {productToEdit.image ? <Img src={mainImage} alt='product' /> : ''}
-        <Column $variation='createEditProduct'>
-          <Label htmlFor='name'>Product name</Label>
-          <Input
-            type='text'
-            id='name'
-            disabled={isWorking}
-            {...register('name', { required: 'This field is required' })}
-          />
-          {errors?.name?.message && <Errors>{errors.name.message}</Errors>}
-        </Column>
-      </Row>
-      <Row>
-        <Column $variation='createEditProduct'>
-          <li>
+    <StyledCreateProductForm onSubmit={handleSubmit(onSubmit, onError)}>
+      <InputContainer>
+        {productToEdit.image ? (
+          <Img src={mainImage} $variation='productCard' alt='product' />
+        ) : (
+          ''
+        )}
+
+        <Label htmlFor='name'>Product name</Label>
+        <Input
+          type='text'
+          id='name'
+          disabled={isWorking}
+          {...register('name', { required: 'This field is required' })}
+        />
+        {errors?.name?.message && <Errors>{errors.name.message}</Errors>}
+      </InputContainer>
+      <InputContainer>
+        <Label htmlFor='category'>Category</Label>
+        <Ul>
+          <Li>
             <Input
               type='radio'
               name='category'
@@ -82,8 +104,8 @@ function CreateProductForm({ productToEdit = {} }) {
             />
 
             <Label htmlFor='chair'>Chair</Label>
-          </li>
-          <li>
+          </Li>
+          <Li>
             <Input
               type='radio'
               name='category'
@@ -93,8 +115,8 @@ function CreateProductForm({ productToEdit = {} }) {
               {...register('category')}
             />
             <Label htmlFor='table'>Table</Label>
-          </li>
-          <li>
+          </Li>
+          <Li>
             <Input
               type='radio'
               name='category'
@@ -104,161 +126,140 @@ function CreateProductForm({ productToEdit = {} }) {
               {...register('category')}
             />
             <Label htmlFor='sofa'>Sofa</Label>
-          </li>
-        </Column>
-      </Row>
-      <Row>
-        <Column $variation='createEditProduct'>
-          <Label htmlFor='tags'>Tags</Label>
-          <Input
-            type='text'
-            id='tags'
-            defaultValue='{"tag1", "tag2"}'
-            placeholder='{"tag1", "tag2"}'
-            disabled={isWorking}
-            {...register('tags')}
-          />
-        </Column>
-      </Row>
-      <Row>
-        <Column $variation='createEditProduct'>
-          <Label htmlFor='unitPrice'>Unit Price</Label>
-          <Input
-            type='number'
-            id='unitPrice'
-            disabled={isWorking}
-            {...register('unitPrice', { required: 'This field is required' })}
-          />
-          {errors?.unitPrice?.message && (
-            <Errors>{errors.unitPrice.message}</Errors>
-          )}
-        </Column>
-      </Row>
-      <Row>
-        <Column $variation='createEditProduct'>
-          <Label htmlFor='inStock'>In stock</Label>
-          <Input
-            type='number'
-            id='inStock'
-            disabled={isWorking}
-            {...register('inStock', { required: 'This field is required' })}
-          />
-          {errors?.unitPrice?.message && (
-            <Errors>{errors.unitPrice.message}</Errors>
-          )}
-        </Column>
-      </Row>
-      <Row>
-        <Column $variation='createEditProduct'>
-          <Label htmlFor='designer'>Designer</Label>
-          <Input
-            type='text'
-            id='designer'
-            disabled={isWorking}
-            {...register('designer')}
-          />
-        </Column>
-      </Row>
-      <Row>
-        <Column $variation='createEditProduct'>
-          <Label htmlFor='material'>Material</Label>
-          <TextArea
-            id='material'
-            name='material'
-            rows='6'
-            disabled={isWorking}
-            {...register('material', { required: 'This field is required' })}
-          />
-          {errors?.material?.message && (
-            <Errors>{errors.material.message}</Errors>
-          )}
-        </Column>
-      </Row>
-      <Row>
-        <Column $variation='createEditProduct'>
-          <Label htmlFor='description1'>Description Paragraph 1</Label>
-          <TextArea
-            id='description1'
-            name='description1'
-            rows='6'
-            disabled={isWorking}
-            {...register('description1', {
-              required: 'This field is required',
-            })}
-          />
-          {errors?.description1?.message && (
-            <Errors>{errors.description1.message}</Errors>
-          )}
-        </Column>
-      </Row>
-      <Row>
-        <Column $variation='createEditProduct'>
-          <Label htmlFor='description2'>Description Paragraph 2</Label>
-          <TextArea
-            id='description2'
-            name='description2'
-            rows='6'
-            disabled={isWorking}
-            {...register('description2')}
-          />
-        </Column>
-      </Row>
-      <Row>
-        <Column $variation='createEditProduct'>
-          <Label htmlFor='measurements'>Measurements</Label>
-          <TextArea
-            id='measurements'
-            name='measurements'
-            rows='6'
-            disabled={isWorking}
-            defaultValue='{ "seating height": 46, "total height": 84.5, "width": 55, "depth": 54 }'
-            placeholder='{ "seating height": 46, "total height": 84.5, "width": 55, "depth": 54 }'
-            {...register('measurements')}
-          />
-        </Column>
-      </Row>
-      <Row>
-        <Column $variation='createEditProduct'>
-          <Label htmlFor='measurements'>Color</Label>
-          <TextArea
-            id='color'
-            name='color'
-            rows='6'
-            disabled={isWorking}
-            defaultValue='{ "white": "F6F6F6", "black": "292929", "stone": "AA9A8D", "orange": "F06500" }'
-            placeholder='{ "white": "F6F6F6", "black": "292929", "stone": "AA9A8D", "orange": "F06500" }'
-            {...register('color')}
-          />
-        </Column>
-      </Row>
-      <Row>
-        <Column $variation='createEditProduct'>
-          <Label htmlFor='image'>Images</Label>
-          <FileInput
-            id='image'
-            type='file'
-            accept='image/*'
-            disabled={isWorking}
-            multiple
-            {...register('image', {
-              required: isEditSession ? false : 'This field is required',
-            })}
-          />
-        </Column>
-      </Row>
+          </Li>
+        </Ul>
+      </InputContainer>
 
-      <Row $variation='formSubmitButtons'>
-        <Column $variation='formSubmitButtons'>
-          {isWorking && <Spinner />}
-          <Button type='reset' disabled={isWorking}>
-            Cancel
-          </Button>
-          <Button $variation='primary' disabled={isWorking}>
-            {isEditSession ? 'Update product' : 'Add product'}
-          </Button>
-        </Column>
-      </Row>
-    </form>
+      <InputContainer>
+        <Label htmlFor='tags'>Tags</Label>
+        <Input
+          type='text'
+          id='tags'
+          defaultValue='{"tag1", "tag2"}'
+          placeholder='{"tag1", "tag2"}'
+          disabled={isWorking}
+          {...register('tags')}
+        />
+      </InputContainer>
+      <InputContainer>
+        <Label htmlFor='unitPrice'>Unit Price</Label>
+        <Input
+          type='number'
+          id='unitPrice'
+          disabled={isWorking}
+          {...register('unitPrice', { required: 'This field is required' })}
+        />
+        {errors?.unitPrice?.message && (
+          <Errors>{errors.unitPrice.message}</Errors>
+        )}
+      </InputContainer>
+      <InputContainer>
+        <Label htmlFor='inStock'>In stock</Label>
+        <Input
+          type='number'
+          id='inStock'
+          disabled={isWorking}
+          {...register('inStock', { required: 'This field is required' })}
+        />
+        {errors?.unitPrice?.message && (
+          <Errors>{errors.unitPrice.message}</Errors>
+        )}
+      </InputContainer>
+      <InputContainer>
+        <Label htmlFor='designer'>Designer</Label>
+        <Input
+          type='text'
+          id='designer'
+          disabled={isWorking}
+          {...register('designer')}
+        />
+      </InputContainer>
+      <InputContainer>
+        <Label htmlFor='material'>Material</Label>
+        <TextArea
+          id='material'
+          name='material'
+          rows='6'
+          disabled={isWorking}
+          {...register('material', { required: 'This field is required' })}
+        />
+        {errors?.material?.message && (
+          <Errors>{errors.material.message}</Errors>
+        )}
+      </InputContainer>
+      <InputContainer>
+        <Label htmlFor='description1'>Description Paragraph 1</Label>
+        <TextArea
+          id='description1'
+          name='description1'
+          rows='6'
+          disabled={isWorking}
+          {...register('description1', {
+            required: 'This field is required',
+          })}
+        />
+        {errors?.description1?.message && (
+          <Errors>{errors.description1.message}</Errors>
+        )}
+      </InputContainer>
+      <InputContainer>
+        <Label htmlFor='description2'>Description Paragraph 2</Label>
+        <TextArea
+          id='description2'
+          name='description2'
+          rows='6'
+          disabled={isWorking}
+          {...register('description2')}
+        />
+      </InputContainer>
+      <InputContainer>
+        <Label htmlFor='measurements'>Measurements</Label>
+        <TextArea
+          id='measurements'
+          name='measurements'
+          rows='6'
+          disabled={isWorking}
+          defaultValue='{ "seating height": 46, "total height": 84.5, "width": 55, "depth": 54 }'
+          placeholder='{ "seating height": 46, "total height": 84.5, "width": 55, "depth": 54 }'
+          {...register('measurements')}
+        />
+      </InputContainer>
+      <InputContainer>
+        <Label htmlFor='measurements'>Color</Label>
+        <TextArea
+          id='color'
+          name='color'
+          rows='6'
+          disabled={isWorking}
+          defaultValue='{ "white": "F6F6F6", "black": "292929", "stone": "AA9A8D", "orange": "F06500" }'
+          placeholder='{ "white": "F6F6F6", "black": "292929", "stone": "AA9A8D", "orange": "F06500" }'
+          {...register('color')}
+        />
+      </InputContainer>
+      <InputContainer>
+        <Label htmlFor='image'>Images</Label>
+        <FileInput
+          id='image'
+          type='file'
+          accept='image/*'
+          disabled={isWorking}
+          multiple
+          {...register('image', {
+            required: isEditSession ? false : 'This field is required',
+          })}
+        />
+      </InputContainer>
+
+      <InputContainer>
+        {isWorking && <Spinner />}
+        <Button type='reset' disabled={isWorking}>
+          Cancel
+        </Button>
+        <Button $variation='primary' disabled={isWorking}>
+          {isEditSession ? 'Update product' : 'Add product'}
+        </Button>
+      </InputContainer>
+    </StyledCreateProductForm>
   );
 }
 

@@ -7,8 +7,6 @@ import { CartContext } from '../../context/cartContext';
 import Errors from '../../ui/Errors';
 import Spinner from '../../ui/Spinner';
 import { useCreateOrder } from './useCreateOrder';
-import Row from '../../ui/Row';
-import Column from '../../ui/Column';
 import Button from '../../ui/Button';
 import styled from 'styled-components';
 

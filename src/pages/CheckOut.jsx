@@ -8,7 +8,6 @@ import useProductFinder from '../features/products/useProductFinder';
 import { constructCartItem } from '../utils/constructCartItem';
 import Heading from '../ui/Heading';
 import Img from '../ui/Img';
-import Button from '../ui/Button';
 
 const StyledCheckOut = styled.section`
   display: grid;
@@ -143,16 +142,6 @@ function CheckOut() {
           </InfoRow>
         </TotalContainer>
       </CartContainer>
-      {/* <Row>
-        <Column $variation='sectionHeading'>
-          <Heading as='h3' $variation='footer'>
-            Need to make some changes?
-            <StyledLink $variation='primaryHeading' to='/cart'>
-              Back to cart
-            </StyledLink>
-          </Heading>
-        </Column>
-      </Row> */}
       <ShippingContainer>
         <CreateOrderForm />
       </ShippingContainer>

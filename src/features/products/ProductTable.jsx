@@ -1,8 +1,7 @@
-import { useLocation, useParams, useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import Spinner from '../../ui/Spinner';
 import { useProducts } from './useProducts';
 import ProductCard from './ProductCard';
-import Row from '../../ui/Row';
 import ProductCardManage from './ProductCardManage';
 import styled from 'styled-components';
 

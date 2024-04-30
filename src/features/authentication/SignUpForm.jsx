@@ -28,6 +28,7 @@ const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 3rem;
+  gap: 0.5rem;
 `;
 
 function SignUpForm() {
