@@ -103,6 +103,11 @@ p.small {
   letter-spacing: .05rem;
   font-weight: 500;
 }
+
+p.upper {
+  text-transform: uppercase;
+}
+
 p.medium {
   font-size: 2rem;
   line-height: 2.5rem;

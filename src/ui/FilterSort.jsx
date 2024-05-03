@@ -76,7 +76,7 @@ function FilterSort() {
   const selectedFilterMaterial = searchParams.get('material');
   const selectSort = searchParams.get('sortBy') || '';
 
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(true);
 
   function handleSort(sortValue) {
     searchParams.set('sortBy', sortValue);

@@ -1,41 +1,144 @@
 import { useParams } from 'react-router-dom';
 import { useProducts } from '../features/products/useProducts';
+import { VscRemove, VscAdd } from 'react-icons/vsc';
 import Spinner from '../ui/Spinner';
 import Section from '../ui/Section';
 import styled from 'styled-components';
 import { useContext, useState } from 'react';
 import { CartContext } from '../context/cartContext';
 import { useMainImage } from '../features/products/useMainImage';
+import Heading from '../ui/Heading';
+import Button from '../ui/Button';
+import Input from '../ui/Input';
 
-const Container = styled.div`
+const StyledProductPage = styled.section`
   display: grid;
-  grid-template-columns: 2fr 1.5fr;
-  gap: 10rem;
-  justify-content: center;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas:
+    'heading heading heading heading'
+    'showcase showcase configure configure'
+    'aboutHeading . about .'
+    'gallery gallery gallery gallery'
+    'materials materials measurements measurements';
+  padding-top: var(--top);
 `;
 
-const ImageContainer = styled.div`
-  position: static;
-  top: 0;
-  /* height: 100%; */
-  align-items: center;
+const HeadingContainer = styled.div`
+  grid-area: heading;
+  padding: var(--cell);
+  border-bottom: var(--border);
+  border-left: var(--border);
+`;
+
+const ShowcaseContainer = styled.article`
+  grid-area: showcase;
+  min-height: 60vh;
+  display: flex;
   justify-content: center;
-  background-color: gray;
+  align-items: center;
+  border-right: var(--border);
+  padding: var(--cell);
+  border-bottom: var(--border);
+`;
+
+const ConfigureContainer = styled.article`
+  grid-area: configure;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-bottom: var(--border);
+`;
+
+const Name = styled.div`
+  padding: var(--cell);
+  border-bottom: var(--border);
+`;
+
+const ConfigureOptionsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10rem;
+`;
+
+const ConfigureOptions = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: var(--cell);
+  border-top: var(--border);
+  &:last-child {
+    border-bottom: var(--border);
+  }
+`;
+
+const ColorContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
+
+const QuantityContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
+
+const AboutHeadingContainer = styled.div`
+  grid-area: aboutHeading;
+  padding: var(--cell);
+`;
+
+const ParagraphContainer = styled.div`
+  grid-area: about;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: var(--cell);
+`;
+
+const GalleryContainer = styled.article`
+  grid-area: gallery;
+  display: flex;
+  flex-direction: column;
+  padding: var(--cell);
+  border-top: var(--border);
+  border-bottom: var(--border);
+`;
+
+const GalleryHeading = styled.div`
+  padding-bottom: 2rem;
+  gap: 2rem;
+`;
+
+const MaterialsContainer = styled.article`
+  grid-area: materials;
+  display: flex;
+  justify-content: space-between;
+  padding: var(--cell);
+  border-left: var(--border);
+  border-right: var(--border);
+  border-bottom: var(--border);
+  height: 40rem;
+`;
+
+const MeasurementsContainer = styled.article`
+  grid-area: measurements;
+  display: flex;
+  justify-content: space-between;
+  padding: var(--cell);
+  border-right: var(--border);
+  border-bottom: var(--border);
+  height: 40rem;
 `;
 
 const Img = styled.img`
   object-fit: contain;
+  max-width: 30rem;
+`;
+
+const ImgGallery = styled.img`
   width: 100%;
-`;
-
-const Article = styled.article`
-  /* min-width: 1000px; */
-`;
-
-const InfoContainer = styled.div`
-  display: grid;
-  grid-template-columns: 20rem auto;
-  gap: 4rem;
+  height: 100rem;
+  object-fit: cover;
+  object-position: center;
 `;
 
 const InfoRow = styled.div`
@@ -113,77 +216,99 @@ function ProductPage() {
 
   const disabled = !color || !quantity || quantity === 0;
 
+  console.log(product);
+
   return (
-    <>
-      <Section>
-        <Container>
-          <ImageContainer>
-            <Img src={product.image[0]} />
-          </ImageContainer>
-          <Article>
-            <header>
-              <h1 className='productHeading'>{product.name}</h1>
-            </header>
-            <InfoContainer>
-              <h3>Designed by</h3>
-              <InfoRow>
-                <p>{product.designer}</p>
-              </InfoRow>
-              <h3>Description</h3>
-              <InfoRow>
-                <p>{product.description1}</p>
-                {product.description2 ? <p>{product.description2}</p> : ''}
-                {product.description ? <p>{product.description3}</p> : ''}
-              </InfoRow>
-              <h3>Unit price</h3>
-              <InfoRow>
-                <p>${product.unitPrice}</p>
-              </InfoRow>
-              <h3>Shop colors and quantity</h3>
-              <form onSubmit={handleSubmit}>
-                <InfoRow>
-                  <div>
-                    {product.color.map((color, index) => (
-                      <input
-                        key={index}
-                        type='radio'
-                        name='color'
-                        value={color.colorName}
-                        onChange={handleColorChange}
-                        onKeyDown={handleKeyDown}
-                      />
-                    ))}
-                  </div>
-                  <div>
-                    <button type='button' onClick={handleSubtract}>
-                      -
-                    </button>
-                    <input
-                      type='number'
-                      name='quantity'
-                      min='0'
-                      max='100'
-                      step='1'
-                      value={Number(quantity)}
-                      onChange={handleQuantityChange}
-                      onKeyDown={handleKeyDown}
-                    />
-                    <button type='button' onClick={handleAdd}>
-                      +
-                    </button>
-                  </div>
-                </InfoRow>
-                <InfoRow>
-                  <button type='submit' disabled={disabled}>
-                    Add to cart
-                  </button>
-                </InfoRow>
-              </form>
-            </InfoContainer>
-          </Article>
-        </Container>
-      </Section>
-    </>
+    <StyledProductPage>
+      <HeadingContainer>
+        <Heading as='h3'>Shop</Heading>
+      </HeadingContainer>
+      <ShowcaseContainer>
+        <Img src={product.image[0]} />
+      </ShowcaseContainer>
+      <ConfigureContainer>
+        <Name>
+          <Heading as='h2'>{product.name}</Heading>
+        </Name>
+        <ConfigureOptionsContainer>
+          <ConfigureOptions>
+            <Heading as='h3'>Designed by</Heading>
+            <p className='upper'>{product.designer}</p>
+          </ConfigureOptions>
+          <ConfigureOptions>
+            <Heading as='h3'>Unit price</Heading>
+            <p className='upper'>${product.unitPrice}</p>
+          </ConfigureOptions>
+          <form onSubmit={handleSubmit}>
+            <ConfigureOptions>
+              <Heading as='h3'>Colors</Heading>
+              <ColorContainer>
+                {product.color.map((color, index) => (
+                  <input
+                    key={index}
+                    type='radio'
+                    name='color'
+                    value={color.colorName}
+                    onChange={handleColorChange}
+                    onKeyDown={handleKeyDown}
+                  />
+                ))}
+              </ColorContainer>
+            </ConfigureOptions>
+            <ConfigureOptions>
+              <Heading as='h3'>Quantity</Heading>
+              <QuantityContainer>
+                <Button type='button' onClick={handleSubtract}>
+                  <VscRemove />
+                </Button>
+                <Input
+                  $variation='order'
+                  type='number'
+                  name='quantity'
+                  min='0'
+                  max='100'
+                  step='1'
+                  value={Number(quantity)}
+                  onChange={handleQuantityChange}
+                  onKeyDown={handleKeyDown}
+                />
+                <Button type='button' onClick={handleAdd}>
+                  <VscAdd />
+                </Button>
+              </QuantityContainer>
+            </ConfigureOptions>
+            <ConfigureOptions>
+              <Button $variation='primary' type='submit' disabled={disabled}>
+                Add to cart
+              </Button>
+            </ConfigureOptions>
+          </form>
+        </ConfigureOptionsContainer>
+      </ConfigureContainer>
+      <AboutHeadingContainer>
+        <Heading as='h3'>About</Heading>
+      </AboutHeadingContainer>
+
+      <ParagraphContainer>
+        <p>{product.description1}</p>
+        {product.description2 ? <p>{product.description2}</p> : ''}
+        {product.description ? <p>{product.description3}</p> : ''}
+      </ParagraphContainer>
+      <GalleryContainer>
+        <GalleryHeading>
+          <Heading as='h3'>Gallery</Heading>
+        </GalleryHeading>
+        <ImgGallery src={product.image[8]}></ImgGallery>
+      </GalleryContainer>
+      <MaterialsContainer>
+        <Heading as='h3'>Materials</Heading>
+        <p>{product.material}</p>
+      </MaterialsContainer>
+      <MeasurementsContainer>
+        <Heading as='h3'>Measurements</Heading>
+        <p>{product.measurements}</p>
+      </MeasurementsContainer>
+    </StyledProductPage>
   );
 }
 
