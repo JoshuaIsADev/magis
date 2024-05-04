@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom';
 import { useProducts } from '../features/products/useProducts';
 import { VscRemove, VscAdd } from 'react-icons/vsc';
 import Spinner from '../ui/Spinner';
-import Section from '../ui/Section';
 import styled from 'styled-components';
 import { useContext, useState } from 'react';
 import { CartContext } from '../context/cartContext';
@@ -19,7 +18,7 @@ const StyledProductPage = styled.section`
     'showcase showcase configure configure'
     'aboutHeading . about .'
     'gallery gallery gallery gallery'
-    'materials materials measurements measurements';
+    'materialsHeading materials measurementsHeading measurements';
   padding-top: var(--top);
 `;
 
@@ -52,7 +51,6 @@ const ConfigureContainer = styled.article`
 
 const Name = styled.div`
   padding: var(--cell);
-  border-bottom: var(--border);
 `;
 
 const ConfigureOptionsContainer = styled.div`
@@ -86,12 +84,13 @@ const AboutHeadingContainer = styled.div`
   padding: var(--cell);
 `;
 
-const ParagraphContainer = styled.div`
+const AboutParagraphContainer = styled.div`
   grid-area: about;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   padding: var(--cell);
+  padding-bottom: 20rem;
 `;
 
 const GalleryContainer = styled.article`
@@ -108,25 +107,40 @@ const GalleryHeading = styled.div`
   gap: 2rem;
 `;
 
+const MaterialsHeadingContainer = styled.article`
+  grid-area: materialsHeading;
+  display: flex;
+  padding: var(--cell);
+  border-bottom: var(--border);
+`;
+
 const MaterialsContainer = styled.article`
   grid-area: materials;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  gap: 2rem;
   padding: var(--cell);
-  border-left: var(--border);
-  border-right: var(--border);
+  padding-bottom: 20rem;
   border-bottom: var(--border);
-  height: 40rem;
+  border-right: var(--border);
+`;
+
+const MeasurementsHeadingContainer = styled.article`
+  grid-area: measurementsHeading;
+  display: flex;
+  padding: var(--cell);
+  border-bottom: var(--border);
 `;
 
 const MeasurementsContainer = styled.article`
   grid-area: measurements;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   padding: var(--cell);
-  border-right: var(--border);
+  padding-bottom: 20rem;
   border-bottom: var(--border);
-  height: 40rem;
+  border-right: var(--border);
 `;
 
 const Img = styled.img`
@@ -139,14 +153,6 @@ const ImgGallery = styled.img`
   height: 100rem;
   object-fit: cover;
   object-position: center;
-`;
-
-const InfoRow = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: var(--pading-m);
 `;
 
 function ProductPage() {
@@ -216,7 +222,7 @@ function ProductPage() {
 
   const disabled = !color || !quantity || quantity === 0;
 
-  console.log(product);
+  const aboutParagraphs = product.description.split('\n');
 
   return (
     <StyledProductPage>
@@ -228,7 +234,7 @@ function ProductPage() {
       </ShowcaseContainer>
       <ConfigureContainer>
         <Name>
-          <Heading as='h2'>{product.name}</Heading>
+          <Heading as='h3'>{product.name}</Heading>
         </Name>
         <ConfigureOptionsContainer>
           <ConfigureOptions>
@@ -285,28 +291,37 @@ function ProductPage() {
           </form>
         </ConfigureOptionsContainer>
       </ConfigureContainer>
+
       <AboutHeadingContainer>
         <Heading as='h3'>About</Heading>
       </AboutHeadingContainer>
+      <AboutParagraphContainer>
+        {aboutParagraphs.map((description, index) => (
+          <p key={index}>{description}</p>
+        ))}
+      </AboutParagraphContainer>
 
-      <ParagraphContainer>
-        <p>{product.description1}</p>
-        {product.description2 ? <p>{product.description2}</p> : ''}
-        {product.description ? <p>{product.description3}</p> : ''}
-      </ParagraphContainer>
       <GalleryContainer>
         <GalleryHeading>
           <Heading as='h3'>Gallery</Heading>
         </GalleryHeading>
         <ImgGallery src={product.image[8]}></ImgGallery>
       </GalleryContainer>
-      <MaterialsContainer>
+      <MaterialsHeadingContainer>
         <Heading as='h3'>Materials</Heading>
+      </MaterialsHeadingContainer>
+      <MaterialsContainer>
         <p>{product.material}</p>
       </MaterialsContainer>
-      <MeasurementsContainer>
+      <MeasurementsHeadingContainer>
         <Heading as='h3'>Measurements</Heading>
-        <p>{product.measurements}</p>
+      </MeasurementsHeadingContainer>
+      <MeasurementsContainer>
+        {Object.keys(product.measurements).map((key) => (
+          <p key={key}>
+            {key}: {product.measurements[key]}
+          </p>
+        ))}
       </MeasurementsContainer>
     </StyledProductPage>
   );
