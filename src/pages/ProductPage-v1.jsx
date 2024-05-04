@@ -157,7 +157,6 @@ const ImgGallery = styled.img`
 
 function ProductPage() {
   const [color, setColor] = useState('');
-  const [imageVariant, setImageVariant] = useState('');
   const [quantity, setQuantity] = useState(1);
   const { cartItems, setCartItems } = useContext(CartContext);
   const { isPending, products } = useProducts();
@@ -185,7 +184,6 @@ function ProductPage() {
 
   function handleColorChange(e) {
     setColor(e.target.value);
-    setImageVariant(variants[e.target.value].image);
   }
 
   function handleAddCartItems(cartItem) {
@@ -228,7 +226,6 @@ function ProductPage() {
 
   const variants = product.variants;
   console.log(variants);
-  console.log(imageVariant);
 
   return (
     <StyledProductPage>
@@ -236,9 +233,7 @@ function ProductPage() {
         <Heading as='h3'>Shop</Heading>
       </HeadingContainer>
       <ShowcaseContainer>
-        {/* <Img src={product.variants[0].image} /> */}
-        <Img src={imageVariant} />
-        {/* <Img src={product.image[0]} /> */}
+        <Img src={product.image[0]} />
       </ShowcaseContainer>
       <ConfigureContainer>
         <Name>
@@ -257,20 +252,7 @@ function ProductPage() {
             <ConfigureOptions>
               <Heading as='h3'>Colors</Heading>
               <ColorContainer>
-                {variants.map((variant, index) => (
-                  <Input
-                    key={index}
-                    $variation='product'
-                    type='radio'
-                    name='color'
-                    $color={variant.colorHex}
-                    $image={variant.image}
-                    value={index}
-                    onChange={handleColorChange}
-                    onKeyDown={handleKeyDown}
-                  />
-                ))}
-                {/* {product.color.map((color, index) => (
+                {product.color.map((color, index) => (
                   <input
                     key={index}
                     type='radio'
@@ -279,7 +261,7 @@ function ProductPage() {
                     onChange={handleColorChange}
                     onKeyDown={handleKeyDown}
                   />
-                ))} */}
+                ))}
               </ColorContainer>
             </ConfigureOptions>
             <ConfigureOptions>

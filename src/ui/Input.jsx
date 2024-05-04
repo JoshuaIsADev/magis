@@ -6,6 +6,14 @@ const variations = {
     margin: 0;
     width: 2rem;
   `,
+  product: css`
+    background-color: #${(props) => props.$color};
+    &:checked {
+      background-color: #${(props) => props.$color};
+      outline: 1px solid var(--color-grey-900);
+      outline-offset: 4px;
+    }
+  `,
 };
 
 const Input = styled.input`
@@ -19,18 +27,17 @@ const Input = styled.input`
   &[type='radio'] {
     position: relative;
     appearance: none;
-
     width: 1.5rem;
     height: 1.5rem;
     border: 1px solid var(--color-grey-200);
     border-radius: 50%;
-    background-color: var(--color-grey-0);
+    /* background-color: var(--color-grey-0); */
 
     margin-right: 0.5rem;
     cursor: pointer;
 
     &:checked {
-      background-color: var(--color-grey-900); // Change the color when checked
+      /* background-color: var(--color-grey-900); */
       border-color: var(--color-grey-200);
     }
   }
