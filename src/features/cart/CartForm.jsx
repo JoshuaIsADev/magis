@@ -49,61 +49,64 @@ const ButtonsContainer = styled.div`
 
 function CartForm({
   name,
-  selectedProductId,
+  selectedVariantId,
   color,
   quantity,
   unitPrice,
-  mainImage,
+  image,
   combinedCartItem,
 }) {
   const { cartItems, setCartItems } = useContext(CartContext);
   const [quantities, setQuantities] = useState(
     cartItems.reduce((acc, item) => {
-      acc[item.selectedProductId] = item.quantity;
+      acc[item.selectedVariantId] = item.quantity;
       return acc;
     }, {})
   );
+  // console.log(cartItems);
 
-  const handleAdd = (selectedProductId) => {
+  function handleAdd(selectedVariantId) {
     setQuantities((prevQuantities) => ({
       ...prevQuantities,
-      [selectedProductId]: (prevQuantities[selectedProductId] || 0) + 1,
+      [selectedVariantId]: (prevQuantities[selectedVariantId] || 0) + 1,
     }));
-  };
+  }
 
-  const handleSubtract = (selectedProductId) => {
-    if (quantities[selectedProductId] > 0) {
+  function handleSubtract(selectedVariantId) {
+    if (quantities[selectedVariantId] > 0) {
       setQuantities((prevQuantities) => ({
         ...prevQuantities,
-        [selectedProductId]: prevQuantities[selectedProductId] - 1,
-      }));
-    }
-  };
-
-  function handleQuantityChange(e, selectedProductId) {
-    const newQuantity = parseInt(e.target.value, 10);
-    if (!isNaN(newQuantity)) {
-      setQuantities((prevQuantities) => ({
-        ...prevQuantities,
-        [selectedProductId]: newQuantity,
+        [selectedVariantId]: prevQuantities[selectedVariantId] - 1,
       }));
     }
   }
 
-  function handleDelete(e, selectedProductId) {
+  function handleQuantityChange(e, selectedVariantId) {
+    const newQuantity = parseInt(e.target.value, 10);
+    if (!isNaN(newQuantity)) {
+      setQuantities((prevQuantities) => ({
+        ...prevQuantities,
+        [selectedVariantId]: newQuantity,
+      }));
+    }
+  }
+
+  function handleDelete(e, selectedVariantId) {
     e.preventDefault();
-    // console.log(cartItems[0].selectedProductId);
+    // console.log(cartItems[0].selectedVariantId);
     const updatedCartItems = cartItems.filter(
-      (cartItem) => cartItem.selectedProductId !== selectedProductId
+      (cartItem) => cartItem.selectedVariantId !== selectedVariantId
     );
     setCartItems(updatedCartItems);
   }
 
   function handleSubmit(e, item) {
+    // console.log(item.selectedVariantId);
     e.preventDefault();
     const updatedCartItems = cartItems.map((cartItem) => {
-      if (cartItem.selectedProductId === item.selectedProductId) {
-        return { ...cartItem, quantity: quantities[item.selectedProductId] };
+      if (cartItem.selectedVariantId === item.selectedVariantId) {
+        return { ...cartItem, quantity: quantities[item.selectedVariantId] };
+        // console.log(quantities[item.selectedVariantId]);
       }
 
       return cartItem;
@@ -114,7 +117,7 @@ function CartForm({
   return (
     <StyledCartForm onSubmit={(e) => handleSubmit(e, combinedCartItem)}>
       <ImageContainer>
-        {<Img $variation='orderCard' src={mainImage} alt='product' />}
+        {<Img $variation='orderCard' src={image} alt='product' />}
       </ImageContainer>
       <InfoContainer>
         <InfoRow>
@@ -128,7 +131,7 @@ function CartForm({
             <OrderButtons>
               <Button
                 type='button'
-                onClick={() => handleSubtract(selectedProductId)}
+                onClick={() => handleSubtract(selectedVariantId)}
               >
                 <VscRemove />
               </Button>
@@ -139,12 +142,12 @@ function CartForm({
                 min='0'
                 max='100'
                 step='1'
-                value={quantities[selectedProductId]}
-                onChange={(e) => handleQuantityChange(e, selectedProductId)}
+                value={quantities[selectedVariantId]}
+                onChange={(e) => handleQuantityChange(e, selectedVariantId)}
               />
               <Button
                 type='button'
-                onClick={() => handleAdd(selectedProductId)}
+                onClick={() => handleAdd(selectedVariantId)}
               >
                 <VscAdd />
               </Button>
@@ -152,7 +155,7 @@ function CartForm({
             <Button type='submit'>Update</Button>
             <Button
               $variation='trash'
-              onClick={(e) => handleDelete(e, selectedProductId)}
+              onClick={(e) => handleDelete(e, selectedVariantId)}
             >
               <VscTrash />
             </Button>

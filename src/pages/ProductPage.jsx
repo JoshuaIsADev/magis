@@ -157,14 +157,15 @@ const ImgGallery = styled.img`
 
 function ProductPage() {
   const [color, setColor] = useState('');
-  const [imageVariant, setImageVariant] = useState('');
   const [quantity, setQuantity] = useState(1);
   const { cartItems, setCartItems } = useContext(CartContext);
   const { isPending, products } = useProducts();
+  const [imageVariant, setImageVariant] = useState('');
   const { id: productId } = useParams();
 
   if (isPending) return <Spinner />;
   const product = products.find((p) => p.id === Number(productId));
+  const defaultImage = product.variants[0].image;
 
   const selectedProductId = productId;
   function handleKeyDown(e) {
@@ -190,9 +191,10 @@ function ProductPage() {
 
   function handleAddCartItems(cartItem) {
     const existingItemIndex = cartItems.findIndex(
-      (item) => item.selectedProductId === cartItem.selectedProductId
+      (item) => item.selectedVariantId === cartItem.selectedVariantId
     );
 
+    // console.log(cartItems);
     if (existingItemIndex !== -1) {
       const updatedCartItems = [...cartItems];
       updatedCartItems[existingItemIndex].quantity += cartItem.quantity;
@@ -207,18 +209,19 @@ function ProductPage() {
   }
 
   function handleSubmit(e) {
-    const mainImage = product.image.find((img) => img.includes('main'));
+    // const mainImage = product.image.find((img) => img.includes('main'));
     e.preventDefault();
-    // const newCartItem = { color, quantity, productId };
     const newCartItem = {
       selectedProductId,
+      selectedVariantId: selectedProductId + '-' + variants[color].colorName,
+      name: product.name,
       quantity,
       unitPrice: product.unitPrice,
-      color,
-      mainImage,
+      color: variants[color].colorName,
+      image: variants[color].image,
     };
+    // console.log(newCartItem);
     handleAddCartItems(newCartItem);
-    // checkIsItemInCart(newCartItem);
     setQuantity(1);
   }
 
@@ -227,8 +230,7 @@ function ProductPage() {
   const aboutParagraphs = product.description.split('\n');
 
   const variants = product.variants;
-  console.log(variants);
-  console.log(imageVariant);
+  // console.log(variants);
 
   return (
     <StyledProductPage>
@@ -236,9 +238,7 @@ function ProductPage() {
         <Heading as='h3'>Shop</Heading>
       </HeadingContainer>
       <ShowcaseContainer>
-        {/* <Img src={product.variants[0].image} /> */}
-        <Img src={imageVariant} />
-        {/* <Img src={product.image[0]} /> */}
+        <Img src={imageVariant || defaultImage} />
       </ShowcaseContainer>
       <ConfigureContainer>
         <Name>
@@ -270,16 +270,6 @@ function ProductPage() {
                     onKeyDown={handleKeyDown}
                   />
                 ))}
-                {/* {product.color.map((color, index) => (
-                  <input
-                    key={index}
-                    type='radio'
-                    name='color'
-                    value={color.colorName}
-                    onChange={handleColorChange}
-                    onKeyDown={handleKeyDown}
-                  />
-                ))} */}
               </ColorContainer>
             </ConfigureOptions>
             <ConfigureOptions>

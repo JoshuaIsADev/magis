@@ -62,23 +62,20 @@ function Cart() {
   const finalTotalPrice = (Number(totalPrice) + Number(taxes)).toFixed(2);
   // console.log(cartItems);
 
-  // const combinedCartItems = [];
+  const combinedCartItems = [];
 
-  // if (cartItems.length !== 0) {
-  //   cartItems.forEach((item) => {
-  //     const existingItem = combinedCartItems.find(
-  //       (i) => i.selectedVariantId === item.selectedVariantId
-  //     );
-  //     if (existingItem) {
-  //       existingItem.quantity += item.quantity;
-  //     } else {
-  //       // console.log(item);
-  //       // combinedCartItems.push(item);
-  //       // console.log(`combinedcartitems: ${combinedCartItems}`);
-  //       combinedCartItems.push(constructCartItem(item, getProduct));
-  //     }
-  //   });
-  // }
+  if (cartItems.length !== 0) {
+    cartItems.forEach((item) => {
+      const existingItem = combinedCartItems.find(
+        (i) => i.selectedProductId === item.selectedProductId
+      );
+      if (existingItem) {
+        existingItem.quantity += item.quantity;
+      } else {
+        combinedCartItems.push(constructCartItem(item, getProduct));
+      }
+    });
+  }
 
   if (isPending) return <Spinner />;
 
@@ -92,16 +89,16 @@ function Cart() {
           <Heading as='h3'>Order summary</Heading>
         </SummaryHeadingContainer>
         <CartContainer>
-          {cartItems.map((cartItem) => (
+          {combinedCartItems.map((combinedCartItem) => (
             <CartForm
-              key={cartItem.id + cartItem.color}
-              name={cartItem.name}
-              selectedVariantId={cartItem.selectedVariantId}
-              color={cartItem.color}
-              quantity={cartItem.quantity}
-              unitPrice={cartItem.unitPrice}
-              image={cartItem.image}
-              combinedCartItem={cartItem}
+              key={combinedCartItem.id + combinedCartItem.color}
+              name={combinedCartItem.name}
+              selectedProductId={combinedCartItem.selectedProductId}
+              color={combinedCartItem.color}
+              quantity={combinedCartItem.quantity}
+              unitPrice={combinedCartItem.unitPrice}
+              mainImage={combinedCartItem.mainImage}
+              combinedCartItem={combinedCartItem}
             />
           ))}
         </CartContainer>
