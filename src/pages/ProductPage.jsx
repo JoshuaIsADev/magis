@@ -5,7 +5,6 @@ import Spinner from '../ui/Spinner';
 import styled from 'styled-components';
 import { useContext, useState } from 'react';
 import { CartContext } from '../context/cartContext';
-import { useMainImage } from '../features/products/useMainImage';
 import Heading from '../ui/Heading';
 import Button from '../ui/Button';
 import Input from '../ui/Input';

@@ -1,14 +1,12 @@
+import styled from 'styled-components';
 import { useContext } from 'react';
 import { CartContext } from '../context/cartContext';
 import { useProducts } from '../features/products/useProducts';
 import Spinner from '../ui/Spinner';
 import StyledLink from '../ui/StyledLink';
 import CartForm from '../features/cart/CartForm';
-import useProductFinder from '../features/products/useProductFinder';
-import { constructCartItem } from '../utils/constructCartItem';
 import Heading from '../ui/Heading';
 import Button from '../ui/Button';
-import styled from 'styled-components';
 
 const StyledCart = styled.section`
   display: grid;
@@ -57,7 +55,7 @@ const InfoRow = styled.div`
 function Cart() {
   const { isPending, products } = useProducts();
   const { cartItems, totalPrice } = useContext(CartContext);
-  const getProduct = useProductFinder(products);
+  // const getProduct = useProductFinder(products);
   const taxes = (Number(totalPrice) * 0.08).toFixed(2);
   const finalTotalPrice = (Number(totalPrice) + Number(taxes)).toFixed(2);
   // console.log(cartItems);
@@ -94,7 +92,7 @@ function Cart() {
         <CartContainer>
           {cartItems.map((cartItem) => (
             <CartForm
-              key={cartItem.id + cartItem.color}
+              key={cartItem.selectedVariantId}
               name={cartItem.name}
               selectedVariantId={cartItem.selectedVariantId}
               color={cartItem.color}

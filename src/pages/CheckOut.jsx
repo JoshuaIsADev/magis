@@ -1,11 +1,9 @@
+import styled from 'styled-components';
 import { useContext } from 'react';
 import { CartContext } from '../context/cartContext';
 import { useProducts } from '../features/products/useProducts';
-import styled from 'styled-components';
 import CreateOrderForm from '../features/order/CreateOrderForm';
 import Spinner from '../ui/Spinner';
-import useProductFinder from '../features/products/useProductFinder';
-import { constructCartItem } from '../utils/constructCartItem';
 import Heading from '../ui/Heading';
 import Img from '../ui/Img';
 
@@ -79,16 +77,16 @@ const ShippingHeadingContainer = styled.div`
 function CheckOut() {
   const { isPending, products } = useProducts();
   const { cartItems, totalPrice } = useContext(CartContext);
-  const getProduct = useProductFinder(products);
+  // const getProduct = useProductFinder(products);
 
   const taxes = (Number(totalPrice) * 0.08).toFixed(2);
   const finalTotalPrice = (Number(totalPrice) + Number(taxes)).toFixed(2);
 
-  const combinedCartItems = [];
+  // const combinedCartItems = [];
 
-  cartItems.forEach((item) => {
-    combinedCartItems.push(constructCartItem(item, getProduct));
-  });
+  // cartItems.forEach((item) => {
+  //   combinedCartItems.push(constructCartItem(item, getProduct));
+  // });
 
   // console.log(cartItems);
 
@@ -103,26 +101,19 @@ function CheckOut() {
         <Heading as='h3'>Shipping details</Heading>
       </ShippingHeadingContainer>
       <CartContainer>
-        {combinedCartItems.map((combinedCartItem) => (
-          <CartCard key={combinedCartItem.id}>
+        {cartItems.map((cartItem) => (
+          <CartCard key={cartItem.selectedVariantId}>
             <ImageContainer>
-              <Img
-                $variation='orderCard'
-                src={combinedCartItem.mainImage}
-                alt='product'
-              />
+              <Img $variation='orderCard' src={cartItem.image} alt='product' />
             </ImageContainer>
             <InfoContainer>
               <InfoRow>
-                <Heading as='h3'>{combinedCartItem.name}</Heading>
-                <p>
-                  {Number(combinedCartItem.quantity) *
-                    Number(combinedCartItem.unitPrice)}
-                </p>
+                <Heading as='h3'>{cartItem.name}</Heading>
+                <p>${Number(cartItem.quantity) * Number(cartItem.unitPrice)}</p>
               </InfoRow>
               <InfoRow>
-                <p>{combinedCartItem.color}</p>
-                <p>{combinedCartItem.quantity}x</p>
+                <p>{cartItem.color}</p>
+                <p>{cartItem.quantity}x</p>
               </InfoRow>
             </InfoContainer>
           </CartCard>

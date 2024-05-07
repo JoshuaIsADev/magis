@@ -1,10 +1,8 @@
+import styled from 'styled-components';
 import { useUser } from '../features/authentication/useUser';
 import { useOrders } from '../features/order/useOrders';
-import useProductFinder from '../features/products/useProductFinder';
-import { useProducts } from '../features/products/useProducts';
 import Spinner from '../ui/Spinner';
 import OrderCard from '../features/order/OrderCard';
-import styled from 'styled-components';
 import Heading from '../ui/Heading';
 
 const StyledOrders = styled.section`
@@ -12,7 +10,6 @@ const StyledOrders = styled.section`
   grid-template-columns: repeat(1, 1fr);
   grid-template-areas: 'heading' 'orders';
   padding-top: var(--top);
-  /* border-bottom: var(--border); */
 `;
 
 const HeadingContainer = styled.div`
@@ -54,7 +51,6 @@ const OrderInfoContainer = styled.div`
 `;
 const OrderCardContainer = styled.div`
   grid-area: item;
-  padding: var(--cell);
   background-color: var(--color-grey-0);
   border-left: var(--border);
 `;
@@ -65,12 +61,12 @@ function Orders() {
 
   if (isUserPending || isPending) return <Spinner />;
   const ordersList = orders.filter((order) => order.user_id === user.id);
+  console.log(orders);
 
   const ordersWithParsedProducts = ordersList.map((order) => ({
     ...order,
     orderedProducts: JSON.parse(order.orderedProducts),
   }));
-  console.log(ordersWithParsedProducts);
 
   return (
     <StyledOrders>
@@ -82,13 +78,14 @@ function Orders() {
           <OrderContainer key={order.id}>
             <OrderInfoContainer>
               <div>
-                <p>Order number: {order.orderNumber}</p>
+                <Heading as='h3'>Order details</Heading>
+                <p>Confirmation number: {order.orderNumber}</p>
                 <p>Purchased on: {order.created_at.slice(0, 10)}</p>
                 <p>Contact info: {order.email}</p>
                 <p>Total price: ${order.totalPrice}</p>
               </div>
               <div>
-                <p>Shipped to:</p>
+                <Heading as='h3'>Shipped to</Heading>
                 <p>{order.fullName}</p>
                 <p>{order.streetNumber}</p>
                 <p>{order.state}</p>
@@ -99,7 +96,7 @@ function Orders() {
             <OrderCardContainer>
               {order.orderedProducts.map((orderItem) => (
                 <OrderCard
-                  key={orderItem.selectedProductId}
+                  key={orderItem.selectedVariantId}
                   orderItem={orderItem}
                 />
               ))}
