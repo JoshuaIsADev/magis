@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import Input from '../../ui/Input';
 import { VscRemove, VscAdd, VscTrash } from 'react-icons/vsc';
 import styled from 'styled-components';
+import toast from 'react-hot-toast';
 import { CartContext } from '../../context/cartContext';
 import Button from '../../ui/Button';
 import Heading from '../../ui/Heading';
@@ -63,7 +64,6 @@ function CartForm({
       return acc;
     }, {})
   );
-  // console.log(cartItems);
 
   function handleAdd(selectedVariantId) {
     setQuantities((prevQuantities) => ({
@@ -73,7 +73,7 @@ function CartForm({
   }
 
   function handleSubtract(selectedVariantId) {
-    if (quantities[selectedVariantId] > 0) {
+    if (quantities[selectedVariantId] > 1) {
       setQuantities((prevQuantities) => ({
         ...prevQuantities,
         [selectedVariantId]: prevQuantities[selectedVariantId] - 1,
@@ -93,20 +93,18 @@ function CartForm({
 
   function handleDelete(e, selectedVariantId) {
     e.preventDefault();
-    // console.log(cartItems[0].selectedVariantId);
     const updatedCartItems = cartItems.filter(
       (cartItem) => cartItem.selectedVariantId !== selectedVariantId
     );
     setCartItems(updatedCartItems);
+    toast.success('Removed item');
   }
 
   function handleSubmit(e, item) {
-    // console.log(item.selectedVariantId);
     e.preventDefault();
     const updatedCartItems = cartItems.map((cartItem) => {
       if (cartItem.selectedVariantId === item.selectedVariantId) {
         return { ...cartItem, quantity: quantities[item.selectedVariantId] };
-        // console.log(quantities[item.selectedVariantId]);
       }
 
       return cartItem;

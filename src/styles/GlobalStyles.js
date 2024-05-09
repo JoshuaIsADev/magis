@@ -12,11 +12,9 @@ const GlobalStyles = createGlobalStyle`
   --color-grey-700: #2e2e2e;
   --color-grey-800: #161616;
   --color-grey-900: #292929;
-  --color-red: #FF0000; 
-
-  --color-brand: #FF2E00;
+  --color-red: #FF2E00; 
   
-  --color-danger: #000000;
+  --color-danger: #FF2E00;
 
   --color-line: rgba(0, 0, 0, .2);
 

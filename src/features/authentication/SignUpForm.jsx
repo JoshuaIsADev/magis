@@ -1,12 +1,12 @@
 import { useForm } from 'react-hook-form';
-import StyledLink from '../../ui/StyledLink';
+import styled from 'styled-components';
 import Label from '../../ui/Label';
+import StyledLink from '../../ui/StyledLink';
 import Input from '../../ui/Input';
+import { useSignUp } from './useSignUp';
 import Spinner from '../../ui/Spinner';
 import Errors from '../../ui/Errors';
-import { useSignUp } from './useSignUp';
 import Button from '../../ui/Button';
-import styled from 'styled-components';
 
 const StyledSignUpForm = styled.form`
   grid-area: form;

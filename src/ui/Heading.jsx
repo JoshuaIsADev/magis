@@ -24,6 +24,9 @@ const variations = {
   filterSort: css`
     padding-bottom: 2rem;
   `,
+  danger: css`
+    color: var(--color-danger);
+  `,
 };
 
 const Heading = styled.h1`

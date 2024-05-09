@@ -23,7 +23,7 @@ export function useSignIn() {
       }
     },
     onError: (err) => {
-      console.log('ERROR', err);
+      // console.log('ERROR', err);
       toast.error('Email or password are incorrect');
     },
   });

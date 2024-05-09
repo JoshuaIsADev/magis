@@ -24,25 +24,25 @@ const HeadingContainer = styled.div`
   grid-area: cartHeading;
   padding: var(--cell);
   border-left: var(--border);
+  border-right: var(--border);
   border-bottom: var(--border);
 `;
 
 const SummaryHeadingContainer = styled.div`
   grid-area: summaryHeading;
   padding: var(--cell);
-  border-left: var(--border);
   border-bottom: var(--border);
 `;
 
 const CartContainer = styled.div`
   grid-area: cart;
   padding-bottom: 30vh;
+  border-right: var(--border);
 `;
 const SummaryContainer = styled.div`
   grid-area: summary;
   display: flex;
   flex-direction: column;
-  border-left: var(--border);
   padding: var(--cell);
   gap: 2rem;
 `;
@@ -52,31 +52,18 @@ const InfoRow = styled.div`
   flex-direction: column;
 `;
 
+const EmptyCartContainer = styled.div`
+  padding: var(--cell);
+`;
+
 function Cart() {
   const { isPending, products } = useProducts();
   const { cartItems, totalPrice } = useContext(CartContext);
-  // const getProduct = useProductFinder(products);
   const taxes = (Number(totalPrice) * 0.08).toFixed(2);
   const finalTotalPrice = (Number(totalPrice) + Number(taxes)).toFixed(2);
-  // console.log(cartItems);
-
-  // const combinedCartItems = [];
-
-  // if (cartItems.length !== 0) {
-  //   cartItems.forEach((item) => {
-  //     const existingItem = combinedCartItems.find(
-  //       (i) => i.selectedVariantId === item.selectedVariantId
-  //     );
-  //     if (existingItem) {
-  //       existingItem.quantity += item.quantity;
-  //     } else {
-  //       // console.log(item);
-  //       // combinedCartItems.push(item);
-  //       // console.log(`combinedcartitems: ${combinedCartItems}`);
-  //       combinedCartItems.push(constructCartItem(item, getProduct));
-  //     }
-  //   });
-  // }
+  if (cartItems.length === 0) {
+    console.log('cart is empty');
+  }
 
   if (isPending) return <Spinner />;
 
@@ -90,6 +77,13 @@ function Cart() {
           <Heading as='h3'>Order summary</Heading>
         </SummaryHeadingContainer>
         <CartContainer>
+          {cartItems.length === 0 && (
+            <EmptyCartContainer>
+              <Heading as='h3' $variation='danger'>
+                Cart is empty
+              </Heading>
+            </EmptyCartContainer>
+          )}
           {cartItems.map((cartItem) => (
             <CartForm
               key={cartItem.selectedVariantId}
@@ -117,9 +111,11 @@ function Cart() {
             <p>${finalTotalPrice}</p>
           </InfoRow>
           <InfoRow>
-            <StyledLink to='/checkout'>
-              <Button $variation='primary'>Proceed to checkout</Button>
-            </StyledLink>
+            {cartItems.length !== 0 && (
+              <StyledLink to='/checkout'>
+                <Button $variation='primary'>Proceed to checkout</Button>
+              </StyledLink>
+            )}
           </InfoRow>
         </SummaryContainer>
       </StyledCart>

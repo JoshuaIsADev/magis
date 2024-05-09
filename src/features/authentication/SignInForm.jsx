@@ -1,3 +1,5 @@
+import { useForm } from 'react-hook-form';
+import styled from 'styled-components';
 import { useState } from 'react';
 import Label from '../../ui/Label';
 import Input from '../../ui/Input';
@@ -5,7 +7,7 @@ import { useSignIn } from './useSignIn';
 import Spinner from '../../ui/Spinner';
 import Button from '../../ui/Button';
 import StyledLink from '../../ui/StyledLink';
-import styled from 'styled-components';
+import Errors from '../../ui/Errors';
 
 const StyledSignInForm = styled.form`
   grid-area: form;
@@ -31,37 +33,33 @@ const InputContainer = styled.div`
 `;
 
 function SignInForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const { signIn, isPending } = useSignIn();
+  const { register, formState, handleSubmit, reset } = useForm();
+  const { errors } = formState;
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (!email || !password) return;
-    signIn(
-      { email, password },
-      {
-        onSettled: () => {
-          setEmail('');
-          setPassword('');
-        },
-      }
-    );
+  function onSubmit(data) {
+    signIn(data, { onSuccess: (data) => reset() });
   }
 
   return (
     <>
-      <StyledSignInForm onSubmit={handleSubmit}>
+      <StyledSignInForm onSubmit={handleSubmit(onSubmit)}>
         <InputContainer>
           <Label htmlFor='email'>Email</Label>
           <Input
             type='email'
             id='email'
             autoComplete='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
             disabled={isPending}
+            {...register('email', {
+              required: 'This field is rquired',
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: 'Please provide a valid email address',
+              },
+            })}
           ></Input>
+          {errors?.email?.message && <Errors>{errors.email.message}</Errors>}
         </InputContainer>
         <InputContainer>
           <Label htmlFor='password'>Password</Label>
@@ -69,10 +67,12 @@ function SignInForm() {
             type='password'
             id='password'
             autoComplete='password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
             disabled={isPending}
+            {...register('password', { required: 'This field is rquired' })}
           ></Input>
+          {errors?.password?.message && (
+            <Errors>{errors.password.message}</Errors>
+          )}
         </InputContainer>
 
         {isPending && <Spinner />}
