@@ -38,6 +38,7 @@ function CreateOrderForm() {
   const userId = JSON.stringify(user.id).replace(/^"|"$/g, '');
 
   function onSubmit(data) {
+    // console.log(data);
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = String(currentDate.getMonth() + 1).padStart(2, '0');

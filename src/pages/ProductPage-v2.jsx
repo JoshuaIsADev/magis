@@ -1,7 +1,5 @@
-import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { useProducts } from '../features/products/useProducts';
-import toast from 'react-hot-toast';
 import { VscRemove, VscAdd } from 'react-icons/vsc';
 import Spinner from '../ui/Spinner';
 import styled from 'styled-components';
@@ -10,7 +8,6 @@ import { CartContext } from '../context/cartContext';
 import Heading from '../ui/Heading';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
-import Errors from '../ui/Errors';
 
 const StyledProductPage = styled.section`
   display: grid;
@@ -158,14 +155,12 @@ const ImgGallery = styled.img`
 `;
 
 function ProductPage() {
-  const [color, setColor] = useState('null');
+  const [color, setColor] = useState('');
   const [quantity, setQuantity] = useState(1);
   const { cartItems, setCartItems } = useContext(CartContext);
   const { isPending, products } = useProducts();
   const [imageVariant, setImageVariant] = useState('');
   const { id: productId } = useParams();
-  const { register, formState, handleSubmit } = useForm();
-  const { errors } = formState;
 
   if (isPending) return <Spinner />;
   const product = products.find((p) => p.id === Number(productId));
@@ -183,7 +178,7 @@ function ProductPage() {
   };
 
   const handleSubtract = () => {
-    if (quantity > 1) {
+    if (quantity > 0) {
       setQuantity((prevQuantity) => prevQuantity - 1);
     }
   };
@@ -211,20 +206,20 @@ function ProductPage() {
     setQuantity(Number(e.target.value));
   }
 
-  function onSubmit(data) {
+  function handleSubmit(e) {
+    e.preventDefault();
     const newCartItem = {
       selectedProductId,
-      selectedVariantId: `${selectedProductId}-${variants[color].colorName}`,
+      selectedVariantId: selectedProductId + '-' + variants[color].colorName,
       name: product.name,
       quantity,
       unitPrice: product.unitPrice,
       color: variants[color].colorName,
       image: variants[color].image,
     };
-
+    // console.log(newCartItem);
     handleAddCartItems(newCartItem);
     setQuantity(1);
-    toast.success('Added to cart');
   }
 
   const disabled = !color || !quantity || quantity === 0;
@@ -232,6 +227,8 @@ function ProductPage() {
   const aboutParagraphs = product.description.split('\n');
 
   const variants = product.variants;
+  // console.log(variants);
+
   return (
     <StyledProductPage>
       <HeadingContainer>
@@ -253,29 +250,22 @@ function ProductPage() {
             <Heading as='h3'>Unit price</Heading>
             <p className='upper'>${product.unitPrice}</p>
           </ConfigureOptions>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit}>
             <ConfigureOptions>
               <Heading as='h3'>Colors</Heading>
               <ColorContainer>
-                {errors?.color?.message && (
-                  <Errors>{errors.color.message}</Errors>
-                )}
                 {variants.map((variant, index) => (
                   <Input
                     key={index}
                     $variation='product'
-                    id='color'
                     type='radio'
                     name='color'
                     $color={variant.colorHex}
                     $image={variant.image}
                     value={index}
-                    {...register('color', {
-                      required: 'Please choose a color',
-                    })}
                     onChange={handleColorChange}
                     onKeyDown={handleKeyDown}
-                  ></Input>
+                  />
                 ))}
               </ColorContainer>
             </ConfigureOptions>
@@ -289,20 +279,16 @@ function ProductPage() {
                   $variation='order'
                   type='number'
                   name='quantity'
-                  min='1'
+                  min='0'
                   max='100'
                   step='1'
                   value={Number(quantity)}
-                  {...register('quantity')}
                   onChange={handleQuantityChange}
                   onKeyDown={handleKeyDown}
                 />
                 <Button type='button' onClick={handleAdd}>
                   <VscAdd />
                 </Button>
-                {errors?.quantity?.message && (
-                  <Errors>{errors.quantity.message}</Errors>
-                )}
               </QuantityContainer>
             </ConfigureOptions>
             <ConfigureOptions>
