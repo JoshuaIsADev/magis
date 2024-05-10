@@ -339,11 +339,14 @@ function ProductPage() {
         <Heading as='h3'>Measurements</Heading>
       </MeasurementsHeadingContainer>
       <MeasurementsContainer>
-        {Object.keys(product.measurements).map((key) => (
-          <p key={key}>
-            {key}: {product.measurements[key]}
-          </p>
-        ))}
+        {product.totalHeight && <p>Total height: {product.totalHeight}</p>}
+        {product.seatingHeight && (
+          <p>Seating height: {product.seatingHeight}</p>
+        )}
+        {product.height && <p>Height: {product.height}</p>}
+        {product.width && <p>Width: {product.width}</p>}
+        {product.length && <p>Length: {product.length}</p>}
+        {product.depth && <p>Depth: {product.depth}</p>}
       </MeasurementsContainer>
     </StyledProductPage>
   );

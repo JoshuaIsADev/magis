@@ -7,11 +7,12 @@ import Label from '../../ui/Label';
 import Errors from '../../ui/Errors';
 import FileInput from '../../ui/FileInput';
 import Spinner from '../../ui/Spinner';
+import Row from '../../ui/Row';
+import Column from '../../ui/Column';
 import Button from '../../ui/Button';
 import { useMainImage } from './useMainImage';
 import styled from 'styled-components';
 import Img from '../../ui/Img';
-import Heading from '../../ui/Heading';
 
 const StyledCreateProductForm = styled.form`
   grid-column: span 1;
@@ -51,7 +52,7 @@ function CreateProductForm({ productToEdit = {} }) {
   const { errors } = formState;
   console.log({ productToEdit });
 
-  const mainImage = productToEdit.variants[0].image;
+  const mainImage = useMainImage(productToEdit.image)[0];
 
   function onSubmit(data) {
     const image = typeof data.image === 'string' ? data.image : data.image;
@@ -74,7 +75,7 @@ function CreateProductForm({ productToEdit = {} }) {
   return (
     <StyledCreateProductForm onSubmit={handleSubmit(onSubmit, onError)}>
       <InputContainer>
-        {productToEdit ? (
+        {productToEdit.image ? (
           <Img src={mainImage} $variation='productCard' alt='product' />
         ) : (
           ''
@@ -84,15 +85,13 @@ function CreateProductForm({ productToEdit = {} }) {
         <Input
           type='text'
           id='name'
-          name='name'
-          autoComplete='false'
           disabled={isWorking}
           {...register('name', { required: 'This field is required' })}
         />
         {errors?.name?.message && <Errors>{errors.name.message}</Errors>}
       </InputContainer>
       <InputContainer>
-        <Heading as='h4'>Category</Heading>
+        <Label htmlFor='category'>Category</Label>
         <Ul>
           <Li>
             <Input
@@ -189,78 +188,52 @@ function CreateProductForm({ productToEdit = {} }) {
         )}
       </InputContainer>
       <InputContainer>
-        <Label htmlFor='description'>Description</Label>
+        <Label htmlFor='description1'>Description Paragraph 1</Label>
         <TextArea
-          id='description'
-          name='description'
+          id='description1'
+          name='description1'
           rows='6'
           disabled={isWorking}
-          {...register('description', {
+          {...register('description1', {
             required: 'This field is required',
           })}
         />
-        {errors?.description?.message && (
-          <Errors>{errors.description.message}</Errors>
+        {errors?.description1?.message && (
+          <Errors>{errors.description1.message}</Errors>
         )}
       </InputContainer>
       <InputContainer>
-        <Label htmlFor='totalHeight'>Total height</Label>
-        <Input
-          type='number'
-          step='0.01'
-          id='totalHeight'
+        <Label htmlFor='description2'>Description Paragraph 2</Label>
+        <TextArea
+          id='description2'
+          name='description2'
+          rows='6'
           disabled={isWorking}
-          {...register('totalHeight')}
+          {...register('description2')}
         />
       </InputContainer>
       <InputContainer>
-        <Label htmlFor='seatingHeight'>Seating height</Label>
-        <Input
-          type='number'
-          step='0.01'
-          id='seatingHeight'
+        <Label htmlFor='measurements'>Measurements</Label>
+        <TextArea
+          id='measurements'
+          name='measurements'
+          rows='6'
           disabled={isWorking}
-          {...register('seatingHeight')}
+          defaultValue='{ "seating height": 46, "total height": 84.5, "width": 55, "depth": 54 }'
+          placeholder='{ "seating height": 46, "total height": 84.5, "width": 55, "depth": 54 }'
+          {...register('measurements')}
         />
       </InputContainer>
       <InputContainer>
-        <Label htmlFor='height'>Height</Label>
-        <Input
-          type='number'
-          step='0.01'
-          id='height'
+        <Label htmlFor='measurements'>Color</Label>
+        <TextArea
+          id='color'
+          name='color'
+          rows='6'
           disabled={isWorking}
-          {...register('height')}
-        />
-      </InputContainer>
-      <InputContainer>
-        <Label htmlFor='width'>Width</Label>
-        <Input
-          type='number'
-          step='0.01'
-          id='width'
-          disabled={isWorking}
-          {...register('width')}
-        />
-      </InputContainer>
-      <InputContainer>
-        <Label htmlFor='depth'>Depth</Label>
-        <Input
-          type='number'
-          step='0.01'
-          id='depth'
-          disabled={isWorking}
-          {...register('depth')}
-        />
-      </InputContainer>
-      <InputContainer>
-        <Label htmlFor='length'>Length</Label>
-        <Input
-          type='number'
-          step='0.01'
-          id='length'
-          disabled={isWorking}
-          {...register('length')}
+          defaultValue='{ "white": "F6F6F6", "black": "292929", "stone": "AA9A8D", "orange": "F06500" }'
+          placeholder='{ "white": "F6F6F6", "black": "292929", "stone": "AA9A8D", "orange": "F06500" }'
+          {...register('color')}
         />
       </InputContainer>
       <InputContainer>

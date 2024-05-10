@@ -131,19 +131,6 @@ function ProductTable() {
         </>
       )}
     </StyledProductTable>
-    // <Row $variation='productCard'>
-    //   {pathIsManage ? (
-    //     sortedProducts.map((product) => (
-    //       <ProductCardManage key={product.id} role='row' product={product} />
-    //     ))
-    //   ) : (
-    //     <>
-    //       {sortedProducts.map((product) => (
-    //         <ProductCard key={product.id} product={product} />
-    //       ))}
-    //     </>
-    //   )}
-    // </Row>
   );
 }
 

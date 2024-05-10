@@ -51,7 +51,7 @@ function ProductCardManage({ product }) {
     unitPrice,
     image,
   } = product;
-  console.log(product);
+  // console.log(product);
 
   const mainImage = useMainImage(image)[0];
 
