@@ -169,7 +169,7 @@ function ProductPage() {
 
   if (isPending) return <Spinner />;
   const product = products.find((p) => p.id === Number(productId));
-  const defaultImage = product.variants[0].image;
+  const defaultImage = product.variants[0].variantImage;
 
   const selectedProductId = productId;
   function handleKeyDown(e) {
@@ -190,7 +190,7 @@ function ProductPage() {
 
   function handleColorChange(e) {
     setColor(e.target.value);
-    setImageVariant(variants[e.target.value].image);
+    setImageVariant(variants[e.target.value].variantImage);
   }
 
   function handleAddCartItems(cartItem) {
@@ -268,7 +268,7 @@ function ProductPage() {
                     type='radio'
                     name='color'
                     $color={variant.colorHex}
-                    $image={variant.image}
+                    $image={variant.variantImage}
                     value={index}
                     {...register('color', {
                       required: 'Please choose a color',

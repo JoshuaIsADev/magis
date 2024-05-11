@@ -1,11 +1,6 @@
-import { useState } from 'react';
-import { useFieldArray, useForm } from 'react-hook-form';
-import styled from 'styled-components';
-import { VscTrash } from 'react-icons/vsc';
+import { useForm } from 'react-hook-form';
 import { useCreateProduct } from './useCreateProduct';
 import { useEditProduct } from './useEditProduct';
-import { useMainImage } from './useMainImage';
-
 import Input from '../../ui/Input';
 import TextArea from '../../ui/TextArea';
 import Label from '../../ui/Label';
@@ -13,8 +8,11 @@ import Errors from '../../ui/Errors';
 import FileInput from '../../ui/FileInput';
 import Spinner from '../../ui/Spinner';
 import Button from '../../ui/Button';
+import { useMainImage } from './useMainImage';
+import styled from 'styled-components';
 import Img from '../../ui/Img';
 import Heading from '../../ui/Heading';
+import { useState } from 'react';
 
 const StyledCreateProductForm = styled.form`
   grid-column: span 1;
@@ -40,12 +38,6 @@ const Ul = styled.ul`
   gap: 2rem;
 `;
 
-const VariantsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
 function CreateProductForm({ productToEdit = {} }) {
   const { isCreating, createProduct } = useCreateProduct();
   const { isEditing, editProduct } = useEditProduct();
@@ -54,51 +46,65 @@ function CreateProductForm({ productToEdit = {} }) {
   const { id: editId, ...editValues } = productToEdit;
   const isEditSession = Boolean(editId);
 
-  const { register, handleSubmit, reset, formState, control } = useForm({
+  const { register, handleSubmit, reset, formState } = useForm({
     defaultValues: isEditSession ? editValues : {},
   });
   const { errors } = formState;
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: 'variants',
+  const [variantsTest, setVariantsTest] = useState({
+    variantId: '',
+    colorName: '',
+    colorHex: '',
+    inStock: '',
+    image: '',
   });
+  const [combinedVariants, setCombinedVariants] = useState([]);
+
+  //   [
+  //   {
+  //     variantId: '',
+  //     colorName: '',
+  //     colorHex: '',
+  //     inStock: '',
+  //     image: '',
+  //   },
+  // ]
+  // console.log({ productToEdit });
 
   // const mainImage = productToEdit.variants[0].image;
 
-  // function handleVariantInputChange(e) {
-  //   const { id, value } = e.target;
-  //   setVariantsTest((prevState) => ({
-  //     ...prevState,
-  //     [id]: value,
-  //   }));
-  // }
+  function handleVariantInputChange(e) {
+    const { id, value } = e.target;
+    setVariantsTest((prevState) => ({
+      ...prevState,
+      [id]: value,
+    }));
+  }
 
   function handleAddVariant(e) {
     e.preventDefault();
-    append({});
-  }
 
-  function handleDelete(e, index) {
-    e.preventDefault();
-    remove(index);
-    // console.log(fields);
-    // toast.success('Removed item');
+    setCombinedVariants([...combinedVariants, variantsTest]);
+    // console.log(`ok: ${JSON.stringify(combinedVariants)}`);
+
+    // if (variantsTest.trim() !== '') {
+    //   setCombinedVariants([...combinedVariants, variantsTest]);
+    //   console.log(`ok: ${combinedVariants}`);
+    // }
   }
 
   function onSubmit(data) {
-    // console.log(data);
-    const image = typeof data.image === 'string' ? data.image : data.image;
-    if (isEditSession)
-      editProduct(
-        { newProductData: { ...data, image }, id: editId }
-        // { onSuccess: (data) => reset() }
-      );
-    else
-      createProduct(
-        { ...data, image: image }
-        // { onSuccess: (data) => reset() }
-      );
-    // console.log(data.variants[1].variantImage);
+    console.log(data);
+    // const image = typeof data.image === 'string' ? data.image : data.image;
+    // if (isEditSession)
+    //   editProduct(
+    //     { newProductData: { ...data, image }, id: editId },
+    //     { onSuccess: (data) => reset() }
+    //   );
+    // else
+    //   createProduct(
+    //     { ...data, image: image },
+    //     { onSuccess: (data) => reset() }
+    //   );
   }
 
   function onError(errors) {
@@ -131,7 +137,6 @@ function CreateProductForm({ productToEdit = {} }) {
           <Ul>
             <Li>
               <Input
-                $variation='manage'
                 type='radio'
                 name='category'
                 id='chair'
@@ -144,7 +149,6 @@ function CreateProductForm({ productToEdit = {} }) {
             </Li>
             <Li>
               <Input
-                $variation='manage'
                 type='radio'
                 name='category'
                 id='table'
@@ -156,7 +160,6 @@ function CreateProductForm({ productToEdit = {} }) {
             </Li>
             <Li>
               <Input
-                $variation='manage'
                 type='radio'
                 name='category'
                 id='sofa'
@@ -169,7 +172,7 @@ function CreateProductForm({ productToEdit = {} }) {
           </Ul>
         </InputContainer>
 
-        {/* <InputContainer>
+        <InputContainer>
           <Label htmlFor='tags'>Tags</Label>
           <Input
             type='text'
@@ -179,7 +182,7 @@ function CreateProductForm({ productToEdit = {} }) {
             disabled={isWorking}
             {...register('tags')}
           />
-        </InputContainer> */}
+        </InputContainer>
         <InputContainer>
           <Label htmlFor='unitPrice'>Unit Price</Label>
           <Input
@@ -187,6 +190,18 @@ function CreateProductForm({ productToEdit = {} }) {
             id='unitPrice'
             disabled={isWorking}
             {...register('unitPrice', { required: 'This field is required' })}
+          />
+          {errors?.unitPrice?.message && (
+            <Errors>{errors.unitPrice.message}</Errors>
+          )}
+        </InputContainer>
+        <InputContainer>
+          <Label htmlFor='inStock'>In stock</Label>
+          <Input
+            type='number'
+            id='inStock'
+            disabled={isWorking}
+            {...register('inStock', { required: 'This field is required' })}
           />
           {errors?.unitPrice?.message && (
             <Errors>{errors.unitPrice.message}</Errors>
@@ -230,10 +245,20 @@ function CreateProductForm({ productToEdit = {} }) {
           )}
         </InputContainer>
         <InputContainer>
+          <Label htmlFor='totalHeight'>Total height</Label>
+          <Input
+            type='number'
+            step='0.01'
+            id='totalHeight'
+            disabled={isWorking}
+            {...register('totalHeight')}
+          />
+        </InputContainer>
+        <InputContainer>
           <Label htmlFor='seatingHeight'>Seating height</Label>
           <Input
             type='number'
-            step='0.1'
+            step='0.01'
             id='seatingHeight'
             disabled={isWorking}
             {...register('seatingHeight')}
@@ -243,7 +268,7 @@ function CreateProductForm({ productToEdit = {} }) {
           <Label htmlFor='height'>Height</Label>
           <Input
             type='number'
-            step='0.1'
+            step='0.01'
             id='height'
             disabled={isWorking}
             {...register('height')}
@@ -253,7 +278,7 @@ function CreateProductForm({ productToEdit = {} }) {
           <Label htmlFor='width'>Width</Label>
           <Input
             type='number'
-            step='0.1'
+            step='0.01'
             id='width'
             disabled={isWorking}
             {...register('width')}
@@ -263,7 +288,7 @@ function CreateProductForm({ productToEdit = {} }) {
           <Label htmlFor='depth'>Depth</Label>
           <Input
             type='number'
-            step='0.1'
+            step='0.01'
             id='depth'
             disabled={isWorking}
             {...register('depth')}
@@ -273,7 +298,7 @@ function CreateProductForm({ productToEdit = {} }) {
           <Label htmlFor='length'>Length</Label>
           <Input
             type='number'
-            step='0.1'
+            step='0.01'
             id='length'
             disabled={isWorking}
             {...register('length')}
@@ -281,19 +306,17 @@ function CreateProductForm({ productToEdit = {} }) {
         </InputContainer>
 
         <InputContainer>
-          <Label htmlFor='image'>Gallery images</Label>
+          <Label htmlFor='image'>Images</Label>
           <FileInput
             id='image'
-            // type='file'
+            type='file'
             accept='image/*'
             disabled={isWorking}
             multiple
-            // {...register('image')}
             {...register('image', {
               required: isEditSession ? false : 'This field is required',
             })}
           />
-          {errors?.image?.message && <Errors>{errors.image.message}</Errors>}
         </InputContainer>
         <InputContainer>
           <Heading as='h3'>Variants</Heading>
@@ -303,94 +326,56 @@ function CreateProductForm({ productToEdit = {} }) {
             ))}
           </Ul> */}
 
-          {fields.map((variant, index) => (
-            <VariantsContainer key={variant.id}>
-              <InputContainer>
-                <Label htmlFor={`variants.${index}.variantId`}>
-                  Variant id
-                </Label>
-                <Input
-                  type='text'
-                  id={`variants.${index}.variantId`}
-                  disabled={isWorking}
-                  {...register(`variants.${index}.variantId`, {
-                    required: 'This field is required',
-                  })}
-                />
-                {errors?.variantId?.message && (
-                  <Errors>{errors.variantId.message}</Errors>
-                )}
-              </InputContainer>
-
-              <InputContainer>
-                <Label htmlFor={`variants.${index}.colorName`}>
-                  Color name
-                </Label>
-                <Input
-                  type='text'
-                  id={`variants.${index}.colorName`}
-                  disabled={isWorking}
-                  {...register(`variants.${index}.colorName`, {
-                    required: 'This field is required',
-                  })}
-                />
-                {errors?.colorName?.message && (
-                  <Errors>{errors.colorName.message}</Errors>
-                )}
-              </InputContainer>
-              <InputContainer>
-                <Label htmlFor={`variants.${index}.colorHex`}>Color hex</Label>
-                <Input
-                  type='text'
-                  id={`variants.${index}.colorHex`}
-                  disabled={isWorking}
-                  {...register(`variants.${index}.colorHex`, {
-                    required: 'This field is required',
-                  })}
-                />
-                {errors?.colorHex?.message && (
-                  <Errors>{errors.colorHex.message}</Errors>
-                )}
-              </InputContainer>
-              <InputContainer>
-                <Label htmlFor={`variants.${index}.inStock`}>In stock</Label>
-                <Input
-                  type='number'
-                  step='1'
-                  id={`variants.${index}.inStock`}
-                  disabled={isWorking}
-                  {...register(`variants.${index}.inStock`, {
-                    required: 'This field is required',
-                  })}
-                />
-                {errors?.inStock?.message && (
-                  <Errors>{errors.inStock.message}</Errors>
-                )}
-              </InputContainer>
-
-              <InputContainer>
-                <Label htmlFor={`variants.${index}.variantImage`}>image</Label>
-                <FileInput
-                  accept='image/*'
-                  id={`variants.${index}.variantImage`}
-                  disabled={isWorking}
-                  {...register(`variants.${index}.variantImage`, {
-                    required: isEditSession ? false : 'This field is required',
-                  })}
-                />
-                {errors?.variantImage?.message && (
-                  <Errors>{errors.variantImage.message}</Errors>
-                )}
-              </InputContainer>
-              <Button
-                $variation='trash'
-                onClick={(e) => handleDelete(e, index)}
-              >
-                <VscTrash />
-              </Button>
-            </VariantsContainer>
-          ))}
-
+          <Label htmlFor='variantId'>Variant id</Label>
+          <Input
+            type='text'
+            id='variantId'
+            disabled={isWorking}
+            value={variantsTest.variantId}
+            onChange={handleVariantInputChange}
+          />
+          <Label htmlFor='colorName'>Color name</Label>
+          <Input
+            type='text'
+            id='colorName'
+            disabled={isWorking}
+            value={variantsTest.colorName}
+            onChange={handleVariantInputChange}
+          />
+          <Label htmlFor='colorHex'>Color hex</Label>
+          <Input
+            type='text'
+            id='colorHex'
+            disabled={isWorking}
+            value={variantsTest.colorHex}
+            onChange={handleVariantInputChange}
+          />
+          <Label htmlFor='inStock'>In stock</Label>
+          <Input
+            type='number'
+            step='1'
+            id='inStock'
+            disabled={isWorking}
+            value={variantsTest.inStock}
+            onChange={handleVariantInputChange}
+          />
+          {/* <Label htmlFor='image'>Image</Label>
+          <Input
+            type='text'
+            id='image'
+            disabled={isWorking}
+            value={variantsTest.image}
+            onChange={handleVariantInputChange}
+          /> */}
+          <Label htmlFor='combinedVariants'>Variants</Label>
+          <Input
+            type='text'
+            id='combinedVariants'
+            disabled={isWorking}
+            value={combinedVariants}
+            // onChange={(e) => setVariantsTest(e.target.value)}
+            {...register('variantsTest')}
+          />
           <Button onClick={handleAddVariant}>Add variant</Button>
         </InputContainer>
         <InputContainer>
@@ -403,6 +388,26 @@ function CreateProductForm({ productToEdit = {} }) {
           </Button>
         </InputContainer>
       </StyledCreateProductForm>
+      {/* <StyledCreateProductForm>
+        <InputContainer>
+          <Heading as='h3'>Variants</Heading>
+          <Ul>
+            {combinedVariants.map((variant, index) => (
+              <li key={index}>{variant}</li>
+            ))}
+          </Ul>
+          <Label htmlFor='variantsTest'>Variants Test</Label>
+          <Input
+            type='text'
+            id='variantsTest'
+            disabled={isWorking}
+            value={variantsTest}
+            onChange={(e) => setVariantsTest(e.target.value)}
+            // {...register('variantsTest')}
+          />
+          <Button onClick={handleAddVariant}>Add variant</Button>
+        </InputContainer>
+      </StyledCreateProductForm> */}
     </>
   );
 }

@@ -1,6 +1,13 @@
 import styled, { css } from 'styled-components';
 
 const variations = {
+  manage: css`
+    background-color: var(--color-grey-0);
+    &:checked {
+      background-color: var(--color-grey-900);
+      border-color: var(--color-grey-200);
+    }
+  `,
   order: css`
     text-align: center;
     margin: 0;

@@ -3,34 +3,36 @@ import { VscChromeClose } from 'react-icons/vsc';
 import Button from './Button';
 import Heading from './Heading';
 
-const StyledModal = styled.div`
-  display: grid;
-  grid-template-columns: reapeat(2, 1fr);
-  grid-template-areas:
-    'heading closeButton'
-    'form form';
-  top: 0;
-  z-index: 20;
-  background-color: var(--color-grey-0);
-  width: 100%;
-  max-width: 80rem;
-  height: 100%;
-  margin: auto;
-  overflow-x: hidden;
-  overflow-y: auto;
-  border: var(--border);
-`;
-
 const ModalContainer = styled.div`
   position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
   top: 0;
+  left: 0;
   z-index: 20;
   width: 100%;
   height: 100%;
-  padding: 5rem;
+`;
+
+const StyledModal = styled.div`
+  position: relative;
+  display: grid;
+  grid-template-columns: reapeat(2, 1fr);
+  grid-template-areas:
+    'heading closeButton'
+    'form form';
+  top: 0;
+  /* left: 0; */
+  z-index: 20;
+  background-color: var(--color-grey-0);
+  width: 100%;
+  max-width: 120rem;
+  height: 100%;
+  margin: 0 auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: var(--border);
 `;
 
 const ModalBg = styled.div`
@@ -75,7 +77,7 @@ function Modal({ children, onClose, heading }) {
         </CloseButtonContainer>
         <FormContainer>{children}</FormContainer>
       </StyledModal>
-      <ModalBg />;
+      <ModalBg />
     </ModalContainer>
   );
 }

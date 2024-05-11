@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import ProductTable from '../features/products/ProductTable';
 import CreateProductForm from '../features/products/CreateProductForm';
 import Button from '../ui/Button';
@@ -46,10 +46,7 @@ function ManageProducts() {
       <FilterSort />
       <ProductTable />
       <AddButtonContainer>
-        <Button
-          $variation='primary'
-          onClick={() => setShowForm((show) => !show)}
-        >
+        <Button $variation='primary' onClick={toggleModal}>
           Add new product
         </Button>
       </AddButtonContainer>

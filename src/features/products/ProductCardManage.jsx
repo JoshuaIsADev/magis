@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import CreateProductForm from './CreateProductForm';
+import { VscTrash } from 'react-icons/vsc';
 import { useDeleteProduct } from './UseDeleteProduct';
 import { useMainImage } from './useMainImage';
+import CreateProductForm from './CreateProductForm';
 import Heading from '../../ui/Heading';
 import Button from '../../ui/Button';
 import Modal from '../../ui/Modal';
@@ -41,6 +42,7 @@ const ButtonContainer = styled.div`
 function ProductCardManage({ product }) {
   const [showForm, setShowForm] = useState(false);
   const { isDeleting, deleteProduct } = useDeleteProduct();
+  console.log(product);
 
   const {
     id: productId,
@@ -51,8 +53,8 @@ function ProductCardManage({ product }) {
     unitPrice,
     image,
   } = product;
-  // console.log(product);
 
+  // const mainImage = product.variants[0].variantImage;
   const mainImage = useMainImage(image)[0];
 
   function toggleModal() {
@@ -80,7 +82,7 @@ function ProductCardManage({ product }) {
               onClick={() => deleteProduct(productId)}
               disabled={isDeleting}
             >
-              Delete
+              <VscTrash />
             </Button>
             <Button
               $variation='primary'
