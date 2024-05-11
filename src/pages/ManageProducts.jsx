@@ -53,7 +53,7 @@ function ManageProducts() {
 
       {showForm && (
         <Modal onClose={toggleModal} heading='Create a new product'>
-          <CreateProductForm />
+          <CreateProductForm onClose={toggleModal} />
         </Modal>
       )}
     </StyledManageProducts>

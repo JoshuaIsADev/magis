@@ -11,6 +11,7 @@ import Heading from '../ui/Heading';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
 import Errors from '../ui/Errors';
+import ImageGallery from '../ui/ImageGallery';
 
 const StyledProductPage = styled.section`
   display: grid;
@@ -148,13 +149,6 @@ const MeasurementsContainer = styled.article`
 const Img = styled.img`
   object-fit: contain;
   max-width: 30rem;
-`;
-
-const ImgGallery = styled.img`
-  width: 100%;
-  height: 100rem;
-  object-fit: cover;
-  object-position: center;
 `;
 
 function ProductPage() {
@@ -327,7 +321,7 @@ function ProductPage() {
         <GalleryHeading>
           <Heading as='h3'>Gallery</Heading>
         </GalleryHeading>
-        <ImgGallery src={product.image[8]}></ImgGallery>
+        <ImageGallery images={product.image}></ImageGallery>
       </GalleryContainer>
       <MaterialsHeadingContainer>
         <Heading as='h3'>Materials</Heading>

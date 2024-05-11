@@ -37,6 +37,18 @@ const variations = {
       color: var(--color-grey-300);
     }
   `,
+  gallery: css`
+    width: 4rem;
+    height: 1.2rem;
+    border-top: 0.5rem solid var(--color-grey-0);
+    border-bottom: 0.5rem solid var(--color-grey-0);
+    background-color: var(--color-grey-900);
+    &:hover,
+    &:active,
+    &:active.link {
+      background-color: var(--color-grey-200);
+    }
+  `,
 };
 
 const Button = styled.button`

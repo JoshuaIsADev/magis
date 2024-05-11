@@ -18,6 +18,10 @@ const variations = {
     max-width: 20rem;
     max-height: 20rem;
   `,
+  gallery: css`
+    height: calc(100vh - 20rem);
+    aspect-ratio: 1;
+  `,
 };
 
 const Img = styled.img`

@@ -3,6 +3,7 @@ import { createEditProduct } from '../../services/apiProducts';
 import toast from 'react-hot-toast';
 
 export function useEditProduct() {
+  // console.log(onClose);
   const queryClient = useQueryClient();
 
   const { mutate: editProduct, isPending: isEditing } = useMutation({

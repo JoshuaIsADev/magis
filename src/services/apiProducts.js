@@ -13,8 +13,8 @@ export async function getProducts() {
   return data;
 }
 
-export async function createEditProduct(newProduct, id) {
-  console.log(newProduct, id);
+export async function createEditProduct(newProduct, id, onClose) {
+  console.log(onClose);
 
   // const newProduct.image = newProduct.image;
   const hasVariantImagePath =
@@ -95,6 +95,7 @@ export async function createEditProduct(newProduct, id) {
     console.error(error);
     throw new Error('Product could not be created');
   }
+
   return data;
 }
 
