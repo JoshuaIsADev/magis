@@ -42,7 +42,7 @@ const ButtonContainer = styled.div`
 function ProductCardManage({ product }) {
   const [showForm, setShowForm] = useState(false);
   const { isDeleting, deleteProduct } = useDeleteProduct();
-  console.log(product);
+  // console.log(product);
 
   const {
     id: productId,

@@ -18,14 +18,13 @@ export async function createEditProduct(newProduct, id) {
 
   // const newProduct.image = newProduct.image;
   const hasVariantImagePath =
-    newProduct.variants[0].variantImage[0]?.startsWith?.(supabaseUrl);
+    newProduct.variants[0].variantImage?.startsWith?.(supabaseUrl);
   let variantImageNameArray = [];
   let variantImagePathArray = [];
 
   for (let variant of newProduct.variants) {
-    // console.log(variant.variantImage[0].id);
     const variantImageName = hasVariantImagePath
-      ? variant.variantImage[0]
+      ? variant.variantImage
       : await getImageName(variant.variantImage[0]);
     const variantImagePath = hasVariantImagePath
       ? variant.variantImage
@@ -34,9 +33,11 @@ export async function createEditProduct(newProduct, id) {
     variantImageNameArray.push(variantImageName);
     variantImagePathArray.push(variantImagePath);
 
-    const { error: storageError } = await supabase.storage
-      .from('product-images')
-      .upload(variantImageName, variant.variantImage[0]);
+    const { error: storageError } = hasVariantImagePath
+      ? variant.variantImage
+      : await supabase.storage
+          .from('product-images')
+          .upload(variantImageName, variant.variantImage[0]);
     if (storageError) {
       await supabase
         .from('products')
@@ -48,7 +49,6 @@ export async function createEditProduct(newProduct, id) {
       );
     }
     variant.variantImage = variantImagePath;
-    console.log(variant.variantImage);
   }
 
   const hasImagePath = newProduct.image[0]?.startsWith?.(supabaseUrl);
