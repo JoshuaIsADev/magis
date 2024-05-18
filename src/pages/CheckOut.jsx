@@ -4,7 +4,7 @@ import { CartContext } from '../context/cartContext';
 import { useProducts } from '../features/products/useProducts';
 import CreateOrderForm from '../features/order/CreateOrderForm';
 import Spinner from '../ui/Spinner';
-import Heading from '../ui/Heading';
+import { Heading, HeadingContainer } from '../ui/Heading.jsx';
 import Img from '../ui/Img';
 
 const StyledCheckOut = styled.section`
@@ -60,7 +60,7 @@ const InfoRow = styled.div`
   justify-content: space-between;
 `;
 
-const HeadingContainer = styled.div`
+const HeadingContainer2 = styled.div`
   grid-area: cartHeading;
   padding: var(--cell);
   border-left: var(--border);
@@ -94,9 +94,9 @@ function CheckOut() {
 
   return (
     <StyledCheckOut>
-      <HeadingContainer>
+      <HeadingContainer2>
         <Heading as='h3'>Order summary</Heading>
-      </HeadingContainer>
+      </HeadingContainer2>
       <ShippingHeadingContainer>
         <Heading as='h3'>Shipping details</Heading>
       </ShippingHeadingContainer>

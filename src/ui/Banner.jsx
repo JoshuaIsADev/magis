@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import Heading from './Heading';
+import { Heading, HeadingContainer } from './Heading.jsx';
 
 const BannerAnimation = keyframes`
   0% {

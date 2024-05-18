@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { VscChromeClose } from 'react-icons/vsc';
 import Button from './Button';
-import Heading from './Heading';
+import { Heading, HeadingContainer } from './Heading.jsx';
 
 const ModalContainer = styled.div`
   position: fixed;
@@ -45,7 +45,7 @@ const ModalBg = styled.div`
   height: 100%;
 `;
 
-const HeadingContainer = styled.div`
+const HeadingContainer2 = styled.div`
   grid-area: heading;
   padding: var(--cell);
   border-bottom: var(--border);
@@ -67,9 +67,9 @@ function Modal({ children, onClose, heading }) {
   return (
     <ModalContainer>
       <StyledModal>
-        <HeadingContainer>
+        <HeadingContainer2>
           <Heading as='h3'>{heading}</Heading>
-        </HeadingContainer>
+        </HeadingContainer2>
         <CloseButtonContainer>
           <Button onClick={onClose}>
             <VscChromeClose />

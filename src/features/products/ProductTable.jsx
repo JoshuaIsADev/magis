@@ -6,6 +6,7 @@ import ProductCardManage from './ProductCardManage';
 import styled from 'styled-components';
 
 const StyledProductTable = styled.div`
+  grid-column: span 5;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: var(--grid-gap);

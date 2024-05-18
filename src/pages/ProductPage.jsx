@@ -7,74 +7,50 @@ import Spinner from '../ui/Spinner';
 import styled from 'styled-components';
 import { useContext, useState } from 'react';
 import { CartContext } from '../context/cartContext';
-import Heading from '../ui/Heading';
+import { Heading, HeadingContainer } from '../ui/Heading.jsx';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
 import Errors from '../ui/Errors';
 import ImageGallery from '../ui/ImageGallery';
+import Img from '../ui/Img.jsx';
 
 const StyledProductPage = styled.section`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-areas:
-    'heading heading heading heading'
-    'showcase showcase configure configure'
-    'aboutHeading . about .'
-    'gallery gallery gallery gallery'
-    'materialsHeading materials measurementsHeading measurements';
-  padding-top: var(--top);
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: var(--grid-gap);
 `;
 
-const HeadingContainer = styled.div`
-  grid-area: heading;
-  padding: var(--cell);
-  border-bottom: var(--border);
-  border-left: var(--border);
+const Empty = styled.div`
+  grid-area: span 1;
 `;
 
-const ShowcaseContainer = styled.article`
-  grid-area: showcase;
-  min-height: 60vh;
+const ColumnShowcase = styled.article`
+  grid-column: 1 / span 3;
+  height: 85vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-right: var(--border);
-  padding: var(--cell);
-  border-bottom: var(--border);
+  padding: 10% 0;
+  /* padding: var(--cell); */
 `;
 
-const ConfigureContainer = styled.article`
-  grid-area: configure;
-  min-height: 90vh;
+const ColumnConfigure = styled.article`
+  grid-column: 5 / span 1;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  border-bottom: var(--border);
-`;
-
-const Name = styled.div`
-  padding: var(--cell);
-`;
-
-const ConfigureOptionsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 10rem;
-`;
-
-const ConfigureOptions = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: var(--cell);
-  border-top: var(--border);
-  &:last-child {
-    border-bottom: var(--border);
-  }
+  justify-content: center;
+  gap: 2rem;
 `;
 
 const ColorContainer = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
+`;
+
+const SubmitContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const QuantityContainer = styled.div`
@@ -82,18 +58,28 @@ const QuantityContainer = styled.div`
   gap: 1rem;
 `;
 
-const AboutHeadingContainer = styled.div`
-  grid-area: aboutHeading;
-  padding: var(--cell);
+const ColumnInfo = styled.article`
+  grid-column: 5 / span 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
 `;
 
-const AboutParagraphContainer = styled.div`
-  grid-area: about;
+const AboutContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: var(--cell);
-  padding-bottom: 20rem;
+`;
+
+const MeasurementsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const MeasurementsRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const GalleryContainer = styled.article`
@@ -101,8 +87,6 @@ const GalleryContainer = styled.article`
   display: flex;
   flex-direction: column;
   padding: var(--cell);
-  border-top: var(--border);
-  border-bottom: var(--border);
 `;
 
 const GalleryHeading = styled.div`
@@ -114,7 +98,6 @@ const MaterialsHeadingContainer = styled.article`
   grid-area: materialsHeading;
   display: flex;
   padding: var(--cell);
-  border-bottom: var(--border);
 `;
 
 const MaterialsContainer = styled.article`
@@ -125,30 +108,12 @@ const MaterialsContainer = styled.article`
   gap: 2rem;
   padding: var(--cell);
   padding-bottom: 20rem;
-  border-bottom: var(--border);
-  border-right: var(--border);
 `;
 
 const MeasurementsHeadingContainer = styled.article`
   grid-area: measurementsHeading;
   display: flex;
   padding: var(--cell);
-  border-bottom: var(--border);
-`;
-
-const MeasurementsContainer = styled.article`
-  grid-area: measurements;
-  display: flex;
-  flex-direction: column;
-  padding: var(--cell);
-  padding-bottom: 20rem;
-  border-bottom: var(--border);
-  border-right: var(--border);
-`;
-
-const Img = styled.img`
-  object-fit: contain;
-  max-width: 30rem;
 `;
 
 function ProductPage() {
@@ -227,54 +192,41 @@ function ProductPage() {
 
   const variants = product.variants;
   return (
-    <StyledProductPage>
-      <HeadingContainer>
-        <Heading as='h3'>Shop</Heading>
-      </HeadingContainer>
-      <ShowcaseContainer>
-        <Img src={imageVariant || defaultImage} />
-      </ShowcaseContainer>
-      <ConfigureContainer>
-        <Name>
-          <Heading as='h3'>{product.name}</Heading>
-        </Name>
-        <ConfigureOptionsContainer>
-          <ConfigureOptions>
-            <Heading as='h3'>Designed by</Heading>
-            <p className='upper'>{product.designer}</p>
-          </ConfigureOptions>
-          <ConfigureOptions>
-            <Heading as='h3'>Unit price</Heading>
-            <p className='upper'>${product.unitPrice}</p>
-          </ConfigureOptions>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <ConfigureOptions>
-              <Heading as='h3'>Colors</Heading>
-              <ColorContainer>
-                {errors?.color?.message && (
-                  <Errors>{errors.color.message}</Errors>
-                )}
-                {variants.map((variant, index) => (
-                  <Input
-                    key={index}
-                    $variation='product'
-                    id='color'
-                    type='radio'
-                    name='color'
-                    $color={variant.colorHex}
-                    $image={variant.variantImage}
-                    value={index}
-                    {...register('color', {
-                      required: 'Please choose a color',
-                    })}
-                    onChange={handleColorChange}
-                    onKeyDown={handleKeyDown}
-                  ></Input>
-                ))}
-              </ColorContainer>
-            </ConfigureOptions>
-            <ConfigureOptions>
-              <Heading as='h3'>Quantity</Heading>
+    <>
+      <StyledProductPage>
+        <HeadingContainer text={`Shop / ${product.name}`} />
+        <ColumnShowcase>
+          <Img src={imageVariant || defaultImage} />
+        </ColumnShowcase>
+        <Empty />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <ColumnConfigure>
+            <Heading as='h3'>{product.name}</Heading>
+            <p>{product.designer}</p>
+            <p>${product.unitPrice}</p>
+            <ColorContainer>
+              {errors?.color?.message && (
+                <Errors>{errors.color.message}</Errors>
+              )}
+              {variants.map((variant, index) => (
+                <Input
+                  key={index}
+                  $variation='product'
+                  id='color'
+                  type='radio'
+                  name='color'
+                  $color={variant.colorHex}
+                  $image={variant.variantImage}
+                  value={index}
+                  {...register('color', {
+                    required: 'Please choose a color',
+                  })}
+                  onChange={handleColorChange}
+                  onKeyDown={handleKeyDown}
+                ></Input>
+              ))}
+            </ColorContainer>
+            <SubmitContainer>
               <QuantityContainer>
                 <Button type='button' onClick={handleSubtract}>
                   <VscRemove />
@@ -298,24 +250,69 @@ function ProductPage() {
                   <Errors>{errors.quantity.message}</Errors>
                 )}
               </QuantityContainer>
-            </ConfigureOptions>
-            <ConfigureOptions>
               <Button $variation='primary' type='submit' disabled={disabled}>
                 Add to cart
               </Button>
-            </ConfigureOptions>
-          </form>
-        </ConfigureOptionsContainer>
-      </ConfigureContainer>
-
-      <AboutHeadingContainer>
+            </SubmitContainer>
+          </ColumnConfigure>
+        </form>
+      </StyledProductPage>
+      <StyledProductPage>
+        <HeadingContainer text='Info' />
+        <ColumnInfo>
+          <AboutContainer>
+            {aboutParagraphs.map((description, index) => (
+              <p key={index}>{description}</p>
+            ))}
+          </AboutContainer>
+          <p>{product.material}</p>
+          <MeasurementsContainer>
+            {product.totalHeight && (
+              <MeasurementsRow>
+                <Heading as='h3'>Total height</Heading>
+                <p>{product.totalHeight}</p>
+              </MeasurementsRow>
+            )}
+            {product.seatingHeight && (
+              <MeasurementsRow>
+                <Heading as='h3'>Seating height</Heading>
+                <p>{product.seatingHeight}</p>
+              </MeasurementsRow>
+            )}
+            {product.height && (
+              <MeasurementsRow>
+                <Heading as='h3'>Height</Heading>
+                <p>{product.height}</p>
+              </MeasurementsRow>
+            )}
+            {product.width && (
+              <MeasurementsRow>
+                <Heading as='h3'>Width</Heading>
+                <p>{product.width}</p>
+              </MeasurementsRow>
+            )}
+            {product.length && (
+              <MeasurementsRow>
+                <Heading as='h3'>Length</Heading>
+                <p>{product.length}</p>
+              </MeasurementsRow>
+            )}
+            {product.depth && (
+              <MeasurementsRow>
+                <Heading as='h3'>Depth</Heading>
+                <p>{product.depth}</p>
+              </MeasurementsRow>
+            )}
+          </MeasurementsContainer>
+        </ColumnInfo>
+        {/* <AboutHeadingContainer>
         <Heading as='h3'>About</Heading>
       </AboutHeadingContainer>
-      <AboutParagraphContainer>
+      <ColumnInfo>
         {aboutParagraphs.map((description, index) => (
           <p key={index}>{description}</p>
         ))}
-      </AboutParagraphContainer>
+      </ColumnInfo>
 
       <GalleryContainer>
         <GalleryHeading>
@@ -341,8 +338,9 @@ function ProductPage() {
         {product.width && <p>Width: {product.width}</p>}
         {product.length && <p>Length: {product.length}</p>}
         {product.depth && <p>Depth: {product.depth}</p>}
-      </MeasurementsContainer>
-    </StyledProductPage>
+      </MeasurementsContainer> */}
+      </StyledProductPage>
+    </>
   );
 }
 

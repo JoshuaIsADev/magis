@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Img from '../../ui/Img';
 import { capitalize } from '../../utils/capitalize';
-import Heading from '../../ui/Heading';
+import { Heading, HeadingContainer } from '../../ui/Heading.jsx';
 
 const ItemsContainer = styled.div`
   display: flex;

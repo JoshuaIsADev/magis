@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Heading from './Heading';
+import { Heading, HeadingContainer } from './Heading.jsx';
 
 const StyledTicker = styled.div`
   grid-area: ticker;

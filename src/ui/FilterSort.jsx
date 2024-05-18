@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { VscDebugBreakpointFunction } from 'react-icons/vsc';
-import Heading from './Heading';
+import { Heading, HeadingContainer } from './Heading.jsx';
 import Button from './Button';
 import styled, { keyframes } from 'styled-components';
 
 const StyledFilterSort = styled.div`
+  grid-column: span 5;
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: var(--grid-gap);

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import SignUpForm from '../features/authentication/SignUpForm';
-import Heading from '../ui/Heading';
+import { Heading, HeadingContainer } from '../ui/Heading.jsx';
 
 const StyledSignUp = styled.section`
   display: grid;
@@ -14,7 +14,7 @@ const StyledSignUp = styled.section`
   padding-top: var(--top);
 `;
 
-const HeadingContainer = styled.div`
+const HeadingContainer2 = styled.div`
   grid-area: heading;
   padding: var(--cell);
   border-bottom: var(--border);
@@ -24,9 +24,9 @@ const HeadingContainer = styled.div`
 function SignUp() {
   return (
     <StyledSignUp>
-      <HeadingContainer>
+      <HeadingContainer2>
         <Heading as='h3'>Sign up</Heading>
-      </HeadingContainer>
+      </HeadingContainer2>
       <SignUpForm />
     </StyledSignUp>
   );

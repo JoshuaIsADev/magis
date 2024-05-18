@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Heading from './Heading';
+import { Heading, HeadingContainer } from './Heading.jsx';
 import Img from './Img';
 
 const StyledHero = styled.section`
@@ -14,7 +14,7 @@ const StyledHero = styled.section`
   border-left: var(--border);
 `;
 
-const HeadingContainer = styled.div`
+const HeadingContainer2 = styled.div`
   grid-area: heading;
   border-bottom: var(--border);
   padding: 1rem var(--cell);
@@ -37,11 +37,11 @@ const AboutContainer = styled.div`
 function Hero({ text }) {
   return (
     <StyledHero>
-      <HeadingContainer>
+      <HeadingContainer2>
         <Heading as='h2' $variation='hero'>
           {text}
         </Heading>
-      </HeadingContainer>
+      </HeadingContainer2>
 
       <ImageContainer>
         <Img

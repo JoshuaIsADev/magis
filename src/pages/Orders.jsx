@@ -3,7 +3,7 @@ import { useUser } from '../features/authentication/useUser';
 import { useOrders } from '../features/order/useOrders';
 import Spinner from '../ui/Spinner';
 import OrderCard from '../features/order/OrderCard';
-import Heading from '../ui/Heading';
+import { Heading, HeadingContainer } from '../ui/Heading.jsx';
 
 const StyledOrders = styled.section`
   display: grid;
@@ -12,7 +12,7 @@ const StyledOrders = styled.section`
   padding-top: var(--top);
 `;
 
-const HeadingContainer = styled.div`
+const HeadingContainer2 = styled.div`
   grid-area: heading;
   padding: var(--cell);
   border-bottom: var(--border);
@@ -70,9 +70,9 @@ function Orders() {
 
   return (
     <StyledOrders>
-      <HeadingContainer>
+      <HeadingContainer2>
         <Heading as='h3'>Your orders</Heading>
-      </HeadingContainer>
+      </HeadingContainer2>
       <OrderTable>
         {ordersWithParsedProducts.map((order) => (
           <OrderContainer key={order.id}>

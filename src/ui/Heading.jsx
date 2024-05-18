@@ -71,4 +71,19 @@ const Heading = styled.h1`
     `}
 `;
 
-export default Heading;
+const StyledHeadingContainer = styled.div`
+  grid-column: span 5;
+  border-bottom: var(--border);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+`;
+
+function HeadingContainer({ text }) {
+  return (
+    <StyledHeadingContainer>
+      <Heading as='h3'>{text}</Heading>
+    </StyledHeadingContainer>
+  );
+}
+
+export { Heading, HeadingContainer };

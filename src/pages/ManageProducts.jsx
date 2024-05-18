@@ -5,7 +5,7 @@ import Button from '../ui/Button';
 import Modal from '../ui/Modal';
 import styled from 'styled-components';
 import FilterSort from '../ui/FilterSort';
-import Heading from '../ui/Heading';
+import { Heading, HeadingContainer } from '../ui/Heading.jsx';
 
 const StyledManageProducts = styled.section`
   display: grid;
@@ -18,7 +18,7 @@ const StyledManageProducts = styled.section`
   padding-top: var(--top);
 `;
 
-const HeadingContainer = styled.div`
+const HeadingContainer2 = styled.div`
   grid-area: heading;
   padding: var(--cell);
   border-bottom: var(--border);
@@ -40,9 +40,9 @@ function ManageProducts() {
 
   return (
     <StyledManageProducts>
-      <HeadingContainer>
+      <HeadingContainer2>
         <Heading as='h3'>Manage products</Heading>
-      </HeadingContainer>
+      </HeadingContainer2>
       <FilterSort />
       <ProductTable />
       <AddButtonContainer>

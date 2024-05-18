@@ -23,18 +23,27 @@ const variations = {
 
   primary: css`
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 300;
     letter-spacing: var(--letter-space);
     text-transform: uppercase;
+    padding: 0.5rem 1rem 0.4rem;
+    border: 1px solid var(--color-grey-900);
+    border-radius: 5px;
     color: ${(props) => props.$color};
+    color: var(--color-grey-0);
+    background-color: var(--color-grey-900);
     transition: 0.1s ease-in;
-    text-decoration: underline;
-    text-underline-offset: 0.3rem;
-    text-decoration-thickness: 1px;
+    text-decoration: none;
+    text-underline-offset: 0;
+    text-decoration-thickness: 0;
     &:hover,
     &:active,
     &.active:link {
-      color: var(--color-grey-300);
+      color: var(--color-grey-900);
+      background-color: var(--color-grey-0);
+      text-decoration: none;
+      text-underline-offset: 0;
+      text-decoration-thickness: 0;
     }
   `,
   secondary: css`

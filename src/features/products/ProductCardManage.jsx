@@ -4,7 +4,7 @@ import { VscTrash } from 'react-icons/vsc';
 import { useDeleteProduct } from './UseDeleteProduct';
 import { useMainImage } from './useMainImage';
 import CreateProductForm from './CreateProductForm';
-import Heading from '../../ui/Heading';
+import { Heading, HeadingContainer } from '../../ui/Heading.jsx';
 import Button from '../../ui/Button';
 import Modal from '../../ui/Modal';
 import Img from '../../ui/Img';

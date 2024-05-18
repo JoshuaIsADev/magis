@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { useMainImage } from './useMainImage';
-import Heading from '../../ui/Heading';
+import { Heading, HeadingContainer } from '../../ui/Heading.jsx';
 import Img from '../../ui/Img';
 import StyledLink from '../../ui/StyledLink';
 

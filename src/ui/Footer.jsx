@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import Heading from './Heading';
+import { Heading, HeadingContainer } from './Heading.jsx';
 
 const StyledFooter = styled.footer`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: var(--grid-gap);
   border-top: var(--border);
-  margin-top: 10rem;
+  margin-top: 2rem;
   padding-top: 0.75rem;
 `;
 

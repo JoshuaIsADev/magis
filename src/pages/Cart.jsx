@@ -5,7 +5,7 @@ import { useProducts } from '../features/products/useProducts';
 import Spinner from '../ui/Spinner';
 import StyledLink from '../ui/StyledLink';
 import CartForm from '../features/cart/CartForm';
-import Heading from '../ui/Heading';
+import { Heading, HeadingContainer } from '../ui/Heading.jsx';
 import Button from '../ui/Button';
 
 const StyledCart = styled.section`
@@ -20,7 +20,7 @@ const StyledCart = styled.section`
   padding-top: var(--top);
 `;
 
-const HeadingContainer = styled.div`
+const HeadingContainer2 = styled.div`
   grid-area: cartHeading;
   padding: var(--cell);
   border-left: var(--border);
@@ -70,9 +70,9 @@ function Cart() {
   return (
     <>
       <StyledCart>
-        <HeadingContainer>
+        <HeadingContainer2>
           <Heading as='h3'>Cart</Heading>
-        </HeadingContainer>
+        </HeadingContainer2>
         <SummaryHeadingContainer>
           <Heading as='h3'>Order summary</Heading>
         </SummaryHeadingContainer>

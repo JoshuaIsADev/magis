@@ -12,7 +12,7 @@ import FileInput from '../../ui/FileInput';
 import Spinner from '../../ui/Spinner';
 import Button from '../../ui/Button';
 import Img from '../../ui/Img';
-import Heading from '../../ui/Heading';
+import { Heading, HeadingContainer } from '../../ui/Heading.jsx';
 
 const StyledCreateProductForm = styled.form`
   grid-column: span 1;

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import toast from 'react-hot-toast';
 import { CartContext } from '../../context/cartContext';
 import Button from '../../ui/Button';
-import Heading from '../../ui/Heading';
+import { Heading, HeadingContainer } from '../../ui/Heading.jsx';
 import Img from '../../ui/Img';
 
 const StyledCartForm = styled.form`
