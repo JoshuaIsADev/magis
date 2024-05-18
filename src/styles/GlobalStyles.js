@@ -90,7 +90,7 @@ a {
 p {
   font-size: 1rem;
       font-weight: 500;
-      line-height: 1.5rem;
+      line-height: 1rem;
       letter-spacing: var(--letter-space);
 }
 

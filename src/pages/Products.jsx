@@ -37,8 +37,8 @@ function Products() {
         <Heading as='h3'>Shop the collection</Heading>
       </HeadingContainer>
       <FilterSort />
-      {/* <ProductTable />
-      <Banner
+      <ProductTable />
+      {/* <Banner
         text='Creating beautiful spaces indoors and outdoors. '
         size='h1'
       /> */}

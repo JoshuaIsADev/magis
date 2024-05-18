@@ -6,19 +6,9 @@ import ProductCardManage from './ProductCardManage';
 import styled from 'styled-components';
 
 const StyledProductTable = styled.div`
-  grid-area: productTable;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 1px;
-  background-color: var(--color-grey-200);
-  &::after {
-    content: '';
-    background-color: var(--color-grey-0);
-    grid-column: span 1;
-  }
-  border-bottom: var(--border);
-  border-right: var(--border);
-  border-left: var(--border);
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: var(--grid-gap);
 `;
 
 function ProductTable() {

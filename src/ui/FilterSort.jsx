@@ -9,6 +9,7 @@ const StyledFilterSort = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: var(--grid-gap);
+  padding-bottom: 4rem;
 `;
 
 const ColumnMenuButton = styled.div`
@@ -47,7 +48,7 @@ const ColumnFilterSort = styled.div`
   grid-column: span 1;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.25rem;
 `;
 
 function FilterSort() {
@@ -289,12 +290,10 @@ function FilterSort() {
           </Button>
         </ColumnFilterSort>
         <ColumnFilterSort>
-          {/* <MenuColumn className={showDropdown ? 'applyButton' : ''}> */}
           <Button $variation='secondary' onClick={() => setShowDropdown(false)}>
             Apply
           </Button>
         </ColumnFilterSort>
-        {/* </MenuColumn> */}
       </FilterSortDropdown>
     </StyledFilterSort>
   );

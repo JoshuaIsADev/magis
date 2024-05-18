@@ -7,9 +7,12 @@ import StyledLink from '../../ui/StyledLink';
 
 const StyledProductCard = styled.div`
   grid-column: span 1;
-  display: grid;
   grid-template-columns: repeat(2, 1fr);
+  display: flex;
   background-color: var(--color-grey-0);
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 `;
 
 const ImageContainer = styled.div`
@@ -20,13 +23,7 @@ const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: var(--cell);
-`;
-
-const InfoRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  gap: 0.5rem;
 `;
 
 function ProductCard({ product }) {
@@ -44,6 +41,19 @@ function ProductCard({ product }) {
 
   return (
     <StyledProductCard>
+      <InfoContainer>
+        <Heading as='h3'>{name}</Heading>
+        <p>${unitPrice}</p>
+        <p>{designer}</p>
+        <StyledLink
+          $variation='underline'
+          to={`/product/${productId}`}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          Shop
+        </StyledLink>
+      </InfoContainer>
       <ImageContainer>
         <StyledLink
           $variation='productCard'
@@ -58,23 +68,6 @@ function ProductCard({ product }) {
           />
         </StyledLink>
       </ImageContainer>
-      <InfoContainer>
-        <InfoRow>
-          <Heading as='h3'>{name}</Heading>
-          <p>${unitPrice}</p>
-        </InfoRow>
-        <InfoRow>
-          <p>{designer}</p>
-          <StyledLink
-            $variation='underline'
-            to={`/product/${productId}`}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          >
-            Shop
-          </StyledLink>
-        </InfoRow>
-      </InfoContainer>
     </StyledProductCard>
   );
 }
