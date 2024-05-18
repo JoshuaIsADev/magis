@@ -8,41 +8,40 @@ import Ticker from '../ui/Ticker.jsx';
 
 const StyledProducts = styled.section`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  /* grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
     'ticker ticker'
     'hero hero'
     'heading menuButton'
     'filterSort filterSort'
     'productTable productTable'
-    'banner banner';
+    'banner banner'; */
   padding-top: var(--top);
 `;
 
 const HeadingContainer = styled.div`
-  grid-area: heading;
-  padding: var(--cell);
+  /* padding: var(--cell); */
+  padding-bottom: 0.5rem;
   border-bottom: var(--border);
-  border-left: var(--border);
 `;
 
 function Products() {
   return (
     <StyledProducts>
-      <Ticker />
+      {/* <Ticker />
       <Hero
         text='Since 1976 Magis produces experimental, aesthetic and functional
             Italian-made furniture'
-      />
+      /> */}
       <HeadingContainer>
         <Heading as='h3'>Shop the collection</Heading>
       </HeadingContainer>
       <FilterSort />
-      <ProductTable />
+      {/* <ProductTable />
       <Banner
         text='Creating beautiful spaces indoors and outdoors. '
         size='h1'
-      />
+      /> */}
     </StyledProducts>
   );
 }

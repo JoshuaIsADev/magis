@@ -10,28 +10,14 @@ const StyledHeader = styled.header`
   position: fixed;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  border-right: var(--border);
-  border-left: var(--border);
-  border-bottom: var(--border);
-  padding: 2rem;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: var(--grid-gap);
   background-color: var(--color-grey-0);
   z-index: 15;
 `;
 
-const HeaderLogo = styled.nav`
+const ColumnHeader = styled.div`
   grid-column: span 1;
-`;
-
-const HeaderNav = styled.nav`
-  grid-column: span 1;
-`;
-
-const Ul = styled.ul`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 2rem;
 `;
 
 function Header() {
@@ -52,55 +38,54 @@ function Header() {
   }
 
   return (
-    <StyledHeader>
-      <HeaderLogo>
-        <StyledLink $variation='headerLogo' to='/'>
-          Magis
-        </StyledLink>
-      </HeaderLogo>
-      <HeaderNav>
-        <Ul>
-          <li>
-            <StyledLink $variation='header' to='/'>
-              Shop
+    <nav>
+      <StyledHeader>
+        <ColumnHeader>
+          <StyledLink $variation='headerLogo' to='/'>
+            Magis
+          </StyledLink>
+        </ColumnHeader>
+
+        <ColumnHeader>
+          <StyledLink $variation='header' to='/'>
+            Products
+          </StyledLink>
+        </ColumnHeader>
+
+        <ColumnHeader disabled={isPending}>
+          {isAuthenticated ? (
+            <StyledLink $variation='header' onClick={signOut}>
+              Sign Out
             </StyledLink>
-          </li>
-
-          <li disabled={isPending}>
-            {isAuthenticated ? (
-              <StyledLink $variation='header' onClick={signOut}>
-                Sign Out
-              </StyledLink>
-            ) : (
-              <StyledLink $variation='header' to='/signin'>
-                Sign In
-              </StyledLink>
-            )}
-          </li>
-          {admin ? (
-            <li disabled={isPending}>
-              <StyledLink $variation='header' to='/manage'>
-                Manage
-              </StyledLink>
-            </li>
           ) : (
-            <>
-              <li disabled={isPending}>
-                <StyledLink $variation='header' to='/orders'>
-                  Orders
-                </StyledLink>
-              </li>
-
-              <li disabled={isPending}>
-                <StyledLink $variation='header' to='/cart'>
-                  Cart {cartItemQuantity > 0 ? `(${cartItemQuantity})` : ''}
-                </StyledLink>
-              </li>
-            </>
+            <StyledLink $variation='header' to='/signin'>
+              Sign In
+            </StyledLink>
           )}
-        </Ul>
-      </HeaderNav>
-    </StyledHeader>
+        </ColumnHeader>
+        {admin ? (
+          <ColumnHeader disabled={isPending}>
+            <StyledLink $variation='header' to='/manage'>
+              Manage
+            </StyledLink>
+          </ColumnHeader>
+        ) : (
+          <>
+            <ColumnHeader disabled={isPending}>
+              <StyledLink $variation='header' to='/orders'>
+                Orders
+              </StyledLink>
+            </ColumnHeader>
+
+            <ColumnHeader disabled={isPending}>
+              <StyledLink $variation='header' to='/cart'>
+                Cart {cartItemQuantity > 0 ? `(${cartItemQuantity})` : ''}
+              </StyledLink>
+            </ColumnHeader>
+          </>
+        )}
+      </StyledHeader>
+    </nav>
   );
 }
 

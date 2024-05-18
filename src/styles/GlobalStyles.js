@@ -22,7 +22,7 @@ const GlobalStyles = createGlobalStyle`
   --background-color-grey: #D9D9D9;
 
   --cell: 2rem;
-  --border: 1px solid var(--color-grey-200);
+  --border: 1px solid var(--color-grey-900);
   --top: 6rem;
   --border-radius-sm: .5rem;
   --border-radius-md: 1rem;
@@ -32,6 +32,8 @@ const GlobalStyles = createGlobalStyle`
   --width-max: 3840px;
   --width-text-max: 700px; 
   --width-main: 1200px;
+
+  --grid-gap: 2rem;
 
   --padding-hero: 6rem;
   --padding-s: 2rem;
@@ -43,7 +45,7 @@ const GlobalStyles = createGlobalStyle`
   --padding-sides: 2rem;
   --padding-right: 1rem;
 
-  --font: "Plus Jakarta Sans", sans-serif;
+  --font: "Overpass Mono", monospace;
   --letter-space: .1rem;
   --letter-space-l: .4rem;
 
@@ -74,6 +76,7 @@ body {
 
   font-family: var(--font);
   font-optical-sizing: auto;
+  font-style: normal;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

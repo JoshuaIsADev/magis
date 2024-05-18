@@ -3,16 +3,17 @@ import { useSearchParams } from 'react-router-dom';
 import { VscDebugBreakpointFunction } from 'react-icons/vsc';
 import Heading from './Heading';
 import Button from './Button';
-import Row from './Row';
 import styled, { keyframes } from 'styled-components';
 
-const MenuButton = styled.div`
-  grid-area: menuButton;
-  padding: var(--cell);
+const StyledFilterSort = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: var(--grid-gap);
+`;
+
+const ColumnMenuButton = styled.div`
+  padding-top: 0.5rem;
   display: flex;
-  justify-content: flex-end;
-  border-bottom: var(--border);
-  border-right: var(--border);
   z-index: 0;
 `;
 
@@ -28,21 +29,12 @@ const DropdownAnimation = keyframes`
   `;
 
 const FilterSortDropdown = styled.nav`
-  grid-area: filterSort;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: var(--grid-gap);
   opacity: 0;
   position: absolute;
-  border-bottom: var(--border);
   z-index: -2;
-
-  &.applyButton {
-    grid-column: 4 / span 1;
-    position: relative;
-    opacity: 1;
-    animation: ${DropdownAnimation} 0.5s ease-in-out forwards;
-    z-index: 2;
-  }
   &.show {
     position: relative;
     opacity: 1;
@@ -51,22 +43,11 @@ const FilterSortDropdown = styled.nav`
   }
 `;
 
-const FilterSortList = styled.div`
+const ColumnFilterSort = styled.div`
   grid-column: span 1;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding: var(--cell);
-  border-right: var(--border);
-  border-bottom: var(--border);
-`;
-
-const FilterSortApply = styled.div`
-  grid-column: span 4;
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.5rem;
-  padding: var(--cell);
 `;
 
 function FilterSort() {
@@ -99,10 +80,10 @@ function FilterSort() {
   }
 
   return (
-    <>
-      <MenuButton>
+    <StyledFilterSort>
+      <ColumnMenuButton>
         <Button
-          $variation='menu'
+          $variation='secondary'
           onClick={() => setShowDropdown(!showDropdown)}
         >
           Filter / Sort
@@ -111,9 +92,9 @@ function FilterSort() {
           transform={showDropdown ? 'rotate(180)' : 'rotate(0)'}
           className={showDropdown ? 'downArrow' : 'arrow'}
         />
-      </MenuButton>
+      </ColumnMenuButton>
       <FilterSortDropdown className={showDropdown ? 'show' : undefined}>
-        <FilterSortList>
+        <ColumnFilterSort>
           <Heading as='h3' $variation='filterSort'>
             Category
           </Heading>
@@ -147,9 +128,9 @@ function FilterSort() {
           >
             Sofa
           </Button>
-        </FilterSortList>
+        </ColumnFilterSort>
 
-        <FilterSortList>
+        <ColumnFilterSort>
           <Heading as='h3' $variation='filterSort'>
             Designer
           </Heading>
@@ -194,8 +175,8 @@ function FilterSort() {
           >
             Ronan & Erwan Bouroullec
           </Button>
-        </FilterSortList>
-        <FilterSortList>
+        </ColumnFilterSort>
+        <ColumnFilterSort>
           <Heading as='h3' $variation='filterSort'>
             Material
           </Heading>
@@ -253,8 +234,8 @@ function FilterSort() {
           >
             Aluminium
           </Button>
-        </FilterSortList>
-        <FilterSortList>
+        </ColumnFilterSort>
+        <ColumnFilterSort>
           <Heading as='h3' $variation='filterSort'>
             Sort
           </Heading>
@@ -306,16 +287,16 @@ function FilterSort() {
           >
             Designer (Z-A)
           </Button>
-        </FilterSortList>
-        <FilterSortApply>
+        </ColumnFilterSort>
+        <ColumnFilterSort>
           {/* <MenuColumn className={showDropdown ? 'applyButton' : ''}> */}
-          <Button $variation='primary' onClick={() => setShowDropdown(false)}>
+          <Button $variation='secondary' onClick={() => setShowDropdown(false)}>
             Apply
           </Button>
-        </FilterSortApply>
+        </ColumnFilterSort>
         {/* </MenuColumn> */}
       </FilterSortDropdown>
-    </>
+    </StyledFilterSort>
   );
 }
 

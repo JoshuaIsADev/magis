@@ -52,11 +52,12 @@ const Heading = styled.h1`
     props.as === 'h3' &&
     css`
       font-size: 1rem;
-      font-weight: 700;
+      font-weight: 500;
       line-height: 1rem;
       letter-spacing: var(--letter-space);
       text-transform: uppercase;
-      ${(props) => variations[props.$variation]}
+      padding-bottom: ${(props) => props.$paddingBottom || '0rem'};
+      ${(props) => variations[props.$variation]};
     `}
   ${(props) =>
     props.as === 'h4' &&

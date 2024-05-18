@@ -37,9 +37,24 @@ const variations = {
       color: var(--color-grey-300);
     }
   `,
+  secondary: css`
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: underline;
+    text-transform: uppercase;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3rem;
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.3rem;
+      text-decoration-thickness: 2px;
+    }
+  `,
+
   gallery: css`
     width: 4rem;
-    height: 1.2rem;
+    height: 1rem;
     border-top: 0.5rem solid var(--color-grey-0);
     border-bottom: 0.5rem solid var(--color-grey-0);
     background-color: var(--color-grey-900);
@@ -52,21 +67,21 @@ const variations = {
 };
 
 const Button = styled.button`
+  font-family: var(--font);
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: var(--letter-space);
-  text-transform: uppercase;
-  padding: 0;
   background-color: var(--color-grey-0);
   border: none;
   text-align: left;
+  padding: 0;
   width: fit-content;
   cursor: pointer;
   &:hover,
   &.selected {
     text-decoration: underline;
     text-underline-offset: 0.3rem;
-    text-decoration-thickness: 1px;
+    text-decoration-thickness: 2px;
   }
   ${(props) => variations[props.$variation]}
 `;

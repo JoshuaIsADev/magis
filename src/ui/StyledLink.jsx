@@ -14,13 +14,15 @@ const variations = {
     font-weight: 500;
     letter-spacing: var(--letter-space);
     text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
+    text-decoration-thickness: 1px;
     color: ${(props) => props.$color};
-    transition: 0.5s ease-in;
   `,
 
   headerLogo: css`
-    font-size: 1.5rem;
-    font-weight: 800;
+    font-size: 1rem;
+    font-weight: 700;
     letter-spacing: var(--letter-space-l);
     text-transform: uppercase;
     color: ${(props) => props.$color};
@@ -38,7 +40,6 @@ const variations = {
     letter-spacing: var(--letter-space);
     text-transform: uppercase;
     padding-left: 1rem;
-    color: ${(props) => props.$color};
     transition: 0.1s ease-in;
     text-decoration: underline;
     text-underline-offset: 0.3rem;
@@ -51,7 +52,7 @@ const variations = {
   `,
 
   footer: css`
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 500;
     text-transform: uppercase;
     &:hover,
@@ -65,7 +66,6 @@ const variations = {
     font-size: 1rem;
     font-weight: 500;
     text-decoration: underline;
-    text-transform: uppercase;
     text-transform: uppercase;
     text-decoration-thickness: 1px;
     text-underline-offset: 0.3rem;
@@ -82,7 +82,7 @@ const StyledLink = styled(NavLink)`
   &:hover {
     text-decoration: underline;
     text-underline-offset: 0.3rem;
-    text-decoration-thickness: 1px;
+    text-decoration-thickness: 2px;
   }
 `;
 

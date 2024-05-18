@@ -6,13 +6,11 @@ import Footer from './Footer';
 function AppLayout() {
   return (
     <>
-      <HeadingProvider>
-        <Header />
-        <main>
-          <Outlet />
-        </main>
-        <Footer />
-      </HeadingProvider>
+      <Header />
+      <main>
+        <Outlet />
+      </main>
+      <Footer />
     </>
   );
 }
