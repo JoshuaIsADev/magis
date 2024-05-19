@@ -26,12 +26,12 @@ const variations = {
     font-weight: 300;
     letter-spacing: var(--letter-space);
     text-transform: uppercase;
-    padding: 0.5rem 1rem 0.4rem;
+    padding: 0.75rem 1rem 0.75rem;
     border: 1px solid var(--color-grey-900);
-    border-radius: 5px;
+    border-radius: none;
     color: ${(props) => props.$color};
-    color: var(--color-grey-0);
-    background-color: var(--color-grey-900);
+    color: var(--color-grey-900);
+    background-color: var(--color-grey-0);
     transition: 0.1s ease-in;
     text-decoration: none;
     text-underline-offset: 0;
@@ -39,8 +39,8 @@ const variations = {
     &:hover,
     &:active,
     &.active:link {
-      color: var(--color-grey-900);
-      background-color: var(--color-grey-0);
+      color: var(--color-grey-0);
+      background-color: var(--color-grey-900);
       text-decoration: none;
       text-underline-offset: 0;
       text-decoration-thickness: 0;
@@ -62,15 +62,15 @@ const variations = {
   `,
 
   gallery: css`
-    width: 4rem;
+    width: 1rem;
     height: 1rem;
-    border-top: 0.5rem solid var(--color-grey-0);
-    border-bottom: 0.5rem solid var(--color-grey-0);
-    background-color: var(--color-grey-900);
+    border: 1px solid var(--color-grey-900);
+    border-radius: 0.5rem;
+    background-color: var(--color-grey-0);
     &:hover,
     &:active,
     &:active.link {
-      background-color: var(--color-grey-200);
+      background-color: var(--color-grey-900);
     }
   `,
 };
@@ -85,6 +85,7 @@ const Button = styled.button`
   text-align: left;
   padding: 0;
   width: fit-content;
+  height: fit-content;
   cursor: pointer;
   &:hover,
   &.selected {

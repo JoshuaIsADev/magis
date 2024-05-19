@@ -24,6 +24,7 @@ const GlobalStyles = createGlobalStyle`
   --cell: 2rem;
   --border: 1px solid var(--color-grey-900);
   --top: 6rem;
+  --bottom: 6rem;
   --border-radius-sm: .5rem;
   --border-radius-md: 1rem;
   --border-radius-lg: 2rem;

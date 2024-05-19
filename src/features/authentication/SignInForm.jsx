@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import { useState } from 'react';
 import Label from '../../ui/Label';
 import Input from '../../ui/Input';
 import { useSignIn } from './useSignIn';
@@ -10,25 +9,16 @@ import StyledLink from '../../ui/StyledLink';
 import Errors from '../../ui/Errors';
 
 const StyledSignInForm = styled.form`
-  grid-area: form;
+  grid-column: 1 / span 1;
   display: flex;
   flex-direction: column;
-  border-left: var(--border);
-  padding: var(--cell);
-  min-height: 80vh;
-`;
-
-const Container = styled.div`
-  grid-area: container;
-  border-left: var(--border);
-  border-right: var(--border);
-  padding: var(--cell);
+  gap: 2rem;
+  padding-bottom: var(--bottom);
 `;
 
 const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding-bottom: 3rem;
   gap: 0.5rem;
 `;
 
@@ -74,20 +64,17 @@ function SignInForm() {
             <Errors>{errors.password.message}</Errors>
           )}
         </InputContainer>
-
         {isPending && <Spinner />}
         <Button $variation='primary' disabled={isPending}>
           Sign in
         </Button>
-      </StyledSignInForm>
-      <Container>
         <p>
           Not yet a member?
-          <StyledLink $variation='primaryHeading' to='/signup'>
+          <StyledLink $variation='secondary' to='/signup'>
             Sign up here
           </StyledLink>
         </p>
-      </Container>
+      </StyledSignInForm>
     </>
   );
 }

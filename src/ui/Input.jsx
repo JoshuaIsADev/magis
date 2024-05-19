@@ -11,7 +11,8 @@ const variations = {
   order: css`
     text-align: center;
     margin: 0;
-    width: 2rem;
+    border: none;
+    padding: 0.75rem 0;
   `,
   product: css`
     background-color: #${(props) => props.$color};
@@ -25,18 +26,18 @@ const variations = {
 
 const Input = styled.input`
   border: none;
-  border-bottom: 1px solid var(--color-grey-200);
+  border: 1px solid var(--color-grey-900);
   background-color: var(--color-grey-0);
   box-shadow: none;
   border-radius: none;
-  padding: 0.5rem 0;
+  padding: 1rem;
   letter-spacing: var(--letter-space);
   &[type='radio'] {
     position: relative;
     appearance: none;
-    width: 1.5rem;
-    height: 1.5rem;
-    border: 1px solid var(--color-grey-200);
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid var(--color-grey-900);
     border-radius: 50%;
     /* background-color: var(--color-grey-0); */
 

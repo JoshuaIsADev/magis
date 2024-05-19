@@ -21,21 +21,17 @@ const fadeOut = keyframes`
   }
 `;
 
-const StyledImageGallery = styled.div`
-  width: 100%;
-`;
-
-const GalleryButtonsContainer = styled.div`
+const ColumnButtons = styled.div`
+  grid-column: 5 / span 1;
   display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: left;
+  flex-wrap: wrap;
   gap: 0.5rem;
-  padding-bottom: 2rem;
 `;
 
 const ImageContainer = styled.div`
-  position: relative;
+  grid-column: 1 / span 3;
   .fade-in {
     animation: ${fadeIn} 0.5s ease-in forwards;
   }
@@ -58,8 +54,11 @@ function ImageGallery({ images }) {
   console.log(showImage);
 
   return (
-    <StyledImageGallery>
-      <GalleryButtonsContainer>
+    <>
+      <ImageContainer>
+        <Img src={showImage} $variation='gallery' className={fadeState}></Img>
+      </ImageContainer>
+      <ColumnButtons>
         {images.map((image, index) => (
           <Button
             $variation='gallery'
@@ -67,11 +66,8 @@ function ImageGallery({ images }) {
             onClick={() => handleClick(index)}
           ></Button>
         ))}
-      </GalleryButtonsContainer>
-      <ImageContainer>
-        <Img src={showImage} $variation='gallery' className={fadeState}></Img>
-      </ImageContainer>
-    </StyledImageGallery>
+      </ColumnButtons>
+    </>
   );
 }
 

@@ -9,6 +9,7 @@ import Ticker from '../ui/Ticker.jsx';
 const StyledProducts = styled.section`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  padding-bottom: var(--bottom);
 `;
 
 function Products() {

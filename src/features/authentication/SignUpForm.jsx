@@ -9,12 +9,11 @@ import Errors from '../../ui/Errors';
 import Button from '../../ui/Button';
 
 const StyledSignUpForm = styled.form`
-  grid-area: form;
+  grid-column: 1 / span 1;
   display: flex;
   flex-direction: column;
-  border-left: var(--border);
-  padding: var(--cell);
-  min-height: 80vh;
+  gap: 2rem;
+  padding-bottom: var(--bottom);
 `;
 
 const Container = styled.div`
@@ -27,7 +26,6 @@ const Container = styled.div`
 const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding-bottom: 3rem;
   gap: 0.5rem;
 `;
 
@@ -114,15 +112,13 @@ function SignUpForm() {
         <Button $variation='primary' disabled={isPending}>
           Sign up
         </Button>
-      </StyledSignUpForm>
-      <Container>
         <p>
           Already a member?
-          <StyledLink $variation='primaryHeading' to='/signin'>
-            Sign In
+          <StyledLink $variation='secondary' to='/signin'>
+            Sign in here
           </StyledLink>
         </p>
-      </Container>
+      </StyledSignUpForm>
     </>
   );
 }
