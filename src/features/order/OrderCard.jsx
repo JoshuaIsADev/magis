@@ -3,37 +3,29 @@ import Img from '../../ui/Img';
 import { capitalize } from '../../utils/capitalize';
 import { Heading, HeadingContainer } from '../../ui/Heading.jsx';
 
-const ItemsContainer = styled.div`
+const StyledOrderCard = styled.div`
+  grid-column: span 1;
   display: flex;
-  flex-direction: row;
-  gap: 2rem;
-  align-items: center;
-  padding: var(--cell);
-  border-bottom: var(--border);
-  &:last-child {
-    border-bottom: none;
-  }
+  flex-direction: column;
 `;
 
-const ItemsInfo = styled.div`
+const InfoContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  gap: 8rem;
-  align-items: center;
+  flex-direction: column;
 `;
 
 function OrderCard({ orderItem }) {
   return (
-    <ItemsContainer key={orderItem.selectedProductId}>
-      <Img $variation='orderCard' src={orderItem.image} alt='product' />
-      <ItemsInfo>
+    <StyledOrderCard key={orderItem.selectedProductId}>
+      <InfoContainer>
         <Heading as='h3'>{orderItem.name}</Heading>
         <p>{capitalize(orderItem.color)}</p>
         <p>
           {orderItem.quantity} x ${orderItem.unitPrice}
         </p>
-      </ItemsInfo>
-    </ItemsContainer>
+      </InfoContainer>
+      <Img $variation='productCard' src={orderItem.image} alt='product' />
+    </StyledOrderCard>
   );
 }
 
