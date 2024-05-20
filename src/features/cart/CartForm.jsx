@@ -19,6 +19,10 @@ const InfoContainer = styled.div`
   flex-direction: column;
 `;
 
+const ImageContainer = styled.div`
+  padding: 2rem 0;
+`;
+
 const OrderButtons = styled.div`
   display: flex;
   align-items: center;
@@ -106,7 +110,9 @@ function CartForm({
         <p>${unitPrice}</p>
         <p>{color}</p>
       </InfoContainer>
-      <Img $variation='productCard' src={image} alt='product' />
+      <ImageContainer>
+        <Img $variation='productCard' src={image} alt='product' />
+      </ImageContainer>
       <ButtonsContainer>
         <OrderButtons>
           <Button

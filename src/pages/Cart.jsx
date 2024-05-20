@@ -11,6 +11,7 @@ import Button from '../ui/Button';
 const StyledCart = styled.section`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  grid-gap: var(--grid-gap);
   padding-bottom: var(--bottom);
 `;
 

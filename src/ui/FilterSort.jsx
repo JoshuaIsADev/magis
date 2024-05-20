@@ -14,7 +14,6 @@ const StyledFilterSort = styled.div`
 `;
 
 const ColumnMenuButton = styled.div`
-  padding-top: 0.5rem;
   display: flex;
   z-index: 0;
 `;

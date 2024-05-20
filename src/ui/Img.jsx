@@ -8,7 +8,7 @@ const variations = {
   `,
   productCard: css`
     aspect-ratio: 1;
-    padding: 2rem 0;
+    /* padding: 2rem 0; */
     max-width: 30rem;
     max-height: 30rem;
   `,

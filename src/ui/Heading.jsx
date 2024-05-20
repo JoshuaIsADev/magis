@@ -1,6 +1,9 @@
 import styled, { css } from 'styled-components';
 
 const variations = {
+  padding: css`
+    padding-bottom: 2rem;
+  `,
   hero: css`
     text-align: justify;
   `,

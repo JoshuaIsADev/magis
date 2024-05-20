@@ -9,69 +9,44 @@ import Img from '../ui/Img';
 
 const StyledCheckOut = styled.section`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-areas:
-    ' cartHeading summaryHeading'
-    'cart shipping';
-  border-left: var(--border);
-  border-right: var(--border);
-  border-bottom: var(--border);
-  padding-top: var(--top);
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: var(--grid-gap);
+  padding-bottom: var(--bottom);
 `;
 
 const CartContainer = styled.div`
-  grid-area: cart;
-`;
-const ShippingContainer = styled.div`
-  grid-area: shipping;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  grid-column: 4 / span 2;
 `;
 
-const CartCard = styled.div`
+const RowCart = styled.div`
   display: grid;
-  grid-template-columns: 1fr 4fr;
-  border-bottom: var(--border);
-`;
-
-const TotalContainer = styled.div`
-  margin: 5rem 0 10rem;
-  padding: var(--cell);
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: var(--grid-gap);
+  align-items: center;
 `;
 
 const ImageContainer = styled.div`
-  grid-column: 1 / span 1;
-  padding: var(--cell);
+  width: 5rem;
+  align-items: left;
+  padding: 1rem 2rem 1rem 0;
+`;
+
+const TotalContainer = styled.div`
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
 `;
 
 const InfoContainer = styled.div`
-  grid-column: 2 / span 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: var(--cell);
-`;
-
-const InfoRow = styled.div`
   display: flex;
   flex-direction: row;
+  width: 100%;
   align-items: center;
-  justify-content: space-between;
 `;
 
-const HeadingContainer2 = styled.div`
-  grid-area: cartHeading;
-  padding: var(--cell);
-  border-left: var(--border);
-  border-bottom: var(--border);
-`;
-
-const ShippingHeadingContainer = styled.div`
-  grid-area: summaryHeading;
-  padding: var(--cell);
-  border-left: var(--border);
-  border-bottom: var(--border);
+const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 function CheckOut() {
@@ -82,60 +57,54 @@ function CheckOut() {
   const taxes = (Number(totalPrice) * 0.08).toFixed(2);
   const finalTotalPrice = (Number(totalPrice) + Number(taxes)).toFixed(2);
 
-  // const combinedCartItems = [];
-
-  // cartItems.forEach((item) => {
-  //   combinedCartItems.push(constructCartItem(item, getProduct));
-  // });
-
-  // console.log(cartItems);
+  console.log(cartItems);
 
   if (isPending) return <Spinner />;
 
   return (
     <StyledCheckOut>
-      <HeadingContainer2>
-        <Heading as='h3'>Order summary</Heading>
-      </HeadingContainer2>
-      <ShippingHeadingContainer>
-        <Heading as='h3'>Shipping details</Heading>
-      </ShippingHeadingContainer>
+      <HeadingContainer text='Checkout' />
+      <CreateOrderForm />
+
       <CartContainer>
+        <Heading as='h3' $variation='padding'>
+          Order summary
+        </Heading>
         {cartItems.map((cartItem) => (
-          <CartCard key={cartItem.selectedVariantId}>
-            <ImageContainer>
-              <Img $variation='orderCard' src={cartItem.image} alt='product' />
-            </ImageContainer>
+          <RowCart key={cartItem.selectedVariantId}>
             <InfoContainer>
-              <InfoRow>
+              <ImageContainer>
+                <Img src={cartItem.image} alt='product' />
+              </ImageContainer>
+              <TextContainer>
                 <Heading as='h3'>{cartItem.name}</Heading>
-                <p>${Number(cartItem.quantity) * Number(cartItem.unitPrice)}</p>
-              </InfoRow>
-              <InfoRow>
                 <p>{cartItem.color}</p>
-                <p>{cartItem.quantity}x</p>
-              </InfoRow>
+              </TextContainer>
             </InfoContainer>
-          </CartCard>
+            <p>
+              {cartItem.quantity} x ${cartItem.unitPrice}
+            </p>
+          </RowCart>
         ))}
+
         <TotalContainer>
-          <InfoRow>
+          <Heading as='h3' $variation='padding'>
+            Cart totals
+          </Heading>
+          <RowCart>
             <Heading as='h3'>Subtotal</Heading>
             <p>${totalPrice.toFixed(2)}</p>
-          </InfoRow>
-          <InfoRow>
+          </RowCart>
+          <RowCart>
             <Heading as='h3'>Taxes</Heading>
             <p>${taxes}</p>
-          </InfoRow>
-          <InfoRow>
+          </RowCart>
+          <RowCart>
             <Heading as='h3'>Total(including taxes)</Heading>
             <p>${finalTotalPrice}</p>
-          </InfoRow>
+          </RowCart>
         </TotalContainer>
       </CartContainer>
-      <ShippingContainer>
-        <CreateOrderForm />
-      </ShippingContainer>
     </StyledCheckOut>
   );
 }

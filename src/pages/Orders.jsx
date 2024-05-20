@@ -6,19 +6,20 @@ import OrderCard from '../features/order/OrderCard';
 import { Heading, HeadingContainer } from '../ui/Heading.jsx';
 
 const StyledOrders = styled.section`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: var(--grid-gap);
   width: 100%;
   margin-bottom: var(--bottom);
 `;
 
 const OrderTable = styled.article`
-  grid-column: span 1;
+  grid-column: 1 / span 1;
   display: flex;
   flex-direction: column;
   gap: 4rem;
   border-bottom: var(--border);
-  margin-bottom: 1rem;
+  /* margin-bottom: 2rem; */
   &:last-child {
     border-bottom: none;
   }

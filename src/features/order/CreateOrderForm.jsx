@@ -9,22 +9,19 @@ import Spinner from '../../ui/Spinner';
 import { useCreateOrder } from './useCreateOrder';
 import Button from '../../ui/Button';
 import styled from 'styled-components';
+import { Heading } from '../../ui/Heading';
 
 const StyledCreateOrderForm = styled.form`
-  grid-area: form;
+  grid-column: 1 / span 2;
   display: flex;
   flex-direction: column;
-  border-left: var(--border);
-  padding: var(--cell);
-  min-height: 80vh;
-  padding-bottom: 10rem;
-  height: 100%;
+  padding-bottom: var(--bottom);
 `;
 
 const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding-bottom: 3rem;
+  padding-bottom: 2rem;
 `;
 
 function CreateOrderForm() {
@@ -58,79 +55,78 @@ function CreateOrderForm() {
 
   return (
     <StyledCreateOrderForm onSubmit={handleSubmit(onSubmit)}>
-      <>
-        <InputContainer>
-          <Label htmlFor='fullName'>Full name</Label>
-          <Input
-            type='text'
-            id='fullName'
-            autoComplete='name'
-            disabled={isPending}
-            {...register('fullName', { required: 'This field is required' })}
-          ></Input>
-          {errors?.fullName?.message && (
-            <Errors>{errors.fullName.message}</Errors>
-          )}
-        </InputContainer>
-        <InputContainer>
-          <Label htmlFor='email'>Email</Label>
-          <Input
-            type='text'
-            id='email'
-            autoComplete='email'
-            disabled={isPending}
-            defaultValue={user.email}
-            {...register('email', {
-              required: 'This field is required',
-              pattern: {
-                value: /\S+@\S+\.\S+/,
-                message: 'Please provide a valid email address',
-              },
-            })}
-          ></Input>
-          {errors?.email?.message && <Errors>{errors.email.message}</Errors>}
-        </InputContainer>
-        <InputContainer>
-          <Label htmlFor='streetNumber'>Street number</Label>
-          <Input
-            type='text'
-            id='streetNumber'
-            autoComplete='streetNumber'
-            disabled={isPending}
-            {...register('streetNumber', {
-              required: 'This field is required',
-            })}
-          ></Input>
-          {errors?.streetNumber?.message && (
-            <Errors>{errors.streetNumber.message}</Errors>
-          )}
-        </InputContainer>
-        <InputContainer>
-          <Label htmlFor='state'>State</Label>
-          <Input
-            type='text'
-            id='state'
-            autoComplete='state'
-            disabled={isPending}
-            {...register('state', { required: 'This field is required' })}
-          ></Input>
-          {errors?.state?.message && <Errors>{errors.state.message}</Errors>}
-        </InputContainer>
-        <InputContainer>
-          <Label htmlFor='zipCode'>Zip code</Label>
-          <Input
-            type='text'
-            id='zipCode'
-            autoComplete='zip'
-            disabled={isPending}
-            {...register('zipCode', { required: 'This field is required' })}
-          ></Input>
-          {errors?.zipCode?.message && (
-            <Errors>{errors.fullName.message}</Errors>
-          )}
-        </InputContainer>
-        {isPending && <Spinner />}
-      </>
+      <Heading as='h3' $variation='padding'>
+        Your info
+      </Heading>
+      <InputContainer>
+        <Label htmlFor='fullName'>Full name</Label>
+        <Input
+          type='text'
+          id='fullName'
+          autoComplete='name'
+          disabled={isPending}
+          {...register('fullName', { required: 'This field is required' })}
+        ></Input>
+        {errors?.fullName?.message && (
+          <Errors>{errors.fullName.message}</Errors>
+        )}
+      </InputContainer>
+      <InputContainer>
+        <Label htmlFor='email'>Email</Label>
+        <Input
+          type='text'
+          id='email'
+          autoComplete='email'
+          disabled={isPending}
+          defaultValue={user.email}
+          {...register('email', {
+            required: 'This field is required',
+            pattern: {
+              value: /\S+@\S+\.\S+/,
+              message: 'Please provide a valid email address',
+            },
+          })}
+        ></Input>
+        {errors?.email?.message && <Errors>{errors.email.message}</Errors>}
+      </InputContainer>
+      <InputContainer>
+        <Label htmlFor='streetNumber'>Street number</Label>
+        <Input
+          type='text'
+          id='streetNumber'
+          autoComplete='streetNumber'
+          disabled={isPending}
+          {...register('streetNumber', {
+            required: 'This field is required',
+          })}
+        ></Input>
+        {errors?.streetNumber?.message && (
+          <Errors>{errors.streetNumber.message}</Errors>
+        )}
+      </InputContainer>
+      <InputContainer>
+        <Label htmlFor='state'>State</Label>
+        <Input
+          type='text'
+          id='state'
+          autoComplete='state'
+          disabled={isPending}
+          {...register('state', { required: 'This field is required' })}
+        ></Input>
+        {errors?.state?.message && <Errors>{errors.state.message}</Errors>}
+      </InputContainer>
+      <InputContainer>
+        <Label htmlFor='zipCode'>Zip code</Label>
+        <Input
+          type='text'
+          id='zipCode'
+          autoComplete='zip'
+          disabled={isPending}
+          {...register('zipCode', { required: 'This field is required' })}
+        ></Input>
+        {errors?.zipCode?.message && <Errors>{errors.fullName.message}</Errors>}
+      </InputContainer>
+      {isPending && <Spinner />}
 
       <Button $variation='primary' disabled={isPending}>
         Place order

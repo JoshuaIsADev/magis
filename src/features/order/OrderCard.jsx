@@ -14,6 +14,10 @@ const InfoContainer = styled.div`
   flex-direction: column;
 `;
 
+const ImageContainer = styled.div`
+  padding: 2rem 0;
+`;
+
 function OrderCard({ orderItem }) {
   return (
     <StyledOrderCard key={orderItem.selectedProductId}>
@@ -24,7 +28,9 @@ function OrderCard({ orderItem }) {
           {orderItem.quantity} x ${orderItem.unitPrice}
         </p>
       </InfoContainer>
-      <Img $variation='productCard' src={orderItem.image} alt='product' />
+      <ImageContainer>
+        <Img $variation='productCard' src={orderItem.image} alt='product' />
+      </ImageContainer>
     </StyledOrderCard>
   );
 }
