@@ -9,29 +9,14 @@ import { Heading, HeadingContainer } from '../../ui/Heading.jsx';
 import Img from '../../ui/Img';
 
 const StyledCartForm = styled.form`
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  border-bottom: var(--border);
-`;
-
-const ImageContainer = styled.div`
-  grid-column: 1 / span 1;
-  padding: var(--cell);
+  grid-column: span 1;
+  display: flex;
+  flex-direction: column;
 `;
 
 const InfoContainer = styled.div`
-  grid-column: 2 / span 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: var(--cell);
-`;
-
-const InfoRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
 `;
 
 const OrderButtons = styled.div`
@@ -112,54 +97,46 @@ function CartForm({
     setCartItems(updatedCartItems);
   }
 
+  // console.log(cartItems);
+
   return (
     <StyledCartForm onSubmit={(e) => handleSubmit(e, combinedCartItem)}>
-      <ImageContainer>
-        {<Img $variation='orderCard' src={image} alt='product' />}
-      </ImageContainer>
       <InfoContainer>
-        <InfoRow>
-          <Heading as='h3'>{name}</Heading>
-
-          <p>${unitPrice}</p>
-        </InfoRow>
-        <InfoRow>
-          <p>{color}</p>
-          <ButtonsContainer>
-            <OrderButtons>
-              <Button
-                type='button'
-                onClick={() => handleSubtract(selectedVariantId)}
-              >
-                <VscRemove />
-              </Button>
-              <Input
-                $variation='order'
-                type='number'
-                name='quantity'
-                min='0'
-                max='100'
-                step='1'
-                value={quantities[selectedVariantId]}
-                onChange={(e) => handleQuantityChange(e, selectedVariantId)}
-              />
-              <Button
-                type='button'
-                onClick={() => handleAdd(selectedVariantId)}
-              >
-                <VscAdd />
-              </Button>
-            </OrderButtons>
-            <Button type='submit'>Update</Button>
-            <Button
-              $variation='trash'
-              onClick={(e) => handleDelete(e, selectedVariantId)}
-            >
-              <VscTrash />
-            </Button>
-          </ButtonsContainer>
-        </InfoRow>
+        <Heading as='h3'>{name}</Heading>
+        <p>${unitPrice}</p>
+        <p>{color}</p>
       </InfoContainer>
+      <Img $variation='productCard' src={image} alt='product' />
+      <ButtonsContainer>
+        <OrderButtons>
+          <Button
+            type='button'
+            onClick={() => handleSubtract(selectedVariantId)}
+          >
+            <VscRemove />
+          </Button>
+          <Input
+            $variation='order'
+            type='number'
+            name='quantity'
+            min='0'
+            max='100'
+            step='1'
+            value={quantities[selectedVariantId]}
+            onChange={(e) => handleQuantityChange(e, selectedVariantId)}
+          />
+          <Button type='button' onClick={() => handleAdd(selectedVariantId)}>
+            <VscAdd />
+          </Button>
+        </OrderButtons>
+        <Button type='submit'>Update</Button>
+        <Button
+          $variation='trash'
+          onClick={(e) => handleDelete(e, selectedVariantId)}
+        >
+          <VscTrash />
+        </Button>
+      </ButtonsContainer>
     </StyledCartForm>
   );
 }

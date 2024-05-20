@@ -168,9 +168,8 @@ function ProductPage() {
       quantity,
       unitPrice: product.unitPrice,
       color: variants[color].colorName,
-      image: variants[color].image,
+      image: variants[color].variantImage,
     };
-
     handleAddCartItems(newCartItem);
     setQuantity(1);
     toast.success('Added to cart');

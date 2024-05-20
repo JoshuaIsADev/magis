@@ -10,41 +10,16 @@ import Button from '../ui/Button';
 
 const StyledCart = styled.section`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-areas:
-    ' cartHeading summaryHeading'
-    'cart summary';
-  border-left: var(--border);
-  border-right: var(--border);
-  border-bottom: var(--border);
-  padding-top: var(--top);
+  grid-template-columns: repeat(5, 1fr);
+  padding-bottom: var(--bottom);
 `;
 
-const HeadingContainer2 = styled.div`
-  grid-area: cartHeading;
-  padding: var(--cell);
-  border-left: var(--border);
-  border-right: var(--border);
-  border-bottom: var(--border);
-`;
-
-const SummaryHeadingContainer = styled.div`
-  grid-area: summaryHeading;
-  padding: var(--cell);
-  border-bottom: var(--border);
-`;
-
-const CartContainer = styled.div`
-  grid-area: cart;
-  padding-bottom: 30vh;
-  border-right: var(--border);
-`;
 const SummaryContainer = styled.div`
-  grid-area: summary;
+  grid-column: 1 / span 1;
   display: flex;
   flex-direction: column;
-  padding: var(--cell);
   gap: 2rem;
+  padding-top: 4rem;
 `;
 
 const InfoRow = styled.div`
@@ -68,58 +43,51 @@ function Cart() {
   if (isPending) return <Spinner />;
 
   return (
-    <>
-      <StyledCart>
-        <HeadingContainer2>
-          <Heading as='h3'>Cart</Heading>
-        </HeadingContainer2>
-        <SummaryHeadingContainer>
-          <Heading as='h3'>Order summary</Heading>
-        </SummaryHeadingContainer>
-        <CartContainer>
-          {cartItems.length === 0 && (
-            <EmptyCartContainer>
-              <Heading as='h3' $variation='danger'>
-                Cart is empty
-              </Heading>
-            </EmptyCartContainer>
+    <StyledCart>
+      <HeadingContainer text='Your shopping cart' />
+      {cartItems.length === 0 && (
+        <EmptyCartContainer>
+          <Heading as='h3' $variation='danger'>
+            Cart is empty
+          </Heading>
+        </EmptyCartContainer>
+      )}
+      {cartItems.map((cartItem) => (
+        <CartForm
+          key={cartItem.selectedVariantId}
+          name={cartItem.name}
+          selectedVariantId={cartItem.selectedVariantId}
+          color={cartItem.color}
+          quantity={cartItem.quantity}
+          unitPrice={cartItem.unitPrice}
+          image={cartItem.image}
+          combinedCartItem={cartItem}
+        />
+      ))}
+
+      <SummaryContainer>
+        <Heading as='h3'>Order summary</Heading>
+        <InfoRow>
+          <Heading as='h3'>Subtotal</Heading>
+          <p>${totalPrice.toFixed(2)}</p>
+        </InfoRow>
+        <InfoRow>
+          <Heading as='h3'>Taxes</Heading>
+          <p>${taxes}</p>
+        </InfoRow>
+        <InfoRow>
+          <Heading as='h3'>Total(including taxes)</Heading>
+          <p>${finalTotalPrice}</p>
+        </InfoRow>
+        <InfoRow>
+          {cartItems.length !== 0 && (
+            <StyledLink to='/checkout'>
+              <Button $variation='primary'>Proceed to checkout</Button>
+            </StyledLink>
           )}
-          {cartItems.map((cartItem) => (
-            <CartForm
-              key={cartItem.selectedVariantId}
-              name={cartItem.name}
-              selectedVariantId={cartItem.selectedVariantId}
-              color={cartItem.color}
-              quantity={cartItem.quantity}
-              unitPrice={cartItem.unitPrice}
-              image={cartItem.image}
-              combinedCartItem={cartItem}
-            />
-          ))}
-        </CartContainer>
-        <SummaryContainer>
-          <InfoRow>
-            <Heading as='h3'>Subtotal</Heading>
-            <p>${totalPrice.toFixed(2)}</p>
-          </InfoRow>
-          <InfoRow>
-            <Heading as='h3'>Taxes</Heading>
-            <p>${taxes}</p>
-          </InfoRow>
-          <InfoRow>
-            <Heading as='h3'>Total(including taxes)</Heading>
-            <p>${finalTotalPrice}</p>
-          </InfoRow>
-          <InfoRow>
-            {cartItems.length !== 0 && (
-              <StyledLink to='/checkout'>
-                <Button $variation='primary'>Proceed to checkout</Button>
-              </StyledLink>
-            )}
-          </InfoRow>
-        </SummaryContainer>
-      </StyledCart>
-    </>
+        </InfoRow>
+      </SummaryContainer>
+    </StyledCart>
   );
 }
 
