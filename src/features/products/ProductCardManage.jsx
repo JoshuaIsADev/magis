@@ -10,33 +10,35 @@ import Modal from '../../ui/Modal';
 import Img from '../../ui/Img';
 
 const StyledProductCard = styled.div`
-  grid-column: span 1;
+  grid-column: span 5;
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: var(--grid-gap);
+  align-items: center;
   background-color: var(--color-grey-0);
+  padding: 0 0 2rem 0;
+  border-bottom: var(--border);
+  &:last-child {
+    border-bottom: none;
+  }
+`;
+
+const ColumnInfo = styled.div`
+  grid-column: span 1;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+`;
+
+const AboutContainer = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const ImageContainer = styled.div`
-  padding: var(--cell);
-`;
-
-const InfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: var(--cell);
-`;
-
-const InfoRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 2rem;
+  grid-column: 1 / span 1;
+  width: 8rem;
+  height: 8rem;
 `;
 
 function ProductCardManage({ product }) {
@@ -63,43 +65,42 @@ function ProductCardManage({ product }) {
 
   return (
     <StyledProductCard>
-      <ImageContainer>
-        {<Img $variation='productCard' src={mainImage} alt='product' />}
-      </ImageContainer>
-      <InfoContainer>
-        <InfoRow>
-          <div>
-            <Heading as='h3'>{name}</Heading>
-            <p>{designer}</p>
-            <p>{category}</p>
-          </div>
-        </InfoRow>
-        <InfoRow>
-          <p>${unitPrice}</p>
-          <p>{inStock} in stock</p>
-          <ButtonContainer>
-            <Button
-              onClick={() => deleteProduct(productId)}
-              disabled={isDeleting}
-            >
-              <VscTrash />
-            </Button>
-            <Button
-              $variation='primary'
-              disabled={isDeleting}
-              onClick={() => setShowForm((show) => !show)}
-            >
-              Edit
-            </Button>
-          </ButtonContainer>
-        </InfoRow>
-      </InfoContainer>
-
+      <ColumnInfo>
+        <ImageContainer>{<Img src={mainImage} alt='product' />}</ImageContainer>
+      </ColumnInfo>
+      <ColumnInfo>
+        <AboutContainer>
+          <Heading as='h3'>{name}</Heading>
+          <p>{category}</p>
+          <p>{designer}</p>
+        </AboutContainer>
+      </ColumnInfo>
+      <ColumnInfo>
+        <p>${unitPrice}</p>
+      </ColumnInfo>
+      <ColumnInfo>
+        <p>{inStock} in stock</p>
+      </ColumnInfo>
+      <ColumnInfo>
+        <Button onClick={() => deleteProduct(productId)} disabled={isDeleting}>
+          <VscTrash />
+        </Button>
+        <Button
+          $variation='primary'
+          disabled={isDeleting}
+          onClick={() => setShowForm((show) => !show)}
+        >
+          Edit
+        </Button>
+      </ColumnInfo>
       {showForm && (
+        <CreateProductForm productToEdit={product} setShowForm={setShowForm} />
+      )}
+      {/* {showForm && (
         <Modal onClose={toggleModal} heading='Edit product'>
           <CreateProductForm productToEdit={product} />
         </Modal>
-      )}
+      )} */}
     </StyledProductCard>
   );
 }

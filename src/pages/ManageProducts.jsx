@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { VscDebugBreakpointFunction } from 'react-icons/vsc';
 import ProductTable from '../features/products/ProductTable';
 import CreateProductForm from '../features/products/CreateProductForm';
 import Button from '../ui/Button';
@@ -9,29 +10,27 @@ import { Heading, HeadingContainer } from '../ui/Heading.jsx';
 
 const StyledManageProducts = styled.section`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-areas:
-    'heading heading'
-    'addButton menuButton'
-    'filterSort filterSort'
-    'productTable productTable';
-  padding-top: var(--top);
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: var(--grid-gap);
+  padding-bottom: var(--bottom);
 `;
 
-const HeadingContainer2 = styled.div`
-  grid-area: heading;
-  padding: var(--cell);
-  border-bottom: var(--border);
-  border-left: var(--border);
+const MenuContainer = styled.div`
+  grid-column: 1 / span 5;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: var(--grid-gap);
 `;
 
-const AddButtonContainer = styled.div`
-  grid-area: addButton;
-  padding: var(--cell);
-  border-bottom: var(--border);
+const FilterSortContainer = styled.div`
+  grid-column: 1 / span 1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 `;
 
 function ManageProducts() {
+  const [showDropdown, setShowDropdown] = useState(false);
   const [showForm, setShowForm] = useState(false);
 
   function toggleModal() {
@@ -40,16 +39,27 @@ function ManageProducts() {
 
   return (
     <StyledManageProducts>
-      <HeadingContainer2>
-        <Heading as='h3'>Manage products</Heading>
-      </HeadingContainer2>
-      <FilterSort />
-      <ProductTable />
-      <AddButtonContainer>
-        <Button $variation='primary' onClick={toggleModal}>
+      <HeadingContainer text='Manage products' />
+      <MenuContainer>
+        <FilterSortContainer>
+          <Button
+            $variation='secondary'
+            onClick={() => setShowDropdown(!showDropdown)}
+          >
+            Filter / Sort
+          </Button>
+
+          <VscDebugBreakpointFunction
+            transform={showDropdown ? 'rotate(180)' : 'rotate(0)'}
+            className={showDropdown ? 'downArrow' : 'arrow'}
+          />
+        </FilterSortContainer>
+        <Button $variation='secondary' onClick={toggleModal}>
           Add new product
         </Button>
-      </AddButtonContainer>
+      </MenuContainer>
+      <FilterSort showDropdown={showDropdown} />
+      <ProductTable />
 
       {showForm && (
         <Modal onClose={toggleModal} heading='Create a new product'>

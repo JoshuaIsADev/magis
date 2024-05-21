@@ -10,12 +10,7 @@ const StyledFilterSort = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: var(--grid-gap);
-  padding-bottom: 4rem;
-`;
-
-const ColumnMenuButton = styled.div`
-  display: flex;
-  z-index: 0;
+  padding-bottom: 1rem;
 `;
 
 const DropdownAnimation = keyframes`
@@ -51,14 +46,14 @@ const ColumnFilterSort = styled.div`
   gap: 0.25rem;
 `;
 
-function FilterSort() {
+function FilterSort({ showDropdown }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedFilter = searchParams.get('category');
   const selectedFilterDesigner = searchParams.get('designer');
   const selectedFilterMaterial = searchParams.get('material');
   const selectSort = searchParams.get('sortBy') || '';
 
-  const [showDropdown, setShowDropdown] = useState(false);
+  // const [showDropdown, setShowDropdown] = useState(false);
 
   function handleSort(sortValue) {
     searchParams.set('sortBy', sortValue);
@@ -82,18 +77,6 @@ function FilterSort() {
 
   return (
     <StyledFilterSort>
-      <ColumnMenuButton>
-        <Button
-          $variation='secondary'
-          onClick={() => setShowDropdown(!showDropdown)}
-        >
-          Filter / Sort
-        </Button>
-        <VscDebugBreakpointFunction
-          transform={showDropdown ? 'rotate(180)' : 'rotate(0)'}
-          className={showDropdown ? 'downArrow' : 'arrow'}
-        />
-      </ColumnMenuButton>
       <FilterSortDropdown className={showDropdown ? 'show' : undefined}>
         <ColumnFilterSort>
           <Heading as='h3' $variation='filterSort'>
@@ -289,11 +272,11 @@ function FilterSort() {
             Designer (Z-A)
           </Button>
         </ColumnFilterSort>
-        <ColumnFilterSort>
+        {/* <ColumnFilterSort>
           <Button $variation='secondary' onClick={() => setShowDropdown(false)}>
             Apply
           </Button>
-        </ColumnFilterSort>
+        </ColumnFilterSort> */}
       </FilterSortDropdown>
     </StyledFilterSort>
   );

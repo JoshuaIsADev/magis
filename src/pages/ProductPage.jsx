@@ -22,6 +22,7 @@ const StickyContainer = styled.div`
 const InfoContainer = styled.section`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: max-content;
   grid-gap: var(--grid-gap);
   height: 100%;
   padding-bottom: var(--bottom);
@@ -183,8 +184,8 @@ function ProductPage() {
   return (
     <>
       <StickyContainer>
-        <HeadingContainer text={`Shop / ${product.name}`} />
         <InfoContainer>
+          <HeadingContainer text={`Shop / ${product.name}`} />
           <AboutContainer>
             {aboutParagraphs.map((description, index) => (
               <p key={index}>{description}</p>
