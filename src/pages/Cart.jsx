@@ -37,9 +37,6 @@ function Cart() {
   const { cartItems, totalPrice } = useContext(CartContext);
   const taxes = (Number(totalPrice) * 0.08).toFixed(2);
   const finalTotalPrice = (Number(totalPrice) + Number(taxes)).toFixed(2);
-  if (cartItems.length === 0) {
-    console.log('cart is empty');
-  }
 
   if (isPending) return <Spinner />;
 
@@ -47,11 +44,9 @@ function Cart() {
     <StyledCart>
       <HeadingContainer text='Your shopping cart' />
       {cartItems.length === 0 && (
-        <EmptyCartContainer>
-          <Heading as='h3' $variation='danger'>
-            Cart is empty
-          </Heading>
-        </EmptyCartContainer>
+        <Heading as='h3' $variation='danger'>
+          Your cart is empty.
+        </Heading>
       )}
       {cartItems.map((cartItem) => (
         <CartForm

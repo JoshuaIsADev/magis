@@ -14,7 +14,7 @@ const GlobalStyles = createGlobalStyle`
   --color-grey-900: #292929;
   --color-red: #FF2E00; 
   
-  --color-danger: #FF2E00;
+  --color-danger: #FCFF55;
 
   --color-line: rgba(0, 0, 0, .2);
 

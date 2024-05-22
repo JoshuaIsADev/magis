@@ -5,7 +5,7 @@ const variations = {
     background-color: var(--color-grey-0);
     &:checked {
       background-color: var(--color-grey-900);
-      border-color: var(--color-grey-200);
+      border-color: var(--color-grey-900);
     }
   `,
   order: css`
@@ -35,18 +35,12 @@ const Input = styled.input`
   &[type='radio'] {
     position: relative;
     appearance: none;
-    width: 1rem;
-    height: 1rem;
     border: 1px solid var(--color-grey-900);
     border-radius: 50%;
-    /* background-color: var(--color-grey-0); */
-
-    margin-right: 0.5rem;
+    margin-right: 0.35rem;
     cursor: pointer;
-
     &:checked {
-      /* background-color: var(--color-grey-900); */
-      border-color: var(--color-grey-200);
+      border-color: var(--color-grey-900);
     }
   }
   ${(props) => variations[props.$variation]}

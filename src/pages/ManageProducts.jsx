@@ -54,18 +54,23 @@ function ManageProducts() {
             className={showDropdown ? 'downArrow' : 'arrow'}
           />
         </FilterSortContainer>
-        <Button $variation='secondary' onClick={toggleModal}>
+        <Button $variation='primary' onClick={toggleModal}>
           Add new product
         </Button>
       </MenuContainer>
+      {showForm && (
+        <CreateProductForm
+          setShowForm={setShowForm}
+          heading='Create a new product'
+        />
+      )}
       <FilterSort showDropdown={showDropdown} />
       <ProductTable />
-
-      {showForm && (
+      {/* {showForm && (
         <Modal onClose={toggleModal} heading='Create a new product'>
           <CreateProductForm onClose={toggleModal} />
         </Modal>
-      )}
+      )} */}
     </StyledManageProducts>
   );
 }

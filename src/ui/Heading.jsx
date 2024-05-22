@@ -28,7 +28,7 @@ const variations = {
     padding-bottom: 2rem;
   `,
   danger: css`
-    color: var(--color-danger);
+    background-color: var(--color-danger);
   `,
 };
 
@@ -75,10 +75,13 @@ const Heading = styled.h1`
 `;
 
 const StyledHeadingContainer = styled.div`
-  grid-column: span 5;
+  grid-column: 1 / span 5;
   border-bottom: var(--border);
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 function HeadingContainer({ text }) {

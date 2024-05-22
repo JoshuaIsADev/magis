@@ -198,9 +198,6 @@ function ProductPage() {
               <p>{product.designer}</p>
               <p>${product.unitPrice}</p>
               <ColorContainer>
-                {errors?.color?.message && (
-                  <Errors>{errors.color.message}</Errors>
-                )}
                 {variants.map((variant, index) => (
                   <Input
                     key={index}
@@ -218,6 +215,9 @@ function ProductPage() {
                     onKeyDown={handleKeyDown}
                   ></Input>
                 ))}
+                {errors?.color?.message && (
+                  <Errors>{errors.color.message}</Errors>
+                )}
               </ColorContainer>
               <SubmitContainer>
                 <QuantityContainer>
@@ -298,7 +298,7 @@ function ProductPage() {
         </ColumnShowcase>
 
         <GalleryContainer>
-          <Img src={product.image[8]} />
+          <Img src={product.image[0]} />
         </GalleryContainer>
       </ShowcaseContainer>
 

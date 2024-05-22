@@ -42,7 +42,7 @@ function SignInForm() {
             autoComplete='email'
             disabled={isPending}
             {...register('email', {
-              required: 'This field is rquired',
+              required: 'This field is required',
               pattern: {
                 value: /\S+@\S+\.\S+/,
                 message: 'Please provide a valid email address',
@@ -58,7 +58,7 @@ function SignInForm() {
             id='password'
             autoComplete='password'
             disabled={isPending}
-            {...register('password', { required: 'This field is rquired' })}
+            {...register('password', { required: 'This field is required' })}
           ></Input>
           {errors?.password?.message && (
             <Errors>{errors.password.message}</Errors>

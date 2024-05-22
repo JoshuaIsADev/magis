@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Errors = styled.p`
   font-size: 1rem;
-  color: var(--color-danger);
+  background-color: var(--color-danger);
 `;
 
 export default Errors;

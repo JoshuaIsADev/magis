@@ -4,6 +4,7 @@ import { useProducts } from './useProducts';
 import ProductCard from './ProductCard';
 import ProductCardManage from './ProductCardManage';
 import styled from 'styled-components';
+import { Heading } from '../../ui/Heading';
 
 const StyledProductTable = styled.div`
   grid-column: span 5;
@@ -91,10 +92,6 @@ function ProductTable() {
         product.material.includes(filterValueMaterial)
     );
 
-  if (filteredProducts.length === 0) {
-    console.log('No products match your search criteria.');
-  }
-
   //Sort
   const selectedSort = searchParams.get('sortBy') || 'name-asc';
   const [field, direction] = selectedSort.split('-');
@@ -106,11 +103,14 @@ function ProductTable() {
       return (a[field] - b[field]) * modifier;
     }
   });
-  // console.log(field, direction, modifier);
 
   return (
     <StyledProductTable>
-      {pathIsManage ? (
+      {filteredProducts.length === 0 ? (
+        <Heading as='h3' $variation='danger'>
+          No products match your search criteria.
+        </Heading>
+      ) : pathIsManage ? (
         sortedProducts.map((product) => (
           <ProductCardManage key={product.id} role='row' product={product} />
         ))

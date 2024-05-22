@@ -13,10 +13,7 @@ export async function getProducts() {
   return data;
 }
 
-export async function createEditProduct(newProduct, id, onClose) {
-  console.log(onClose);
-
-  // const newProduct.image = newProduct.image;
+export async function createEditProduct(newProduct, id) {
   const hasVariantImagePath =
     newProduct.variants[0].variantImage?.startsWith?.(supabaseUrl);
   let variantImageNameArray = [];

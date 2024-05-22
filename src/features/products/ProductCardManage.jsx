@@ -56,8 +56,8 @@ function ProductCardManage({ product }) {
     image,
   } = product;
 
-  // const mainImage = product.variants[0].variantImage;
-  const mainImage = useMainImage(image)[0];
+  const mainImage = product.variants[0].variantImage;
+  // const mainImage = useMainImage(image)[0];
 
   function toggleModal() {
     setShowForm((show) => !show);
@@ -94,7 +94,11 @@ function ProductCardManage({ product }) {
         </Button>
       </ColumnInfo>
       {showForm && (
-        <CreateProductForm productToEdit={product} setShowForm={setShowForm} />
+        <CreateProductForm
+          productToEdit={product}
+          setShowForm={setShowForm}
+          heading='Edit product'
+        />
       )}
       {/* {showForm && (
         <Modal onClose={toggleModal} heading='Edit product'>

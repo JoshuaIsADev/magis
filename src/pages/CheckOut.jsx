@@ -57,8 +57,6 @@ function CheckOut() {
   const taxes = (Number(totalPrice) * 0.08).toFixed(2);
   const finalTotalPrice = (Number(totalPrice) + Number(taxes)).toFixed(2);
 
-  console.log(cartItems);
-
   if (isPending) return <Spinner />;
 
   return (

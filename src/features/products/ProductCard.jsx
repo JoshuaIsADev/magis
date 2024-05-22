@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { useMainImage } from './useMainImage';
 import { Heading, HeadingContainer } from '../../ui/Heading.jsx';
 import Img from '../../ui/Img';
 import StyledLink from '../../ui/StyledLink';
@@ -28,7 +27,9 @@ const InfoContainer = styled.div`
 
 function ProductCard({ product }) {
   const { id: productId, name, designer, unitPrice, image } = product;
-  const mainImage = useMainImage(image);
+  const mainImage = product.variants[0].variantImage;
+  const secondaryImage = product.variants[1].variantImage;
+
   const [isHovered, setIsHovered] = useState(false);
 
   function handleMouseEnter() {
@@ -63,7 +64,7 @@ function ProductCard({ product }) {
         >
           <Img
             $variation='productCard'
-            src={isHovered ? mainImage[1] : mainImage[0]}
+            src={isHovered ? secondaryImage : mainImage}
             alt='product'
           />
         </StyledLink>
