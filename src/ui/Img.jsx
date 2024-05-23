@@ -22,6 +22,10 @@ const variations = {
     height: calc(100vh - 20rem);
     aspect-ratio: 1;
   `,
+  xs: css`
+    aspect-ratio: 1;
+    width: 12rem;
+  `,
   xxs: css`
     aspect-ratio: 1;
     width: 3rem;

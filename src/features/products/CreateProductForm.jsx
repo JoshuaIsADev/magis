@@ -40,15 +40,24 @@ const ColumnMeasurements = styled.div`
 const ColumnImages = styled.div`
   grid-column: 4 / span 2;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* grid-template-columns: repeat(4, 1fr); */
   grid-gap: var(--grid-gap);
 `;
 
+const ImageContainer = styled.div`
+  /* grid-column: span 1; */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 2rem;
+  width: 100%;
+  align-items: center;
+`;
+
 const VariantImageContainer = styled.div`
-  grid-column: 1 / span 2;
+  grid-column: span 2;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
 `;
 
 const InputContainer = styled.div`
@@ -122,7 +131,6 @@ function CreateProductForm({ heading, productToEdit = {}, setShowForm }) {
     control,
     name: 'variants',
   });
-
   function handleAddVariant(e) {
     e.preventDefault();
     append({});
@@ -344,19 +352,27 @@ function CreateProductForm({ heading, productToEdit = {}, setShowForm }) {
       <ColumnImages>
         <InputContainer>
           <Label htmlFor='image'>Gallery images</Label>
-          <FileInput
-            id='image'
-            // type='file'
-            accept='image/*'
-            disabled={isWorking}
-            multiple
-            {...register(
-              'image'
-              // , {
-              //   required: isEditSession ? false : 'This field is required',
-              // }
-            )}
-          />
+          {isEditSession ? (
+            <ImageContainer>
+              {productToEdit.image.map((image, index) => (
+                <Img src={image} key={index} alt='gallery' />
+              ))}
+            </ImageContainer>
+          ) : (
+            <FileInput
+              id='image'
+              // type='file'
+              accept='image/*'
+              disabled={isWorking}
+              multiple
+              {...register(
+                'image'
+                // , {
+                //   required: isEditSession ? false : 'This field is required',
+                // }
+              )}
+            />
+          )}
           {errors?.image?.message && <Errors>{errors.image.message}</Errors>}
         </InputContainer>
       </ColumnImages>
@@ -432,7 +448,7 @@ function CreateProductForm({ heading, productToEdit = {}, setShowForm }) {
           <InputContainer>
             <Label htmlFor={`variants.${index}.variantImage`}>image</Label>
             <VariantImageContainer>
-              {variant.variantImage !== undefined ? (
+              {isEditSession ? (
                 <>
                   <Img
                     src={productToEdit.variants[index].variantImage}
