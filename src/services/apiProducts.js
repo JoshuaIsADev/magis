@@ -14,6 +14,7 @@ export async function getProducts() {
 }
 
 export async function createEditProduct(newProduct, id) {
+  console.log(newProduct, id);
   const hasVariantImagePath =
     newProduct.variants[0].variantImage?.startsWith?.(supabaseUrl);
   let variantImageNameArray = [];

@@ -44,8 +44,11 @@ const ColumnImages = styled.div`
   grid-gap: var(--grid-gap);
 `;
 
-const ImagesUploadContainer = styled.div`
+const VariantImageContainer = styled.div`
   grid-column: 1 / span 2;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 `;
 
 const InputContainer = styled.div`
@@ -102,11 +105,13 @@ const RowHeadingButton = styled.div`
 `;
 
 function CreateProductForm({ heading, productToEdit = {}, setShowForm }) {
+  console.log(productToEdit);
   const { isCreating, createProduct } = useCreateProduct();
   const { isEditing, editProduct } = useEditProduct();
   const isWorking = isCreating || isEditing;
 
   const { id: editId, ...editValues } = productToEdit;
+  // console.log(editId === undefined);
   const isEditSession = Boolean(editId);
 
   const { register, handleSubmit, reset, formState, control } = useForm({
@@ -128,6 +133,13 @@ function CreateProductForm({ heading, productToEdit = {}, setShowForm }) {
     remove(index);
     toast.success('Removed item');
   }
+
+  // function handleVariantImageDelete(e, index) {
+  //   e.preventDefault();
+  //   console.log(fields[index].variantImage);
+  //   fields[index].variantImage = null;
+  //   toast.success('Removed image');
+  // }
 
   function onSubmit(data) {
     const image = typeof data.image === 'string' ? data.image : data.image;
@@ -419,19 +431,36 @@ function CreateProductForm({ heading, productToEdit = {}, setShowForm }) {
 
           <InputContainer>
             <Label htmlFor={`variants.${index}.variantImage`}>image</Label>
-            <FileInput
-              accept='image/*'
-              id={`variants.${index}.variantImage`}
-              disabled={isWorking}
-              {...register(
-                `variants.${index}.variantImage`
-                // , {                required: isEditSession ? false : 'This field is required',
-                // }
+            <VariantImageContainer>
+              {variant.variantImage !== undefined ? (
+                <>
+                  <Img
+                    src={productToEdit.variants[index].variantImage}
+                    $variation='xxs'
+                    alt='variant'
+                  />
+                  {/* <Button
+                    $variation='secondary'
+                    onClick={(e) => handleVariantImageDelete(e, index)}
+                    type='button'
+                  >
+                    Delete image
+                  </Button> */}
+                </>
+              ) : (
+                <FileInput
+                  accept='image/*'
+                  id={`variants.${index}.variantImage`}
+                  disabled={isWorking}
+                  {...register(`variants.${index}.variantImage`, {
+                    required: isEditSession ? false : 'This field is required',
+                  })}
+                />
               )}
-            />
-            {errors?.variantImage?.message && (
-              <Errors>{errors.variantImage.message}</Errors>
-            )}
+              {errors?.variantImage?.message && (
+                <Errors>{errors.variantImage.message}</Errors>
+              )}
+            </VariantImageContainer>
           </InputContainer>
           <ActionContainer>
             <Button

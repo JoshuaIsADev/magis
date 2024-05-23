@@ -22,6 +22,10 @@ const variations = {
     height: calc(100vh - 20rem);
     aspect-ratio: 1;
   `,
+  xxs: css`
+    aspect-ratio: 1;
+    width: 3rem;
+  `,
 };
 
 const Img = styled.img`

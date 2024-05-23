@@ -66,11 +66,6 @@ function ManageProducts() {
       )}
       <FilterSort showDropdown={showDropdown} />
       <ProductTable />
-      {/* {showForm && (
-        <Modal onClose={toggleModal} heading='Create a new product'>
-          <CreateProductForm onClose={toggleModal} />
-        </Modal>
-      )} */}
     </StyledManageProducts>
   );
 }
