@@ -102,6 +102,7 @@ const GalleryContainer = styled.div`
   grid-column: 2 / span 3;
   height: 85vh;
   margin: 10rem 0;
+  padding: 0 10rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -297,9 +298,11 @@ function ProductPage() {
           <Img src={imageVariant || defaultImage} />
         </ColumnShowcase>
 
-        <GalleryContainer>
-          <Img src={product.image[0]} />
-        </GalleryContainer>
+        {product.image.map((image, index) => (
+          <GalleryContainer key={index}>
+            <Img src={image} alt='gallery' />
+          </GalleryContainer>
+        ))}
       </ShowcaseContainer>
 
       {/* <ImageGallery images={product.image}></ImageGallery> */}
