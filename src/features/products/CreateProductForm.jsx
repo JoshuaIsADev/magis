@@ -154,16 +154,34 @@ function CreateProductForm({ heading, productToEdit = {}, setShowForm }) {
   // }
 
   function onSubmit(data) {
+    const seatingHeight =
+      data.seatingHeight.trim() !== '' ? parseFloat(data.seatingHeight) : null;
+    const height = data.height.trim() !== '' ? parseFloat(data.height) : null;
+    const width = data.width.trim() !== '' ? parseFloat(data.width) : null;
+    const depth = data.depth.trim() !== '' ? parseFloat(data.depth) : null;
+    const length = data.length.trim() !== '' ? parseFloat(data.length) : null;
+
     const image = typeof data.image === 'string' ? data.image : data.image;
     if (isEditSession)
       editProduct(
-        { newProductData: { ...data, image }, id: editId }
+        {
+          newProductData: {
+            ...data,
+            seatingHeight,
+            height,
+            width,
+            depth,
+            length,
+            image,
+          },
+          id: editId,
+        }
         // { onSuccess: setShowForm(false) }
         // { onSuccess: (data) => reset() }
       );
     else
       createProduct(
-        { ...data, image: image },
+        { ...data, seatingHeight, height, width, depth, length, image: image },
         // { onSuccess: setShowForm(false) }
         { onSuccess: (data) => reset() }
       );
