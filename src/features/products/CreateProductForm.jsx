@@ -14,6 +14,7 @@ import Button from '../../ui/Button';
 import Img from '../../ui/Img';
 import { Heading, HeadingContainer } from '../../ui/Heading.jsx';
 import toast from 'react-hot-toast';
+import { useState } from 'react';
 
 const StyledCreateProductForm = styled.form`
   grid-column: span 5;
@@ -40,7 +41,6 @@ const ColumnMeasurements = styled.div`
 const ColumnImages = styled.div`
   grid-column: 4 / span 2;
   display: grid;
-  /* grid-template-columns: repeat(4, 1fr); */
   grid-gap: var(--grid-gap);
 `;
 
@@ -103,6 +103,7 @@ const ColumnVariantsSmall = styled.div`
 const RowButtonVariants = styled.div`
   grid-column: 1 / span 5;
 `;
+
 const RowHeadingButton = styled.div`
   grid-column: 1 / span 5;
   display: flex;
@@ -114,13 +115,13 @@ const RowHeadingButton = styled.div`
 `;
 
 function CreateProductForm({ heading, productToEdit = {}, setShowForm }) {
-  console.log(productToEdit);
+  // console.log(productToEdit);
+  const [forceRerender, setForceRerender] = useState(false);
   const { isCreating, createProduct } = useCreateProduct();
   const { isEditing, editProduct } = useEditProduct();
   const isWorking = isCreating || isEditing;
 
   const { id: editId, ...editValues } = productToEdit;
-  // console.log(editId === undefined);
   const isEditSession = Boolean(editId);
 
   const { register, handleSubmit, reset, formState, control } = useForm({
@@ -131,6 +132,7 @@ function CreateProductForm({ heading, productToEdit = {}, setShowForm }) {
     control,
     name: 'variants',
   });
+
   function handleAddVariant(e) {
     e.preventDefault();
     append({});
@@ -139,13 +141,15 @@ function CreateProductForm({ heading, productToEdit = {}, setShowForm }) {
   function handleDelete(e, index) {
     e.preventDefault();
     remove(index);
+    // productToEdit.variants[index].variantImage = '';
+    setForceRerender((prev) => !prev);
     toast.success('Removed item');
   }
 
   // function handleVariantImageDelete(e, index) {
   //   e.preventDefault();
-  //   console.log(fields[index].variantImage);
-  //   fields[index].variantImage = null;
+  //   delete productToEdit.variants[index].variantImage;
+  //   setForceRerender(prev => !prev);
   //   toast.success('Removed image');
   // }
 
@@ -155,15 +159,12 @@ function CreateProductForm({ heading, productToEdit = {}, setShowForm }) {
       editProduct(
         { newProductData: { ...data, image }, id: editId }
         // { onSuccess: setShowForm(false) }
-        // { onSuccess: onClose }
-        // { onSuccess: () => onClose() }
         // { onSuccess: (data) => reset() }
       );
     else
       createProduct(
         { ...data, image: image },
         // { onSuccess: setShowForm(false) }
-        // { onSuccess: onClose }
         { onSuccess: (data) => reset() }
       );
   }
@@ -389,7 +390,6 @@ function CreateProductForm({ heading, productToEdit = {}, setShowForm }) {
             <Input
               type='text'
               id={`variants.${index}.variantId`}
-              // $index={index}
               disabled={isWorking}
               {...register(`variants.${index}.variantId`, {
                 required: 'This field is required',
@@ -448,10 +448,10 @@ function CreateProductForm({ heading, productToEdit = {}, setShowForm }) {
           <InputContainer>
             <Label htmlFor={`variants.${index}.variantImage`}>image</Label>
             <VariantImageContainer>
-              {isEditSession ? (
+              {isEditSession && productToEdit?.variants[index] ? (
                 <>
                   <Img
-                    src={productToEdit.variants[index].variantImage}
+                    src={productToEdit?.variants[index]?.variantImage}
                     $variation='xxs'
                     alt='variant'
                   />
@@ -479,13 +479,17 @@ function CreateProductForm({ heading, productToEdit = {}, setShowForm }) {
             </VariantImageContainer>
           </InputContainer>
           <ActionContainer>
-            <Button
-              $variation='secondary'
-              onClick={(e) => handleDelete(e, index)}
-              type='button'
-            >
-              Delete variant
-            </Button>
+            {productToEdit?.variants?.length > 1 ? (
+              <Button
+                $variation='secondary'
+                onClick={(e) => handleDelete(e, index)}
+                type='button'
+              >
+                Delete variant
+              </Button>
+            ) : (
+              ''
+            )}
           </ActionContainer>
         </RowVariants>
       ))}

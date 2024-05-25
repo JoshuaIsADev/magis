@@ -14,25 +14,23 @@ export async function getProducts() {
 }
 
 export async function createEditProduct(newProduct, id) {
-  function hasVariantImagePath(variant) {
-    return variant.variantImage?.startsWith?.(supabaseUrl);
-  }
+  const hasVariantImagePath =
+    newProduct.variants[0].variantImage?.startsWith?.(supabaseUrl);
   let variantImageNameArray = [];
   let variantImagePathArray = [];
 
   for (let variant of newProduct.variants) {
-    const variantImageName = hasVariantImagePath(variant)
+    const variantImageName = hasVariantImagePath
       ? variant.variantImage
       : await getImageName(variant.variantImage[0]);
-    const variantImagePath = hasVariantImagePath(variant)
+    const variantImagePath = hasVariantImagePath
       ? variant.variantImage
       : await getImagePath(variantImageName);
-    console.log(variant);
 
     variantImageNameArray.push(variantImageName);
     variantImagePathArray.push(variantImagePath);
 
-    const { error: storageError } = hasVariantImagePath(variant)
+    const { error: storageError } = hasVariantImagePath
       ? variant.variantImage
       : await supabase.storage
           .from('product-images')
@@ -50,24 +48,19 @@ export async function createEditProduct(newProduct, id) {
     variant.variantImage = variantImagePath;
   }
 
-  function hasImagePath(image) {
-    return image?.startsWith?.(supabaseUrl);
-  }
-
+  const hasImagePath = newProduct.image[0]?.startsWith?.(supabaseUrl);
   let imageNameArray = [];
   let imagePathArray = [];
 
   // 1. upload image
   for (let image of newProduct.image) {
-    const imageName = hasImagePath(image) ? image : await getImageName(image);
-    const imagePath = hasImagePath(image)
-      ? image
-      : await getImagePath(imageName);
+    const imageName = hasImagePath ? image : await getImageName(image);
+    const imagePath = hasImagePath ? image : await getImagePath(imageName);
 
     imageNameArray.push(imageName);
     imagePathArray.push(imagePath);
 
-    const { error: storageError } = hasImagePath(image)
+    const { error: storageError } = hasImagePath
       ? image
       : await supabase.storage.from('product-images').upload(imageName, image);
 

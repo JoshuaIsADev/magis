@@ -56,7 +56,7 @@ function ProductCardManage({ product }) {
     image,
   } = product;
 
-  const mainImage = product.variants[0].variantImage;
+  const mainImage = product?.variants[0]?.variantImage;
   // const mainImage = useMainImage(image)[0];
 
   function toggleModal() {
@@ -66,7 +66,13 @@ function ProductCardManage({ product }) {
   return (
     <StyledProductCard>
       <ColumnInfo>
-        <ImageContainer>{<Img src={mainImage} alt='product' />}</ImageContainer>
+        {product?.variants[0]?.variantImage ? (
+          <ImageContainer>
+            {<Img src={mainImage} alt='product' />}
+          </ImageContainer>
+        ) : (
+          'Please add a variant'
+        )}
       </ColumnInfo>
       <ColumnInfo>
         <AboutContainer>
