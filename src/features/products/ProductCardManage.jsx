@@ -10,9 +10,9 @@ import Modal from '../../ui/Modal';
 import Img from '../../ui/Img';
 
 const StyledProductCard = styled.div`
-  grid-column: span 5;
+  grid-column: span 6;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-gap: var(--grid-gap);
   align-items: center;
   background-color: var(--color-grey-0);
@@ -75,8 +75,10 @@ function ProductCardManage({ product }) {
         )}
       </ColumnInfo>
       <ColumnInfo>
+        <Heading as='h3'>{name}</Heading>
+      </ColumnInfo>
+      <ColumnInfo>
         <AboutContainer>
-          <Heading as='h3'>{name}</Heading>
           <p>{category}</p>
           <p>{designer}</p>
         </AboutContainer>

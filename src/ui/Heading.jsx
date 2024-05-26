@@ -75,13 +75,15 @@ const Heading = styled.h1`
 `;
 
 const StyledHeadingContainer = styled.div`
-  grid-column: 1 / span 5;
+  grid-column: 1 / span 6;
+  grid-gap: var(--grid-gap);
   border-bottom: var(--border);
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  ${(props) => variations[props.$variation]}
 `;
 
 function HeadingContainer({ text }) {

@@ -6,12 +6,17 @@ import StyledLink from '../../ui/StyledLink';
 
 const StyledProductCard = styled.div`
   grid-column: span 1;
-  grid-template-columns: repeat(2, 1fr);
   display: flex;
   background-color: var(--color-grey-0);
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  @media (max-width: 1200px) {
+    grid-column: span 2;
+  }
+  @media (max-width: 600px) {
+    grid-column: span 3;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -28,7 +33,8 @@ const InfoContainer = styled.div`
 function ProductCard({ product }) {
   const { id: productId, name, designer, unitPrice, image } = product;
   const mainImage = product.variants[0].variantImage;
-  const secondaryImage = product.variants[1].variantImage;
+  const secondaryImage =
+    product.variants[1]?.variantImage || product.variants[0].variantImage;
 
   const [isHovered, setIsHovered] = useState(false);
 

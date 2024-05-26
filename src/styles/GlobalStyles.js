@@ -12,14 +12,8 @@ const GlobalStyles = createGlobalStyle`
   --color-grey-700: #2e2e2e;
   --color-grey-800: #161616;
   --color-grey-900: #292929;
-  --color-red: #FF2E00; 
   
   --color-danger: #FCFF55;
-
-  --color-line: rgba(0, 0, 0, .2);
-
-  --background-color: #FFFFFF;
-  --background-color-grey: #D9D9D9;
 
   --cell: 2rem;
   --border: 1px solid var(--color-grey-900);
@@ -35,8 +29,8 @@ const GlobalStyles = createGlobalStyle`
   --width-main: 1200px;
 
   --grid-gap: 2rem;
+  --padding-body: 1rem;
 
-  --padding-hero: 6rem;
   --padding-s: 2rem;
   --padding-m: 4rem;
   --padding-l: 6rem;
@@ -49,13 +43,6 @@ const GlobalStyles = createGlobalStyle`
   --font: "Overpass Mono", monospace;
   --letter-space: .1rem;
   --letter-space-l: .4rem;
-
-  @media (max-width: 1400px) {
-  --padding-row: 12vw;
-}
-@media (max-width: 1000px) {
-  --padding-row: 0vw;
-}
 }
 
 *,
@@ -74,7 +61,6 @@ html {
 }
 
 body {
-
   font-family: var(--font);
   font-optical-sizing: auto;
   font-style: normal;

@@ -9,6 +9,7 @@ const variations = {
     }
   `,
   order: css`
+    width: 3rem;
     text-align: center;
     margin: 0;
     border: none;
@@ -32,6 +33,7 @@ const Input = styled.input`
   border-radius: none;
   padding: 1rem;
   letter-spacing: var(--letter-space);
+  width: 100%;
   &[type='radio'] {
     position: relative;
     appearance: none;

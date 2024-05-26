@@ -8,14 +8,14 @@ import StyledLink from '../ui/StyledLink.jsx';
 
 const StyledOrders = styled.section`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-gap: var(--grid-gap);
   width: 100%;
-  margin-bottom: var(--bottom);
+  padding: 0 var(--padding-body) var(--bottom);
 `;
 
 const OrderTable = styled.article`
-  grid-column: 1 / span 5;
+  grid-column: 1 / span 6;
   display: flex;
   flex-direction: column;
   gap: 4rem;
@@ -28,15 +28,18 @@ const OrderTable = styled.article`
 
 const Row = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-gap: var(--grid-gap);
 `;
 
 const Column = styled.div`
-  grid-column: span 1;
+  grid-column: span 2;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  @media (max-width: 1400px) {
+    grid-column: span 2;
+  }
 `;
 
 const InfoContainer = styled.div`

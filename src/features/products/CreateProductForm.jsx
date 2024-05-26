@@ -17,39 +17,38 @@ import toast from 'react-hot-toast';
 import { useState } from 'react';
 
 const StyledCreateProductForm = styled.form`
-  grid-column: span 5;
+  grid-column: span 6;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-gap: var(--grid-gap);
   background-color: var(--color-grey-0);
   border: var(--border);
-  padding: 2rem;
+  padding: 1rem;
 `;
 
 const ColumnProductInfo = styled.div`
-  grid-column: 1 / span 2;
+  grid-column: 1 / span 3;
   display: flex;
   flex-direction: column;
   width: 100%;
 `;
 
 const ColumnMeasurements = styled.div`
-  grid-column: 3 / span 1;
+  grid-column: 4 / span 1;
   display: flex;
   flex-direction: column;
 `;
 const ColumnImages = styled.div`
-  grid-column: 4 / span 2;
+  grid-column: 5 / span 2;
   display: grid;
   grid-gap: var(--grid-gap);
 `;
 
 const ImageContainer = styled.div`
-  /* grid-column: span 1; */
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 2rem;
-  width: 100%;
+  grid-gap: var(--grid-gap);
+  /* width: 100%; */
   align-items: center;
 `;
 
@@ -65,6 +64,7 @@ const InputContainer = styled.div`
   flex-direction: column;
   padding-bottom: 1rem;
   gap: 0.2rem;
+  width: 100%;
 `;
 
 const ActionContainer = styled.div`
@@ -73,39 +73,29 @@ const ActionContainer = styled.div`
   align-items: center;
 `;
 
-const Li = styled.li`
-  display: flex;
-  align-items: center;
-`;
 const Ul = styled.ul`
   display: flex;
   gap: 2rem;
 `;
 
+const Li = styled.li`
+  display: flex;
+  align-items: center;
+`;
+
 const RowVariants = styled.div`
-  grid-column: 1 / span 5;
+  grid-column: 1 / span 6;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: var(--grid-gap);
-`;
-
-const ColumnVariants = styled.div`
-  grid-column: span 1;
-`;
-
-const ColumnVariantsSmall = styled.div`
-  grid-column: span 1;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-gap: var(--grid-gap);
 `;
 
 const RowButtonVariants = styled.div`
-  grid-column: 1 / span 5;
+  grid-column: 1 / span 6;
 `;
 
 const RowHeadingButton = styled.div`
-  grid-column: 1 / span 5;
+  grid-column: 1 / span 6;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -155,11 +145,11 @@ function CreateProductForm({ heading, productToEdit = {}, setShowForm }) {
 
   function onSubmit(data) {
     const seatingHeight =
-      data.seatingHeight.trim() !== '' ? parseFloat(data.seatingHeight) : null;
-    const height = data.height.trim() !== '' ? parseFloat(data.height) : null;
-    const width = data.width.trim() !== '' ? parseFloat(data.width) : null;
-    const depth = data.depth.trim() !== '' ? parseFloat(data.depth) : null;
-    const length = data.length.trim() !== '' ? parseFloat(data.length) : null;
+      data.seatingHeight !== '' ? parseFloat(data.seatingHeight) : null;
+    const height = data.height !== '' ? parseFloat(data.height) : null;
+    const width = data.width !== '' ? parseFloat(data.width) : null;
+    const depth = data.depth !== '' ? parseFloat(data.depth) : null;
+    const length = data.length !== '' ? parseFloat(data.length) : null;
 
     const image = typeof data.image === 'string' ? data.image : data.image;
     if (isEditSession)
@@ -257,12 +247,12 @@ function CreateProductForm({ heading, productToEdit = {}, setShowForm }) {
                 $variation='manage'
                 type='radio'
                 name='category'
-                id='sofa'
-                value='Sofa'
+                id='lounge'
+                value='Lounge'
                 disabled={isWorking}
                 {...register('category')}
               />
-              <Label htmlFor='sofa'>Sofa</Label>
+              <Label htmlFor='lounge'>Lounge</Label>
             </Li>
           </Ul>
         </InputContainer>
@@ -431,37 +421,37 @@ function CreateProductForm({ heading, productToEdit = {}, setShowForm }) {
               <Errors>{errors.colorName.message}</Errors>
             )}
           </InputContainer>
-          <ColumnVariantsSmall>
-            <InputContainer>
-              <Label htmlFor={`variants.${index}.colorHex`}>Color hex</Label>
-              <Input
-                type='text'
-                id={`variants.${index}.colorHex`}
-                disabled={isWorking}
-                {...register(`variants.${index}.colorHex`, {
-                  required: 'This field is required',
-                })}
-              />
-              {errors?.colorHex?.message && (
-                <Errors>{errors.colorHex.message}</Errors>
-              )}
-            </InputContainer>
-            <InputContainer>
-              <Label htmlFor={`variants.${index}.inStock`}>In stock</Label>
-              <Input
-                type='number'
-                step='1'
-                id={`variants.${index}.inStock`}
-                disabled={isWorking}
-                {...register(`variants.${index}.inStock`, {
-                  required: 'This field is required',
-                })}
-              />
-              {errors?.inStock?.message && (
-                <Errors>{errors.inStock.message}</Errors>
-              )}
-            </InputContainer>
-          </ColumnVariantsSmall>
+
+          <InputContainer>
+            <Label htmlFor={`variants.${index}.colorHex`}>Color hex</Label>
+            <Input
+              type='text'
+              id={`variants.${index}.colorHex`}
+              disabled={isWorking}
+              {...register(`variants.${index}.colorHex`, {
+                required: 'This field is required',
+              })}
+            />
+            {errors?.colorHex?.message && (
+              <Errors>{errors.colorHex.message}</Errors>
+            )}
+          </InputContainer>
+
+          <InputContainer>
+            <Label htmlFor={`variants.${index}.inStock`}>In stock</Label>
+            <Input
+              type='number'
+              step='1'
+              id={`variants.${index}.inStock`}
+              disabled={isWorking}
+              {...register(`variants.${index}.inStock`, {
+                required: 'This field is required',
+              })}
+            />
+            {errors?.inStock?.message && (
+              <Errors>{errors.inStock.message}</Errors>
+            )}
+          </InputContainer>
 
           <InputContainer>
             <Label htmlFor={`variants.${index}.variantImage`}>image</Label>

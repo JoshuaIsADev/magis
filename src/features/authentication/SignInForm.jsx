@@ -9,11 +9,14 @@ import StyledLink from '../../ui/StyledLink';
 import Errors from '../../ui/Errors';
 
 const StyledSignInForm = styled.form`
-  grid-column: 1 / span 1;
+  grid-column: 1 / span 2;
   display: flex;
   flex-direction: column;
   gap: 2rem;
   padding-bottom: var(--bottom);
+  @media (max-width: 1400px) {
+    grid-column: span 2;
+  }
 `;
 
 const InputContainer = styled.div`

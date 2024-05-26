@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import SignUpForm from '../features/authentication/SignUpForm';
-import { Heading, HeadingContainer } from '../ui/Heading.jsx';
+import { HeadingContainer } from '../ui/Heading.jsx';
 
 const StyledSignUp = styled.section`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  padding-bottom: var(--bottom);
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: var(--grid-gap);
+  padding: 0 var(--padding-body) var(--bottom);
 `;
 
 function SignUp() {

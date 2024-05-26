@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
 import StyledLink from './StyledLink';
 import { UserContext } from '../context/userContext';
@@ -10,10 +10,15 @@ const StyledHeader = styled.header`
   position: fixed;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-gap: var(--grid-gap);
   background-color: var(--color-grey-0);
+  padding: var(--padding-body);
   z-index: 15;
+`;
+
+const ColumnLogo = styled.div`
+  grid-column: 1 / span 2;
 `;
 
 const ColumnHeader = styled.div`
@@ -38,54 +43,52 @@ function Header() {
   }
 
   return (
-    <nav>
-      <StyledHeader>
-        <ColumnHeader>
-          <StyledLink $variation='headerLogo' to='/'>
-            Magis
-          </StyledLink>
-        </ColumnHeader>
+    <StyledHeader>
+      <ColumnLogo>
+        <StyledLink $variation='headerLogo' to='/'>
+          Magis
+        </StyledLink>
+      </ColumnLogo>
 
-        <ColumnHeader>
-          <StyledLink $variation='header' to='/'>
-            Products
-          </StyledLink>
-        </ColumnHeader>
+      <ColumnHeader>
+        <StyledLink $variation='header' to='/'>
+          Products
+        </StyledLink>
+      </ColumnHeader>
 
+      <ColumnHeader disabled={isPending}>
+        {isAuthenticated ? (
+          <StyledLink $variation='header' onClick={signOut}>
+            Sign Out
+          </StyledLink>
+        ) : (
+          <StyledLink $variation='header' to='/signin'>
+            Sign In
+          </StyledLink>
+        )}
+      </ColumnHeader>
+      {admin ? (
         <ColumnHeader disabled={isPending}>
-          {isAuthenticated ? (
-            <StyledLink $variation='header' onClick={signOut}>
-              Sign Out
-            </StyledLink>
-          ) : (
-            <StyledLink $variation='header' to='/signin'>
-              Sign In
-            </StyledLink>
-          )}
+          <StyledLink $variation='header' to='/manage'>
+            Manage
+          </StyledLink>
         </ColumnHeader>
-        {admin ? (
+      ) : (
+        <>
           <ColumnHeader disabled={isPending}>
-            <StyledLink $variation='header' to='/manage'>
-              Manage
+            <StyledLink $variation='header' to='/orders'>
+              Orders
             </StyledLink>
           </ColumnHeader>
-        ) : (
-          <>
-            <ColumnHeader disabled={isPending}>
-              <StyledLink $variation='header' to='/orders'>
-                Orders
-              </StyledLink>
-            </ColumnHeader>
 
-            <ColumnHeader disabled={isPending}>
-              <StyledLink $variation='header' to='/cart'>
-                Cart {cartItemQuantity > 0 ? `(${cartItemQuantity})` : ''}
-              </StyledLink>
-            </ColumnHeader>
-          </>
-        )}
-      </StyledHeader>
-    </nav>
+          <ColumnHeader disabled={isPending}>
+            <StyledLink $variation='header' to='/cart'>
+              Cart {cartItemQuantity > 0 ? `(${cartItemQuantity})` : ''}
+            </StyledLink>
+          </ColumnHeader>
+        </>
+      )}
+    </StyledHeader>
   );
 }
 

@@ -11,20 +11,20 @@ import { useState } from 'react';
 
 const StyledProducts = styled.section`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-gap: var(--grid-gap);
-  padding-bottom: var(--bottom);
+  padding: 0 var(--padding-body);
 `;
 
 const MenuContainer = styled.div`
-  grid-column: 1 / span 5;
+  grid-column: 1 / span 6;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-gap: var(--grid-gap);
 `;
 
 const FilterSortContainer = styled.div`
-  grid-column: 1 / span 1;
+  grid-column: 1 / span 6;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -40,7 +40,7 @@ function Products() {
         text='Since 1976 Magis produces experimental, aesthetic and functional
             Italian-made furniture'
       /> */}
-      <HeadingContainer text='Shop the collectionss' />
+      <HeadingContainer text='Shop the collections' />
       <MenuContainer>
         <FilterSortContainer>
           <Button

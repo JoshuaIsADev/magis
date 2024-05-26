@@ -10,26 +10,25 @@ import Button from '../ui/Button';
 
 const StyledCart = styled.section`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-gap: var(--grid-gap);
-  padding-bottom: var(--bottom);
+  padding: 0 var(--padding-body) var(--bottom);
 `;
 
 const SummaryContainer = styled.div`
-  grid-column: 1 / span 1;
+  grid-column: 1 / span 2;
   display: flex;
   flex-direction: column;
   gap: 2rem;
   padding-top: 4rem;
+  @media (max-width: 1400px) {
+    grid-column: 1 / span 2;
+  }
 `;
 
 const InfoRow = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-const EmptyCartContainer = styled.div`
-  padding: var(--cell);
 `;
 
 function Cart() {

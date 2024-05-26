@@ -1,10 +1,14 @@
 import styled, { css } from 'styled-components';
+import ProductPage from '../pages/ProductPage';
 
 const variations = {
   hero: css`
     /* max-height: 80rem; */
     object-fit: cover;
     height: 100%;
+  `,
+  productPage: css`
+    padding: 2rem;
   `,
   productCard: css`
     aspect-ratio: 1;
@@ -36,6 +40,7 @@ const Img = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
+  object-position: center;
   ${(props) => variations[props.$variation]}
 `;
 

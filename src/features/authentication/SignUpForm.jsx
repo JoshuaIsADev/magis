@@ -9,18 +9,14 @@ import Errors from '../../ui/Errors';
 import Button from '../../ui/Button';
 
 const StyledSignUpForm = styled.form`
-  grid-column: 1 / span 1;
+  grid-column: 1 / span 2;
   display: flex;
   flex-direction: column;
   gap: 2rem;
   padding-bottom: var(--bottom);
-`;
-
-const Container = styled.div`
-  grid-area: container;
-  border-left: var(--border);
-  border-right: var(--border);
-  padding: var(--cell);
+  @media (max-width: 1400px) {
+    grid-column: span 2;
+  }
 `;
 
 const InputContainer = styled.div`

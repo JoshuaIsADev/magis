@@ -10,15 +10,15 @@ import { Heading, HeadingContainer } from '../ui/Heading.jsx';
 
 const StyledManageProducts = styled.section`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-gap: var(--grid-gap);
-  padding-bottom: var(--bottom);
+  padding: 0 var(--padding-body) var(--bottom);
 `;
 
 const MenuContainer = styled.div`
-  grid-column: 1 / span 5;
+  grid-column: 1 / span 6;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-gap: var(--grid-gap);
 `;
 

@@ -7,9 +7,9 @@ import styled from 'styled-components';
 import { Heading } from '../../ui/Heading';
 
 const StyledProductTable = styled.div`
-  grid-column: span 5;
+  grid-column: span 6;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-gap: var(--grid-gap);
 `;
 

@@ -4,10 +4,8 @@ import StyledLink from '../ui/StyledLink';
 
 const StyledPageNotFound = styled.section`
   display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: var(--grid-gap);
-  width: 100%;
-  margin-bottom: var(--bottom);
+  grid-template-columns: repeat(6, 1fr);
+  padding: 0 var(--padding-body) var(--bottom);
 `;
 
 function PageNotFound() {
