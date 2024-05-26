@@ -20,38 +20,57 @@ const StyledProductPage = styled.section`
   padding: 0 var(--padding-body) var(--bottom);
 `;
 
-const ColumnOrder = styled.form`
+const OrderContainer = styled.form`
   grid-column: 1 / span 1;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  @media (max-width: 1200px) {
+    grid-column: 5 / span 2;
+  }
+  @media (max-width: 800px) {
+    grid-column: 1 / span 6;
+    grid-row: 3 / span 1;
+    padding-bottom: 4rem;
+  }
 `;
 
-const TextContainer = styled.div`
+const ProductHeadingContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 0.5rem;
   border-bottom: var(--border);
 `;
 
-const ColumnInfo = styled.div`
+const InfoContainer = styled.div`
   grid-column: 6 / span 1;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  /* @media (max-width: 1000px) {
-    grid-column: span 3;
+  @media (max-width: 1200px) {
+    grid-column: 5 / span 2;
+    grid-row: 3;
   }
-  @media (max-width: 600px) {
-    grid-column: span 6;
-  } */
+  @media (max-width: 800px) {
+    grid-column: 1 / span 6;
+    grid-row: 4 / span 1;
+  }
 `;
-const ColumnShowcase = styled.div`
+const MainImageContainer = styled.div`
   grid-column: 2 / span 4;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 85vh;
+  @media (max-width: 1200px) {
+    grid-column: 1 / span 4;
+    grid-row: 2 / span 2;
+  }
+  @media (max-width: 800px) {
+    grid-column: 1 / span 6;
+    grid-row: 2 / span 1;
+    height: 35vh;
+  }
 `;
 
 const Ul = styled.ul`
@@ -59,6 +78,9 @@ const Ul = styled.ul`
   gap: 0.5rem;
   padding-top: 4rem;
   align-items: center;
+  @media (max-width: 800px) {
+    padding-top: 2rem;
+  }
 `;
 
 const Li = styled.li`
@@ -78,7 +100,13 @@ const DetailContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  padding-top: 8rem;
+  padding-top: 6rem;
+  @media (max-width: 1200px) {
+    padding-top: 4rem;
+  }
+  @media (max-width: 800px) {
+    padding-top: 2rem;
+  }
 `;
 
 const MeasurementsContainer = styled.div`
@@ -94,11 +122,19 @@ const MeasurementsRow = styled.div`
 
 const GalleryContainer = styled.div`
   grid-column: 2 / span 4;
-  height: 85vh;
+  max-height: 85vh;
   margin: 10rem 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 1200px) {
+    margin: 4rem 0;
+  }
+  @media (max-width: 800px) {
+    grid-column: 1 / span 6;
+    margin: 1rem 0;
+    max-height: 100vh;
+  }
 `;
 
 function ProductPage() {
@@ -179,12 +215,12 @@ function ProductPage() {
     <StyledProductPage>
       <HeadingContainer text='Shop' />
 
-      <ColumnOrder onSubmit={handleSubmit(onSubmit)}>
-        <TextContainer>
+      <OrderContainer onSubmit={handleSubmit(onSubmit)}>
+        <ProductHeadingContainer>
           <Heading as='h3'>{product.name}</Heading>
           <p>{product.designer}</p>
           <p>${product.unitPrice}</p>
-        </TextContainer>
+        </ProductHeadingContainer>
 
         <Ul>
           {variants.map((variant, index) => (
@@ -233,13 +269,13 @@ function ProductPage() {
         <Button $variation='primary' type='submit' disabled={disabled}>
           Add to cart
         </Button>
-      </ColumnOrder>
+      </OrderContainer>
 
-      <ColumnShowcase>
+      <MainImageContainer>
         <Img src={imageVariant || defaultImage} $variation='productPage' />
-      </ColumnShowcase>
+      </MainImageContainer>
 
-      <ColumnInfo>
+      <InfoContainer>
         {aboutParagraphs.map((description, index) => (
           <p key={index}>{description}</p>
         ))}
@@ -284,7 +320,7 @@ function ProductPage() {
             )}
           </MeasurementsContainer>
         </DetailContainer>
-      </ColumnInfo>
+      </InfoContainer>
 
       {product.image.map((image, index) => (
         <GalleryContainer key={index}>

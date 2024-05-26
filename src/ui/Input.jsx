@@ -17,6 +17,7 @@ const variations = {
   `,
   product: css`
     background-color: #${(props) => props.$color};
+
     &:checked {
       background-color: #${(props) => props.$color};
       outline: 1px solid var(--color-grey-900);
@@ -31,9 +32,8 @@ const Input = styled.input`
   background-color: var(--color-grey-0);
   box-shadow: none;
   border-radius: none;
-  padding: 1rem;
+  padding: 0.5rem;
   letter-spacing: var(--letter-space);
-  width: 100%;
   &[type='radio'] {
     position: relative;
     appearance: none;

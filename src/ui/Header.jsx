@@ -11,7 +11,8 @@ const StyledHeader = styled.header`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-gap: var(--grid-gap);
+  grid-column-gap: var(--grid-gap);
+  grid-row-gap: 0.5rem;
   background-color: var(--color-grey-0);
   padding: var(--padding-body);
   z-index: 15;
@@ -19,10 +20,16 @@ const StyledHeader = styled.header`
 
 const ColumnLogo = styled.div`
   grid-column: 1 / span 2;
+  @media (max-width: 600px) {
+    grid-column: span 6;
+  }
 `;
 
 const ColumnHeader = styled.div`
   grid-column: span 1;
+  @media (max-width: 600px) {
+    grid-column: span 6;
+  }
 `;
 
 function Header() {

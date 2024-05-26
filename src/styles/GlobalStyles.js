@@ -19,15 +19,6 @@ const GlobalStyles = createGlobalStyle`
   --border: 1px solid var(--color-grey-900);
   --top: 6rem;
   --bottom: 6rem;
-  --border-radius-sm: .5rem;
-  --border-radius-md: 1rem;
-  --border-radius-lg: 2rem;
-
-  /* --width-desktop: calc(100vw - 7rem); */
-  --width-max: 3840px;
-  --width-text-max: 700px; 
-  --width-main: 1200px;
-
   --grid-gap: 2rem;
   --padding-body: 1rem;
 
@@ -43,6 +34,10 @@ const GlobalStyles = createGlobalStyle`
   --font: "Overpass Mono", monospace;
   --letter-space: .1rem;
   --letter-space-l: .4rem;
+  @media (max-width: 600px) {
+    --top: 12rem;
+    --grid-gap: 1rem;
+  }
 }
 
 *,
@@ -76,7 +71,7 @@ a {
 
 p {
   font-size: 1rem;
-      font-weight: 500;
+      font-weight: 400;
       line-height: 1rem;
       letter-spacing: var(--letter-space);
 }

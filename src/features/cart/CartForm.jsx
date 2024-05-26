@@ -135,7 +135,9 @@ function CartForm({
             <VscAdd />
           </Button>
         </OrderButtons>
-        <Button type='submit'>Update</Button>
+        <Button type='submit' $variation='secondary'>
+          Update
+        </Button>
         <Button
           $variation='trash'
           onClick={(e) => handleDelete(e, selectedVariantId)}

@@ -23,10 +23,10 @@ const variations = {
 
   primary: css`
     font-size: 1rem;
-    font-weight: 300;
+    font-weight: 400;
     letter-spacing: var(--letter-space);
     text-transform: uppercase;
-    padding: 0.75rem 1rem 0.75rem;
+    padding: 0.25rem 0.5rem 0.15rem;
     border: 1px solid var(--color-grey-900);
     border-radius: none;
     color: ${(props) => props.$color};
