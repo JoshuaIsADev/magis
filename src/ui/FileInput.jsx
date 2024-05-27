@@ -6,6 +6,7 @@ const FileInput = styled.input.attrs({ type: 'file' })`
   border-radius: none;
   padding: 0.8rem 1.2rem;
   box-shadow: none;
+  width: 100%;
   &[type='radio'] {
     margin-right: 1rem;
   }

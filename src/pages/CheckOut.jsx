@@ -16,6 +16,14 @@ const StyledCheckOut = styled.section`
 
 const CartContainer = styled.div`
   grid-column: 4 / span 2;
+  @media (max-width: 1000px) {
+    grid-column: 4 / span 3;
+    /* grid-row: 2 / span 2; */
+  }
+  @media (max-width: 500px) {
+    grid-column: 1 / span 6;
+    grid-row: 1 / span 1;
+  }
 `;
 
 const RowCart = styled.div`
@@ -23,6 +31,10 @@ const RowCart = styled.div`
   grid-template-columns: repeat(2, 1fr);
   grid-gap: var(--grid-gap);
   align-items: center;
+  @media (max-width: 1000px) {
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 
 const ImageContainer = styled.div`

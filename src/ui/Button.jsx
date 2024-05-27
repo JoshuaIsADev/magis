@@ -9,6 +9,16 @@ const variations = {
   trash: css`
     padding-top: 0.3rem;
   `,
+  icons: css`
+    padding: 0.25rem;
+    margin: 0.25rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    &:hover {
+      opacity: 0.3;
+    }
+  `,
   menu: css`
     display: flex;
     align-items: left;
@@ -26,7 +36,7 @@ const variations = {
     font-weight: 400;
     letter-spacing: var(--letter-space);
     text-transform: uppercase;
-    padding: 0.25rem 0.5rem 0.15rem;
+    padding: 0.5rem 0.5rem 0.35rem;
     border: 1px solid var(--color-grey-900);
     border-radius: none;
     color: ${(props) => props.$color};
@@ -79,7 +89,7 @@ const Button = styled.button`
   font-family: var(--font);
   font-size: 1rem;
   font-weight: 500;
-  letter-spacing: var(--letter-space);
+  /* letter-spacing: var(--letter-space); */
   background-color: var(--color-grey-0);
   border: none;
   text-align: left;

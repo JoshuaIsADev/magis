@@ -4,7 +4,7 @@ import StyledLink from '../ui/StyledLink';
 
 const StyledPageNotFound = styled.section`
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   padding: 0 var(--padding-body) var(--bottom);
 `;
 

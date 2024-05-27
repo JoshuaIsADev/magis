@@ -16,6 +16,14 @@ const StyledCreateOrderForm = styled.form`
   display: flex;
   flex-direction: column;
   padding-bottom: var(--bottom);
+  @media (max-width: 1000px) {
+    grid-column: 1 / span 3;
+    /* grid-row: 2 / span 2; */
+  }
+  @media (max-width: 500px) {
+    grid-column: 1 / span 6;
+    grid-row: 2 / span 1;
+  }
 `;
 
 const InputContainer = styled.div`

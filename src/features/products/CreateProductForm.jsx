@@ -12,7 +12,7 @@ import FileInput from '../../ui/FileInput';
 import Spinner from '../../ui/Spinner';
 import Button from '../../ui/Button';
 import Img from '../../ui/Img';
-import { Heading, HeadingContainer } from '../../ui/Heading.jsx';
+import { Heading } from '../../ui/Heading.jsx';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 
@@ -31,17 +31,33 @@ const ColumnProductInfo = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  @media (max-width: 800px) {
+    grid-column: span 6;
+  }
 `;
 
 const ColumnMeasurements = styled.div`
   grid-column: 4 / span 1;
   display: flex;
   flex-direction: column;
+  @media (max-width: 800px) {
+    grid-column: 1 / span 2;
+  }
+  @media (max-width: 400px) {
+    grid-column: 1 / span 6;
+  }
 `;
+
 const ColumnImages = styled.div`
   grid-column: 5 / span 2;
   display: grid;
   grid-gap: var(--grid-gap);
+  @media (max-width: 800px) {
+    grid-column: 3 / span 4;
+  }
+  @media (max-width: 400px) {
+    grid-column: 1 / span 6;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -60,11 +76,15 @@ const VariantImageContainer = styled.div`
 `;
 
 const InputContainer = styled.div`
+  grid-column: span 1;
   display: flex;
   flex-direction: column;
   padding-bottom: 1rem;
   gap: 0.2rem;
   width: 100%;
+  @media (max-width: 800px) {
+    grid-column: span 3;
+  }
 `;
 
 const ActionContainer = styled.div`
@@ -88,10 +108,10 @@ const RowVariants = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-gap: var(--grid-gap);
-`;
-
-const RowButtonVariants = styled.div`
-  grid-column: 1 / span 6;
+  @media (max-width: 800px) {
+    grid-column-gap: var(--grid-gap);
+    grid-row-gap: 0;
+  }
 `;
 
 const RowHeadingButton = styled.div`
@@ -489,11 +509,11 @@ function CreateProductForm({ heading, productToEdit = {}, setShowForm }) {
           <ActionContainer>
             {productToEdit?.variants?.length > 1 ? (
               <Button
-                $variation='secondary'
+                $variation='icons'
                 onClick={(e) => handleDelete(e, index)}
                 type='button'
               >
-                Delete variant
+                <VscTrash />
               </Button>
             ) : (
               ''

@@ -7,6 +7,9 @@ const rotate = keyframes`
 `;
 
 const Spinner = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
   margin: auto auto;
   width: 4rem;
   aspect-ratio: 1;

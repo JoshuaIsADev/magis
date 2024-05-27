@@ -34,12 +34,14 @@ const Input = styled.input`
   border-radius: none;
   padding: 0.5rem;
   letter-spacing: var(--letter-space);
+  width: 100%;
   &[type='radio'] {
     position: relative;
     appearance: none;
     border: 1px solid var(--color-grey-900);
     border-radius: 50%;
     margin-right: 0.35rem;
+    margin-bottom: 0.3rem;
     cursor: pointer;
     &:checked {
       border-color: var(--color-grey-900);

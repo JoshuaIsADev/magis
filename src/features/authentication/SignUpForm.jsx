@@ -17,6 +17,12 @@ const StyledSignUpForm = styled.form`
   @media (max-width: 1400px) {
     grid-column: span 2;
   }
+  @media (max-width: 1000px) {
+    grid-column: span 3;
+  }
+  @media (max-width: 500px) {
+    grid-column: span 6;
+  }
 `;
 
 const InputContainer = styled.div`

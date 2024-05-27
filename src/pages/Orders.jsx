@@ -37,8 +37,13 @@ const Column = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  @media (max-width: 1400px) {
-    grid-column: span 2;
+  @media (max-width: 800px) {
+    grid-column: span 3;
+    gap: 0.25rem;
+  }
+  @media (max-width: 400px) {
+    grid-column: span 6;
+    gap: 0.25rem;
   }
 `;
 

@@ -22,11 +22,17 @@ const MenuContainer = styled.div`
   grid-gap: var(--grid-gap);
 `;
 
-const FilterSortContainer = styled.div`
-  grid-column: 1 / span 1;
+const ColumnMenu = styled.div`
+  grid-column: span 1;
   display: flex;
   align-items: center;
   gap: 1rem;
+  @media (max-width: 1200px) {
+    grid-column: span 2;
+  }
+  @media (max-width: 600px) {
+    grid-column: span 3;
+  }
 `;
 
 function ManageProducts() {
@@ -41,7 +47,7 @@ function ManageProducts() {
     <StyledManageProducts>
       <HeadingContainer text='Manage products' />
       <MenuContainer>
-        <FilterSortContainer>
+        <ColumnMenu>
           <Button
             $variation='secondary'
             onClick={() => setShowDropdown(!showDropdown)}
@@ -53,10 +59,12 @@ function ManageProducts() {
             transform={showDropdown ? 'rotate(180)' : 'rotate(0)'}
             className={showDropdown ? 'downArrow' : 'arrow'}
           />
-        </FilterSortContainer>
-        <Button $variation='primary' onClick={toggleModal}>
-          Add new product
-        </Button>
+        </ColumnMenu>
+        <ColumnMenu>
+          <Button $variation='primary' onClick={toggleModal}>
+            Add new product
+          </Button>
+        </ColumnMenu>
       </MenuContainer>
       {showForm && (
         <CreateProductForm

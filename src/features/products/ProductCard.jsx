@@ -11,7 +11,7 @@ const StyledProductCard = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  @media (max-width: 1200px) {
+  @media (max-width: 1400px) {
     grid-column: span 2;
   }
   @media (max-width: 600px) {
@@ -20,14 +20,19 @@ const StyledProductCard = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  padding: var(--cell);
+  padding: 4rem;
+  margin-bottom: 2rem;
+  /* padding: var(--cell); */
+  @media (max-width: 800px) {
+    padding: 2rem;
+  }
 `;
 
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 0.5rem;
+  line-height: var(--line-height);
 `;
 
 function ProductCard({ product }) {

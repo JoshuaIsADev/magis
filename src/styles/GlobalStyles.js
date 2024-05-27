@@ -22,18 +22,10 @@ const GlobalStyles = createGlobalStyle`
   --grid-gap: 2rem;
   --padding-body: 1rem;
 
-  --padding-s: 2rem;
-  --padding-m: 4rem;
-  --padding-l: 6rem;
-  --padding-xl: 10rem;
-  --padding-v: 2rem;
-  --padding-row: 25vw;
-  --padding-sides: 2rem;
-  --padding-right: 1rem;
-
   --font: "Overpass Mono", monospace;
   --letter-space: .1rem;
   --letter-space-l: .4rem;
+  --line-height: 1rem;
   @media (max-width: 600px) {
     --top: 12rem;
     --grid-gap: 1rem;
@@ -71,39 +63,9 @@ a {
 
 p {
   font-size: 1rem;
-      font-weight: 400;
-      line-height: 1rem;
-      letter-spacing: var(--letter-space);
-}
-
-.bold {
-  font-weight: 700;
-}
-
-p.small {
-  font-size: .8rem;
-  line-height: 1.25rem;
-  letter-spacing: .05rem;
   font-weight: 500;
-}
-
-p.upper {
-  text-transform: uppercase;
-}
-
-p.medium {
-  font-size: 2rem;
-  line-height: 2.5rem;
-  letter-spacing: .05rem;
-  font-weight: 400;
-  text-transform: uppercase;
-}
-p.large {
-  font-size: 3rem;
-  line-height: 3.5rem;
-  letter-spacing: .05rem;
-  font-weight: 400;
-  text-transform: uppercase;
+  line-height: var(--line-height);
+  letter-spacing: var(--letter-space);
 }
 
 li {
