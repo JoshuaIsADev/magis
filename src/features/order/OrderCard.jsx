@@ -28,7 +28,9 @@ function OrderCard({ orderItem }) {
   return (
     <StyledOrderCard key={orderItem.selectedProductId}>
       <InfoContainer>
-        <Heading as='h3'>{orderItem.name}</Heading>
+        <Heading as='h2' $variation='bold'>
+          {orderItem.name}
+        </Heading>
         <p>{capitalize(orderItem.color)}</p>
         <p>
           {orderItem.quantity} x ${orderItem.unitPrice}

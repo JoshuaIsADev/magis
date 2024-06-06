@@ -107,7 +107,7 @@ function ProductTable() {
   return (
     <StyledProductTable>
       {filteredProducts.length === 0 ? (
-        <Heading as='h3' $variation='danger'>
+        <Heading as='h1' $variation='danger'>
           No products match your search criteria.
         </Heading>
       ) : pathIsManage ? (

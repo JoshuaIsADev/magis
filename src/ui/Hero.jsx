@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Heading, HeadingContainer } from './Heading.jsx';
+import { Heading } from './Heading.jsx';
 import Img from './Img';
 
 const StyledHero = styled.section`

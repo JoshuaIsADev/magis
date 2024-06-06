@@ -20,7 +20,6 @@ const OrderTable = styled.article`
   flex-direction: column;
   gap: 4rem;
   border-bottom: var(--border);
-  /* margin-bottom: 2rem; */
   &:last-child {
     border-bottom: none;
   }
@@ -72,24 +71,38 @@ function Orders() {
           <OrderTable key={order.id}>
             <Row>
               <Column>
-                <Heading as='h3'>Order details</Heading>
+                <Heading as='h2' $variation='bold'>
+                  Order details
+                </Heading>
                 <InfoContainer>
-                  <p>Confirmation number: {order.orderNumber}</p>
-                  <p>Purchased on: {order.created_at.slice(0, 10)}</p>
-                  <p>Total price: ${order.totalPrice}</p>
+                  <Heading as='h3'>Confirmation number: </Heading>
+                  <p>{order.orderNumber}</p>
+                  <Heading as='h3'>
+                    Purchased on: <p>{order.created_at.slice(0, 10)}</p>
+                  </Heading>
+                  <Heading as='h3'>Total price: </Heading>
+                  <p>${order.totalPrice}</p>
                 </InfoContainer>
               </Column>
               <Column>
-                <Heading as='h3'>Contact Info</Heading>
+                <Heading as='h2' $variation='bold'>
+                  Contact Info
+                </Heading>
                 <InfoContainer>
-                  <p>Full Name: {order.fullName}</p>
-                  <p>Contact info: {order.email}</p>
-                </InfoContainer>
-              </Column>
-              <Column>
-                <Heading as='h3'>Shipped to</Heading>
-                <InfoContainer>
+                  <Heading as='h3'>Full Name: </Heading>
                   <p>{order.fullName}</p>
+                  <Heading as='h3'>Contact info: </Heading>
+                  <p>{order.email}</p>
+                </InfoContainer>
+              </Column>
+              <Column>
+                <Heading as='h2' $variation='bold'>
+                  Shipped to
+                </Heading>
+                <InfoContainer>
+                  <Heading as='h3'>Name: </Heading>
+                  <p>{order.fullName}</p>
+                  <Heading as='h3'>Address: </Heading>
                   <p>{order.streetNumber}</p>
                   <p>{order.state}</p>
                   <p>{order.zipCode}</p>

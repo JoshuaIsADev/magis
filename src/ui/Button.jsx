@@ -1,36 +1,6 @@
 import styled, { css } from 'styled-components';
 
 const variations = {
-  header: css`
-    display: flex;
-    align-items: left;
-    background-color: white;
-  `,
-  trash: css`
-    padding-top: 0.3rem;
-  `,
-  icons: css`
-    padding: 0.25rem;
-    margin: 0.25rem;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    &:hover {
-      opacity: 0.3;
-    }
-  `,
-  menu: css`
-    display: flex;
-    align-items: left;
-    border: none;
-    text-align: left;
-    &:hover,
-    &.selected {
-      background-color: var(--color-grey-0);
-      color: var(--color-grey-900);
-    }
-  `,
-
   primary: css`
     font-size: 1rem;
     font-weight: 400;
@@ -70,26 +40,12 @@ const variations = {
       text-decoration-thickness: 2px;
     }
   `,
-
-  gallery: css`
-    width: 1rem;
-    height: 1rem;
-    border: 1px solid var(--color-grey-900);
-    border-radius: 0.5rem;
-    background-color: var(--color-grey-0);
-    &:hover,
-    &:active,
-    &:active.link {
-      background-color: var(--color-grey-900);
-    }
-  `,
 };
 
 const Button = styled.button`
   font-family: var(--font);
   font-size: 1rem;
   font-weight: 500;
-  /* letter-spacing: var(--letter-space); */
   background-color: var(--color-grey-0);
   border: none;
   text-align: left;

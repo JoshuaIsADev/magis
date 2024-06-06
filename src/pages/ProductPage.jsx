@@ -217,7 +217,9 @@ function ProductPage() {
 
       <OrderContainer onSubmit={handleSubmit(onSubmit)}>
         <ProductHeadingContainer>
-          <Heading as='h3'>{product.name}</Heading>
+          <Heading as='h2' $variation='bold'>
+            {product.name}
+          </Heading>
           <p>{product.designer}</p>
           <p>${product.unitPrice}</p>
         </ProductHeadingContainer>
@@ -284,37 +286,37 @@ function ProductPage() {
           <MeasurementsContainer>
             {product.totalHeight && (
               <MeasurementsRow>
-                <Heading as='h3'>Total height</Heading>
+                <p>Total height</p>
                 <p>{product.totalHeight}</p>
               </MeasurementsRow>
             )}
             {product.seatingHeight && (
               <MeasurementsRow>
-                <Heading as='h3'>Seating height</Heading>
+                <p>Seating height</p>
                 <p>{product.seatingHeight}</p>
               </MeasurementsRow>
             )}
             {product.height && (
               <MeasurementsRow>
-                <Heading as='h3'>Height</Heading>
+                <p>Height</p>
                 <p>{product.height}</p>
               </MeasurementsRow>
             )}
             {product.width && (
               <MeasurementsRow>
-                <Heading as='h3'>Width</Heading>
+                <p>Width</p>
                 <p>{product.width}</p>
               </MeasurementsRow>
             )}
             {product.length && (
               <MeasurementsRow>
-                <Heading as='h3'>Length</Heading>
+                <p>Length</p>
                 <p>{product.length}</p>
               </MeasurementsRow>
             )}
             {product.depth && (
               <MeasurementsRow>
-                <Heading as='h3'>Depth</Heading>
+                <p>Depth</p>
                 <p>{product.depth}</p>
               </MeasurementsRow>
             )}

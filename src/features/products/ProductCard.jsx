@@ -54,7 +54,9 @@ function ProductCard({ product }) {
   return (
     <StyledProductCard>
       <InfoContainer>
-        <Heading as='h3'>{name}</Heading>
+        <Heading as='h2' $variation='bold'>
+          {name}
+        </Heading>
         <p>${unitPrice}</p>
         <p>{designer}</p>
         <StyledLink

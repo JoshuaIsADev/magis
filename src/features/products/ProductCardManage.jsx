@@ -2,9 +2,8 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { VscTrash, VscEdit } from 'react-icons/vsc';
 import { useDeleteProduct } from './UseDeleteProduct';
-import { useMainImage } from './useMainImage';
 import CreateProductForm from './CreateProductForm';
-import { Heading, HeadingContainer } from '../../ui/Heading.jsx';
+import { Heading } from '../../ui/Heading.jsx';
 import Button from '../../ui/Button';
 import Modal from '../../ui/Modal';
 import Img from '../../ui/Img';
@@ -84,8 +83,6 @@ function ProductCardManage({ product }) {
   } = product;
 
   const mainImage = product?.variants[0]?.variantImage;
-  // const mainImage = useMainImage(image)[0];
-
   function toggleModal() {
     setShowForm((show) => !show);
   }

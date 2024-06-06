@@ -1,11 +1,11 @@
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
-import { HeadingProvider } from '../context/headingContext';
 import Footer from './Footer';
 import styled from 'styled-components';
 
 const StyledMain = styled.main`
   padding-top: var(--top);
+  min-height: 75vh;
 `;
 
 function AppLayout() {

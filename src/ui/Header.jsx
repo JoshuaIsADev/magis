@@ -87,7 +87,6 @@ function Header() {
               Orders
             </StyledLink>
           </ColumnHeader>
-
           <ColumnHeader disabled={isPending}>
             <StyledLink $variation='header' to='/cart'>
               Cart {cartItemQuantity > 0 ? `(${cartItemQuantity})` : ''}

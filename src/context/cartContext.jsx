@@ -19,7 +19,7 @@ export const CartProvider = ({ children }) => {
     setTotalPrice(total);
   }, [cartItems]);
 
-  const value = { cartItems, totalPrice, setCartItems };
+  const value = { cartItems, totalPrice, setCartItems, setTotalPrice };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };

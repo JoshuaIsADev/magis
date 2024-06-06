@@ -41,7 +41,9 @@ function Footer() {
       <HeadingContainer text='Info' />
       <ColumnFooter>
         <FooterHeadingContainer>
-          <Heading as='h3'>Made in Italy</Heading>
+          <Heading as='h2' $variation='bold'>
+            Made in Italy
+          </Heading>
         </FooterHeadingContainer>
         <ContentContainer>
           <p>
@@ -66,10 +68,12 @@ function Footer() {
       </ColumnFooter>
       <ColumnFooter>
         <FooterHeadingContainer>
-          <Heading as='h3'>Reach out</Heading>
+          <Heading as='h2' $variation='bold'>
+            Reach out
+          </Heading>
         </FooterHeadingContainer>
         <ContentContainer>
-          <p>Magis Spa</p>
+          <Heading as='h3'>Magis Spa</Heading>
           <div>
             <p>via Triestina, Accesso E - Z.I. Ponte Tezze</p>
             <p>30020 Torre di Mosto - Ve / Italia</p>

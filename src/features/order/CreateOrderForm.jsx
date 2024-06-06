@@ -36,10 +36,12 @@ function CreateOrderForm() {
   const { user, isAuthenticated } = useUser();
   const { register, formState, handleSubmit, reset } = useForm();
   const { errors } = formState;
-  const { cartItems, totalPrice } = useContext(CartContext);
+  const { cartItems, setCartItems, setTotalPrice, totalPrice } =
+    useContext(CartContext);
   const { isPending, createOrder } = useCreateOrder();
 
   const orderedProducts = JSON.stringify(cartItems);
+
   const userId = JSON.stringify(user.id).replace(/^"|"$/g, '');
 
   function onSubmit(data) {
@@ -58,12 +60,18 @@ function CreateOrderForm() {
     data.orderedProducts = orderedProducts;
     data.user_id = userId;
     data.totalPrice = totalPrice;
-    createOrder(data, { onSuccess: (data) => reset() });
+    createOrder(data, {
+      onSuccess: (data) => {
+        setCartItems([]);
+        setTotalPrice(0);
+        reset();
+      },
+    });
   }
 
   return (
     <StyledCreateOrderForm onSubmit={handleSubmit(onSubmit)}>
-      <Heading as='h3' $variation='padding'>
+      <Heading as='h2' $variation='bold' $paddingBottom='2rem'>
         Your info
       </Heading>
       <InputContainer>

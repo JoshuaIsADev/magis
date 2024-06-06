@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
-import { Heading, HeadingContainer } from './Heading.jsx';
+import { Heading } from './Heading.jsx';
 import Button from './Button';
 import styled, { keyframes } from 'styled-components';
 
@@ -27,8 +27,6 @@ const FilterSortDropdown = styled.nav`
   grid-template-columns: repeat(6, 1fr);
   grid-gap: var(--grid-gap);
   opacity: 1;
-  /* position: absolute; */
-  /* z-index: -2; */
   &.show {
     position: relative;
     opacity: 1;
@@ -81,11 +79,10 @@ function FilterSort({ showDropdown }) {
 
   return (
     <StyledFilterSort>
-      {/* <FilterSortDropdown className={showDropdown ? 'show' : undefined}> */}
       {showDropdown && (
         <FilterSortDropdown>
           <ColumnFilterSort>
-            <Heading as='h3' $variation='filterSort'>
+            <Heading as='h1' $variation='filterSort'>
               Category
             </Heading>
             <Button
@@ -123,7 +120,7 @@ function FilterSort({ showDropdown }) {
           </ColumnFilterSort>
 
           <ColumnFilterSort>
-            <Heading as='h3' $variation='filterSort'>
+            <Heading as='h1' $variation='filterSort'>
               Designer
             </Heading>
             <Button
@@ -171,7 +168,7 @@ function FilterSort({ showDropdown }) {
             </Button>
           </ColumnFilterSort>
           <ColumnFilterSort>
-            <Heading as='h3' $variation='filterSort'>
+            <Heading as='h1' $variation='filterSort'>
               Material
             </Heading>
             <Button
@@ -236,7 +233,7 @@ function FilterSort({ showDropdown }) {
             </Button>
           </ColumnFilterSort>
           <ColumnFilterSort>
-            <Heading as='h3' $variation='filterSort'>
+            <Heading as='h1' $variation='filterSort'>
               Sort
             </Heading>
             <Button
@@ -290,15 +287,6 @@ function FilterSort({ showDropdown }) {
               Designer (Z-A)
             </Button>
           </ColumnFilterSort>
-
-          {/* <ColumnFilterSort>
-          <Button
-          $variation='secondary'
-          onClick={(showDropdown) => !showDropdown}
-          >
-          Apply
-          </Button>
-        </ColumnFilterSort> */}
         </FilterSortDropdown>
       )}
     </StyledFilterSort>

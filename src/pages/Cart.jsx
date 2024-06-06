@@ -43,7 +43,7 @@ function Cart() {
     <StyledCart>
       <HeadingContainer text='Your shopping cart' />
       {cartItems.length === 0 && (
-        <Heading as='h3' $variation='danger'>
+        <Heading as='h2' $variation='danger'>
           Your cart is empty.
         </Heading>
       )}
@@ -61,7 +61,9 @@ function Cart() {
       ))}
 
       <SummaryContainer>
-        <Heading as='h3'>Order summary</Heading>
+        <Heading as='h2' $variation='bold'>
+          Order summary
+        </Heading>
         <InfoRow>
           <Heading as='h3'>Subtotal</Heading>
           <p>${totalPrice.toFixed(2)}</p>

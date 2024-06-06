@@ -6,6 +6,8 @@ import CreateOrderForm from '../features/order/CreateOrderForm';
 import Spinner from '../ui/Spinner';
 import { Heading, HeadingContainer } from '../ui/Heading.jsx';
 import Img from '../ui/Img';
+import { useUser } from '../features/authentication/useUser.js';
+import StyledLink from '../ui/StyledLink.jsx';
 
 const StyledCheckOut = styled.section`
   display: grid;
@@ -62,6 +64,7 @@ const TextContainer = styled.div`
 `;
 
 function CheckOut() {
+  const { user, isAuthenticated } = useUser();
   const { isPending, products } = useProducts();
   const { cartItems, totalPrice } = useContext(CartContext);
   // const getProduct = useProductFinder(products);
@@ -74,10 +77,22 @@ function CheckOut() {
   return (
     <StyledCheckOut>
       <HeadingContainer text='Checkout' />
-      <CreateOrderForm />
+      {user ? (
+        <CreateOrderForm />
+      ) : (
+        <TextContainer>
+          <Heading as='h3' $variation='danger'>
+            Please{' '}
+            <StyledLink $variation='secondary' to='/signin'>
+              Sign in
+            </StyledLink>{' '}
+            to checkout.
+          </Heading>
+        </TextContainer>
+      )}
 
       <CartContainer>
-        <Heading as='h3' $variation='padding'>
+        <Heading as='h2' $variation='bold' $paddingBottom='2rem'>
           Order summary
         </Heading>
         {cartItems.map((cartItem) => (
@@ -87,7 +102,9 @@ function CheckOut() {
                 <Img src={cartItem.image} alt='product' />
               </ImageContainer>
               <TextContainer>
-                <Heading as='h3'>{cartItem.name}</Heading>
+                <Heading as='h3' $variation='bold'>
+                  {cartItem.name}
+                </Heading>
                 <p>{cartItem.color}</p>
               </TextContainer>
             </InfoContainer>
@@ -98,7 +115,7 @@ function CheckOut() {
         ))}
 
         <TotalContainer>
-          <Heading as='h3' $variation='padding'>
+          <Heading as='h2' $variation='bold' $paddingBottom='2rem'>
             Cart totals
           </Heading>
           <RowCart>
