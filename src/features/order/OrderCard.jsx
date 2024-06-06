@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Img from '../../ui/Img';
 import { capitalize } from '../../utils/capitalize';
-import { Heading, HeadingContainer } from '../../ui/Heading.jsx';
+import { Heading } from '../../ui/Heading.jsx';
 
 const StyledOrderCard = styled.div`
   grid-column: span 1;

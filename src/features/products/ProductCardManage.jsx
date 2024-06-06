@@ -5,7 +5,6 @@ import { useDeleteProduct } from './UseDeleteProduct';
 import CreateProductForm from './CreateProductForm';
 import { Heading } from '../../ui/Heading.jsx';
 import Button from '../../ui/Button';
-import Modal from '../../ui/Modal';
 import Img from '../../ui/Img';
 
 const StyledProductCard = styled.div`
@@ -79,13 +78,9 @@ function ProductCardManage({ product }) {
     category,
     inStock,
     unitPrice,
-    image,
   } = product;
 
   const mainImage = product?.variants[0]?.variantImage;
-  function toggleModal() {
-    setShowForm((show) => !show);
-  }
 
   return (
     <StyledProductCard>
@@ -136,11 +131,6 @@ function ProductCardManage({ product }) {
           heading='Edit product'
         />
       )}
-      {/* {showForm && (
-        <Modal onClose={toggleModal} heading='Edit product'>
-          <CreateProductForm productToEdit={product} />
-        </Modal>
-      )} */}
     </StyledProductCard>
   );
 }

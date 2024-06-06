@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { VscChromeClose } from 'react-icons/vsc';
 import Button from './Button';
-import { Heading, HeadingContainer } from './Heading.jsx';
+import { Heading } from './Heading.jsx';
 
 const ModalContainer = styled.div`
   position: fixed;

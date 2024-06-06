@@ -1,12 +1,11 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { VscDebugBreakpointFunction } from 'react-icons/vsc';
 import ProductTable from '../features/products/ProductTable';
 import CreateProductForm from '../features/products/CreateProductForm';
 import Button from '../ui/Button';
-import Modal from '../ui/Modal';
 import styled from 'styled-components';
 import FilterSort from '../ui/FilterSort';
-import { Heading, HeadingContainer } from '../ui/Heading.jsx';
+import { HeadingContainer } from '../ui/Heading.jsx';
 
 const StyledManageProducts = styled.section`
   display: grid;

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { Heading, HeadingContainer } from '../../ui/Heading.jsx';
+import { Heading } from '../../ui/Heading.jsx';
 import Img from '../../ui/Img';
 import StyledLink from '../../ui/StyledLink';
 
@@ -36,7 +36,7 @@ const InfoContainer = styled.div`
 `;
 
 function ProductCard({ product }) {
-  const { id: productId, name, designer, unitPrice, image } = product;
+  const { id: productId, name, designer, unitPrice } = product;
   const mainImage = product.variants[0].variantImage;
   const secondaryImage =
     product.variants[1]?.variantImage || product.variants[0].variantImage;
