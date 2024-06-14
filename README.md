@@ -29,7 +29,7 @@ http://magis-portfolio-project.netlify.app
 
 ## To start the project
 
-1. In the project folder in terminal
+1. In the project folder in terminal run
 
    ```sh
    npm run dev
@@ -58,7 +58,7 @@ http://magis-portfolio-project.netlify.app
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License
 
 ## Contact
 
