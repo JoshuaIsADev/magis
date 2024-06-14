@@ -22,19 +22,25 @@ http://magis-portfolio-project.netlify.app
    ```sh
    npm install
    ```
-3. Navigate to the project repository:
+3. Navigate to the project repository
+   ```sh
+   cd magis
+   ```
 
-```sh
-cd magis
-```
+## To start the project
 
-## To start the project:
+1. In the project folder in terminal
 
-npm run dev
+   ```sh
+   npm run dev
+   ```
 
-Open http://localhost:3000 in your browser to view the application.
+2. Click the link in your terminal or navigate to your browser to
+   ```sh
+   http://localhost:3000
+   ```
 
-The project uses the following dependencies:
+## Dependencies
 
 <ul>
   <li>supabase</li>
