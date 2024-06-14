@@ -8,6 +8,10 @@ Built with React, Vite and Supabase as the backend.
 
 Deployed on Netlify
 
+## View live
+
+http://magis-portfolio-project.netlify.app
+
 ## To clone the repository and installation
 
 1. Clone the repo
@@ -24,7 +28,8 @@ Deployed on Netlify
 cd magis
 ```
 
-To start the project:
+## To start the project:
+
 npm run dev
 
 Open http://localhost:3000 in your browser to view the application.
@@ -45,6 +50,15 @@ The project uses the following dependencies:
   <li>styled-components</li>
 </ul>
 
+## License
+
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Contact
+
+Joshua Llaneza - joshuaisadev@gmail.com
+github - https://github.com/JoshuaIsADev
+
+## Acknowledgments
 
 Inspiration and initial guidance from various online resources and tutorials.
